@@ -10,6 +10,7 @@
     "grunt-contrib-coffee": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-uglify": "*",
+    "grunt-contrib-jasmine": "*",
     "grunt-contrib-stylus": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-watch": "*"

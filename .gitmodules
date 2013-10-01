@@ -1,0 +1,3 @@
+[submodule "component"]
+    path = component
+    url = https://github.com/tapquo/bower-atoms.git

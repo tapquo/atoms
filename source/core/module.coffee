@@ -1,0 +1,33 @@
+###
+Basic Module with extend/include methods
+
+@namespace Atoms
+@class Module
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
+
+MODULE_KEYWORDS = ['included', 'extended']
+
+class Atoms.Module
+
+  @extend: (obj) ->
+    throw new Error('extend(obj) requires obj') unless obj
+    for key, value of obj when key not in MODULE_KEYWORDS
+      @[key] = value
+
+    obj.extended?.apply(this)
+    @
+
+  @include: (obj) ->
+    throw new Error('include(obj) requires obj') unless obj
+    for key, value of obj when key not in MODULE_KEYWORDS
+      @::[key] = value
+
+    included = obj.included
+    included.apply(this) if included
+    @
+
+  constructor: ->
+    @init? arguments

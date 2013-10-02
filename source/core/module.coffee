@@ -14,17 +14,13 @@ class Atoms.Module
 
   @extend: (obj) ->
     throw new Error('extend(obj) requires obj') unless obj
-    for key, value of obj when key not in MODULE_KEYWORDS
-      @[key] = value
-
+    @[key] = value for key, value of obj when key not in MODULE_KEYWORDS
     obj.extended?.apply(this)
     @
 
   @include: (obj) ->
     throw new Error('include(obj) requires obj') unless obj
-    for key, value of obj when key not in MODULE_KEYWORDS
-      @::[key] = value
-
+    @::[key] = value for key, value of obj when key not in MODULE_KEYWORDS
     included = obj.included
     included.apply(this) if included
     @

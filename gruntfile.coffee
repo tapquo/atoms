@@ -13,7 +13,13 @@ module.exports = (grunt) ->
 
     source:
       coffee: [
-        'source/atoms.coffee']
+        'source/atoms.coffee',
+        'source/core/*.coffee',
+        'source/atoms/*.coffee',
+        'source/molecules/*.coffee',
+        'source/organisms/*.coffee',
+        'source/templates/*.coffee',
+        'source/pages/*.coffee']
 
       spec  : [
         'spec/*.coffee']

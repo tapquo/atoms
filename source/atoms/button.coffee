@@ -8,6 +8,3 @@ class Atoms.Atom.Button extends Atoms.BaseAtom
     </atom-button>"""
 
   events: ["click"]
-
-  click: (event) ->
-    @el.hide()

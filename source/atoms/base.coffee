@@ -5,7 +5,8 @@ class Atoms.BaseAtom extends Atoms.Module
 
   @include Atoms.EventEmitter
 
-  template : null
+  molecule: null
+  template: null
 
   constructor: (@attributes) ->
     @className = @constructor.name
@@ -15,14 +16,12 @@ class Atoms.BaseAtom extends Atoms.Module
       if @attributes.method? then @render(@attributes.method) else @append()
 
     @bindEvents @events if @events?
+    @el
 
   # Event handling
   bindEvents: (events) ->
     for evt in events
-      event_name = "atom-#{evt}"
-      @bind event_name, @[evt]
-      @el.on evt, do (evt, event_name) => (event) =>
-        @trigger event_name, event
+      @el.on evt, do (evt) => (event) => @trigger "atom-#{evt}", event
 
   # Output methods
   append: -> @render "append"

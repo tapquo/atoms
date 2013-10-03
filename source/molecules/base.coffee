@@ -1,3 +1,11 @@
+###
+Base class for Molecule
+
+@namespace Atoms
+@class BaseMolecule
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
 "use strict"
 
 class Atoms.BaseMolecule extends Atoms.Module

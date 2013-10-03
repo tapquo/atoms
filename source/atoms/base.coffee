@@ -1,5 +1,12 @@
-"use strict"
+###
+Base class for Atom
 
+@namespace Atoms
+@class BaseAtom
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
 
 class Atoms.BaseAtom extends Atoms.Module
 

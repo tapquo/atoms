@@ -1,3 +1,13 @@
+###
+@TODO
+
+@namespace Atoms.Atom
+@class Input
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
+
 class Atoms.Atom.Input extends Atoms.BaseAtom
 
   template: """

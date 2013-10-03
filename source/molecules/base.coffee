@@ -8,7 +8,7 @@ class Atoms.BaseMolecule extends Atoms.Module
   atoms   : {}
 
   constructor: (@attributes) ->
-    @className = @constructor.name
+    super
     @type = "Molecule"
     @el = Atoms.$ Atoms.render(@template)(@attributes)
     if @attributes?.organism?
@@ -24,5 +24,5 @@ class Atoms.BaseMolecule extends Atoms.Module
       attributes = @attributes[index] or atom
       attributes.molecule = @el
 
-      @[index] = new Atoms.Atom[className] attributes
+      @[index] = new Atoms.Atom?[className] attributes
       @[index].bind "atom-#{event}", @[event] for event in atom.binds

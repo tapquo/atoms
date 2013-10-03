@@ -9,7 +9,7 @@ class Atoms.BaseAtom extends Atoms.Module
   template: null
 
   constructor: (@attributes) ->
-    @className = @constructor.name
+    super
     @type = "Atom"
     if @attributes?.molecule? and @template?
       @molecule = Atoms.$ @attributes.molecule

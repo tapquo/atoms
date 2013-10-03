@@ -27,3 +27,4 @@ class Atoms.Module
 
   constructor: ->
     @init? arguments
+    @className = @constructor.name

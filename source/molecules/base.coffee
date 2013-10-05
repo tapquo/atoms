@@ -12,25 +12,46 @@ class Atoms.BaseMolecule extends Atoms.Module
 
   @include Atoms.EventEmitter
 
-  organism: null
   atoms   : {}
+  bindings: {}
+  el: null
+  organism: null
 
   constructor: (@attributes) ->
     super
+    @attributes.className = @className
     @type = "Molecule"
     @el = Atoms.$ Atoms.render(@template)(@attributes)
+    @_readAttributes()
+    @_assignOrganism()
+    @_createAtoms()
+
+  _readAttributes: ->
+     for attr of @attributes
+      className = Atoms.className(attr)
+      if Atoms.Atom?[className]
+        @attributes[attr] = [@attributes[attr]] unless Atoms.isArray @attributes[attr]
+        @atoms[attr] = []
+        @atoms[attr].push atom for atom in @attributes[attr]
+
+  _assignOrganism: ->
     if @attributes?.organism?
       @organism = Atoms.$ @attributes.organism
       @organism.append @el
-    @createAtoms()
 
-  createAtoms: =>
+  _createAtoms: =>
     for index of @atoms
-      atom = @atoms[index]
-      className = index[0].toUpperCase() + index[1..-1].toLowerCase()
+      className = Atoms.className(index)
+      if Atoms.Atom?[className]
+        atom = @atoms[index]
+        atom = [atom] unless Atoms.isArray atom
+        @[index] = []
+        @[index].push @_atomInstance(className, child) for child in atom
 
-      attributes = @attributes[index] or atom
-      attributes.molecule = @el
-
-      @[index] = new Atoms.Atom?[className] attributes
-      @[index].bind "atom-#{event}", @[event] for event in atom.binds
+  _atomInstance: (className, attributes) =>
+    attributes.molecule = @el
+    atom = new Atoms.Atom?[className] attributes
+    for event in @bindings[className.toLowerCase()]
+      event_name = "#{className.toLowerCase()}#{Atoms.className(event)}"
+      atom.bind "atom-#{event_name}", @[event_name]
+    atom

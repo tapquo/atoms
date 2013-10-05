@@ -39,8 +39,8 @@ module.exports = (grunt) ->
         pivotal:
           src: '<%=meta.build%>/<%=pkg.name%>.debug.js'
           options:
+            vendor: 'spec/components/jquery/jquery.js'
             specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
-            # vendor: 'components/quojs/quojs.js'
 
     watch:
       coffee:

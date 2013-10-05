@@ -1,45 +1,28 @@
 
 # Globals
 Atoms = @Atoms =
-  version   : "0.0.1"
+  version   : "0.0.2"
   Atom      : {}
   Molecule  : {}
   Organism  : {}
   Template  : {}
-  $         : (args...) -> if $$? then $$ args... else $ args...
+  # Core helpers
+  className : (string) -> string.charAt(0).toUpperCase() + string.slice(1)
+  isArray: (value) -> return {}.toString.call(value) is '[object Array]'
+  $: (args...) -> if $$? then $$ args... else $ args...
 
 $ ->
-  # # Example of Atoms
-  # new Atoms.Atom.Button
-  #   label       : "Login"
-  #   molecule    : document.body
-  #   method      : "prepend"
+  # new Atoms.Organism.SearchableList system: "section"
 
-  # _input = new Atoms.Atom.Input
-  #   type        : "password"
-  #   placeholder : "Type your password"
-  #   molecule    : document.body
-  #   method      : "prepend"
-
-  # _input = new Atoms.Atom.Input
-  #   type        : "text"
-  #   placeholder : "Type your name"
-  #   molecule    : document.body
-  #   method      : "prepend"
-
-
-  # # Example of Molecules
-  # new Atoms.Molecule.Search
-  #   organism: "section"
-
-  # new Atoms.Molecule.Search
-  #   organism: "section"
-  #   label   : "buscar"
-  #   atoms:
-  #     input:
-  #       placeholder: "buscador your search"
-  #     button:
-  #       label: "buscar"
-
-  new Atoms.Organism.SearchableList system: "section"
-
+  new Atoms.Molecule.Navigation
+    link: [
+      href: "http://google.com", label: "Google", icon: "google"
+    ,
+      href: "http://tapquo.com", label: "tapquo"
+    ,
+      href: "http://w3c.com", label: "w3c", icon: "html5"],
+    button: [
+      label: "one"
+    ,
+      label: "two"],
+    organism: document.body

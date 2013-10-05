@@ -13,9 +13,7 @@ class Atoms.BaseMolecule extends Atoms.Module
   @include Atoms.EventEmitter
 
   atoms   : {}
-  bindings: {}
-  el: null
-  organism: null
+  bindings: null
 
   constructor: (@attributes) ->
     super
@@ -23,8 +21,8 @@ class Atoms.BaseMolecule extends Atoms.Module
     @type = "Molecule"
     @el = Atoms.$ Atoms.render(@template)(@attributes)
     @_readAttributes()
-    @_assignOrganism()
-    @_createAtoms()
+    @_assignParent()
+    @_assignAtoms()
 
   _readAttributes: ->
      for attr of @attributes
@@ -34,12 +32,12 @@ class Atoms.BaseMolecule extends Atoms.Module
         @atoms[attr] = []
         @atoms[attr].push atom for atom in @attributes[attr]
 
-  _assignOrganism: ->
-    if @attributes?.organism?
-      @organism = Atoms.$ @attributes.organism
-      @organism.append @el
+  _assignParent: ->
+    if @attributes?.parent?
+      @parent = Atoms.$ @attributes.parent
+      @parent.append @el
 
-  _createAtoms: =>
+  _assignAtoms: =>
     for index of @atoms
       className = Atoms.className(index)
       if Atoms.Atom?[className]
@@ -49,7 +47,7 @@ class Atoms.BaseMolecule extends Atoms.Module
         @[index].push @_atomInstance(className, child) for child in atom
 
   _atomInstance: (className, attributes) =>
-    attributes.molecule = @el
+    attributes.parent = @el
     atom = new Atoms.Atom?[className] attributes
     for event in @bindings[className.toLowerCase()]
       event_name = "#{className.toLowerCase()}#{Atoms.className(event)}"

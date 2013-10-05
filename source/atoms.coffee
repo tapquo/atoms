@@ -25,4 +25,4 @@ $ ->
       label: "one"
     ,
       label: "two"],
-    organism: document.body
+    parent: document.body

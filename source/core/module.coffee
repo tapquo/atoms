@@ -12,6 +12,10 @@ MODULE_KEYWORDS = ['included', 'extended']
 
 class Atoms.Module
 
+  template: null
+  parent  : null
+  el      : null
+
   @extend: (obj) ->
     throw new Error('extend(obj) requires obj') unless obj
     @[key] = value for key, value of obj when key not in MODULE_KEYWORDS

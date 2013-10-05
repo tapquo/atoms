@@ -1,6 +1,12 @@
-# templayed.js 0.2.1 - (c) 2012 Paul Engel
-# The fastest and smallest Mustache compliant Javascript templating library
+###
+The fastest and smallest Mustache compliant Javascript templating library
+templayed.js 0.2.1 - (c) 2012 Paul Engel
 
+@namespace Atoms
+@class Output
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
 "use strict"
 
 Atoms.render = (template, data) ->

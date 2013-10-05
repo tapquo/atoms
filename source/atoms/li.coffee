@@ -10,6 +10,7 @@
 
 class Atoms.Atom.Li extends Atoms.BaseAtom
 
-  template: "<li>{{label}}</li>"
+  template: """
+    <li class="{{style}}">{{label}}</li>"""
 
   events: ["click"]

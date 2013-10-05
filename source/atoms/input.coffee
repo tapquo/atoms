@@ -11,7 +11,6 @@
 class Atoms.Atom.Input extends Atoms.BaseAtom
 
   template: """
-        <input type="{{type}}" id="{{id}}" placeholder="{{placeholder}}" />
-    """
+    <input type="{{type}}" id="{{id}}" placeholder="{{placeholder}}" class="{{style}}" value="{{value}}" />"""
 
   events: ["click", "keypress", "keyup"]

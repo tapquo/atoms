@@ -9,9 +9,6 @@ class Atoms.Molecule.Navigation extends Atoms.BaseMolecule
     link:   ["click"]
     button: ["click"]
 
-  constructor: ->
-    super
-    console.log @
   linkClick: (event, atom) => @_trigger event, atom
 
   buttonClick: (event, atom) => @_trigger event, atom

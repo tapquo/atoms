@@ -27,7 +27,7 @@ class Atoms.BaseMolecule extends Atoms.Module
   _readAttributes: ->
      for attr of @attributes
       className = Atoms.className(attr)
-      if Atoms.Atom?[className]
+      if Atoms.Atom[className]?
         @attributes[attr] = [@attributes[attr]] unless Atoms.isArray @attributes[attr]
         @atoms[attr] = []
         @atoms[attr].push atom for atom in @attributes[attr]
@@ -40,7 +40,7 @@ class Atoms.BaseMolecule extends Atoms.Module
   _assignAtoms: =>
     for index of @atoms
       className = Atoms.className(index)
-      if Atoms.Atom?[className]
+      if Atoms.Atom[className]?
         atom = @atoms[index]
         atom = [atom] unless Atoms.isArray atom
         @[index] = []
@@ -49,7 +49,8 @@ class Atoms.BaseMolecule extends Atoms.Module
   _atomInstance: (className, attributes) =>
     attributes.parent = @el
     atom = new Atoms.Atom?[className] attributes
-    for event in @bindings[className.toLowerCase()]
-      event_name = "#{className.toLowerCase()}#{Atoms.className(event)}"
-      atom.bind "atom-#{event_name}", @[event_name]
+    if @bindings[className.toLowerCase()]?
+      className = className.toLowerCase()
+      for event in @bindings[className]
+        atom.bind event, @["#{className}#{Atoms.className(event)}"]
     atom

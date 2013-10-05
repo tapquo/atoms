@@ -17,23 +17,30 @@ class Atoms.BaseOrganism extends Atoms.Module
 
   constructor: (@attributes) ->
     super
+    @attributes.className = @className
     @type = "Organism"
-
     @el = Atoms.$ Atoms.render(@template)(@attributes)
-    if @attributes?.system?
-      @system = Atoms.$ @attributes.system
-      @system.append @el
+
+    if @attributes?.parent?
+      @parent = Atoms.$ @attributes.parent
+      @parent.append @el
 
     @_assignMolecules()
     @
 
-  _assignMoleculescreateMolecules: ->
+  _assignMolecules: =>
     for index of @molecules
-      molecule = @molecules[index]
-      className = index[0].toUpperCase() + index[1..-1].toLowerCase()
+      className = Atoms.className(index)
+      if Atoms.Molecule[className]?
+        molecule = @molecules[index]
+        attributes = @attributes.molecule?[index] or molecule
+        @[index] = @_moleculeInstance className, attributes
 
-      attributes = @attributes.molecule?[index] or molecule
-      attributes.parent = @el
-
-      @[index] = new Atoms.Molecule[className] attributes
-      @[index].bind "molecule-#{event}", @[event] for event in molecule.binds
+  _moleculeInstance: (className, attributes) =>
+    attributes.parent = @el
+    molecule = new Atoms.Molecule?[className] attributes
+    if @bindings[className.toLowerCase()]?
+      className = className.toLowerCase()
+      for event in @bindings[className]
+        molecule.bind event, @["#{className}#{Atoms.className(event)}"]
+    molecule

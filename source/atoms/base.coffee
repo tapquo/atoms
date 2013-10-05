@@ -28,7 +28,8 @@ class Atoms.BaseAtom extends Atoms.Module
   # Event handling
   bindEvents: (events) ->
     for evt in events
-      @el.on evt, do (evt) => (event) => @trigger "atom-#{evt}", event
+      event_name = "atom-#{@className.toLowerCase()}#{Atoms.className(evt)}"
+      @el.on evt, do (event_name) => (event) => @trigger event_name, event, @
 
   # Output methods
   append: -> @render "append"

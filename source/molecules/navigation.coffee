@@ -1,8 +1,7 @@
 class Atoms.Molecule.Navigation extends Atoms.BaseMolecule
 
   template: """
-    <nav molecule-class="{{className}}" class="{{class}}">
-    </nav>
+    <nav molecule-class="{{className}}" class="{{style}}"></nav>
   """
 
   bindings:
@@ -16,4 +15,4 @@ class Atoms.Molecule.Navigation extends Atoms.BaseMolecule
   _trigger: (event, atom) ->
     event.preventDefault()
     atom.el.addClass("active").siblings().removeClass("active")
-    @trigger "molecule-navigation", atom, @
+    @trigger "select", atom, @

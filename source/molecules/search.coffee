@@ -1,32 +1,39 @@
+###
+Basic fieldset for search
+
+@namespace Atoms.Molecule
+@class Search
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
 "use strict"
 
 class Atoms.Molecule.Search extends Atoms.BaseMolecule
 
   template: """
-    <molecule-search atom-class="{{className}}">
-      <label>{{label}}</label>
-      {{atom}}
-    </molecule-search>
+    <fieldset molecule-class="{{className}}"></fieldset>
   """
 
   atoms:
+    label:
+      text: "Search:"
     input:
-      placeholder : "Type your password..."
-      binds       : ["keyup"]
+      placeholder : "Type your search..."
     button:
-      label       : "Click to search"
-      binds       : ["click"]
+      label       : "Go!"
 
-  click: =>
-    @_trigger @input.el.val()
+  bindings:
+    input: ["keyup"]
+    button: ["click"]
 
-  keyup: (event) =>
-    @_trigger @input.el.val() if event.keyCode is 13
+  buttonClick: (event, atom) => @_trigger()
 
-  # Triggers
-  _trigger: (value) ->
+  inputKeyup: (event, atom) => @_trigger() if event.keyCode is 13
+
+  _trigger: ->
+    value = @input[0].el.val()
     if value isnt ""
-      @trigger "molecule-search_on", value
+      @trigger "on", value
     else
-      @trigger "molecule-search_off"
+      @trigger "off"
 

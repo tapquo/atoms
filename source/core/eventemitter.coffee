@@ -8,7 +8,7 @@ Event emitter which provides the observer pattern to Atoms classes.
 ###
 "use strict"
 
-Atoms.EventEmitter =
+Atoms.Core.EventEmitter =
 
   bind: (event, callback) ->
     event = @_getNameOfEvent(@type, @className, event)

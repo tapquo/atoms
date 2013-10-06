@@ -8,18 +8,19 @@ Base class for Organism
 ###
 "use strict"
 
-class Atoms.BaseOrganism extends Atoms.Module
+class Atoms.Class.Organism extends Atoms.Core.Module
 
-  @include Atoms.EventEmitter
+  @include Atoms.Core.EventEmitter
 
   molecules : {}
   bindings: null
 
   constructor: (@attributes) ->
     super
+    console.log @attributes
     @attributes.className = @className
     @type = "Organism"
-    @el = Atoms.$ Atoms.render(@template)(@attributes)
+    @el = Atoms.$ Atoms.Core.render(@template)(@attributes) unless @el
 
     if @attributes?.parent?
       @parent = Atoms.$ @attributes.parent

@@ -2,15 +2,16 @@
 @TODO
 
 @namespace Atoms.Atom
-@class Li
+@class Button
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-class Atoms.Atom.Li extends Atoms.BaseAtom
+
+class Atoms.Atom.Image extends Atoms.Class.Atom
 
   template: """
-    <li class="{{style}}">{{label}}</li>"""
+    <img src="{{source}}" class="{{style}}" alt="{{label}}" />"""
 
   events: ["click"]

@@ -10,7 +10,7 @@ Basic Module with extend/include methods
 
 MODULE_KEYWORDS = ['included', 'extended']
 
-class Atoms.Module
+class Atoms.Core.Module
 
   template: null
   parent  : null

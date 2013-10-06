@@ -2,16 +2,15 @@
 @TODO
 
 @namespace Atoms.Atom
-@class Button
+@class Link
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-
-class Atoms.Atom.Image extends Atoms.BaseAtom
+class Atoms.Atom.Link extends Atoms.Class.Atom
 
   template: """
-    <img src="{{source}}" class="{{style}}" alt="{{label}}" />"""
+    <a href="{{href}}" class="{{style}}" data-icon="{{icon}}">{{label}}</a>"""
 
   events: ["click"]

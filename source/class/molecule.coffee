@@ -8,9 +8,9 @@ Base class for Molecule
 ###
 "use strict"
 
-class Atoms.BaseMolecule extends Atoms.Module
+class Atoms.Class.Molecule extends Atoms.Core.Module
 
-  @include Atoms.EventEmitter
+  @include Atoms.Core.EventEmitter
 
   atoms   : {}
   bindings: null
@@ -19,7 +19,7 @@ class Atoms.BaseMolecule extends Atoms.Module
     super
     @attributes.className = @className
     @type = "Molecule"
-    @el = Atoms.$ Atoms.render(@template)(@attributes)
+    @el = Atoms.$ Atoms.Core.render(@template)(@attributes)
     @_readAttributes()
     @_assignParent()
     @_assignAtoms()

@@ -15,15 +15,14 @@ module.exports = (grunt) ->
       coffee: [
         'source/atoms.coffee',
         'source/core/*.coffee',
-        'source/atoms/*.coffee',
-        'source/molecules/*.coffee',
-        'source/organisms/*.coffee',
-        'source/templates/*.coffee',
-        'source/pages/*.coffee']
+        'source/class/*.coffee',
+        'source/atom/*.coffee',
+        'source/molecule/*.coffee',
+        'source/organism/*.coffee',
+        'source/template/*.coffee']
 
       spec  : [
         'spec/*.coffee']
-
 
     coffee:
       core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js' : '<%= source.coffee %>'

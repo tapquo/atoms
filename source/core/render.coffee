@@ -9,7 +9,7 @@ templayed.js 0.2.1 - (c) 2012 Paul Engel
 ###
 "use strict"
 
-Atoms.render = (template, data) ->
+Atoms.Core.render = (template, data) ->
   get = (path, i) ->
     i = 1
     path = path.replace(/\.\.\//g, ->

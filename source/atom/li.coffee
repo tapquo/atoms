@@ -2,15 +2,15 @@
 @TODO
 
 @namespace Atoms.Atom
-@class Link
+@class Li
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-class Atoms.Atom.Link extends Atoms.BaseAtom
+class Atoms.Atom.Li extends Atoms.Class.Atom
 
   template: """
-    <a href="{{href}}" class="{{style}}" data-icon="{{icon}}">{{label}}</a>"""
+    <li class="{{style}}">{{label}}</li>"""
 
   events: ["click"]

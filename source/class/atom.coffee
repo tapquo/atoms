@@ -8,10 +8,10 @@ Base class for Atom
 ###
 "use strict"
 
-class Atoms.BaseAtom extends Atoms.Module
+class Atoms.Class.Atom extends Atoms.Core.Module
 
-  @include Atoms.EventEmitter
-  @include Atoms.Output
+  @include Atoms.Core.EventEmitter
+  @include Atoms.Core.Output
 
   constructor: (@attributes) ->
     super

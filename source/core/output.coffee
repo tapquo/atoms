@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-Atoms.Output =
+Atoms.Core.Output =
 
   append: -> @render "append"
 
@@ -17,5 +17,5 @@ Atoms.Output =
   html: -> @render "html"
 
   render: (method) ->
-    @el = Atoms.$ Atoms.render(@template)(@attributes)
+    @el = Atoms.$ Atoms.Core.render(@template)(@attributes)
     @parent[method] @el

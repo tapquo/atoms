@@ -11,46 +11,13 @@ Base class for Molecule
 class Atoms.Class.Molecule extends Atoms.Core.Module
 
   @include Atoms.Core.EventEmitter
+  @include Atoms.Core.Chemistry
 
   atoms   : {}
-  bindings: null
 
   constructor: (@attributes) ->
     super
     @attributes.className = @className
     @type = "Molecule"
-    @el = Atoms.$ Atoms.Core.render(@template)(@attributes)
-    @_readAttributes()
-    @_assignParent()
-    @_assignAtoms()
-
-  _readAttributes: ->
-     for attr of @attributes
-      className = Atoms.className(attr)
-      if Atoms.Atom[className]?
-        @attributes[attr] = [@attributes[attr]] unless Atoms.isArray @attributes[attr]
-        @atoms[attr] = []
-        @atoms[attr].push atom for atom in @attributes[attr]
-
-  _assignParent: ->
-    if @attributes?.parent?
-      @parent = Atoms.$ @attributes.parent
-      @parent.append @el
-
-  _assignAtoms: =>
-    for index of @atoms
-      className = Atoms.className(index)
-      if Atoms.Atom[className]?
-        atom = @atoms[index]
-        atom = [atom] unless Atoms.isArray atom
-        @[index] = []
-        @[index].push @_atomInstance(className, child) for child in atom
-
-  _atomInstance: (className, attributes) =>
-    attributes.parent = @el
-    atom = new Atoms.Atom?[className] attributes
-    if @bindings[className.toLowerCase()]?
-      className = className.toLowerCase()
-      for event in @bindings[className]
-        atom.bind event, @["#{className}#{Atoms.className(event)}"]
-    atom
+    @el = Atoms.$ Atoms.Core.render(@template)(@attributes) unless @el
+    @chemistry()

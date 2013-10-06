@@ -13,6 +13,8 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output
 
+  bindings: null
+
   constructor: (@attributes) ->
     super
     @type = "Atom"
@@ -20,11 +22,8 @@ class Atoms.Class.Atom extends Atoms.Core.Module
       @parent = Atoms.$ @attributes.parent
       if @attributes.method? then @render(@attributes.method) else @append()
 
-    @bindEvents @events if @events?
+    if @events?
+      for evt in @events
+        event_name = Atoms.Core.className(evt)
+        @el.on evt, do (event_name) => (event) => @trigger event_name, event, @
     @el
-
-  # Event handling
-  bindEvents: (events) ->
-    for evt in events
-      event_name = Atoms.className(evt)
-      @el.on evt, do (event_name) => (event) => @trigger event_name, event, @

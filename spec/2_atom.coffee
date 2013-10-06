@@ -6,10 +6,10 @@ describe "Atom", ->
   template_binded = "<input type='#{type}' />"
   element = undefined
 
-  class AtomEmpty extends Atoms.BaseAtom
+  class AtomEmpty extends Atoms.Class.Atom
     constructor: -> super
 
-  class AtomTest extends Atoms.BaseAtom
+  class AtomTest extends Atoms.Class.Atom
     template: template
 
   beforeEach ->
@@ -18,7 +18,7 @@ describe "Atom", ->
 
   # Expects
   it "can create a new Base instance", ->
-    atom = new Atoms.BaseAtom template: "<li>"
+    atom = new Atoms.Class.Atom template: "<li>"
     expect(atom).toBeTruthy()
     expect(atom.append).toBeTruthy()
 

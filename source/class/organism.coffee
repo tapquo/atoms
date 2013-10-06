@@ -17,7 +17,6 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    console.log @attributes
     @attributes.className = @className
     @type = "Organism"
     @el = Atoms.$ Atoms.Core.render(@template)(@attributes) unless @el

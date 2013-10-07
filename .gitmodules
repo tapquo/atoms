@@ -1,3 +1,6 @@
 [submodule "component"]
-    path = component
-    url = https://github.com/tapquo/bower-atoms.git
+	path = component
+	url = https://github.com/tapquo/bower-atoms
+[submodule "style/CSSmethods"]
+	path = style/CSSmethods
+	url = https://github.com/soyjavi/CSSmethods.git

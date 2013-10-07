@@ -10,6 +10,8 @@ Event emitter which provides the observer pattern to Atoms classes.
 
 Atoms.Core.Chemistry =
 
+  bindings: null
+
   chemistry: ->
     # Assign parent
     if @attributes.parent?
@@ -27,8 +29,7 @@ Atoms.Core.Chemistry =
       if Atoms[type][className]?
         @attributes[attr] = [@attributes[attr]] unless Atoms.Core.isArray @attributes[attr]
         base = @[context][attr]
-        @[context][attr] = []
-        @[context][attr].push @_mix(item, base) for item in @attributes[attr]
+        @[context][attr] = (@_mix(item, base) for item in @attributes[attr])
 
     # Normalize values
     for index of @[context]
@@ -36,8 +37,7 @@ Atoms.Core.Chemistry =
       if Atoms[type][className]?
         item = @[context][index]
         item = [item] unless Atoms.Core.isArray item
-        @[index] = []
-        @[index].push @_instance(type, className, child) for child in item
+        @[index] = (@_instance(type, className, child) for child in item)
 
   _instance: (type, className, attributes) ->
     attributes.parent = @el

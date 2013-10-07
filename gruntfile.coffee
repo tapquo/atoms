@@ -21,6 +21,18 @@ module.exports = (grunt) ->
         'source/organism/*.coffee',
         'source/template/*.coffee']
 
+      stylus:
+        base: [
+          'style/base/reset.styl',
+          'style/base/class.styl',
+          'style/base/atom.*.styl',
+          'style/base/molecule.*.styl',
+          'style/base/organism.*.styl']
+        theme: [
+          'style/theme/atom.*.styl',
+          'style/theme/molecule.*.styl',
+          'style/theme/organism.*.styl']
+
       spec  : [
         'spec/*.coffee']
 
@@ -41,6 +53,16 @@ module.exports = (grunt) ->
             vendor: 'spec/components/jquery/jquery.js'
             specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
 
+
+    stylus:
+      base:
+        options: compress: true, import: [ '__init']
+        files: '<%=meta.bower%>/<%=pkg.name%>.css': '<%=source.stylus.base%>'
+      theme:
+        options: compress: false, import: [ '__init']
+        files: '<%=meta.bower%>/<%=pkg.name%>.theme.css': '<%=source.stylus.theme%>'
+
+
     watch:
       coffee:
         files: ['<%= source.coffee %>']
@@ -48,7 +70,12 @@ module.exports = (grunt) ->
       spec:
         files: ['<%= source.spec %>']
         tasks: ['coffee:spec', 'jasmine']
-
+      stylus_base:
+        files: ['<%= source.stylus.base %>']
+        tasks: ['stylus:base']
+      stylus_theme:
+        files: ['<%= source.stylus.theme %>']
+        tasks: ['stylus:theme']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'
@@ -58,4 +85,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['coffee', 'uglify', 'jasmine']
+  grunt.registerTask 'default', ['coffee', 'uglify', 'jasmine', 'stylus']

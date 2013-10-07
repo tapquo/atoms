@@ -10,7 +10,7 @@
 
 class Atoms.Organism.HeaderNavSearch extends Atoms.Class.Organism
 
-  template: """<header></header>"""
+  template: """<header organism-class="{{className}}"></header>"""
 
   molecules:
     search: style: "none"
@@ -22,23 +22,15 @@ class Atoms.Organism.HeaderNavSearch extends Atoms.Class.Organism
         href: "http://tapquo.com", label: "tapquo"
       ,
         href: "http://w3c.com", label: "w3c", icon: "html5"]
-
-    # navigation:
-    #   style: "on_left"
-    #   button: [
-    #     label: "Google", icon: "google"
-    #   ,
-    #     label: "tapquo"]
+      button: [
+        label: "Google", icon: "google"]
 
   bindings:
-    search: ["on", "off"]
+    search: ["enter"]
     navigation: ["select"]
 
   navigationSelect: (event, molecule) ->
     console.log "navigationSelect", event, molecule
 
-  searchOn: (event, molecule) ->
-    console.log "searchOn", event, molecule
-
-  searchOff: (event, molecule) ->
-    console.log "searchOff", event, molecule
+  searchEnter: (value, molecule) ->
+    console.log "searchEnter", value, molecule

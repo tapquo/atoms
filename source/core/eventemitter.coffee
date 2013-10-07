@@ -29,7 +29,9 @@ Atoms.Core.EventEmitter =
     i = 0
 
     while i < @_events[event].length
-      @_events[event][i].apply this, Array::slice.call(arguments, 1)
+      parameters = Array::slice.call(arguments, 1)
+      parameters.push @
+      @_events[event][i].apply @, parameters
       i++
 
   _getNameOfEvent: (type="", className, event) ->

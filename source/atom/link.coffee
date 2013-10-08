@@ -11,6 +11,6 @@
 class Atoms.Atom.Link extends Atoms.Class.Atom
 
   template: """
-    <a href="{{href}}" class="{{style}}" data-icon="{{icon}}">{{label}}</a>"""
+    <a href="{{href}}" class="{{style}}" data-icon="{{icon}}">{{text}}</a>"""
 
   events: ["click"]

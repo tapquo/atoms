@@ -12,7 +12,7 @@ class Atoms.Atom.Button extends Atoms.Class.Atom
 
   template: """
     <button id="{{id}}" class="{{style}}" data-icon="{{icon}}">
-    {{label}}
+    {{text}}
     </button>"""
 
   events: ["click"]

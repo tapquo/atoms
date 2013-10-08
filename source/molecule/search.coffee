@@ -14,19 +14,22 @@ class Atoms.Molecule.Search extends Atoms.Class.Molecule
     <fieldset molecule-class="{{className}}"></fieldset>
   """
 
-  atoms:
-    label:
-      text: "Search:"
-    input:
-      placeholder : "Type your search..."
-    button:
-      label       : "Go!"
-
   bindings:
     input: ["keyup"]
     button: ["click"]
 
-  buttonClick: (event, atom) => @_search event, atom
+  constructor: ->
+    @atoms =
+      label:
+        text: "Search:"
+      input:
+        placeholder : "Type your search..."
+      button:
+        text       : "Go!"
+    super
+
+  buttonClick: (event, atom) =>
+    @_search event, atom
 
   inputKeyup: (event, atom) =>
     @trigger "keyup", event.keyCode

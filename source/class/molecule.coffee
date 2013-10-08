@@ -13,8 +13,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Chemistry
 
-  atoms   : {}
-
   constructor: (@attributes) ->
     super
     @attributes.className = @className

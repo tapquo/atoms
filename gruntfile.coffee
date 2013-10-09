@@ -29,6 +29,7 @@ module.exports = (grunt) ->
           'style/base/molecule.*.styl',
           'style/base/organism.*.styl']
         theme: [
+          'style/theme/reset.styl',
           'style/theme/atom.*.styl',
           'style/theme/molecule.*.styl',
           'style/theme/organism.*.styl']

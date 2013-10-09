@@ -11,11 +11,12 @@ Base class for Molecule
 class Atoms.Molecule.List extends Atoms.Class.Molecule
 
   template: """
-    <ul></ul>
+    <molecule-list>
+      <li>1</li>
+      <li>2</li>
+    </molecule-list>
   """
 
-  bindings:
-    li: ["click"]
-
-  liClick: (event, atom) =>
-    @trigger "click", atom
+  constructor: ->
+    super
+    @el.bind "click", (event) => @trigger "select", event

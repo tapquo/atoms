@@ -11,29 +11,18 @@ button
 
   section &
     border-radius: BORDER_RADIUS
-    text-transform: uppercase
     background-color: BUTTON
     color: #999
     box-shadow 0em -0.185rem 0em rgba(0, 0, 0, 0.1) inset
+    transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease
 
-    & > .icon
-      opacity: 0.85
-
-    & > abbr
-      font-weight: bold
-
-    &:not(.disabled):hover, &:not(.disabled):active
-      & > .icon
-        opacity: 1
-
-    &:not(.disabled):hover
+    &:hover
       background-color: darken(BUTTON, 20%)
       color: #fff
-    &:not(.disabled):active
+    &:active
       background-color: darken(BUTTON, 40%)
       box-shadow 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset
 
-    /* COLORS */
     &.accept
       background-color: ACCEPT
       &:hover
@@ -54,15 +43,6 @@ button
         background-color: darken(WARNING, 30%)
     &.accept, &.cancel, &.warning
       color: #fff
-
-    &.disabled
-      color: darken(BUTTON, 10%)
-      background-color: lighten(BUTTON, 25%)
-      cursor: default
-      box-shadow none
-    /* COLORS */
-    transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease
-
 
   section nav &
     border-radius: 0

@@ -108,17 +108,13 @@ body
   -moz-user-select: moz-none
   user-select: none
 
-  // @TODO: Why??
-  // -webkit-box-orient: vertical
-  // -webkit-box-align: stretch
-  // -webkit-tap-highlight-color: rgba(0,0,0,0)
   display-box()
 
   & *
     box-sizing(border-box)
     margin: 0
     padding: 0
-    // -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 
 a
   text-decoration: none
@@ -132,9 +128,6 @@ img
   vertical-align: middle
   font-size: 0
 
-// strong
-//   font-weight: 600
-
 table
   border-collapse: collapse
   border-spacing: 0
@@ -147,3 +140,38 @@ th, td, caption
   ::-webkit-scrollbar
     width: 1px
     height: 1px
+
+
+
+body, html
+  height: 100%
+  width: 100%
+  margin: 0
+  padding: 0
+  overflow: hidden
+
+  & > aside, & > article
+    display-box()
+    box-orient(vertical)
+    height: inherit
+    webkit-transform: translate3d(0,0,0)
+    width: 100%
+
+    & > header, > footer
+      box-flex(0)
+      z-index: 3
+      position: relative
+    & > header
+      ordinal-group(1)
+
+      // position: fixed
+      // width: 100%
+
+    & > section
+      box-flex(1)
+      ordinal-group(2)
+      z-index: -1
+      // padding-top: HEADER_HEIGHT
+
+    & > footer
+      ordinal-group(3)

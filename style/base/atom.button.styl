@@ -1,0 +1,53 @@
+/**
+ * Atoms
+ *
+ * @namespace atom.button.styl
+ *
+ * @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+ */
+
+button
+  display: inline-block
+  min-height: 1em
+  vertical-align: middle
+  font-size: inherit
+  font-family: inherit
+  font-weight: inherit
+  text-align: center
+  text-decoration: none
+  line-height: 1em
+  border: none
+  cursor: pointer
+  outline: none
+  background: none
+
+  & > .icon
+    line-height: 0.9em
+    font-weight: 100 !important
+  & > .icon + abbr
+    margin-left: 0.25em
+
+  header &
+    SIZE = (HEADER_HEIGHT / 1.25)
+    height: HEADER_HEIGHT
+    padding: 0 0.6em
+    & > .icon
+      font-size: (FONT_SIZE_BIG * 1.25)
+
+  section &
+    padding: 0.8em 1.0em
+    &.big
+      font-size: FONT_SIZE_BIG
+    &.small
+      font-size: FONT_SIZE_SMALL
+    &.tiny
+      font-size: FONT_SIZE_TINY
+      padding: 0.5em 0.6em
+    &.anchor
+      width: 100%
+      position: relative
+      &:not(.icon) .icon
+        position: absolute
+        left: 1.0em
+
+

@@ -1,0 +1,11 @@
+label
+  display: inline-block
+  font-size: FONT_SIZE_LABEL
+  font-weight: normal
+
+  &.tag + label.tag:not(:last-child)
+    margin-left: 0.2rem
+
+  &.tag
+    padding: 0.4em 0.8em
+    margin: 0.2rem 0

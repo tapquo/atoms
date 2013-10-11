@@ -11,7 +11,7 @@
 class Atoms.Atom.Button extends Atoms.Core.Class.Atom
 
   template: """
-    <button id="{{id}}" class="{{style}}">
+    <button id="{{id}}" class="{{style}}{{^if.text}} icon{{/if.text}}">
       {{#if.icon}}<span class="icon {{icon}}"></span>{{/if.icon}}
       {{#if.text}}<abbr>{{text}}</abbr>{{/if.text}}
     </button>"""

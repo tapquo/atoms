@@ -11,7 +11,7 @@ Basic fieldset for search
 class Atoms.Molecule.Search extends Atoms.Class.Molecule
 
   template: """
-    <fieldset molecule-class="{{className}}"></fieldset>
+    <fieldset molecule-search molecule-class="{{className}}"></fieldset>
   """
 
   bindings:
@@ -20,9 +20,8 @@ class Atoms.Molecule.Search extends Atoms.Class.Molecule
 
   constructor: ->
     @atoms =
-      label:
-        text: "Search:"
       input:
+        type: "search"
         placeholder : "Type your search..."
       button:
         text       : "Go!"
@@ -38,5 +37,3 @@ class Atoms.Molecule.Search extends Atoms.Class.Molecule
   _search: (event, atom) ->
     value = @input[0].el.val()
     @trigger "enter", value if value isnt ""
-
-

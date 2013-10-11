@@ -36,4 +36,4 @@ class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
 
   _search: (event, atom) ->
     value = @input[0].el.val()
-    @trigger "enter", value if value isnt ""
+    @trigger "enter", value, atom if value isnt ""

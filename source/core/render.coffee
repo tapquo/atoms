@@ -2,7 +2,7 @@
 The fastest and smallest Mustache compliant Javascript templating library
 templayed.js 0.2.1 - (c) 2012 Paul Engel
 
-@namespace Atoms
+@namespace Atoms.Core
 @class Output
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi

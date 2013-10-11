@@ -12,39 +12,47 @@ module.exports = (grunt) ->
               ' - Licensed <%= _.pluck(pkg.license, "type").join(", ") %> */\n'
 
     source:
-      coffee: [
+      # CoffeeScript
+      core: [
         'source/atoms.coffee',
         'source/core/*.coffee',
-        'source/class/*.coffee',
+        'source/core/class/*.coffee',
         'source/atom/*.coffee',
-        'source/molecule/*.coffee',
-        'source/organism/*.coffee',
+        'source/molecule/*.coffee']
+      spec  : [
+        'spec/*.coffee'],
+      organisms: [
+        'source/organism/*.coffee'],
+      templates: [
         'source/template/*.coffee']
-
+      # Stylus
       stylus:
         base: [
           'style/base/reset.styl',
           'style/base/class.styl',
           'style/base/atom.*.styl',
           'style/base/molecule.*.styl',
-          'style/base/organism.*.styl']
+          'style/base/organism.*.styl',
+          'style/base/template.*.styl']
         theme: [
           'style/theme/reset.styl',
           'style/theme/atom.*.styl',
           'style/theme/molecule.*.styl',
           'style/theme/organism.*.styl']
 
-      spec  : [
-        'spec/*.coffee']
 
     coffee:
-      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js' : '<%= source.coffee %>'
-      spec: files: '<%=meta.build%>/<%=pkg.name%>.spec.js'  : '<%= source.spec %>'
+      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js'         : '<%= source.core %>'
+      spec: files: '<%=meta.build%>/<%=pkg.name%>.spec.js'          : '<%= source.spec %>'
+      organisms: files: '<%=meta.build%>/<%=pkg.name%>.organisms.js': '<%= source.organisms %>'
+      templates: files: '<%=meta.build%>/<%=pkg.name%>.templates.js': '<%= source.templates %>'
 
 
     uglify:
       options: compress: false, banner: "<%= meta.banner %>"
       core: files: '<%=meta.bower%>/<%=pkg.name%>.js': '<%=meta.build%>/<%=pkg.name%>.debug.js'
+      organisms: files: '<%=meta.bower%>/<%=pkg.name%>.organisms.js': '<%=meta.build%>/<%=pkg.name%>.organisms.js'
+      templates: files: '<%=meta.bower%>/<%=pkg.name%>.templates.js': '<%=meta.build%>/<%=pkg.name%>.templates.js'
 
 
     jasmine:
@@ -65,12 +73,18 @@ module.exports = (grunt) ->
 
 
     watch:
-      coffee:
-        files: ['<%= source.coffee %>']
+      core:
+        files: ['<%= source.core %>']
         tasks: ['coffee:core']
       spec:
         files: ['<%= source.spec %>']
         tasks: ['coffee:spec', 'jasmine']
+      organisms:
+        files: ['<%= source.organisms %>']
+        tasks: ['coffee:organisms']
+      templates:
+        files: ['<%= source.templates %>']
+        tasks: ['coffee:templates']
       stylus_base:
         files: ['<%= source.stylus.base %>']
         tasks: ['stylus:base']

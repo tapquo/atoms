@@ -1,7 +1,7 @@
 ###
 Basic Module with extend/include methods
 
-@namespace Atoms
+@namespace Atoms.Core
 @class Module
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi

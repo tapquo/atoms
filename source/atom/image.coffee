@@ -9,9 +9,9 @@
 "use strict"
 
 
-class Atoms.Atom.Image extends Atoms.Class.Atom
+class Atoms.Atom.Image extends Atoms.Core.Class.Atom
 
   template: """
-    <img src="{{source}}" class="{{style}}" alt="{{label}}" />"""
+    <img src="{{source}}" class="{{style}}" alt="{{alt}}" />"""
 
   events: ["click"]

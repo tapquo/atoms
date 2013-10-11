@@ -1,14 +1,14 @@
 ###
 Base class for Molecule
 
-@namespace Atoms
-@class BaseMolecule
+@namespace Atoms.Core.Class
+@class Molecule
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-class Atoms.Class.Molecule extends Atoms.Core.Module
+class Atoms.Core.Class.Molecule extends Atoms.Core.Module
 
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output

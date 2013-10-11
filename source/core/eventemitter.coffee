@@ -1,7 +1,7 @@
 ###
 Event emitter which provides the observer pattern to Atoms classes.
 
-@namespace Atoms
+@namespace Atoms.Core
 @class EventEmitter
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
@@ -9,6 +9,8 @@ Event emitter which provides the observer pattern to Atoms classes.
 "use strict"
 
 Atoms.Core.EventEmitter =
+
+  bindings: null
 
   bind: (event, callback) ->
     event = @_getNameOfEvent(@type, @className, event)
@@ -33,6 +35,11 @@ Atoms.Core.EventEmitter =
       parameters.push @
       @_events[event][i].apply @, parameters
       i++
+
+  bindList: (el, className, events) ->
+    for event in events
+      el.bind event, @["#{className.toLowerCase()}#{Atoms.Core.className(event)}"]
+
 
   _getNameOfEvent: (type="", className, event) ->
     ("#{type.toLowerCase()}_#{className.toLowerCase()}_#{event}").toLowerCase()

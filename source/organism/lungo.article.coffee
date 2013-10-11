@@ -1,5 +1,5 @@
 
-class Atoms.Organism.LungoArticle extends Atoms.Class.Organism
+class Atoms.Organism.LungoArticle extends Atoms.Core.Class.Organism
 
   template: """
     <article id="{{id}}"></article>"""

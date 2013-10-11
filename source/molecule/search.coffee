@@ -8,7 +8,7 @@ Basic fieldset for search
 ###
 "use strict"
 
-class Atoms.Molecule.Search extends Atoms.Class.Molecule
+class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
 
   template: """
     <fieldset molecule-search molecule-class="{{className}}"></fieldset>

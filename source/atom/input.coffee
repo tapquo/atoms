@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Atom.Input extends Atoms.Class.Atom
+class Atoms.Atom.Input extends Atoms.Core.Class.Atom
 
   template: """
     {{#if.label}}<label>{{label}}</label>{{/if.label}}

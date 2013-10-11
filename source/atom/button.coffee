@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Atom.Button extends Atoms.Class.Atom
+class Atoms.Atom.Button extends Atoms.Core.Class.Atom
 
   template: """
     <button id="{{id}}" class="{{style}}">

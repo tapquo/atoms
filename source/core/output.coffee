@@ -1,7 +1,7 @@
 ###
 @TODO
 
-@namespace Atoms
+@namespace Atoms.COre
 @class Output
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi

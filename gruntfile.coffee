@@ -32,14 +32,14 @@ module.exports = (grunt) ->
           'style/base/class.styl',
           'style/base/atom.*.styl',
           'style/base/molecule.*.styl',
-          'style/base/organism.*.styl',
-          'style/base/template.*.styl']
+          'style/base/organism.*.styl']
         theme: [
           'style/theme/reset.styl',
           'style/theme/atom.*.styl',
           'style/theme/molecule.*.styl',
           'style/theme/organism.*.styl']
-
+        templates: [
+          'style/theme/template.*.styl']
 
     coffee:
       core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js'         : '<%= source.core %>'
@@ -70,6 +70,9 @@ module.exports = (grunt) ->
       theme:
         options: compress: false, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.theme.css': '<%=source.stylus.theme%>'
+      templates:
+        options: compress: false, import: [ '__init']
+        files: '<%=meta.bower%>/<%=pkg.name%>.templates.css': '<%=source.stylus.templates%>'
 
 
     watch:
@@ -91,6 +94,9 @@ module.exports = (grunt) ->
       stylus_theme:
         files: ['<%= source.stylus.theme %>']
         tasks: ['stylus:theme']
+      stylus_templates:
+        files: ['<%= source.stylus.templates %>']
+        tasks: ['stylus:templates']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'

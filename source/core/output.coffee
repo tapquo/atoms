@@ -10,12 +10,19 @@
 
 Atoms.Core.Output =
 
+  method: "append"
+
   append: -> @render "append"
 
   prepend: -> @render "prepend"
 
   html: -> @render "html"
 
-  render: (method) ->
+  render: ->
+    throw "No template defined." unless @template?
+    throw "No parent assigned." unless @attributes.parent?
+
     @el = Atoms.$ Atoms.Core.render(@template)(@attributes)
-    @parent[method] @el
+    @parent = Atoms.$ @attributes.parent
+    @method = @attributes.method if @attributes.method?
+    @parent[@method] @el

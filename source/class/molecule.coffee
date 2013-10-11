@@ -12,10 +12,11 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Chemistry
+  @include Atoms.Core.Output
 
   constructor: (@attributes) ->
     super
     @attributes.className = @className
     @type = "Molecule"
-    @el = Atoms.$ Atoms.Core.render(@template)(@attributes) unless @el
+    @render()
     @chemistry()

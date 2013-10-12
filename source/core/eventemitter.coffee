@@ -38,7 +38,7 @@ Atoms.Core.EventEmitter =
 
   bindList: (el, className, events) ->
     for event in events
-      el.bind event, @["#{className.toLowerCase()}#{Atoms.Core.className(event)}"]
+      el.bind event, @["#{className.toLowerCase()}#{Atoms.Core.Helper.className(event)}"]
 
 
   _getNameOfEvent: (type="", className, event) ->

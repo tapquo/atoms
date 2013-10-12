@@ -1,11 +1,8 @@
 
 # Globals
 Atoms = @Atoms =
-  version   : "0.0.4"
-  Core      :
-    Class: {}
-    className : (string) -> string.charAt(0).toUpperCase() + string.slice(1)
-    isArray   : (value) -> return {}.toString.call(value) is '[object Array]'
+  version   : "0.0.5"
+  Core      : Class: {}
   Atom      : {}
   Molecule  : {}
   Organism  : {}

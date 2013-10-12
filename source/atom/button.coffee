@@ -11,16 +11,10 @@
 class Atoms.Atom.Button extends Atoms.Core.Class.Atom
 
   template: """
-    <button id="{{id}}" class="{{style}}{{^if.text}} icon{{/if.text}}">
+    <button {{#if.id}}id="{{id}}"{{/if.id}} class="{{style}}{{^if.text}} icon{{/if.text}}">
       {{#if.icon}}<span class="icon {{icon}}"></span>{{/if.icon}}
       {{#if.text}}<abbr>{{text}}</abbr>{{/if.text}}
     </button>"""
 
   events: ["click"]
-
-  constructor: (@attributes) ->
-    @attributes.if = icon: false, text: false
-    @attributes.if.icon = true if @attributes.icon?
-    @attributes.if.text = true if @attributes.text?
-    super
-
+  ifs   : ["id", "icon", "text"]

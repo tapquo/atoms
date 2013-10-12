@@ -12,12 +12,7 @@ class Atoms.Atom.Input extends Atoms.Core.Class.Atom
 
   template: """
     {{#if.label}}<label>{{label}}</label>{{/if.label}}
-    <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" value="{{value}}" />"""
+    <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" value="{{value}}" {{#required}}required{{/required}} />"""
 
   events: ["click", "keypress", "keyup"]
-
-  constructor: (@attributes) ->
-    @attributes.if = label: false
-    @attributes.if.label = true if @attributes.label?
-    super
-
+  ifs   : ["label"]

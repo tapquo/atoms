@@ -17,8 +17,4 @@ class Atoms.Atom.Label extends Atoms.Core.Class.Atom
       {{#if.count}}<strong>{{count}}</strong>{{/if.count}}
     </label>"""
 
-  constructor: (@attributes) ->
-    @attributes.if = icon: false, count: false
-    @attributes.if.icon = true if @attributes.icon?
-    @attributes.if.count = true if @attributes.count?
-    super
+  ifs: ["icon", "count"]

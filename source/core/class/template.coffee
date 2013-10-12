@@ -11,3 +11,10 @@ Base class for Organism
 class Atoms.Core.Class.Template extends Atoms.Core.Module
 
   @include Atoms.Core.EventEmitter
+  @include Atoms.Core.Output
+
+  constructor: ->
+    super
+    @attributes.className = @className
+    @type = "Template"
+    @render()

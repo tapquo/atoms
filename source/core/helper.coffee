@@ -11,7 +11,7 @@
 Atoms.Core.Helper = do ->
 
   mix = (extend, base) ->
-    result = _clone(base)
+    result = @_clone(base)
     if result? then result[prop] = extend[prop] for prop of extend else result = extend
     result
 
@@ -24,7 +24,7 @@ Atoms.Core.Helper = do ->
     return {}.toString.call(value) is '[object Array]'
 
 
-  _clone = (obj) ->
+  _clone: (obj) ->
     return obj if not obj? or typeof obj isnt 'object'
     return new Date(obj.getTime()) if obj instanceof Date
 

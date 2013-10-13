@@ -1,7 +1,6 @@
 # Atoms
 ## Atomic Development for Modern WebApps
-Copyright 2013, Tapquo S.L.
-
+Copyright 2013, Javier Jimenez Villar
 
 
 ### Qué demonios es Atoms?

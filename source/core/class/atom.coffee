@@ -16,7 +16,6 @@ class Atoms.Core.Class.Atom extends Atoms.Core.Module
   constructor: (@attributes) ->
     super
     @type = "Atom"
-    # @_analizeIfs()
     @render()
 
     if @events?

@@ -18,11 +18,13 @@ Atoms.Core.EventEmitter =
   @param  {string}    A string containing one or more event/custom types.
   @param  {function}  A function to execute each time the event is triggered.
   ###
-  bind: (event, callback) ->
-    event = @_getNameOfEvent(@type, @className, event)
-    @_events = @_events or {}
-    @_events[event] = @_events[event] or []
-    @_events[event].push callback
+  bind: (events, callback) ->
+    events = events.split(' ')
+    calls = @hasOwnProperty('_events') and @_events or = {}
+    for event in events
+      event = @_getNameOfEvent @type, @className, event
+      calls[event] or = []
+      calls[event].push callback
 
   ###
   Remove a previously-attached event handler from the class.
@@ -33,7 +35,7 @@ Atoms.Core.EventEmitter =
   unbind: (event, callback) ->
     event = @_getNameOfEvent(@type, @className, event)
     @_events = @_events or {}
-    return  if event of @_events is false
+    return if event of @_events is false
     @_events[event].splice @_events[event].indexOf(callback), 1
 
   ###
@@ -69,5 +71,5 @@ Atoms.Core.EventEmitter =
       el.bind event, @["#{name.toLowerCase()}#{Atoms.Core.Helper.className(event)}"]
 
   # Private Methods
-  _getNameOfEvent: (type="", className, event) ->
+  _getNameOfEvent: (type="", className="", event) ->
     ("#{type.toLowerCase()}_#{className.toLowerCase()}_#{event}").toLowerCase()

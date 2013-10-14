@@ -66,7 +66,7 @@ Atoms.Core.EventEmitter =
   bindList: (el, name, events) ->
     #@TODO: Better if use internal @name
     for event in events
-      el.bind event, @["#{name.toLowerCase()}#{Atoms.Core.Helper.name(event)}"]
+      el.bind event, @["#{name.toLowerCase()}#{Atoms.Core.Helper.className(event)}"]
 
   # Private Methods
   _getNameOfEvent: (type="", className, event) ->

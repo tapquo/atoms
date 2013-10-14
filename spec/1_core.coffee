@@ -1,9 +1,18 @@
 describe "Core", ->
 
-  Atom = undefined
+  Atom        = undefined
+  atomEmitter  = undefined
+  spy         = undefined
 
   beforeEach ->
     Atom = Atoms.Core.Module
+
+    atomEmitter = Atom.create()
+    atomEmitter.extend Atoms.Core.EventEmitter
+    noop = spy: ->
+    spyOn noop, "spy"
+    spy = noop.spy
+
 
   it "is healthy", ->
     expect(Atoms).toBeTruthy()
@@ -49,3 +58,55 @@ describe "Core", ->
   it "include/extend should raise without arguments", ->
     expect(-> Atom.include() ).toThrow()
     expect(-> Atom.extend() ).toThrow()
+
+  it "can bind/trigger events", ->
+    atomEmitter.bind "hello", spy
+    atomEmitter.trigger "hello"
+    expect(spy).toHaveBeenCalled()
+
+  it "should trigger correct events", ->
+    atomEmitter.bind "hello", spy
+    atomEmitter.trigger "bye"
+    expect(spy).not.toHaveBeenCalled()
+
+  it "can bind/trigger multiple events", ->
+    atomEmitter.bind "hello guy by", spy
+    atomEmitter.trigger "guy"
+    expect(spy).toHaveBeenCalled()
+
+  it "can pass data to triggered events", ->
+    atomEmitter.bind "yoyo", spy
+    atomEmitter.trigger "yoyo", 5, 10
+    expect(spy).toHaveBeenCalledWith 5, 10, atomEmitter
+
+  it "can unbind events", ->
+    atomEmitter.bind "hello", spy
+    atomEmitter.unbind "hello"
+    atomEmitter.trigger "hello"
+    expect(spy).not.toHaveBeenCalled()
+
+  it "should allow a callback unbind itself", ->
+    #
+    a = jasmine.createSpy("a")
+    b = jasmine.createSpy("b")
+    c = jasmine.createSpy("c")
+    b.andCallFake -> atomEmitter.unbind "once", b
+
+    atomEmitter.bind "once", a
+    atomEmitter.bind "once", b
+    atomEmitter.bind "once", c
+    atomEmitter.trigger "once"
+    expect(a).toHaveBeenCalled()
+    expect(b).toHaveBeenCalled()
+    expect(c).toHaveBeenCalled()
+    atomEmitter.trigger "once"
+    expect(a.callCount).toBe 2
+    expect(b.callCount).toBe 1
+    expect(c.callCount).toBe 2
+
+  it "can cancel propogation", ->
+    #
+    atomEmitter.bind "bye", -> false
+    atomEmitter.bind "bye", spy
+    atomEmitter.trigger "bye"
+    expect(spy).not.toHaveBeenCalled()

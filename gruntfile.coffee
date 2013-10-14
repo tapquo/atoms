@@ -57,7 +57,10 @@ module.exports = (grunt) ->
 
     jasmine:
         pivotal:
-          src: '<%=meta.build%>/<%=pkg.name%>.debug.js'
+          src: [
+            '<%=meta.build%>/<%=pkg.name%>.debug.js',
+            '<%=meta.build%>/<%=pkg.name%>.organisms.js',
+            '<%=meta.build%>/<%=pkg.name%>.templates.js']
           options:
             vendor: 'spec/components/jquery/jquery.js'
             specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',

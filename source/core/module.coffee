@@ -40,6 +40,18 @@ class Atoms.Core.Module
     included.apply(this) if included
     @
 
+  ###
+  ...
+  @method create
+  @param  {value}    Instance extend contents
+  @param  {value}    Static extend contents
+  ###
+  @create: (instances, statics) ->
+    class cls extends @
+    cls.include(instances) if instances
+    cls.extend(statics) if statics
+    cls
+
   constructor: ->
     @init? arguments
     @className = @constructor.name

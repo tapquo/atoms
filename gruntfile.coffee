@@ -84,7 +84,7 @@ module.exports = (grunt) ->
     watch:
       core:
         files: ['<%= source.core %>']
-        tasks: ['coffee:core']
+        tasks: ['coffee:core', 'jasmine']
       spec:
         files: ['<%= source.spec %>']
         tasks: ['coffee:spec', 'jasmine']

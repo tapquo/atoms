@@ -25,6 +25,8 @@ module.exports = (grunt) ->
         'source/organism/*.coffee'],
       templates: [
         'source/template/*.coffee']
+      example: [
+        'example/*.coffee']
       # Stylus
       stylus:
         base: [
@@ -46,6 +48,7 @@ module.exports = (grunt) ->
       spec: files: '<%=meta.build%>/<%=pkg.name%>.spec.js'          : '<%= source.spec %>'
       organisms: files: '<%=meta.build%>/<%=pkg.name%>.organisms.js': '<%= source.organisms %>'
       templates: files: '<%=meta.build%>/<%=pkg.name%>.templates.js': '<%= source.templates %>'
+      example: files: '<%=meta.build%>/<%=pkg.name%>.example.js'    : '<%= source.example %>'
 
 
     uglify:
@@ -62,7 +65,7 @@ module.exports = (grunt) ->
             '<%=meta.build%>/<%=pkg.name%>.organisms.js',
             '<%=meta.build%>/<%=pkg.name%>.templates.js']
           options:
-            vendor: 'spec/components/jquery/jquery.js'
+            vendor: 'spec/components/jquery/jquery.min.js'
             specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
 
 
@@ -88,6 +91,9 @@ module.exports = (grunt) ->
       organisms:
         files: ['<%= source.organisms %>']
         tasks: ['coffee:organisms']
+      example:
+        files: ['<%= source.example %>']
+        tasks: ['coffee:example']
       templates:
         files: ['<%= source.templates %>']
         tasks: ['coffee:templates']

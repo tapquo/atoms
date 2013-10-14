@@ -27,3 +27,7 @@ class Atoms.Molecule.Form extends Atoms.Core.Class.Molecule
 
   inputKeyup: (event, atom) =>
     @trigger "keyup", event.keyCode, atom
+
+  buttonClick: (event, atom) =>
+    event.preventDefault()
+    @trigger "click", event, atom

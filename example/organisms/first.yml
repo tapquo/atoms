@@ -1,0 +1,63 @@
+header:
+  molecule:
+    navigation:
+      - style: left
+        button:
+          - icon: chevron-left
+
+      - style: right
+        button:
+          - icon: edit
+          - icon: search
+
+
+section:
+  atom:
+    button:
+      style: fluid
+      disabled: true
+      icon: search
+      text: Find your friends
+
+  molecule:
+    form:
+      input:
+        - type: text
+          placeholder: Your address..
+          label: Adress Information:
+        - type: number
+          placeholder: Postal code
+          style: tiny
+      button:
+        - text: Validate address
+          style: fluid
+
+    navigation:
+      style: margin-top
+      button:
+        - icon: ok
+          style: accept
+        - icon: remove
+          style: cancel
+
+
+footer:
+  molecule:
+    navigation:
+      button:
+        - icon: user
+        - icon: home
+        - icon: pushpin
+        - icon: inbox
+
+bindings:
+  header:
+    navigation: ["select"]
+
+  section:
+    form: ["keyup", "click"]
+    navigation: ["select"]
+
+  footer:
+    navigation: ["select"]
+

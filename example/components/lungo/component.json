@@ -1,0 +1,13 @@
+{
+  "name": "lungo",
+  "description": "HTML5 Cross-Device Framework.",
+  "version": "2.2.1",
+  "homepage": "http://lungo.tapquo.com",
+  "author": {
+    "name": "Tapquo S.L.",
+    "site": "http://tapquo.com"},
+  "main": ["./lungo.js", "./lungo.css"],
+  "keywords": [ "mobile", "framework", "html5", "device", "phone", "tablet", "tv" ],
+  "dependencies": {"quojs": "latest"},
+  "license": [ {"type": "GPLv3"}, {"type": "Commercial"}]
+}

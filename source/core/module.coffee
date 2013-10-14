@@ -16,12 +16,23 @@ class Atoms.Core.Module
   parent  : null
   el      : null
 
+  ###
+  Extends the contents of an object onto the class to provide new static methods.
+  @method extend
+  @param  {value}    Contents
+  ###
   @extend: (obj) ->
     throw new Error('extend(obj) requires obj') unless obj
     @[key] = value for key, value of obj when key not in MODULE_KEYWORDS
     obj.extended?.apply(this)
     @
 
+  ###
+  Include the contents of an object onto the class prototype to provide new
+  instance methods.
+  @method include
+  @param  {value}    Contents
+  ###
   @include: (obj) ->
     throw new Error('include(obj) requires obj') unless obj
     @::[key] = value for key, value of obj when key not in MODULE_KEYWORDS

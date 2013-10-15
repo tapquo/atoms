@@ -85,25 +85,6 @@ describe "Core", ->
     atomEmitter.trigger "hello"
     expect(spy).not.toHaveBeenCalled()
 
-  it "should allow a callback unbind itself", ->
-    #
-    a = jasmine.createSpy("a")
-    b = jasmine.createSpy("b")
-    c = jasmine.createSpy("c")
-    b.andCallFake -> atomEmitter.unbind "once", b
-
-    atomEmitter.bind "once", a
-    atomEmitter.bind "once", b
-    atomEmitter.bind "once", c
-    atomEmitter.trigger "once"
-    expect(a).toHaveBeenCalled()
-    expect(b).toHaveBeenCalled()
-    expect(c).toHaveBeenCalled()
-    atomEmitter.trigger "once"
-    expect(a.callCount).toBe 2
-    expect(b.callCount).toBe 1
-    expect(c.callCount).toBe 2
-
   it "can cancel propogation", ->
     #
     atomEmitter.bind "bye", -> false

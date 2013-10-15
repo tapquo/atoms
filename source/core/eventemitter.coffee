@@ -34,9 +34,8 @@ Atoms.Core.EventEmitter =
   ###
   unbind: (event, callback) ->
     event = @_getNameOfEvent(@type, @className, event)
-    @_events = @_events or {}
-    return if event of @_events is false
-    @_events[event].splice @_events[event].indexOf(callback), 1
+    if @hasOwnProperty('_events') and @_events?[event]
+      @_events[event].splice @_events[event].indexOf(callback), 1
 
   ###
   Execute all handlers and behaviors attached to the matched class for the given
@@ -46,17 +45,13 @@ Atoms.Core.EventEmitter =
   @param  {array}     [OPTIONAL] Additional parameters to pass along to the event
                       handler.
   ###
-  trigger: (event) ->
+  trigger: (event, args...) ->
     event = @_getNameOfEvent @type, @className, event
-    @_events = @_events or {}
-    return  if event of @_events is false
-    i = 0
-
-    while i < @_events[event].length
-      parameters = Array::slice.call(arguments, 1)
-      parameters.push @
-      @_events[event][i].apply @, parameters
-      i++
+    events = @hasOwnProperty('_events') and @_events?[event]
+    return unless events
+    args.push @
+    for event in events
+      break if event.apply(@, args) is false
 
   ###
   Attach a handler to a list of a events for the class.

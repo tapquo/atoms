@@ -42,7 +42,7 @@ describe "Molecule", ->
     expect(search.parent).toEqual el
     expect(search.el.parent().html()).toEqual el.html()
 
-  it "Instances of atoms make up the molecule", ->
+  it "Instances of Atoms make up the Molecule", ->
     search = new Search parent: el
     expect(search.el.children("input")).toBeTruthy()
     expect(search.input.length > 0).toBeTruthy()

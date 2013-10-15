@@ -91,12 +91,12 @@ module.exports = (grunt) ->
       organisms:
         files: ['<%= source.organisms %>']
         tasks: ['coffee:organisms']
-      example:
-        files: ['<%= source.example %>']
-        tasks: ['coffee:example']
       templates:
         files: ['<%= source.templates %>']
         tasks: ['coffee:templates']
+      example:
+        files: ['<%= source.example %>']
+        tasks: ['coffee:example']
       stylus_base:
         files: ['<%= source.stylus.base %>']
         tasks: ['stylus:base']

@@ -37,7 +37,7 @@ Atoms.Core.Output =
   ###
   render: ->
     throw "No template defined." unless @template?
-    throw "No parent assigned." unless @attributes.parent?
+    throw "No parent assigned." unless @attributes?.parent?
     @_setIfBindings() if @ifs.length > 0
     @el = Atoms.$ @_mustache(@template)(@attributes)
     @parent = Atoms.$ @attributes.parent

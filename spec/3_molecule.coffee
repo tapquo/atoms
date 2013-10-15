@@ -33,8 +33,13 @@ describe "Molecule", ->
 
   it "can create a new Molecule extends Base", ->
     class Search extends Atoms.Core.Class.Molecule
-      template: "<fieldset/>"
     expect(Search).toBeTruthy()
+
+  it "a instance of Molecule needs a template and a parent", ->
+    no_template = -> new do class NoTemplate extends Atoms.Core.Class.Molecule
+    expect(no_template).toThrow()
+    no_parent = -> new Article()
+    expect(no_parent).toThrow()
 
   it "can create a instance of Molecule", ->
     search = new Search parent: el

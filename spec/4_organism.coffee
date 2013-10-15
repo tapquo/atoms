@@ -36,16 +36,11 @@ describe "Organism", ->
 
   it "can create a new Organism extends Base", ->
     class Organism extends Atoms.Core.Class.Organism
-      template: "<article/>"
-      areas: ["header"]
     expect(Organism).toBeTruthy()
 
-  it "a instance of Atom needs a template and a parent", ->
-    no_template = ->
-      class NoTemplate extends Atoms.Core.Class.Organism
-      new NoTemplate()
+  it "a instance of Organism needs a template and a parent", ->
+    no_template = -> new do class NoTemplate extends Atoms.Core.Class.Organism
     expect(no_template).toThrow()
-
     no_parent = -> new Article()
     expect(no_parent).toThrow()
 

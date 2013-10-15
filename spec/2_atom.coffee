@@ -14,13 +14,10 @@ describe "Atom", ->
 
   it "can create a new Atom extends Base", ->
     class Button extends Atoms.Core.Class.Atom
-      template: "<button></button>"
     expect(Button).toBeTruthy()
 
   it "a instance of Atom needs a template and a parent", ->
-    no_template = ->
-      class NoTemplate extends Atoms.Core.Class.Atom
-      new NoTemplate()
+    no_template = -> new do class NoTemplate extends Atoms.Core.Class.Atom
     expect(no_template).toThrow()
 
     no_parent = -> new Input()

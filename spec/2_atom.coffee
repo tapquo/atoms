@@ -1,61 +1,55 @@
 describe "Atom", ->
 
-  # Basic elements
   template = "<input type='{{type}}' />"
-  type = "text"
-  template_binded = "<input type='#{type}' />"
-  element = undefined
-
-  class AtomEmpty extends Atoms.Class.Atom
-    constructor: -> super
-
-  class AtomTest extends Atoms.Class.Atom
-    template: template
+  el       = undefined
+  Input    = undefined
+  spy         = undefined
 
   beforeEach ->
-    element = Atoms.$ "<div />"
+    class Input extends Atoms.Core.Class.Atom
+      template: template
+      events: ["click"]
+
+    el = Atoms.$ "<div></div>"
+
+    noop = spy: ->
+    spyOn noop, "spy"
+    spy = noop.spy
 
 
-  # Expects
-  it "can create a new Base instance", ->
-    atom = new Atoms.Class.Atom template: "<li>"
-    expect(atom).toBeTruthy()
-    expect(atom.append).toBeTruthy()
+  it "can create a new Atom extends Base", ->
+    class Button extends Atoms.Core.Class.Atom
+      template: "<button></button>"
+    expect(Button).toBeTruthy()
 
+  it "a instance of Atom needs a template and a parent", ->
+    no_template = ->
+      class NoTemplate extends Atoms.Core.Class.Atom
+      new NoTemplate()
+    expect(no_template).toThrow()
 
-  it "a Atom need a template", ->
-    atom = new AtomEmpty()
-    expect(atom).toBeTruthy()
-    expect(atom.template).toBe null
+    no_parent = -> new Input()
+    expect(no_parent).toThrow()
 
-    atom = new AtomTest
-    expect(atom.template).toBe template
+  it "can create a instance of Atom", ->
+    input = new Input parent: el
+    expect(input instanceof Input).toBeTruthy()
+    expect(input.parent).toEqual el
+    expect(input.el.parent().html()).toEqual el.html()
 
-  it "a new Atom can set into a Molecule", ->
-    atom = new AtomTest molecule: element, type: type
-    atom.html()
-    expect(atom.el.parent()[0]).toBe element[0]
+  it "can set a QuerySelectorAll parent", ->
+    input = new Input parent: query = "<header></header>"
+    expect(input.parent[0].nodeType).toEqual Atoms.$(query)[0].nodeType
 
-  it "a new Atom can set attributes for binding in template", ->
-    atom = new AtomTest molecule: element, type: type
-    atom.html()
-    expect(atom.el.html()).toBe template_binded
+  it "can set attributes in a new Instance of Atom", ->
+    input = new Input parent: el, type: "text"
+    expect(input.el[0].outerHTML).toEqual '<input type="text">'
 
-  # it "should allow a callback unbind itself", ->
-  #   a = jasmine.createSpy("a")
-  #   b = jasmine.createSpy("b")
-  #   c = jasmine.createSpy("c")
-  #   b.andCallFake ->
-  #     EventTest.unbind "once", b
+  it "can set a different method to render a instance of Atom in parent", ->
+    input = new Input parent: el, type: "text", method: "prepend"
+    expect(input.el[0].outerHTML).toEqual '<input type="text">'
 
-  #   EventTest.bind "once", a
-  #   EventTest.bind "once", b
-  #   EventTest.bind "once", c
-  #   EventTest.trigger "once"
-  #   expect(a).toHaveBeenCalled()
-  #   expect(b).toHaveBeenCalled()
-  #   expect(c).toHaveBeenCalled()
-  #   EventTest.trigger "once"
-  #   expect(a.callCount).toBe 2
-  #   expect(b.callCount).toBe 1
-  #   expect(c.callCount).toBe 2
+  it "should bind to a assigned events", ->
+    input = new Input parent: el
+    expect("click" in input.events).toBeTruthy()
+    expect("tap" in input.events).not.toBeTruthy()

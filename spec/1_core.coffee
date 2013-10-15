@@ -17,16 +17,16 @@ describe "Core", ->
   it "is healthy", ->
     expect(Atoms).toBeTruthy()
 
-  it "Atom exists", ->
+  it "Atom class exists", ->
     expect(Atoms.Core.Class.Atom).toBeTruthy()
 
-  it "Molecule exists", ->
+  it "Molecule class exists", ->
     expect(Atoms.Core.Class.Molecule).toBeTruthy()
 
-  it "Organism exists", ->
+  it "Organism class exists", ->
     expect(Atoms.Core.Class.Organism).toBeTruthy()
 
-  it "Template exists", ->
+  it "Template class exists", ->
     expect(Atoms.Core.Class.Organism).toBeTruthy()
 
   it "can create subclasses", ->

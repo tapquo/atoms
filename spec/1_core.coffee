@@ -1,7 +1,7 @@
 describe "Core", ->
 
   Atom        = undefined
-  atomEmitter  = undefined
+  atomEmitter = undefined
   spy         = undefined
 
   beforeEach ->

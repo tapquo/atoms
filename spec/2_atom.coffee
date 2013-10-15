@@ -3,7 +3,6 @@ describe "Atom", ->
   template = "<input type='{{type}}' />"
   el       = undefined
   Input    = undefined
-  spy         = undefined
 
   beforeEach ->
     class Input extends Atoms.Core.Class.Atom
@@ -11,10 +10,6 @@ describe "Atom", ->
       events: ["click"]
 
     el = Atoms.$ "<div></div>"
-
-    noop = spy: ->
-    spyOn noop, "spy"
-    spy = noop.spy
 
 
   it "can create a new Atom extends Base", ->

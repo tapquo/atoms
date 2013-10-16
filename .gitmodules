@@ -1,9 +1,0 @@
-[submodule "bower_components/atoms"]
-    path = bower_components/atoms
-    url = https://github.com/tapquo/bower-atoms.git
-[submodule "bower_components/atoms-icons"]
-    path = bower_components/atoms-icons
-    url = https://github.com/tapquo/bower-atoms-icons.git
-[submodule "bower_components/CSSmethods"]
-    path = bower_components/CSSmethods
-    url = https://github.com/soyjavi/CSSmethods.git

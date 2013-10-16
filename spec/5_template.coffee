@@ -11,8 +11,11 @@ describe "Organism", ->
     spy = noop.spy
 
     class Template extends Atoms.Core.Class.Template
+      @attributes "title", "button"
       template: "<article><h1>{{title}}</h1></article>"
       title: "Hi Atoms!!!"
+      button:
+        icon: "profile"
 
     el = Atoms.$ "<div/>"
 
@@ -35,5 +38,4 @@ describe "Organism", ->
 
   it "Templates are shielded only be assigned attributes that exist in the base", ->
     template = new Template parent: el
-
-
+    expect(template.constructor.elements).toEqual ["title", "button"]

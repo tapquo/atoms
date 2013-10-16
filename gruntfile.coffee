@@ -42,6 +42,8 @@ module.exports = (grunt) ->
           'style/theme/organism.*.styl']
         templates: [
           'style/theme/template.*.styl']
+        icons: [
+          'bower_components/atoms_icons/*.styl']
 
     coffee:
       core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js'         : '<%= source.core %>'
@@ -79,7 +81,9 @@ module.exports = (grunt) ->
       templates:
         options: compress: false, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.templates.css': '<%=source.stylus.templates%>'
-
+      icons:
+        options: compress: false
+        files: '<%=meta.bower%>_icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
 
     watch:
       core:
@@ -106,6 +110,9 @@ module.exports = (grunt) ->
       stylus_templates:
         files: ['<%= source.stylus.templates %>']
         tasks: ['stylus:templates']
+      stylus_icons:
+        files: ['<%= source.stylus.icons %>']
+        tasks: ['stylus:icons']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'

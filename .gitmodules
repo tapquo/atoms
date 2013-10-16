@@ -4,3 +4,6 @@
 [submodule "style/CSSmethods"]
 	path = style/CSSmethods
 	url = https://github.com/soyjavi/CSSmethods.git
+[submodule "bower_components/atoms-icons"]
+	path = bower_components/atoms-icons
+	url = https://github.com/tapquo/bower-atoms-icons.git

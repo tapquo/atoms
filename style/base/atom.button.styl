@@ -23,7 +23,6 @@ button
 
   & > .icon
     line-height: 0.9em
-    font-weight: 100 !important
   & > .icon + abbr
     margin-left: 0.25em
 
@@ -37,8 +36,12 @@ button
   section &
     padding: 0.8em 1.0em
     margin: 0.2em 0
+    & .icon
+      font-size: 1.1em
     &.big
       font-size: FONT_SIZE_BIG
+    &:not(.big):not(.small):not(.tiny)
+      font-size: 1.1rem
     &.small
       font-size: FONT_SIZE_SMALL
     &.tiny
@@ -54,5 +57,6 @@ button
       cursor: default
     & + button
       margin-right: 0.2em
+
 
 

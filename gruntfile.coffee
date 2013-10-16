@@ -4,7 +4,7 @@ module.exports = (grunt) ->
 
     meta:
       build   : 'build',
-      bower   : 'component',
+      bower   : 'bower_components/atoms',
       version : '',
       banner  : '/* <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy/m/d") %>\n' +
               '   <%= pkg.homepage %>\n' +

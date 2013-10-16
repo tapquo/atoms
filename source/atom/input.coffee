@@ -10,9 +10,10 @@
 
 class Atoms.Atom.Input extends Atoms.Core.Class.Atom
 
+  @conditionals "label"
+
   template: """
     {{#if.label}}<label>{{label}}</label>{{/if.label}}
     <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" value="{{value}}" {{#required}}required{{/required}} />"""
 
   events: ["click", "keypress", "keyup"]
-  ifs   : ["label"]

@@ -1,6 +1,12 @@
 
 class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
 
+  # Template
+  # ---------------------------------------------------------------------------
+  @attributes "title", "logo", "inputs", "buttons", "copyright"
+
+  @conditionals "logo", "title"
+
   template: """
     <article id="{{id}}" atom-template="LoginSignup">
       <section>
@@ -10,9 +16,12 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
       </section>
     </article>"""
 
-  ifs: ["logo", "title"]
-
-  inputs: [
+  # Attributes
+  # ---------------------------------------------------------------------------
+  logo      : undefined
+  title     : "Your app title..."
+  copyright : "Your company copyright..."
+  inputs:   [
     type        : "text"
     name        : "user"
     placeholder : "Type your username"
@@ -21,18 +30,15 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
     type        : "password"
     name        : "password"
     placeholder : "Type your password.."
-    required    : true
-  ]
-
-  buttons: [
+    required    : true]
+  buttons:  [
     icon: "user", text: "Login", style: "accept"
   ,
-    icon: "signin", text: "Signup"
-  ]
+    icon: "signin", text: "Signup"]
 
+  # Template Business
+  # ---------------------------------------------------------------------------
   constructor: (@attributes) ->
-    for input, index in @attributes.inputs
-      @inputs[index] = Atoms.Core.Helper.mix(input, @inputs[index])
     super
     section = @el.children("section")
 
@@ -44,31 +50,23 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
 
     @formKeyup()
 
-
   navigationSelect: (event) =>
-    is_valid = true
-    properties = {}
-    for input in @form.input
-      el = input.el
-      properties[el.attr "name"] = el.val()
-      is_valid = false if el.attr("required")? and el.val() is ""
-    properties
-    if is_valid then @trigger "validate", properties
-
+    if @_filledRequiredFields()
+      properties = {}
+      properties[el.attr "name"] = el.val() for input in @form.input
+      @trigger "validate", properties
 
   formKeyup: (event) =>
-    is_valid = @_readProperties()
-
+    is_valid = @_filledRequiredFields()
     for button in @navigation.button
       if is_valid
         button.el.removeAttr "disabled"
       else
         button.el.attr "disabled", "disabled"
 
-  _readProperties: ->
+  _filledRequiredFields: ->
     is_valid = true
     for input in @form.input
       el = input.el
       is_valid = false if el.attr("required")? and el.val() is ""
     is_valid
-

@@ -10,6 +10,8 @@
 
 class Atoms.Atom.Button extends Atoms.Core.Class.Atom
 
+  @conditionals "id", "icon", "text", "disabled"
+
   template: """
     <button {{#if.id}}id="{{id}}"{{/if.id}} class="{{style}}{{^if.text}} icon{{/if.text}}" {{#if.disabled}}disabled{{/if.disabled}}>
       {{#if.icon}}<span class="icon {{icon}}"></span>{{/if.icon}}
@@ -17,4 +19,3 @@ class Atoms.Atom.Button extends Atoms.Core.Class.Atom
     </button>"""
 
   events: ["click"]
-  ifs   : ["id", "icon", "text", "disabled"]

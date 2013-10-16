@@ -13,6 +13,7 @@ Atoms.Core.Output =
   method: "append"
   ifs   : []
 
+
   ###
   Insert content to the end of each element in the set of matched elements.
   @method append
@@ -35,16 +36,25 @@ Atoms.Core.Output =
   Render element with the instance @template and @attributes.
   @method render
   ###
-  render: ->
+  render: (conditionals = []) ->
     throw "No template defined." unless @template?
     throw "No parent assigned." unless @attributes?.parent?
-    @_setIfBindings() if @ifs.length > 0
+
+    @_createConditionalsBindings()
     @el = Atoms.$ @_mustache(@template)(@attributes)
     @parent = Atoms.$ @attributes.parent
     @method = @attributes.method if @attributes.method?
     @parent[@method] @el
 
   # Private Methods
+
+  _createConditionalsBindings: ->
+    @attributes.if = {}
+    if @constructor.ifs?
+      for key in @constructor.ifs
+        @attributes.if[key] = if @attributes[key]? then true else false
+
+
   ###
   The fastest and smallest Mustache compliant Javascript templating library
   templayed.js 0.2.1 - (c) 2012 Paul Engel
@@ -80,8 +90,3 @@ Atoms.Core.Output =
 
     inc = 0
     new Function("data", "data = [data], s = \"" + block(template.replace(/"/g, "\\\"").replace(/\n/g, "\\n")) + "\"; return s;")
-
-  _setIfBindings: ->
-    @attributes.if = {}
-    for key in @ifs
-      @attributes.if[key] = if @attributes[key]? then true else false

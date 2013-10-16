@@ -52,6 +52,13 @@ class Atoms.Core.Module
     cls.extend(statics) if statics
     cls
 
+  ###
+  ...
+  @method conditionals
+  @param  {array}    Array of conditionals values for template.
+  ###
+  @conditionals: (@ifs...) -> @
+
   constructor: ->
     @init? arguments
     @className = @constructor.name

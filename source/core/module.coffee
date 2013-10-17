@@ -56,13 +56,10 @@ class Atoms.Core.Module
   @method template
   @param  {value}    String or Function
   ###
-  @template: (value) ->
-    if typeof(value) is "string"
+  @template = (value) ->
+    if value? and typeof value is "string"
       @template = value
     else
       @template = "<div/>"
-      console.log "require"
 
-  constructor: ->
-    @init? arguments
-    @className = @constructor.name
+  constructor: -> @init? arguments

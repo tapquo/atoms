@@ -17,8 +17,7 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    @attributes.className = @className
-    @type = "Organism"
+    @constructor.type = "Organism"
     @render()
     for area in @areas
       if @attributes[area] then @_create area, @attributes[area]

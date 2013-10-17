@@ -15,8 +15,7 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    @attributes.className = @className
-    @type = "Molecule"
+    @constructor.type = "Molecule"
     @render()
     @atoms = {} unless @atoms?
     @chemistry()

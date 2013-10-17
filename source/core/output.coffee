@@ -10,9 +10,8 @@ HTML Renderer
 
 Atoms.Core.Output =
 
-  method: "append"
-  ifs   : []
-
+  method       : "append"
+  conditionals : []
 
   ###
   Insert content to the end of each element in the set of matched elements.
@@ -37,21 +36,20 @@ Atoms.Core.Output =
   @method render
   ###
   render: (conditionals = []) ->
-    throw "No template defined." unless @template?
+    throw "No template defined." unless @constructor.template?
     throw "No parent assigned." unless @attributes?.parent?
 
     @_createConditionalsBindings()
-    @el = Atoms.$ @_mustache(@template)(@attributes)
+    @el = Atoms.$ @_mustache(@constructor.template)(@attributes)
     @parent = Atoms.$ @attributes.parent
     @method = @attributes.method if @attributes.method?
     @parent[@method] @el
 
   # Private Methods
-
   _createConditionalsBindings: ->
     @attributes.if = {}
-    if @constructor.ifs?
-      for key in @constructor.ifs
+    if @conditionals?
+      for key in @conditionals
         @attributes.if[key] = if @attributes[key]? then true else false
 
 

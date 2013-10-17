@@ -12,7 +12,6 @@ MODULE_KEYWORDS = ['included', 'extended']
 
 class Atoms.Core.Module
 
-  template: null
   parent  : null
   el      : null
 
@@ -54,10 +53,15 @@ class Atoms.Core.Module
 
   ###
   ...
-  @method conditionals
-  @param  {array}    Array of conditionals values for template.
+  @method template
+  @param  {value}    String or Function
   ###
-  @conditionals: (@ifs...) -> @
+  @template: (value) ->
+    if typeof(value) is "string"
+      @template = value
+    else
+      @template = "<div/>"
+      console.log "require"
 
   constructor: ->
     @init? arguments

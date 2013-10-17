@@ -10,6 +10,4 @@
 
 class Atoms.Atom.Title extends Atoms.Core.Class.Atom
 
-  template: """<h1>{{text}}</h1>"""
-
-  events: ["click"]
+  @template """<h1>{{text}}</h1>"""

@@ -10,7 +10,7 @@ Basic fieldset for search
 
 class Atoms.Molecule.Form extends Atoms.Core.Class.Molecule
 
-  template: """
+  @template """
     <form molecule-form molecule-class="{{className}}"></form>
   """
 

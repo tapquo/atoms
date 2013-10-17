@@ -22,4 +22,3 @@ class Atoms.Core.Class.Atom extends Atoms.Core.Module
       for evt in @events
         event_name = Atoms.Core.Helper.className(evt)
         @el.on evt, do (event_name) => (event) => @trigger event_name, event, @
-    @

@@ -5,9 +5,10 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
   # ---------------------------------------------------------------------------
   @attributes "title", "logo", "inputs", "buttons", "copyright"
 
-  @conditionals "logo", "title"
 
-  template: """
+  conditionals: ["logo", "title"]
+
+  @template """
     <article id="{{id}}" atom-template="LoginSignup">
       <section>
         {{#if.logo}}<img src="{{logo}}" />{{/if.logo}}
@@ -15,6 +16,7 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
         <small>{{copyright}}</small>
       </section>
     </article>"""
+
 
   # Attributes
   # ---------------------------------------------------------------------------
@@ -53,7 +55,7 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
   navigationSelect: (event) =>
     if @_filledRequiredFields()
       properties = {}
-      properties[el.attr "name"] = el.val() for input in @form.input
+      properties[input.el.attr "name"] = input.el.val() for input in @form.input
       @trigger "validate", properties
 
   formKeyup: (event) =>

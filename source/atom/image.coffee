@@ -11,7 +11,7 @@
 
 class Atoms.Atom.Image extends Atoms.Core.Class.Atom
 
-  template: """
+  @template """
     <img src="{{source}}" class="{{style}}" alt="{{alt}}" />"""
 
   events: ["click"]

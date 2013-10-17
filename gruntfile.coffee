@@ -54,21 +54,24 @@ module.exports = (grunt) ->
 
 
     uglify:
-      options: compress: false, banner: "<%= meta.banner %>"
+      options:
+        report: "gzip"
+        mangle: false
+        banner: "<%= meta.banner %>"
       core: files: '<%=meta.bower%>/<%=pkg.name%>.js': '<%=meta.build%>/<%=pkg.name%>.debug.js'
       organisms: files: '<%=meta.bower%>/<%=pkg.name%>.organisms.js': '<%=meta.build%>/<%=pkg.name%>.organisms.js'
       templates: files: '<%=meta.bower%>/<%=pkg.name%>.templates.js': '<%=meta.build%>/<%=pkg.name%>.templates.js'
 
 
     jasmine:
-        pivotal:
-          src: [
-            '<%=meta.build%>/<%=pkg.name%>.debug.js',
-            '<%=meta.build%>/<%=pkg.name%>.organisms.js',
-            '<%=meta.build%>/<%=pkg.name%>.templates.js']
-          options:
-            vendor: 'spec/components/jquery/jquery.min.js'
-            specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
+      pivotal:
+        src: [
+          '<%=meta.build%>/<%=pkg.name%>.debug.js',
+          '<%=meta.build%>/<%=pkg.name%>.organisms.js',
+          '<%=meta.build%>/<%=pkg.name%>.templates.js']
+        options:
+          vendor: 'spec/components/jquery/jquery.min.js'
+          specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
 
 
     stylus:
@@ -84,6 +87,7 @@ module.exports = (grunt) ->
       icons:
         options: compress: false
         files: '<%=meta.bower%>_icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
+
 
     watch:
       core:
@@ -113,6 +117,7 @@ module.exports = (grunt) ->
       stylus_icons:
         files: ['<%= source.stylus.icons %>']
         tasks: ['stylus:icons']
+
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'

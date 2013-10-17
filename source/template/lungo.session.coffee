@@ -5,9 +5,6 @@ class Atoms.Template.LungoSession extends Atoms.Core.Class.Template
   # ---------------------------------------------------------------------------
   @attributes "title", "logo", "inputs", "buttons", "copyright"
 
-
-  conditionals: ["logo", "title"]
-
   @template """
     <article id="{{id}}" atom-template="LoginSignup">
       <section>

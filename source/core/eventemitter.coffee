@@ -22,7 +22,7 @@ Atoms.Core.EventEmitter =
     events = events.split(' ')
     calls = @hasOwnProperty('_events') and @_events or = {}
     for event in events
-      event = @_getNameOfEvent @type, @className, event
+      event = @_parseName event
       calls[event] or = []
       calls[event].push callback
 
@@ -33,7 +33,7 @@ Atoms.Core.EventEmitter =
   @param  {function}  The function that is to be no longer executed.
   ###
   unbind: (event, callback) ->
-    event = @_getNameOfEvent(@type, @className, event)
+    event = @_parseName event
     if @hasOwnProperty('_events') and @_events?[event]
       @_events[event].splice @_events[event].indexOf(callback), 1
 
@@ -46,7 +46,7 @@ Atoms.Core.EventEmitter =
                       handler.
   ###
   trigger: (event, args...) ->
-    event = @_getNameOfEvent @type, @className, event
+    event = @_parseName event
     events = @hasOwnProperty('_events') and @_events?[event]
     return unless events
     args.push @
@@ -66,5 +66,5 @@ Atoms.Core.EventEmitter =
       el.bind event, @["#{name.toLowerCase()}#{Atoms.Core.Helper.className(event)}"]
 
   # Private Methods
-  _getNameOfEvent: (type="", className="", event) ->
-    ("#{type.toLowerCase()}_#{className.toLowerCase()}_#{event}").toLowerCase()
+  _parseName: (event) ->
+    ("#{@constructor.type}_#{@constructor.name}_#{event}").toLowerCase()

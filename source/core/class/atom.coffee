@@ -13,7 +13,7 @@ class Atoms.Core.Class.Atom extends Atoms.Core.Module
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output
 
-  @events = do @evts...
+  @events = (@evts...) -> @
 
   constructor: (@attributes) ->
     super

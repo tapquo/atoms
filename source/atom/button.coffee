@@ -16,6 +16,4 @@ class Atoms.Atom.Button extends Atoms.Core.Class.Atom
       {{#if.text}}<abbr>{{text}}</abbr>{{/if.text}}
     </button>"""
 
-  conditionals: ["id", "icon", "text", "disabled"]
-
-  events: ["click"]
+  @events "click"

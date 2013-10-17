@@ -16,4 +16,4 @@ class Atoms.Atom.Link extends Atoms.Core.Class.Atom
       {{text}}
     </a>"""
 
-  events: ["click"]
+  @events "click"

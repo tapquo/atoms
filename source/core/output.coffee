@@ -40,6 +40,7 @@ Atoms.Core.Output =
     throw "No parent assigned." unless @attributes?.parent?
 
     @_createConditionalsBindings()
+    @attributes.className = @constructor.name
     @el = Atoms.$ @_mustache(@constructor.template)(@attributes)
     @parent = Atoms.$ @attributes.parent
     @method = @attributes.method if @attributes.method?
@@ -47,11 +48,10 @@ Atoms.Core.Output =
 
   # Private Methods
   _createConditionalsBindings: ->
-    @attributes.if = {}
-    if @conditionals?
-      for key in @conditionals
-        @attributes.if[key] = if @attributes[key]? then true else false
-
+    conditions = {}
+    for key of @attributes
+      conditions[key] = if @attributes[key]? then true else false
+    @attributes.if = conditions
 
   ###
   The fastest and smallest Mustache compliant Javascript templating library

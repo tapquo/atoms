@@ -24,7 +24,7 @@ describe "Organism", ->
     spy = noop.spy
 
     class Article extends Atoms.Core.Class.Organism
-      template: "<article/>"
+      @template "<article/>"
       areas: ["header", "section", "footer"]
 
       navigationSelect: spy
@@ -44,7 +44,7 @@ describe "Organism", ->
     no_parent = -> new Article()
     expect(no_parent).toThrow()
 
-  it "can create a instance of Molecule", ->
+  it "can create a instance of Organism", ->
     article = new Article parent: el
     expect(article instanceof Article).toBeTruthy()
     expect(article.parent).toEqual el

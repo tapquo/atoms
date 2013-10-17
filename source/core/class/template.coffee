@@ -28,7 +28,7 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
 
     @attributes.className = @className
     @type = "Template"
-    @render @constructor.ifs
+    @render()
 
   _mixAttributes: (key, index)->
     if Atoms.Core.Helper.isArray(@attributes[key])

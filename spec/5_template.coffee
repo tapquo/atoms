@@ -12,7 +12,7 @@ describe "Organism", ->
 
     class Template extends Atoms.Core.Class.Template
       @attributes "title", "button"
-      template: "<article><h1>{{title}}</h1></article>"
+      @template "<article><h1>{{title}}</h1></article>"
       title: "Hi Atoms!!!"
       button:
         icon: "profile"

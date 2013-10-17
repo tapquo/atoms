@@ -1,6 +1,6 @@
 class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
 
-  template: """
+  @template """
     <nav molecule-class="{{className}}" class="{{style}}"></nav>
   """
 

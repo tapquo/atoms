@@ -6,7 +6,7 @@ describe "Atom", ->
 
   beforeEach ->
     class Input extends Atoms.Core.Class.Atom
-      template: template
+      @template template
       events: ["click"]
 
     el = Atoms.$ "<div></div>"

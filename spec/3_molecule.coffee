@@ -11,7 +11,7 @@ describe "Molecule", ->
     spy = noop.spy
 
     class Search extends Atoms.Core.Class.Molecule
-      template: "<fieldset/>"
+      @template "<fieldset/>"
 
       bindings: button: ["click"]
 

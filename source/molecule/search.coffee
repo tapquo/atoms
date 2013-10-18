@@ -11,7 +11,7 @@ Basic fieldset for search
 class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
 
   @template """
-    <fieldset molecule-search molecule-class="{{className}}"></fieldset>
+    <fieldset></fieldset>
   """
 
   bindings:

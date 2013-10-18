@@ -1,8 +1,12 @@
 class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
 
   @template """
-    <nav molecule-class="{{className}}" class="{{style}}"></nav>
+    <nav class="{{style}}"></nav>
   """
+
+  # @binds
+  #   link: ["click"]
+  #   button: ["click"]
 
   bindings:
     link:   ["click"]

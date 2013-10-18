@@ -15,5 +15,3 @@ class Atoms.Atom.Link extends Atoms.Core.Class.Atom
       {{#if.icon}}<span class="icon {{icon}}"></span>{{/if.icon}}
       {{text}}
     </a>"""
-
-  @events "click"

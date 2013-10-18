@@ -55,7 +55,7 @@ class Atoms.Core.Module
   @method template
   @param  {value}    String or Function
   ###
-  @template = (value) ->
+  @template: (value) ->
     if value? and typeof value is "string"
       @template = value
     else

@@ -17,7 +17,7 @@ describe "Organism", ->
       button:
         icon: "profile"
 
-    el = Atoms.$ "<div/>"
+    el = Atoms.$("<div/>").first()
 
 
   it "can create a new Template extends Base", ->
@@ -33,7 +33,7 @@ describe "Organism", ->
   it "can create a instance of Template", ->
     template = new Template parent: el
     expect(template instanceof Template).toBeTruthy()
-    expect(template.parent).toEqual el
+    expect(template.constructor.parent).toEqual el
     expect(template.el.parent().html()).toEqual el.html()
 
   it "Templates are shielded only be assigned attributes that exist in the base", ->

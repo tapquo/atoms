@@ -10,9 +10,6 @@ HTML Renderer
 
 Atoms.Core.Output =
 
-  method       : "append"
-  conditionals : []
-
   ###
   Insert content to the end of each element in the set of matched elements.
   @method append
@@ -35,23 +32,24 @@ Atoms.Core.Output =
   Render element with the instance @template and @attributes.
   @method render
   ###
-  render: (conditionals = []) ->
+  render: () ->
     throw "No template defined." unless @constructor.template?
     throw "No parent assigned." unless @attributes?.parent?
 
-    @_createConditionalsBindings()
-    @attributes.className = @constructor.name
-    @el = Atoms.$ @_mustache(@constructor.template)(@attributes)
-    @parent = Atoms.$ @attributes.parent
-    @method = @attributes.method if @attributes.method?
-    @parent[@method] @el
+    @_createIfBindings()
+    # Public attributes
+    @el = Atoms.$(@_mustache(@constructor.template)(@attributes)).first()
+    @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
+    # Attributes for constructor
+    @constructor.parent = Atoms.$(@attributes.parent).first()
+    @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
+    @constructor.parent[@constructor.method] @el
 
   # Private Methods
-  _createConditionalsBindings: ->
-    conditions = {}
+  _createIfBindings: ->
+    @attributes.if = {}
     for key of @attributes
-      conditions[key] = if @attributes[key]? then true else false
-    @attributes.if = conditions
+      @attributes.if[key] = true if @attributes[key]?
 
   ###
   The fastest and smallest Mustache compliant Javascript templating library

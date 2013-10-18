@@ -28,7 +28,7 @@ describe "Molecule", ->
 
       buttonDblClick: spy
 
-    el = Atoms.$ "<div/>"
+    el = Atoms.$("<div/>").first()
 
 
   it "can create a new Molecule extends Base", ->
@@ -44,7 +44,7 @@ describe "Molecule", ->
   it "can create a instance of Molecule", ->
     search = new Search parent: el
     expect(search instanceof Search).toBeTruthy()
-    expect(search.parent).toEqual el
+    expect(search.constructor.parent).toEqual el
     expect(search.el.parent().html()).toEqual el.html()
 
   it "Instances of Atoms make up the Molecule", ->

@@ -20,7 +20,7 @@ Atoms.Core.EventEmitter =
   ###
   bind: (events, callback) ->
     events = events.split(' ')
-    calls = @hasOwnProperty('_events') and @_events or = {}
+    calls = @hasOwnProperty('events') and @events or = {}
     for event in events
       event = @_parseName event
       calls[event] or = []
@@ -34,8 +34,8 @@ Atoms.Core.EventEmitter =
   ###
   unbind: (event, callback) ->
     event = @_parseName event
-    if @hasOwnProperty('_events') and @_events?[event]
-      @_events[event].splice @_events[event].indexOf(callback), 1
+    if @hasOwnProperty('events') and @events?[event]
+      @events[event].splice @events[event].indexOf(callback), 1
 
   ###
   Execute all handlers and behaviors attached to the matched class for the given
@@ -47,7 +47,7 @@ Atoms.Core.EventEmitter =
   ###
   trigger: (event, args...) ->
     event = @_parseName event
-    events = @hasOwnProperty('_events') and @_events?[event]
+    events = @hasOwnProperty('events') and @events?[event]
     return unless events
     args.push @
     for event in events
@@ -61,7 +61,6 @@ Atoms.Core.EventEmitter =
   @param  {array}     List of events to subscribe.
   ###
   bindList: (el, name, events) ->
-    #@TODO: Better if use internal @name
     for event in events
       el.bind event, @["#{name.toLowerCase()}#{Atoms.Core.Helper.className(event)}"]
 

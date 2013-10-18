@@ -37,12 +37,13 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
       if Atoms.Atom[className]?
         item = @atoms[index]
         item = [item] unless Atoms.Core.Helper.isArray item
-        @[index] = (@_instance(className, child) for child in item)
+        @[index] = (@_atomInstance(className, child) for child in item)
 
 
-  _instance: (className, attributes) ->
+  _atomInstance: (className, attributes) ->
     attributes.parent = @el
+    attributes.events = @bindings?[className.toLowerCase()] or []
+
     instance = new Atoms.Atom[className] attributes
-    if @bindings?[className.toLowerCase()]?
-      @bindList instance, className, @bindings[className.toLowerCase()]
+    if attributes.events.length > 0 then @bindList instance, className, attributes.events
     instance

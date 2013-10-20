@@ -18,7 +18,8 @@ module.exports = (grunt) ->
         'source/core/*.coffee',
         'source/core/class/*.coffee',
         'source/atom/*.coffee',
-        'source/molecule/*.coffee']
+        'source/molecule/*.coffee',
+        'source/system/*.coffee']
       spec  : [
         'spec/*.coffee'],
       organisms: [
@@ -34,12 +35,14 @@ module.exports = (grunt) ->
           'style/base/class.styl',
           'style/base/atom.*.styl',
           'style/base/molecule.*.styl',
-          'style/base/organism.*.styl']
+          'style/base/organism.*.styl',
+          'style/base/system.*.styl']
         theme: [
           'style/theme/reset.styl',
           'style/theme/atom.*.styl',
           'style/theme/molecule.*.styl',
-          'style/theme/organism.*.styl']
+          'style/theme/organism.*.styl',
+          'style/theme/system.*.styl']
         templates: [
           'style/theme/template.*.styl']
         icons: [

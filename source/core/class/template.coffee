@@ -15,6 +15,7 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
 
   @attributes: (@elements...) -> @
 
+
   constructor: (@attributes) ->
     super
     @constructor.type = "Template"
@@ -27,6 +28,8 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
     for key in @constructor.elements
       @attributes[key] = @[key] unless @attributes[key]?
     @render()
+    Atoms.System.Cache[@constructor.name] = @
+
 
   _mixAttributes: (key, index)->
     if Atoms.Core.Helper.isArray(@attributes[key])

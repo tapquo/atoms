@@ -21,6 +21,8 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
     @render()
     for area in @areas
       if @attributes[area] then @_create area, @attributes[area]
+    Atoms.System.Cache[@constructor.name] = @
+
 
   _create: (area, properties) ->
     el = @el.append("<#{area}></#{area}>").children(area)
@@ -31,6 +33,7 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
           collection = properties[type][className]
           collection = [collection] unless Atoms.Core.Helper.isArray collection
           @_instance area, el, type, className, collection
+
 
   _instance: (area, parent, type, className, collection) ->
     for item in collection

@@ -14,17 +14,18 @@ class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
     <fieldset></fieldset>
   """
 
-  bindings:
-    input: ["keyup"]
-    button: ["click"]
+  available: ["input", "button"]
 
   constructor: ->
-    @atoms =
-      input:
-        type: "search"
-        placeholder : "Type your search..."
-      button:
-        text       : "Go!"
+    @default =
+      atoms: [
+        input: type: "search", placeholder: "Type your search..."
+      ,
+        button: text: "Go!"
+      ]
+      events:
+        input: ["keyup"]
+        button: ["click"]
     super
 
   buttonClick: (event, atom) =>

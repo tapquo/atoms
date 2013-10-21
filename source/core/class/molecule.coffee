@@ -17,32 +17,23 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
     super
     @constructor.type = "Molecule"
     @render()
-    @atoms = {} unless @atoms?
     @chemistry()
 
 
   chemistry: (elements) ->
-    # Read Attributes
-    for attr of @attributes
-      className = Atoms.Core.Helper.className(attr)
-      if Atoms.Atom[className]? and @atoms[attr]?
-        @attributes[attr] = [@attributes[attr]] unless Atoms.Core.Helper.isArray @attributes[attr]
-        base = @atoms[attr]
-        @atoms[attr] = (Atoms.Core.Helper.mix(item, base) for item in @attributes[attr])
+    for atom, index in @attributes.atoms
+      for key of atom when @available.indexOf(key) > -1
+        className = Atoms.Core.Helper.className(key)
+        if Atoms.Atom[className]?
+          attributes = Atoms.Core.Helper.mix atom[key], @default.atoms?[index]?[key]
 
-    # Normalize values
-    for index of @atoms
-      @[index] = null
-      className = Atoms.Core.Helper.className(index)
-      if Atoms.Atom[className]?
-        item = @atoms[index]
-        item = [item] unless Atoms.Core.Helper.isArray item
-        @[index] = (@_atomInstance(className, child) for child in item)
+          @[key] = [] unless @[key]?
+          @[key].push @_atomInstance key, className, attributes
 
 
-  _atomInstance: (className, attributes) ->
+  _atomInstance: (key, className, attributes, events) ->
     attributes.parent = @el
-    attributes.events = @bindings?[className.toLowerCase()] or []
+    attributes.events = attributes.events or @attributes.events?[key] or @default.events?[key] or []
 
     instance = new Atoms.Atom[className] attributes
     if attributes.events.length > 0 then @bindList instance, className, attributes.events

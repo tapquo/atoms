@@ -10,17 +10,21 @@ Basic fieldset for search
 
 class Atoms.Molecule.Form extends Atoms.Core.Class.Molecule
 
-  @template """
-    <form></form>
-  """
+  @template """<form {{#if.style}}style="{{style}}"{{/if.style}}></form>"""
 
-  bindings:
-    input: ["keyup", "keypress"]
-    button: ["click"]
+  available: ["label", "input", "textarea", "select", "button"]
 
   constructor: ->
-    @atoms = input: [], button: []
+    @default =
+      events:
+        input   : ["keyup", "keypress"]
+        button  : ["click"]
     super
+
+  value: ->
+    properties = {}
+    properties[input.attributes.name] = input.value() for input in @input
+    properties
 
   inputKeypress: (event, atom) =>
     @trigger "keypress", event.keyCode, atom

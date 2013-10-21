@@ -1,19 +1,14 @@
 class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
 
-  @template """
-    <nav class="{{style}}"></nav>
-  """
+  @template """<nav class="{{style}}"></nav>"""
 
-  # @binds
-  #   link: ["click"]
-  #   button: ["click"]
-
-  bindings:
-    link:   ["click"]
-    button: ["click"]
+  available: ["label", "input", "textarea", "select", "button"]
 
   constructor: ->
-    @atoms = link: [], button: []
+    @default =
+      events:
+        link:   ["click"]
+        button: ["click"]
     super
 
   linkClick: (event, atom) =>
@@ -26,4 +21,3 @@ class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
     event.preventDefault()
     atom.el.addClass("active").siblings().removeClass("active")
     @trigger "select", event, atom
-

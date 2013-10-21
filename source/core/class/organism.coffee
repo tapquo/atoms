@@ -15,8 +15,21 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
   areas: []
 
+  yaml = {}
+
+  @scaffold = (url) ->
+    loader = if $$? then $$ else $
+    response = loader.ajax
+      url     : url
+      async   : false
+      dataType: "text"
+      error   : -> throw "Error loading scaffold in #{url}"
+      success : (response) -> yaml = YAML.parse(response)
+
+
   constructor: (@attributes) ->
     super
+    @attributes = Atoms.Core.Helper.mix @attributes, yaml
     @constructor.type = "Organism"
     @render()
     for area in @areas
@@ -43,3 +56,4 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
       if @attributes.bindings?[area]?[className]?
         @bindList instance, className, @attributes.bindings[area][className], className
+

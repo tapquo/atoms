@@ -1,0 +1,7 @@
+section:
+  atom:
+    button:
+      style: fluid
+      disabled: true
+      icon: search
+      text: Find your friends

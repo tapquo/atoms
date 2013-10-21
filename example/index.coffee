@@ -1,29 +1,32 @@
 $ ->
-  # session = new Atoms.Template.LungoSession
-  #   parent: document.body
-  #   title: "Atoms App"
-  #   logo: "http://cdn.tapquo.com/photos/soyjavi.jpg"
-  #   copyright: "Tapquo S.L. 2013"
-  #   inputs: [
-  #     placeholder: "Your name..."
-  #   ,
-  #     placeholder: "Your password..."
-  #   ]
+  console.log "------------------------------------------------------------"
+  console.log "Atoms v#{Atoms.version}", Atoms
+  console.log "------------------------------------------------------------"
 
-  class First extends Atoms.Organism.LungoArticle
-    navigationSelect: (event, atom, molecule) ->
-      console.log "event", event
-      console.log "atom", atom
-      console.log "molecule", molecule
+  # Atoms.Core.Route.navigate "First", "second", "third", a: 1
 
-    formKeyup: (keycode, atom, molecule) ->
-      console.log keycode, atom, molecule
+  # class Btn extends Atoms.Atom.Button
 
-    formClick: (event, atom) ->
-      console.log event, atom
+  # btn = new Btn
+  #   parent: "article section"
+  #   events: ["click", "dblclick"]
+  #   method: "prepend"
+  #   text  : "sksksk"
 
-  YAML.load 'organisms/first.yml', (attributes) ->
-    attributes.parent = document.body
-    org = new First attributes
+  # btn2 = new Atoms.Atom.Button
+  #   parent: "article section"
+  #   events: ["click", "dblclick"]
+  #   method: "prepend"
+  #   style : "fluid big"
+  #   text  : "prueba"
+
+  # btn.bind "click", (event, atom) -> console.log "click", atom
+  # btn.bind "dblclick", (event, atom) -> console.log "dblclick", atom
+  # btn2.bind "click", (event, atom) ->
+  #   console.log "btn2 click", atom.constructor.type, atom.constructor.name
+  #   atom.el.toggleClass "accept"
+
+  # console.log btn, btn2
+
 
 

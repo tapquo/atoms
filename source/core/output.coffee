@@ -38,7 +38,7 @@ Atoms.Core.Output =
 
     @_createIfBindings()
     # Public attributes
-    @el = Atoms.$(@_mustache(@constructor.template)(@attributes)).first()
+    @el = Atoms.$(@_mustache(@constructor.template)(@attributes))
     @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
     # Attributes for constructor
     @constructor.parent = Atoms.$(@attributes.parent).first()

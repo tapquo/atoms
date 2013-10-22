@@ -1,11 +1,5 @@
-article
-
-  header
-    height: HEADER_HEIGHT
-    line-height: HEADER_HEIGHT
-
-  section
-    padding: 0.66em
+section
+  article &, aside &
     overflow-x: hidden
     overflow-y: scroll
     -webkit-overflow-scrolling: touch
@@ -21,6 +15,9 @@ article
     & > *
       -webkit-transform: translate3d(0, 0, 0)
 
-  footer
-    height: FOOTER_HEIGHT
-    line-height: FOOTER_HEIGHT
+  article &
+    padding: 0.75rem
+
+  aside &
+    padding: 0.5rem 1rem
+    width: 100%

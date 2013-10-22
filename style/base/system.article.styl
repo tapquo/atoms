@@ -1,0 +1,11 @@
+article
+  width: 100%
+  z-index: 1
+
+  &.active
+    display-box()
+  &:not(.active)
+    display: none
+
+  &.aside
+    transform: translateX(ASIDE_WIDTH)

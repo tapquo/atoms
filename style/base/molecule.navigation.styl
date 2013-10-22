@@ -1,7 +1,7 @@
 nav
-  line-height: 1rem
+  // line-height: 1rem
 
-  section &, footer &
+  article section &, footer &
     width: 100%
     display-box()
     box-pack(justify)
@@ -19,3 +19,12 @@ nav
   footer & > button
     height:  FOOTER_HEIGHT
     font-size: (FONT_SIZE_NORMAL * 1.5)
+
+
+  aside section &
+    & > a
+      display: block
+      line-height: HEADER_HEIGHT
+      & .icon
+        font-size: FONT_SIZE_BIG
+        margin-right: 0.25rem

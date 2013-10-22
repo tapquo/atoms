@@ -11,12 +11,10 @@
 class Atoms.Atom.Input extends Atoms.Core.Class.Atom
 
   @template """
-    {{#if.label}}<label>{{label}}</label>{{/if.label}}
     <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" value="{{value}}" {{#required}}required{{/required}} />"""
 
   value: (value) ->
-    input = @el.filter("input")
-    if value? then input.val value else input.val()
+    if value? then @el.val value else @el.val()
 
   error: (value) ->
     if value?

@@ -1,6 +1,15 @@
 header:
+  atom:
+    title:
+      text: "#Atoms"
   molecule:
     navigation:
+      - style: left
+        events: ["select"]
+        atoms:
+          - button:
+              icon: menu
+
       - style: right
         events: ["select"]
         atoms:

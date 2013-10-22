@@ -1,0 +1,31 @@
+header:
+  atom:
+    title:
+      text: "#Atoms"
+  molecule:
+    navigation:
+      - style: right
+        events: ["select"]
+        atoms:
+          - button:
+              icon: cog
+
+
+section:
+  molecule:
+    navigation:
+      events: ["select"]
+      atoms:
+        - link:
+            text        : text sample 1
+            icon        : profile
+        - link:
+            text        : text sample 2
+            icon        : cog
+        - button:
+            text: Button sample
+
+  atom:
+    button:
+      text: "Add Contact"
+      style: "fluid accept"

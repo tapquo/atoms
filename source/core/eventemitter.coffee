@@ -60,9 +60,11 @@ Atoms.Core.EventEmitter =
   @param  {string}    Name of class.
   @param  {array}     List of events to subscribe.
   ###
-  bindList: (el, name, events) ->
+  bindList: (instance, events) ->
+    class_lower = instance.constructor.name.toLowerCase()
     for event in events
-      el.bind event, @["#{name.toLowerCase()}#{Atoms.Core.Helper.className(event)}"]
+      callback_name = "#{class_lower}#{Atoms.Core.Helper.className(event)}"
+      instance.bind event, @[callback_name]
 
   # Private Methods
   _parseName: (event) ->

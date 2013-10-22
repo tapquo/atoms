@@ -1,77 +1,58 @@
 header:
   molecule:
     navigation:
-      - style: left
-        button:
-          - icon: arrow_carrot-left
-
       - style: right
-        button:
-          - icon: pencil-edit
-          - icon: search
-
+        events: ["select"]
+        atoms:
+          - button:
+              icon: pencil-edit
+          - button:
+              icon: search
 
 section:
-  atom:
-    button:
-      style: fluid
-      disabled: true
-      icon: search
-      text: Find your friends
 
   molecule:
     form:
-      input:
-        - type: text
-          placeholder: Your address..
-          label: Adress Information:
-        - type: number
-          placeholder: Postal code
-          style: tiny
-      button:
-        - text: Validate address
-          style: fluid big
-          icon: question
-        - text: Validate address
-          style: fluid
-          icon: question
-        - text: Validate address
-          style: fluid small
-          icon: question
-        - text: Validate address
-          icon: question
-          style: fluid tiny
+      events: ["keyup", "keypress", "click"]
+      atoms:
+        - label:
+            text: General Info
+        - input:
+            type        : text
+            name        : name
+            placeholder : Type your name...
+            label       : Your credentials
+            required    : true
+            events      : ["keyup"] # Only subscribe for keyup
+        - input:
+            type        : password
+            name        : password
+            placeholder : Type your password...
+            events      : [] # Disabled all events
+        - label:
+            text        : Other Information
+        - input:
+            type        : email
+            name        : mail
+            placeholder : Type your mail...
+        - input:
+            type        : text
+            name        : username
+            style       : big
+            placeholder : Typer your username...
+        - input:
+            type        : number
+            name        : years
+            placeholder : Years...
+        - button:
+            text        : Save
+            icon        : ok
+            style       : accept fluid
 
-
-
-    navigation:
-      style: margin-top
-      button:
-        - icon: check
-          style: accept
-          text: Accept
-        - icon: close
-          style: cancel
-        - icon: close
-
-
-footer:
-  molecule:
-    navigation:
-      button:
-        - icon: profile
-        - icon: chat_alt
-        - icon: compass_alt
-        - icon: adjust-horiz
-
-bindings:
-  header:
-    navigation: ["select"]
-
-  section:
-    form: ["keyup", "click"]
-    navigation: ["select"]
-
-  footer:
-    navigation: ["select"]
-
+  atom:
+    button:
+      style  : fluid
+      # disabled: true
+      icon  : search
+      text  : Find your friends
+      events: ["click"]

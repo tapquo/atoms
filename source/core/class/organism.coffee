@@ -32,13 +32,14 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
     @constructor.type = "Organism"
     @render()
+    @el.attr "id", @constructor.name
     for area in @areas
       if @attributes[area] then @_create area, @attributes[area]
     Atoms.System.Cache[@constructor.name] = @
 
 
   _create: (area, properties) ->
-    el = @el.append("<#{area}></#{area}>").children(area)
+    el = @el.append("<#{area}/>").children(area)
     for type of properties
       for className of properties[type]
         if Atoms[Atoms.Core.Helper.className(type)][Atoms.Core.Helper.className(className)]?
@@ -53,7 +54,5 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
       item.parent = parent
       instance = new Atoms[Atoms.Core.Helper.className(type)][Atoms.Core.Helper.className(className)] item
       @[className].push instance
-
-      if @attributes.bindings?[area]?[className]?
-        @bindList instance, className, @attributes.bindings[area][className], className
-
+      if item.events?
+        @bindList instance, item.events

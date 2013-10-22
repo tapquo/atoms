@@ -3,30 +3,44 @@ $ ->
   console.log "Atoms v#{Atoms.version}", Atoms
   console.log "------------------------------------------------------------"
 
-  # Atoms.Core.Route.navigate "First", "second", "third", a: 1
-
-  # class Btn extends Atoms.Atom.Button
-
-  # btn = new Btn
+  # search = new Atoms.Molecule.Search
   #   parent: "article section"
-  #   events: ["click", "dblclick"]
-  #   method: "prepend"
-  #   text  : "sksksk"
+  #   atoms : [
+  #     input: placeholder: "Your password..."
+  #   ,
+  #     button: icon: "plus", text: null
+  #   ]
+  # search.bind "enter", (args...) -> console.log "search", args
 
-  # btn2 = new Atoms.Atom.Button
+  # form = new Atoms.Molecule.Form
   #   parent: "article section"
-  #   events: ["click", "dblclick"]
-  #   method: "prepend"
-  #   style : "fluid big"
-  #   text  : "prueba"
+  #   style : "clase"
+  #   atoms : [
+  #     label: text: "prueba"
+  #   ,
+  #     input: type: "text", name: "name", placeholder: "Your name..."
+  #   ,
+  #     input: type: "password", name: "password", placeholder: "Your password..."
+  #   ,
+  #     label: text: "prueba"
+  #   ,
+  #     button: icon: "plus", text: "Save", style: "fluid accept"
+  #   ]
+  #   # events:
+  #   #   input: ["keyup"]
+  #   triggers: ["keypress", "keyup", "click"]
 
-  # btn.bind "click", (event, atom) -> console.log "click", atom
-  # btn.bind "dblclick", (event, atom) -> console.log "dblclick", atom
-  # btn2.bind "click", (event, atom) ->
-  #   console.log "btn2 click", atom.constructor.type, atom.constructor.name
-  #   atom.el.toggleClass "accept"
+  # form.bind "keyup", (event) -> console.log "keyupped", event
 
-  # console.log btn, btn2
+  # form.bind "click", (event) ->
+  #   console.log "clicked", event
 
 
+  # nav = new Atoms.Molecule.Navigation
+  #   parent: "article section"
+  #   atoms : [
+  #     button: icon: "plus", text: "Save"
+  #   ,
+  #     button: icon: "plus", text: "Save"
+  #   ]
 

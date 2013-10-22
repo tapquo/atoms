@@ -21,7 +21,8 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
 
 
   chemistry: (elements) ->
-    for atom, index in @attributes.atoms
+    atoms = @attributes.atoms or @default.atoms
+    for atom, index in atoms
       for key of atom when @available.indexOf(key) > -1
         className = Atoms.Core.Helper.className(key)
         if Atoms.Atom[className]?
@@ -31,10 +32,10 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
           @[key].push @_atomInstance key, className, attributes
 
 
-  _atomInstance: (key, className, attributes, events) ->
+  _atomInstance: (key, className, attributes) ->
     attributes.parent = @el
     attributes.events = attributes.events or @attributes.events?[key] or @default.events?[key] or []
 
     instance = new Atoms.Atom[className] attributes
-    if attributes.events.length > 0 then @bindList instance, className, attributes.events
+    if attributes.events.length > 0 then @bindList instance, attributes.events
     instance

@@ -11,17 +11,21 @@ describe "Molecule", ->
     spy = noop.spy
 
     class Search extends Atoms.Core.Class.Molecule
+
       @template "<fieldset/>"
 
-      bindings: button: ["click"]
+      available: ["input", "button"]
 
       constructor: ->
-        @atoms =
-          input:
-            type: "search"
-            placeholder : "Type your search..."
-          button:
-            text       : "Go!"
+        @default =
+          atoms: [
+            input: type: "search", placeholder: "Type your search..."
+          ,
+            button: text: "Go!"
+          ]
+          events:
+            input: ["keyup"]
+            button: ["click"]
         super
 
       buttonClick: spy

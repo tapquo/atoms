@@ -6,17 +6,17 @@ describe "Organism", ->
   Article     = undefined
   attributes  =
     header:
-        molecule:
-          navigation:
-            style: "left"
-            button: [
-              icon: "edit"
-            ,
-              icon: "search"
-            ]
-      section:
-        atom:
-          button: icon: "ok"
+      molecule:
+        navigation:
+          style: "left"
+          atoms: [
+            button: icon: "edit"
+          ,
+            button: icon: "search"
+          ]
+    section:
+      atom:
+        button: icon: "ok"
 
   beforeEach ->
     noop = spy: ->
@@ -65,7 +65,7 @@ describe "Organism", ->
     expect(article.button.length > 0).toBeTruthy()
 
   it "Organism can bind to defined Atoms & Molecules events", ->
-    attributes.bindings = header: navigation: ["select"]
+    attributes.header.molecule.navigation.events = ["select"]
     article = new Article attributes
     article.navigation[0].trigger "select"
     expect(spy).toHaveBeenCalled()

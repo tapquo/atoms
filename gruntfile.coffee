@@ -36,12 +36,14 @@ module.exports = (grunt) ->
           'style/base/atom.*.styl',
           'style/base/molecule.*.styl',
           'style/base/organism.*.styl',
+          'style/base/system.styl',
           'style/base/system.*.styl']
         theme: [
           'style/theme/reset.styl',
           'style/theme/atom.*.styl',
           'style/theme/molecule.*.styl',
           'style/theme/organism.*.styl',
+          'style/theme/system.styl',
           'style/theme/system.*.styl']
         templates: [
           'style/theme/template.*.styl']

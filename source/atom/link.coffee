@@ -13,5 +13,5 @@ class Atoms.Atom.Link extends Atoms.Core.Class.Atom
   @template """
     <a href="{{href}}" class="{{style}}">
       {{#if.icon}}<span class="icon {{icon}}"></span>{{/if.icon}}
-      {{text}}
+      {{#if.text}}{{text}}{{/if.text}}
     </a>"""

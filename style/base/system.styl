@@ -1,0 +1,29 @@
+body, html
+  height: 100%
+  width: 100%
+  margin: 0
+  padding: 0
+  overflow: hidden
+
+  & > aside, & > article
+    box-orient(vertical)
+    height: inherit
+    webkit-transform: translate3d(0,0,0)
+
+
+
+    & > header, > footer
+      box-flex(0)
+      z-index: 3
+      position: relative
+
+    & > header
+      ordinal-group(1)
+
+    & > section
+      box-flex(1)
+      ordinal-group(2)
+      z-index: -1
+
+    & > footer
+      ordinal-group(3)

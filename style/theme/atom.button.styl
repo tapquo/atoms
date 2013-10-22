@@ -1,10 +1,5 @@
 button
 
-  header nav &
-    color: lighten(THEME, 75%)
-    &:hover, &:active, &.active
-      color: WHITE !important
-
   section &
     border-radius: BORDER_RADIUS
     background-color: BUTTON
@@ -49,22 +44,3 @@ button
     &[disabled]
       & > abbr, & .icon
         opacity: 0.35
-
-
-  section nav &
-    border-radius: 0
-    border-left: inset 1px rgba(0,0,0,0.05)
-    &:first-child
-      border-radius: BORDER_RADIUS 0 0 BORDER_RADIUS
-      border-left: none
-    &:last-child
-      border-radius: 0 BORDER_RADIUS BORDER_RADIUS 0
-
-  footer &
-    color: lighten(DARK, 50%)
-    &:active, &:hover, &.active
-      color: WHITE
-
-
-
-

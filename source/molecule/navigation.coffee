@@ -2,7 +2,7 @@ class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
 
   @template """<nav class="{{style}}"></nav>"""
 
-  available: ["label", "input", "textarea", "select", "button"]
+  available: ["button", "link"]
 
   constructor: ->
     @default =

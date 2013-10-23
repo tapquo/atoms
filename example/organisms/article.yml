@@ -65,3 +65,17 @@ section:
       icon  : search
       text  : Find your friends
       events: ["click"]
+
+
+footer:
+  molecule:
+    navigation:
+      atoms:
+        - button:
+            icon: profile
+        - button:
+            icon: chat_alt
+        - button:
+            icon: compass_alt
+        - button:
+            icon: adjust-horiz

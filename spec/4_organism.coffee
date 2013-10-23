@@ -23,6 +23,16 @@ describe "Organism", ->
     spyOn noop, "spy"
     spy = noop.spy
 
+    class Atoms.Atom.Button extends Atoms.Core.Class.Atom
+      @template "<button>{{text}}</button>"
+
+    class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
+      @template "<nav></nav>"
+      available: ["button", "link"]
+      constructor: ->
+        @default = {}
+        super
+
     class Article extends Atoms.Core.Class.Organism
       @template "<article/>"
       areas: ["header", "section", "footer"]
@@ -51,7 +61,6 @@ describe "Organism", ->
     expect(article.el.parent().html()).toEqual el.html()
 
   it "Instance of Organism has areas for Atoms & Molecules", ->
-    attributes.div = []
     article = new Article attributes
     expect(article.el.children("header").length > 0).toBeTruthy()
     expect(article.el.children("div").length > 0).not.toBeTruthy()

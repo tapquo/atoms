@@ -6,46 +6,46 @@ $ ->
   # ------------------------------------------------------------
   # Molecule examples
   # ------------------------------------------------------------
-  # search = new Atoms.Molecule.Search
-  #   parent: "article section"
-  #   # atoms : [
-  #   #   input: placeholder: "Your password..."
-  #   # ,
-  #   #   button: icon: "plus", text: null
-  #   # ]
-  # search.bind "enter", (args...) -> console.log "search", args
+  search = new Atoms.Molecule.Search
+    parent: "article section"
+    # atoms : [
+    #   input: placeholder: "Your password..."
+    # ,
+    #   button: icon: "plus", text: null
+    # ]
+  search.bind "enter", (args...) -> console.log "search", args
 
-  # form = new Atoms.Molecule.Form
-  #   parent: "article section"
-  #   style : "clase"
-  #   atoms : [
-  #     label: text: "prueba"
-  #   ,
-  #     input: type: "text", name: "name", placeholder: "Your name..."
-  #   ,
-  #     input: type: "password", name: "password", placeholder: "Your password..."
-  #   ,
-  #     label: text: "prueba"
-  #   ,
-  #     button: icon: "plus", text: "Save", style: "fluid accept"
-  #   ]
-  #   # events:
-  #   #   input: ["keyup"]
-  #   triggers: ["keypress", "keyup", "click"]
+  form = new Atoms.Molecule.Form
+    parent: "article section"
+    style : "clase"
+    atoms : [
+      label: text: "prueba"
+    ,
+      input: type: "text", name: "name", placeholder: "Your name..."
+    ,
+      input: type: "password", name: "password", placeholder: "Your password..."
+    ,
+      label: text: "prueba"
+    ,
+      button: icon: "plus", text: "Save", style: "fluid accept"
+    ]
+    # events:
+    #   input: ["keyup"]
+    triggers: ["keypress", "keyup", "click"]
 
-  # form.bind "keyup", (event) -> console.log "keyupped", event
+  form.bind "keyup", (event) -> console.log "keyupped", event
 
-  # form.bind "click", (event) ->
-  #   console.log "clicked", event
+  form.bind "click", (event) ->
+    console.log "clicked", event
 
 
-  # nav = new Atoms.Molecule.Navigation
-  #   parent: "article section"
-  #   atoms : [
-  #     button: icon: "plus", text: "Save"
-  #   ,
-  #     button: icon: "plus", text: "Save"
-  #   ]
+  nav = new Atoms.Molecule.Navigation
+    parent: "article section"
+    atoms : [
+      button: icon: "plus", text: "Save"
+    ,
+      button: icon: "plus", text: "Save"
+    ]
 
 
   # ------------------------------------------------------------
@@ -77,7 +77,6 @@ $ ->
   # Organism Aside
   # ------------------------------------------------------------
   class Aside extends Atoms.Organism.Aside
-
     @scaffold "organisms/aside.yml"
 
   aside = new Aside parent: document.body
@@ -85,17 +84,15 @@ $ ->
   # ------------------------------------------------------------
   # Template
   # ------------------------------------------------------------
-  # session = new Atoms.Template.LungoSession
-  #   parent    : document.body
-  #   # title     : "Atoms App"
-  #   # logo      : "http://cdn.tapquo.com/photos/soyjavi.jpg"
-  #   # copyright : "Tapquo S.L. 2013"
-  #   # inputs    : [
-  #   #   placeholder: "Tu usuario...",
-  #   #   value: "@soyjavi",
-  #   #   name: "nombre"
-  #   # ,
-  #   #   placeholder: "Your password...",
-  #   #   name: "contraseña"
-  #   # ]
-
+  session = new Atoms.Template.Session
+    parent    : document.body
+    title     : "Atoms App"
+    logo      : "http://cdn.tapquo.com/photos/soyjavi.jpg"
+    copyright : "Tapquo S.L. 2013"
+    inputs    : [
+      placeholder: "Nickname...",
+      value: "@soyjavi",
+      name: "nickname"
+    ,
+      name: "pass"
+    ]

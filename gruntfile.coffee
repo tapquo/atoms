@@ -14,58 +14,60 @@ module.exports = (grunt) ->
     source:
       # CoffeeScript
       core: [
-        'source/atoms.coffee',
-        'source/core/*.coffee',
-        'source/core/class/*.coffee',
-        'source/atom/*.coffee',
-        'source/molecule/*.coffee',
-        'source/system/*.coffee']
-      spec  : [
-        'spec/*.coffee'],
-      organisms: [
-        'source/organism/*.coffee'],
-      templates: [
-        'source/template/*.coffee']
+        'source/core/atoms.coffee'
+        'source/core/*.coffee'
+        'source/core/class/*.coffee']
+      app: [
+        'source/app/atom/*.coffee'
+        'source/app/molecule/*.coffee'
+        'source/app/organism/*.coffee'
+        'source/app/template/*.coffee'
+        'source/app/system/*.coffee']
       example: [
         'example/*.coffee']
+
+      spec  : [
+        'spec/*.coffee'],
+
       # Stylus
       stylus:
-        base: [
-          'style/base/reset.styl',
-          'style/base/class.styl',
-          'style/base/atom.*.styl',
-          'style/base/molecule.*.styl',
-          'style/base/organism.*.styl',
-          'style/base/system.styl',
-          'style/base/system.*.styl']
+        app: [
+          'style/app/reset.styl'
+          'style/app/class.styl'
+          'style/app/atom.*.styl'
+          'style/app/molecule.*.styl'
+          'style/app/organism.*.styl'
+          'style/app/template.*.styl'
+          'style/app/system.styl'
+          'style/app/system.*.styl']
         theme: [
-          'style/theme/reset.styl',
-          'style/theme/atom.*.styl',
-          'style/theme/molecule.*.styl',
-          'style/theme/organism.*.styl',
-          'style/theme/system.styl',
+          'style/theme/reset.styl'
+          'style/theme/atom.*.styl'
+          'style/theme/molecule.*.styl'
+          'style/theme/organism.*.styl'
+          'style/theme/template.*.styl'
+          'style/theme/system.styl'
           'style/theme/system.*.styl']
-        templates: [
-          'style/theme/template.*.styl']
         icons: [
           'bower_components/atoms_icons/*.styl']
 
+
+    concat:
+      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'   : '<%= source.core %>'
+      app : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'     : '<%= source.app %>'
+
+
     coffee:
-      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js'         : '<%= source.core %>'
-      spec: files: '<%=meta.build%>/<%=pkg.name%>.spec.js'          : '<%= source.spec %>'
-      organisms: files: '<%=meta.build%>/<%=pkg.name%>.organisms.js': '<%= source.organisms %>'
-      templates: files: '<%=meta.build%>/<%=pkg.name%>.templates.js': '<%= source.templates %>'
-      example: files: '<%=meta.build%>/<%=pkg.name%>.example.js'    : '<%= source.example %>'
+      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
+      app : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      spec: files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
+      example: files: '<%=meta.build%>/<%=pkg.name%>.example.js'  : '<%= source.example %>'
 
 
     uglify:
-      options:
-        report: "gzip"
-        mangle: false
-        banner: "<%= meta.banner %>"
+      options: report: "gzip", mangle: false, banner: "<%= meta.banner %>"
       core: files: '<%=meta.bower%>/<%=pkg.name%>.js': '<%=meta.build%>/<%=pkg.name%>.debug.js'
-      organisms: files: '<%=meta.bower%>/<%=pkg.name%>.organisms.js': '<%=meta.build%>/<%=pkg.name%>.organisms.js'
-      templates: files: '<%=meta.bower%>/<%=pkg.name%>.templates.js': '<%=meta.build%>/<%=pkg.name%>.templates.js'
+      app : files: '<%=meta.bower%>/<%=pkg.name%>.app.js': '<%=meta.build%>/<%=pkg.name%>.app.js'
 
 
     jasmine:
@@ -80,15 +82,12 @@ module.exports = (grunt) ->
 
 
     stylus:
-      base:
+      app:
         options: compress: true, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.css': '<%=source.stylus.base%>'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.css': '<%=source.stylus.app%>'
       theme:
         options: compress: false, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.theme.css': '<%=source.stylus.theme%>'
-      templates:
-        options: compress: false, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.templates.css': '<%=source.stylus.templates%>'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
       icons:
         options: compress: false
         files: '<%=meta.bower%>_icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
@@ -97,28 +96,22 @@ module.exports = (grunt) ->
     watch:
       core:
         files: ['<%= source.core %>']
-        tasks: ['coffee:core', 'jasmine']
+        tasks: ['concat:core', 'coffee:core', 'jasmine']
       spec:
         files: ['<%= source.spec %>']
         tasks: ['coffee:spec', 'jasmine']
-      organisms:
-        files: ['<%= source.organisms %>']
-        tasks: ['coffee:organisms']
-      templates:
-        files: ['<%= source.templates %>']
-        tasks: ['coffee:templates']
+      app:
+        files: ['<%= source.app %>']
+        tasks: ['concat:app', 'coffee:app']
       example:
         files: ['<%= source.example %>']
         tasks: ['coffee:example']
-      stylus_base:
-        files: ['<%= source.stylus.base %>']
-        tasks: ['stylus:base']
+      stylus_app:
+        files: ['<%= source.stylus.app %>']
+        tasks: ['stylus:app']
       stylus_theme:
         files: ['<%= source.stylus.theme %>']
         tasks: ['stylus:theme']
-      stylus_templates:
-        files: ['<%= source.stylus.templates %>']
-        tasks: ['stylus:templates']
       stylus_icons:
         files: ['<%= source.stylus.icons %>']
         tasks: ['stylus:icons']
@@ -132,4 +125,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['coffee', 'uglify', 'jasmine', 'stylus']
+  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'jasmine', 'stylus']

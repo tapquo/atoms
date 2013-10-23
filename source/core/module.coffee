@@ -58,8 +58,6 @@ class Atoms.Core.Module
   @template = (value) ->
     if value? and typeof value is "string"
       @template = value
-    else
-      @template = "<div/>"
 
 guid = ->
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace /[xy]/g, (c) ->

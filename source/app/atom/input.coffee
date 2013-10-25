@@ -11,7 +11,7 @@
 class Atoms.Atom.Input extends Atoms.Core.Class.Atom
 
   @template """
-    <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" value="{{value}}" {{#required}}required{{/required}} />"""
+    <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" {{#if.value}}value="{{value}}"{{/if.value}} {{#required}}required{{/required}} />"""
 
   value: (value) ->
     if value? then @el.val value else @el.val()

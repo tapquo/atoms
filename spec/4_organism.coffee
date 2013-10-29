@@ -57,7 +57,6 @@ describe "Organism", ->
   it "can create a instance of Organism", ->
     article = new Article parent: el
     expect(article instanceof Article).toBeTruthy()
-    expect(article.constructor.parent).toEqual el
     expect(article.el.parent().html()).toEqual el.html()
 
   it "Instance of Organism has areas for Atoms & Molecules", ->

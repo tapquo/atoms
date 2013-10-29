@@ -41,9 +41,8 @@ Atoms.Core.Output =
     @el = Atoms.$(@_mustache(@constructor.template)(@attributes))
     @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
     # Attributes for constructor
-    @constructor.parent = Atoms.$(@attributes.parent).first()
     @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
-    @constructor.parent[@constructor.method] @el
+    Atoms.$(@attributes.parent).first()[@constructor.method] @el
 
   # Private Methods
   _createIfBindings: ->

@@ -26,12 +26,11 @@ describe "Atom", ->
   it "can create a instance of Atom", ->
     input = new Input parent: el
     expect(input instanceof Input).toBeTruthy()
-    expect(input.constructor.parent).toEqual el
     expect(input.el.parent().html()).toEqual el.html()
 
   it "can set a QuerySelectorAll parent", ->
     input = new Input parent: query = "<header></header>"
-    expect(input.constructor.parent[0].nodeType).toEqual Atoms.$(query)[0].nodeType
+    expect(input.el.parent()[0].nodeType).toEqual Atoms.$(query)[0].nodeType
 
   it "can set attributes in a new Instance of Atom", ->
     input = new Input parent: el, type: "text"
@@ -40,6 +39,15 @@ describe "Atom", ->
   it "can set a different method to render a instance of Atom in parent", ->
     input = new Input parent: el, type: "text", method: "prepend"
     expect(input.el[0].outerHTML).toEqual '<input type="text" data-atom="input">'
+
+  it "can extend a atom", ->
+    class InputBig extends Input
+      constructor: ->
+        @constructor.template = "<input type='{{type}}' class='big'/>"
+        super
+    input = new Input parent: el
+    inputBig = new InputBig parent: el
+    expect(inputBig.constructor.__super__.constructor.name).toEqual input.constructor.name
 
   it "should bind to a assigned events", ->
     input = new Input parent: el

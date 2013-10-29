@@ -54,7 +54,6 @@ describe "Molecule", ->
   it "can create a instance of Molecule", ->
     search = new Search parent: el
     expect(search instanceof Search).toBeTruthy()
-    expect(search.constructor.parent).toEqual el
     expect(search.el.parent().html()).toEqual el.html()
 
   it "Instances of Atoms make up the Molecule", ->

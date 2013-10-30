@@ -29,9 +29,6 @@ describe "Organism", ->
     class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
       @template "<nav></nav>"
       available: ["button", "link"]
-      constructor: ->
-        @default = {}
-        super
 
     class Article extends Atoms.Core.Class.Organism
       @template "<article/>"

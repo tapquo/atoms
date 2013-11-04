@@ -1,0 +1,34 @@
+[data-component="modal"]
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 1980
+  display-box()
+  box-align(center)
+  box-pack(center)
+
+  & > article
+    width: MODAL_WIDTH
+    text-align: center
+
+    & > header
+      & > *
+        display: block
+        padding-top: 1rem
+        text-align: center
+      & .icon
+        font-size: 3.5rem
+        line-height: 3.5rem
+        & + h1
+          padding-top: 0
+
+    & > footer
+      & > nav
+        margin: 0 1em
+        font-size: FONT_SIZE_BIG
+        & > button
+          line-height: (FONT_SIZE_BIG * 2.75)
+          width: 100%
+          display: block

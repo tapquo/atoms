@@ -1,0 +1,17 @@
+[data-component="modal"]
+  background: rgba(0,0,0,0.5)
+  & > article
+    background: BACKGROUND
+
+    & > header
+      color: darken(BACKGROUND, 60%)
+
+    & > section
+      color: darken(BACKGROUND, 40%)
+
+    & > footer
+      background: lighten(BACKGROUND, 25%)
+      & > nav
+        & > button
+          &:not(:last-child)
+            border-bottom: solid 1px darken(BACKGROUND, 5%)

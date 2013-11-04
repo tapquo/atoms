@@ -21,37 +21,39 @@ class Atoms.Template.Session extends Atoms.Core.Class.Template
   title     : "Your app title..."
   copyright : "Your company copyright..."
   inputs:   [
-    type        : "text"
-    name        : "user"
-    placeholder : "Type your username"
-    required    : true
+    input:
+      type        : "text"
+      name        : "user"
+      placeholder : "Type your username"
+      required    : true
   ,
-    type        : "password"
-    name        : "password"
-    placeholder : "Type your password.."
-    required    : true]
+    input:
+      type        : "password"
+      name        : "password"
+      placeholder : "Type your password.."
+      required    : true]
   buttons:  [
-    icon: "user", text: "Login", style: "accept"
+    button:
+      icon: "user", text: "Login", style: "accept"
   ,
-    icon: "signin", text: "Signup"]
+    button:
+      icon: "signin", text: "Signup"]
 
-  # Template Business
-  # ---------------------------------------------------------------------------
   constructor: (@attributes) ->
     super
     section = @el.children("section")
 
-    @form = new Atoms.Molecule.Form parent: section, input: @inputs
+    @form = new Atoms.Molecule.Form parent: section, atoms: @inputs
     @form.bind "keyup", @formKeyup
 
-    @navigation = new Atoms.Molecule.Navigation parent: section, button: @buttons
+    @navigation = new Atoms.Molecule.Navigation parent: section, atoms: @buttons
     @navigation.bind "select", @navigationSelect
 
     @formKeyup()
 
   navigationSelect: (event) =>
     if @_filledRequiredFields()
-      @trigger "validate", @form.parse()
+      @trigger "validate", @form.value()
 
   formKeyup: (event) =>
     is_valid = @_filledRequiredFields()

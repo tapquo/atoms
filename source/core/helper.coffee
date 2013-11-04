@@ -19,7 +19,15 @@ Atoms.Core.Helper = do ->
   ###
   mix = (extend, base) ->
     clone = @_clone base
-    if clone? then clone[prop] = extend[prop] for prop of extend else clone = extend
+    # if clone? then clone[prop] = extend[prop] for prop of extend else clone = extend
+    if clone?
+      for property of extend
+        if typeof(extend[property]) is "object"
+          clone[property] = @mix extend[property], clone[property]
+        else
+          clone[property] = extend[property]
+    else
+      clone = extend
     clone
 
   ###

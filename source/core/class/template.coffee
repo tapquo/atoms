@@ -19,6 +19,7 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
   constructor: (@attributes) ->
     super
     @constructor.type = "Template"
+
     for key of @attributes
       if key in @constructor.elements
         @_mixAttributes(key)
@@ -31,10 +32,10 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
     Atoms.System.Cache[@constructor.name] = @
 
 
-  _mixAttributes: (key, index)->
+  _mixAttributes: (key)->
     if Atoms.Core.Helper.isArray(@attributes[key])
       for extend, index in @attributes[key]
-        @[key][index] = Atoms.Core.Helper.mix extend,  @[key][index]
+        @[key][index] = Atoms.Core.Helper.mix extend, @[key][index]
     else if typeof(@attributes[key]) is "object"
       @[key] = Atoms.Core.Helper.mix @attributes[key], @[key]
     else

@@ -90,25 +90,32 @@ $ ->
   Atoms.System.Layout.show "First"
 
   # ------------------------------------------------------------
+
   # Organism Aside
   # ------------------------------------------------------------
-  # class Aside extends Atoms.Organism.Aside
-  #   @scaffold "organisms/aside.yml"
+  class Aside extends Atoms.Organism.Aside
+    @scaffold "organisms/aside.yml"
 
-  # aside = new Aside parent: document.body
+  aside = new Aside parent: document.body
 
-  # # ------------------------------------------------------------
-  # # Template
-  # # ------------------------------------------------------------
-  # session = new Atoms.Template.Session
-  #   parent    : document.body
-  #   title     : "Atoms App"
-  #   logo      : "http://cdn.tapquo.com/photos/soyjavi.jpg"
-  #   copyright : "Tapquo S.L. 2013"
-  #   inputs    : [
-  #     placeholder: "Nickname...",
-  #     value: "@soyjavi",
-  #     name: "nickname"
-  #   ,
-  #     name: "pass"
-  #   ]
+  # ------------------------------------------------------------
+  # Template
+  # ------------------------------------------------------------
+  session = new Atoms.Template.Session
+    parent    : document.body
+    title     : "Atoms App"
+    logo      : "http://cdn.tapquo.com/photos/soyjavi.jpg"
+    copyright : "Tapquo S.L. 2013"
+    inputs: [
+      input: placeholder: "Nickname...", value: "@soyjavi", name: "nickname"
+    ,
+      input: name: "pass"
+    ]
+    buttons: [
+      button: style: "cancel", text: "Log in"
+    ]
+
+  session.bind "validate", -> console.log "argu", arguments
+  Atoms.System.Layout.show "Session"
+
+  console.log Atoms.System.Cache

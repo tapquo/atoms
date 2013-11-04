@@ -17,19 +17,22 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
   yaml = {}
 
-  @scaffold = (url) ->
+  @scaffold: (url) ->
     loader = if $$? then $$ else $
     response = loader.ajax
       url     : url
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-      success : (response) -> yaml = YAML.parse(response)
+      success : (response) ->
+        console.log "loaded yaml"
+        yaml = YAML.parse(response)
 
 
   constructor: (@attributes) ->
     super
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
+    yaml = {}
     @constructor.type = "Organism"
     @render()
     @el.attr "id", @constructor.name

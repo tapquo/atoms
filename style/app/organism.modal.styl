@@ -34,10 +34,17 @@
           width: 100%
           display: block
 
-
-
   &.loading
     & > article
-      height: 5rem
-      width: 5rem
-      background: red
+      padding: AIR = .75rem
+      &::before, &::after
+        content: ""
+        display: block
+        width: SIZE = (AIR * 2)
+        height: SIZE
+      &::before
+        float: left
+        margin-right: (AIR / 2)
+      &::after
+        float: right
+        margin-left: (AIR / 2)

@@ -1,15 +1,11 @@
 [data-component="modal"]
-  background: rgba(0,0,0,0.75)
   visibility: hidden
-  & > article
+  &:not(.loading) > article
     background: BACKGROUND
-    // transform: translateY(500%)
     & > header
       color: darken(BACKGROUND, 60%)
-
     & > section
       color: darken(BACKGROUND, 40%)
-
     & > footer
       background: lighten(BACKGROUND, 25%)
       & > nav
@@ -19,10 +15,12 @@
 
   &.active
     visibility: visible
+    background-color: rgba(0,0,0,0.5)
     & > article
       backface-visibility hidden
-      vendor(animation-duration, 650ms)
-      vendor(animation-timing-function, steps(15, end))
+      SPEED = ANIMATION_DURATION * 1.25
+      vendor(animation-duration, SPEED)
+      // vendor(animation-timing-function, steps(ANIMATION_STEPS, end))
       &.show
         vendor(animation-name, modal-show)
         vendor(animation-direction, normal)
@@ -32,18 +30,40 @@
         vendor(animation-fill-mode, forwards)
 
 
+  &.loading
+    & > article
+      background: darken(DARK, 50%)
+      border-radius: 1rem
+      &::before, &::after
+        background-color: WHITE
+        border-radius: 50%
+      &.show
+        SPEED = ANIMATION_DURATION * 1.4
+        &::before
+          animation loading-dots SPEED 0 steps(ANIMATION_STEPS) infinite
+        &::after
+          animation loading-dots SPEED (SPEED / 2) steps(ANIMATION_STEPS) infinite
+
+
 @keyframes modal-show
-  0% {
+  0%
     opacity: 0
     transform: translateY(500%)
-  }
-  60% {
+  60%
     opacity: 1
     transform: translateY(-7%)
-  }
-  80% {
+  80%
     transform: translateY(2%)
-  }
-  100% {
+  100%
     transform: translateY(0)
-  }
+
+@keyframes loading-dots
+  0%
+    opacity: 1
+    transform scale(1)
+  50%
+    opacity: 0.5
+    transform scale(0.85)
+  100%
+    opacity: 1
+    transform scale(1)

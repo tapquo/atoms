@@ -9,12 +9,18 @@ header:
         atoms:
           - button:
               icon: menu
+              system:
+                aside: "s"
 
       - style: right
         events: ["select"]
         atoms:
           - button:
               icon: pencil-edit
+              system:
+                article: "Second"
+                section: undefined
+
           - button:
               icon: search
 
@@ -73,6 +79,8 @@ footer:
       atoms:
         - button:
             icon: profile
+            system:
+              article: Second
         - button:
             icon: chat_alt
         - button:

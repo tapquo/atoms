@@ -76,9 +76,6 @@ $ ->
       console.log "atom", atom
       console.log "molecule", molecule
 
-      Atoms.System.Layout.show "Second"
-
-
     formKeyup: (event) -> console.log "ku", event
 
     formKeypress: (event) -> console.log "kp", event
@@ -98,10 +95,6 @@ $ ->
 
   class Second extends Atoms.Organism.Article
     @scaffold "organisms/second.yml"
-
-    navigationSelect: ->
-      Atoms.System.Layout.return()
-
   second = new Second parent: document.body
 
   # first.el.addClass "aside"

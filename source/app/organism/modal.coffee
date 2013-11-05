@@ -29,6 +29,28 @@ class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
 
   areas: ["header", "section", "footer"]
 
-  constructor: ->
-    yaml = null
-    super
+  constructor: (@attributes={}) ->
+    @constructor.type = "Modal"
+    @attributes.parent = document.body
+    super @attributes
+    @article = @el.children("article")
+    # @TODO: Test in QuoJS
+    @article.bind "webkitAnimationEnd mozAnimationEnd", @onAnimationEnd
+
+    @article.find("button").bind "click", => @hide()
+
+  # Publics
+  show: ->
+    @el.addClass "active"
+    @article.addClass "show"
+    @trigger "show"
+
+  hide: ->
+    @article.removeClass("show").addClass("hide")
+    @trigger "hide"
+
+  # Privates
+  onAnimationEnd: =>
+    if @article.hasClass "hide"
+      @el.removeClass "active"
+      @article.removeClass "hide"

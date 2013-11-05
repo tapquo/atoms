@@ -25,11 +25,14 @@ Atoms.System.Layout = do(a = Atoms) ->
     #   window.history.back()
     # , 1000
 
-
   _back = ->
     @current.state("out")
     @current = a.System.Cache.First
     @current.state("back-out")
 
-  show: _show
-  return: _back
+  _aside = ->
+    @current.aside()
+
+  show  : _show
+  back  : _back
+  aside : _aside

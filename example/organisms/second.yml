@@ -5,10 +5,11 @@ header:
   molecule:
     navigation:
       - style: left
-        events: ["select"]
         atoms:
           - button:
               icon: arrow_carrot-left
+              system:
+                url: back
 
 section:
   atom:

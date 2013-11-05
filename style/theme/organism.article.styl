@@ -14,7 +14,16 @@ body > article
     &[data-state="back-in"]
       vendor(animation-name, article-out)
     &[data-state="back-out"]
+      vendor(animation-delay, 1)
       vendor(animation-name, article-out)
+      vendor(animation-direction, reverse)
+      vendor(animation-fill-mode, forwards)
+
+    &[data-state="aside-in"]
+      vendor(animation-name, article-aside)
+      vendor(animation-fill-mode, forwards)
+    &[data-state="aside-out"]
+      vendor(animation-name, article-aside)
       vendor(animation-direction, reverse)
       vendor(animation-fill-mode, forwards)
 
@@ -44,3 +53,9 @@ DEGREES   = -15deg
   100%
     transform: rotateY(DEGREES)
     opacity: OPACITY
+
+@keyframes article-aside
+  0%
+    transform: translateX(0)
+  100%
+    transform: translateX(80%)

@@ -1,8 +1,9 @@
 [data-component="modal"]
-  background: rgba(0,0,0,0.5)
+  background: rgba(0,0,0,0.75)
+  visibility: hidden
   & > article
     background: BACKGROUND
-
+    // transform: translateY(500%)
     & > header
       color: darken(BACKGROUND, 60%)
 
@@ -15,3 +16,34 @@
         & > button
           &:not(:last-child)
             border-bottom: solid 1px darken(BACKGROUND, 5%)
+
+  &.active
+    visibility: visible
+    & > article
+      backface-visibility hidden
+      vendor(animation-duration, 650ms)
+      vendor(animation-timing-function, steps(15, end))
+      &.show
+        vendor(animation-name, modal-show)
+        vendor(animation-direction, normal)
+      &.hide
+        vendor(animation-name, modal-show)
+        vendor(animation-direction, reverse)
+        vendor(animation-fill-mode, forwards)
+
+
+@keyframes modal-show
+  0% {
+    opacity: 0
+    transform: translateY(500%)
+  }
+  60% {
+    opacity: 1
+    transform: translateY(-7%)
+  }
+  80% {
+    transform: translateY(2%)
+  }
+  100% {
+    transform: translateY(0)
+  }

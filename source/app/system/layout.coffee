@@ -10,8 +10,15 @@ Event emitter which provides the pub/sub pattern to Atoms classes.
 
 Atoms.System.Layout = do(a = Atoms) ->
 
+  current = null
+
   _show = (article, organism) ->
-    a.System.Cache[article].el.addClass "active"
+    article = a.System.Cache[article]
+    article.state("in")
+
+    if @current then @current.state("back-in")
+
+    @current = article
 
     # window.history.pushState {}, "Atoms #{article}", "#{article}"
     # setTimeout ->
@@ -19,8 +26,10 @@ Atoms.System.Layout = do(a = Atoms) ->
     # , 1000
 
 
-  _back = (article, section) ->
-    console.log "back"
+  _back = ->
+    @current.state("out")
+    @current = a.System.Cache.First
+    @current.state("back-out")
 
   show: _show
-  back: _back
+  return: _back

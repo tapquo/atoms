@@ -76,46 +76,79 @@ $ ->
       console.log "atom", atom
       console.log "molecule", molecule
 
+      Atoms.System.Layout.show "Second"
+
+
     formKeyup: (event) -> console.log "ku", event
 
     formKeypress: (event) -> console.log "kp", event
 
     formClick: (event, atom, molecule) -> console.log "value: ", molecule.value()
 
-    buttonClick: (event) -> console.log "Atom.Button clicked"
+    buttonClick: (event) ->
+      console.log "Atom.Button clicked"
+      Atoms.System.Cache.Loading.show()
+      setTimeout ->
+        Atoms.System.Cache.Loading.hide()
+      , 850
+
 
   first = new First parent: document.body
+
+
+  class Second extends Atoms.Organism.Article
+    @scaffold "organisms/second.yml"
+
+    navigationSelect: ->
+      Atoms.System.Layout.return()
+
+  second = new Second parent: document.body
 
   # first.el.addClass "aside"
   Atoms.System.Layout.show "First"
 
-  # ------------------------------------------------------------
 
+  # ------------------------------------------------------------
   # Organism Aside
   # ------------------------------------------------------------
-  class Aside extends Atoms.Organism.Aside
-    @scaffold "organisms/aside.yml"
+  # class Aside extends Atoms.Organism.Aside
+  #   @scaffold "organisms/aside.yml"
 
-  aside = new Aside parent: document.body
+  # aside = new Aside parent: document.body
+
+
+  # ------------------------------------------------------------
+  # Organism Aside
+  # ------------------------------------------------------------
+  modal = new Atoms.Organism.Modal
+    icon    : "question"
+    title   : "Hello modal"
+    text    : "lorem ipsum"
+  # modal.show()
+
+  # Atoms.System.Cache.Loading.show()
+  # setTimeout ->
+  #   loading.hide()
+  # , 1000
 
   # ------------------------------------------------------------
   # Template
   # ------------------------------------------------------------
-  session = new Atoms.Template.Session
-    parent    : document.body
-    title     : "Atoms App"
-    logo      : "http://cdn.tapquo.com/photos/soyjavi.jpg"
-    copyright : "Tapquo S.L. 2013"
-    inputs: [
-      input: placeholder: "Nickname...", value: "@soyjavi", name: "nickname"
-    ,
-      input: name: "pass"
-    ]
-    buttons: [
-      button: style: "cancel", text: "Log in"
-    ]
+  # session = new Atoms.Template.Session
+  #   parent    : document.body
+  #   title     : "Atoms App"
+  #   logo      : "http://cdn.tapquo.com/photos/soyjavi.jpg"
+  #   copyright : "Tapquo S.L. 2013"
+  #   inputs: [
+  #     input: placeholder: "Nickname...", value: "@soyjavi", name: "nickname"
+  #   ,
+  #     input: name: "pass"
+  #   ]
+  #   buttons: [
+  #     button: style: "cancel", text: "Log in"
+  #   ]
 
-  session.bind "validate", -> console.log "argu", arguments
-  Atoms.System.Layout.show "Session"
+  # session.bind "validate", -> console.log "argu", arguments
+  # Atoms.System.Layout.show "Session"
 
   console.log Atoms.System.Cache

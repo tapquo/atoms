@@ -1,0 +1,21 @@
+header:
+  atom:
+    title:
+      text: "Second"
+  molecule:
+    navigation:
+      - style: left
+        events: ["select"]
+        atoms:
+          - button:
+              icon: arrow_carrot-left
+
+section:
+  atom:
+    button:
+      style  : fluid
+      # disabled: true
+      icon  : search
+      text  : Find your friends
+      events: ["click"]
+

@@ -3,10 +3,14 @@ body > article
   width: 100%
   z-index: 1
 
-  &.active
-    display-box()
+  display-box()
+  backface-visibility hidden
+  vendor(animation-fill-mode, forwards)
+
   &:not(.active)
-    display: none
+    visibility: hidden
+  &.active
+    visibility: visible
 
   &.aside
     transform: translateX(ASIDE_WIDTH)

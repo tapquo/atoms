@@ -6,6 +6,7 @@ body, html
   overflow: hidden
 
   & > aside, & > article
+    display-box()
     box-orient(vertical)
     height: inherit
     webkit-transform: translate3d(0,0,0)
@@ -24,3 +25,7 @@ body, html
 
     & > footer
       ordinal-group(3)
+
+body
+  vendor(perspective, 800px)
+  vendor(transform-style, preserve-3d)

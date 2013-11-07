@@ -8,8 +8,7 @@ header:
         atoms:
           - button:
               icon: arrow_carrot-left
-              system:
-                url: back
+              path: "back"
 
 section:
   atom:

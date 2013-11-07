@@ -22,9 +22,9 @@ class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
     atom.el.addClass("active").siblings().removeClass("active")
     @trigger "select", event, atom
 
-    if atom.attributes.system?
-      system = atom.attributes.system
+    path = atom.attributes.path
 
-      if system.article? then Atoms.System.Layout.show system.article
-      if system.url? then Atoms.System.Layout.back()
-      if system.aside? then Atoms.System.Layout.aside()
+    if path is "back"
+      Atoms.System.Layout.back()
+    else
+      Atoms.Url.path path

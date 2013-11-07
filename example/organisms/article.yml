@@ -17,9 +17,7 @@ header:
         atoms:
           - button:
               icon: pencil-edit
-              system:
-                article: "Second"
-                section: undefined
+              path: "Second/section2"
 
           - button:
               icon: search

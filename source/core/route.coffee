@@ -1,120 +1,112 @@
 "use strict"
 
-class Atoms.Core.Route extends Atoms.Core.Module
 
-  @extend Atoms.Core.EventEmitter
+Atoms.Url = do ->
 
-  @routess: []
+  regexp =
+    attributes: /:([\w\d]+)/g
+    splat     : /\*([\w\d]+)/g
+    escape    : /[-[\]{}()+?.,\\^$|#\s]/g
+    hash      : /^#*/
 
-  @options: {}
+  history = false
+  routes = {}
+  current = null
 
-  constructor: (@path, @callback) ->
-    @names = []
+  _listen = (urls) ->
+    _addRoute(path, callback) for path, callback of urls
+    Atoms.$(window).on "popstate", _change
 
-    if typeof path is 'string'
-      namedParam.lastIndex = 0
-      while (match = namedParam.exec(path)) != null
-        @names.push(match[1])
-
-      splatParam.lastIndex = 0
-      while (match = splatParam.exec(path)) != null
-        @names.push(match[1])
-
-      path = path.replace(escapeRegExp, '\\$&')
-                 .replace(namedParam, '([^\/]*)')
-                 .replace(splatParam, '(.*?)')
-
-      @route = new RegExp('^' + path + '$')
-    else
-      @route = path
-
-
-  @routes: (routes) ->
-    # @add path, @proxy(callback) for path, callback of routes
-    @add path, callback for path, callback of routes
-
-
-  @listen: () ->
-    Atoms.$(window).bind "popstate", @change
-    @change()
-
-  @unbind: ->
-    Atoms.$(window).unbind "popstate", @change
-
-  @navigate: (args...) ->
-    options = {}
+  _path = (args...) ->
     last_argument = args[args.length - 1]
     if typeof last_argument is 'object'
       options = args.pop()
-      options = @extend @options, options
 
-    path = args.join('/')
-    unless path is @path
-      console.log "cambiar", path
-      @path = path
-      @trigger "navigate", @path
-      @matchRoute(@path, options) if options.trigger
-      history.pushState {}, document.title, @path
-    @
+    path = "/" + args.join("/")
+    unless path is current
+      path = "#" + path unless history
+      window.history.pushState {}, document.title, path.toLowerCase()
+      _change()
+
+  _back = ->
+    window.history.back()
 
 
-  @add: (path, callback) ->
-    if (typeof path is 'object' and path not instanceof RegExp)
-      @add(key, value) for key, value of path
-    else
-      @routes.push(new @(path, callback))
+  _forward = ->
+    window.history.forward()
+
 
   # Private
-  @extend: (object={}, properties) ->
-    object[key] = val for key, val of properties
-    object
+  _addRoute = (path, callback) ->
+    attributes = ["url"]
 
-  @getPath: ->
+    regexp.attributes.lastIndex = 0
+    while (match = regexp.attributes.exec(path)) != null
+      attributes.push(match[1])
+
+    regexp.splat.lastIndex = 0
+    while (match = regexp.splat.exec(path)) != null
+      attributes.push(match[1])
+
+    path = path.replace(regexp.escape, '\\$&')
+               .replace(regexp.attributes, '([^\/]*)')
+               .replace(regexp.splat, '(.*?)')
+
+    console.log path, attributes
+
+    routes[path] =
+      attributes: attributes
+      callback  : callback
+      regexp    : new RegExp('^' + path + '$')
+
+
+  _change = (event) ->
+    if event then event.preventDefault()
+    path = if history then _getPath() else _getFragment()
+
+    console.log "\n[history]", history.state
+    console.log "  -[path]", path
+
+    unless path is current
+      current = path
+      _matchRoute path
+
+
+  _getPath = ->
     path = window.location.pathname
     if path.substr(0,1) isnt '/'
       path = '/' + path
     path
 
-  @change: ->
-    path = @getPath()
-    unless path is @path
-      @path = path
-      @matchRoute(@path)
-    @
+  _getFragment = ->
+    window.location.hash.replace(regexp.hash, '')
 
-  @matchRoute: (path, options) ->
-    for route in @routes
-      if route.match(path, options)
-        @trigger 'change', route, path
-        return route
 
-  match: (path, options = {}) ->
-    match = @route.exec(path)
+  _matchRoute = (path, options) ->
+    console.log "  -[matchRoute]", path
+    for key of routes
+      route = routes[key]
+      exec = route.regexp.exec(path)
+      if exec
+        obj = {}
+        obj[attribute] = exec[index] for attribute, index in route.attributes
+        route.callback?.call(@, obj)
+        break
 
-    return false unless match
+  return {
+    listen  : _listen
+    path    : _path
+    back    : _back
+    forward : _forward
+    add     : _addRoute
+  }
 
-    options.match = match
-    if @names.length
-      for param, i in match.slice(1)
-        options[@names[i]] = param
 
-    @callback.call(null, options) isnt false
 
-# Regular expressions
-namedParam   = /:([\w\d]+)/g
-splatParam   = /\*([\w\d]+)/g
-escapeRegExp = /[-[\]{}()+?.,\\^$|#\s]/g
 
-# # Coffee-script bug
-# Atoms.Core.Route.change =
-#   Atoms.Core.Route.proxy(Atoms.Core.Route.change)
+Atoms.Url.listen
+  ""                   : (properties) -> console.error "callback /", properties
+  "/:article/:section" : (properties) ->
+    console.error "callback /article/section", properties
+    Atoms.System.Layout.show properties.article, properties.section
 
-# Atoms.Core.Class.Organism.include
-#   route: (path, callback) ->
-#     Atoms.Core.Route.add path, @proxy(callback)
-
-#   routes: (routes) ->
-#     @route(key, value) for key, value of routes
-
-#   url: ->
-#     Atoms.Core.Route.navigate.apply(Atoms.Core.Route, arguments)

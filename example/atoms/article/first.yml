@@ -9,8 +9,7 @@ header:
         atoms:
           - button:
               icon: menu
-              system:
-                aside: "s"
+              path: aside
 
       - style: right
         events: ["select"]
@@ -18,12 +17,10 @@ header:
           - button:
               icon: pencil-edit
               path: "Second/section2"
-
           - button:
               icon: search
 
 section:
-
   molecule:
     form:
       events: ["keyup", "keypress", "click"]

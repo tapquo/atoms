@@ -1,4 +1,16 @@
-$ ->
+Atoms.$ ->
+
+  if navigator.standalone
+    $(document.body).addClass "standalone"
+
+  # window.addEventListener "popstate", (event) ->
+  #   event.preventDefault()
+  #   console.log "popstate", event, history.state
+
+  # window.addEventListener "pushstate", (event) ->
+  #   event.preventDefault()
+  #   console.log "pushstate", event
+
   console.log "------------------------------------------------------------"
   console.log "Atoms v#{Atoms.version}", Atoms
   console.log "------------------------------------------------------------"
@@ -69,7 +81,7 @@ $ ->
   # ------------------------------------------------------------
   class First extends Atoms.Organism.Article
 
-    @scaffold "organisms/article.yml"
+    @scaffold "atoms/article/first.yml"
 
     navigationSelect: (event, atom, molecule) ->
       console.log "event", event
@@ -94,11 +106,26 @@ $ ->
 
 
   class Second extends Atoms.Organism.Article
-    @scaffold "organisms/second.yml"
+    @scaffold "atoms/article/second.yml"
+
+    buttonClick: ->
+      modal = new Atoms.Organism.Modal
+        icon    : "question"
+        title   : "Hello modal"
+        text    : "lorem ipsum"
+      modal.show()
+
   second = new Second parent: document.body
 
-  # first.el.addClass "aside"
-  Atoms.System.Layout.show "First"
+
+  class Third extends Atoms.Organism.Article
+    @scaffold "atoms/article/third.yml"
+
+  third = new Third parent: document.body
+
+  # Atoms.Url.path "first", "second"
+  # Atoms.Url.path "second", "second"
+  # Atoms.Url.path "third", "second"
 
 
   # ------------------------------------------------------------
@@ -113,11 +140,7 @@ $ ->
   # ------------------------------------------------------------
   # Organism Aside
   # ------------------------------------------------------------
-  modal = new Atoms.Organism.Modal
-    icon    : "question"
-    title   : "Hello modal"
-    text    : "lorem ipsum"
-  # modal.show()
+
 
   # Atoms.System.Cache.Loading.show()
   # setTimeout ->
@@ -143,5 +166,3 @@ $ ->
 
   # session.bind "validate", -> console.log "argu", arguments
   # Atoms.System.Layout.show "Session"
-
-  console.log Atoms.System.Cache

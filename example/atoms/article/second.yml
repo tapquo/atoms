@@ -9,7 +9,11 @@ header:
           - button:
               icon: arrow_carrot-left
               path: "back"
-
+      - style: right
+        atoms:
+          - button:
+              icon: arrow_carrot-right
+              path: third/section
 section:
   atom:
     button:

@@ -1,0 +1,11 @@
+header:
+  atom:
+    title:
+      text: "Third"
+  molecule:
+    navigation:
+      - style: left
+        atoms:
+          - button:
+              icon: arrow_carrot-left
+              path: "back"

@@ -12,15 +12,15 @@ Atoms.System.Layout = do (a = Atoms) ->
 
   current = null
 
-  _show = (article, organism) ->
-    article = a.System.Cache[article]
+  _show = (article, section) ->
+    article = a.System.Cache[a.Core.Helper.className(article)]
     article.state("in")
-    if @current then @current.state("back-in")
+    @current.state("back-in") if @current
     @current = article
 
-  _back = ->
+  _back = (article, section) ->
     @current.state("out")
-    @current = a.System.Cache.First
+    @current = a.System.Cache[a.Core.Helper.className(article)]
     @current.state("back-out")
 
   _aside = ->

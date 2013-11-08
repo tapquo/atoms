@@ -1,40 +1,46 @@
 "use strict"
 
 
-Atoms.Url = do ->
+Atoms.Url = do (a = Atoms) ->
 
   regexp =
-    attributes: /:([\w\d]+)/g
-    splat     : /\*([\w\d]+)/g
-    escape    : /[-[\]{}()+?.,\\^$|#\s]/g
-    hash      : /^#*/
+    attributes  : /:([\w\d]+)/g
+    splat       : /\*([\w\d]+)/g
+    escape      : /[-[\]{}()+?.,\\^$|#\s]/g
+    hash        : /^#*/
 
-  history = false
-  routes = {}
-  current = null
+  history       = false
+  routes        = {}
+  current_path  = null
 
-  _listen = (urls) ->
-    _addRoute(path, callback) for path, callback of urls
-    Atoms.$(window).on "popstate", _change
+  current       = null
 
+  forward       = true
+
+  ###
+  @TODO
+  @method path
+  @param  {value}    Array of urls with callbacks
+  ###
   _path = (args...) ->
+    forward = true
     last_argument = args[args.length - 1]
     if typeof last_argument is 'object'
       options = args.pop()
 
     path = "/" + args.join("/")
-    unless path is current
+    unless path is current_path
       path = "#" + path unless history
       window.history.pushState {}, document.title, path.toLowerCase()
       _change()
 
+  ###
+  @TODO
+  @method back
+  ###
   _back = ->
+    forward = false
     window.history.back()
-
-
-  _forward = ->
-    window.history.forward()
-
 
   # Private
   _addRoute = (path, callback) ->
@@ -52,25 +58,18 @@ Atoms.Url = do ->
                .replace(regexp.attributes, '([^\/]*)')
                .replace(regexp.splat, '(.*?)')
 
-    console.log path, attributes
-
     routes[path] =
       attributes: attributes
       callback  : callback
       regexp    : new RegExp('^' + path + '$')
 
-
   _change = (event) ->
     if event then event.preventDefault()
     path = if history then _getPath() else _getFragment()
 
-    console.log "\n[history]", history.state
-    console.log "  -[path]", path
-
-    unless path is current
-      current = path
+    unless path is current_path
+      current_path = path
       _matchRoute path
-
 
   _getPath = ->
     path = window.location.pathname
@@ -81,9 +80,7 @@ Atoms.Url = do ->
   _getFragment = ->
     window.location.hash.replace(regexp.hash, '')
 
-
   _matchRoute = (path, options) ->
-    console.log "  -[matchRoute]", path
     for key of routes
       route = routes[key]
       exec = route.regexp.exec(path)
@@ -93,20 +90,22 @@ Atoms.Url = do ->
         route.callback?.call(@, obj)
         break
 
+
+  _listen = do ->
+    urls =
+      ""                   : (properties) -> console.error "callback /", properties
+      "/:article/:section" : (properties) =>
+        if forward
+          Atoms.System.Layout.show properties.article, properties.section
+        else
+          Atoms.System.Layout.back properties.article, properties.section
+
+    _addRoute(path, callback) for path, callback of urls
+    Atoms.$(window).on "popstate", _change
+
+
   return {
-    listen  : _listen
     path    : _path
     back    : _back
-    forward : _forward
     add     : _addRoute
   }
-
-
-
-
-Atoms.Url.listen
-  ""                   : (properties) -> console.error "callback /", properties
-  "/:article/:section" : (properties) ->
-    console.error "callback /article/section", properties
-    Atoms.System.Layout.show properties.article, properties.section
-

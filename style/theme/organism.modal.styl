@@ -15,11 +15,11 @@
 
   &.active
     visibility: visible
-    background-color: rgba(0,0,0,0.5)
+    background-color: rgba(0,0,0,0.25)
     & > article
       backface-visibility hidden
-      SPEED = ANIMATION_DURATION * 1.25
-      vendor(animation-duration, SPEED)
+      vendor(animation-duration, ANIMATION_DURATION)
+      vendor(animation-timing-function, ANIMATION_EASE)
       // vendor(animation-timing-function, steps(ANIMATION_STEPS, end))
       &.show
         vendor(animation-name, modal-show)

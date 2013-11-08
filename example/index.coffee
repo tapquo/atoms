@@ -121,6 +121,10 @@ Atoms.$ ->
   class Third extends Atoms.Organism.Article
     @scaffold "atoms/article/third.yml"
 
+    constructor: ->
+      super
+      @attributes.aside = "skksk"
+
   third = new Third parent: document.body
 
   # Atoms.Url.path "first", "second"

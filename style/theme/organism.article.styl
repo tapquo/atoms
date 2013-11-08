@@ -4,6 +4,7 @@ body > article
 
   vendor(animation-duration, ANIMATION_DURATION)
   vendor(animation-timing-function, ANIMATION_EASE)
+  // vendor(animation-timing-function, steps(1, start))
   &.active
     &[data-state="in"]
       vendor(animation-name, article-in)

@@ -11,13 +11,18 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
     super
     @el.bind "webkitAnimationEnd", @_onAnimationEnd
 
-
   in: ->
     # @TODO: Has a aside?
     @state "in"
-  out: -> @state "out"
-  backIn: -> @state "back-in"
-  backOut: -> @state "back-out"
+
+  out: ->
+    @state "out"
+
+  backIn: ->
+    @state "back-in"
+
+  backOut: ->
+    @state "back-out"
 
   state: (name) ->
     @el.addClass("active").attr("data-state", name)

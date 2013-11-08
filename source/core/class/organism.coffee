@@ -40,14 +40,20 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
 
   _create: (area, properties) ->
-    el = @el.append("<#{area}/>").children(area)
-    for type of properties
-      for className of properties[type]
-        if Atoms[Atoms.Core.Helper.className(type)][Atoms.Core.Helper.className(className)]?
-          @[className] = [] unless @[className]?
-          collection = properties[type][className]
-          collection = [collection] unless Atoms.Core.Helper.isArray collection
-          @_instance area, el, type, className, collection
+    properties = [properties] unless Atoms.Core.Helper.isArray(properties)
+
+    for property in properties
+      el = Atoms.$ "<#{area}/>"
+      @el.append el
+
+      for type of property
+        for className of property[type]
+          if Atoms[Atoms.Core.Helper.className(type)][Atoms.Core.Helper.className(className)]?
+            @[className] = [] unless @[className]?
+            collection = property[type][className]
+            collection = [collection] unless Atoms.Core.Helper.isArray collection
+            @_instance area, el, type, className, collection
+
 
 
   _instance: (area, parent, type, className, collection) ->

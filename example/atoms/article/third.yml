@@ -9,3 +9,39 @@ header:
           - button:
               icon: arrow_carrot-left
               path: "back"
+
+section:
+  - atom:
+      button:
+        style  : fluid
+        # disabled: true
+        icon  : search
+        text  : Find your friends
+        events: ["click"]
+  - atom:
+      title:
+        text: two
+  - atom:
+      title:
+        text: three
+  - atom:
+      title:
+        text: four
+
+footer:
+  molecule:
+    navigation:
+      atoms:
+        - button:
+            icon: profile
+            style: active
+            path: third/0
+        - button:
+            icon: chat_alt
+            path: third/1
+        - button:
+            icon: compass_alt
+            path: third/2
+        - button:
+            icon: adjust-horiz
+            path: third/3

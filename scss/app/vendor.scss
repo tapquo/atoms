@@ -1,0 +1,176 @@
+@mixin vendor($prop, $args) {
+  @each $vendor in webkit, moz, ms, o {
+    -#{$vendor}-#{$prop}: $args;
+    #{$prop}: $args;
+  }
+}
+
+@mixin vendorValue($prop, $args) {
+  #{$prop}: -webkit- + $args;
+  #{$prop}: -moz- + $args;
+  #{$prop}: -ms- + $args;
+  #{$prop}: -o- + $args;
+  #{$prop}: $args;
+}
+
+@mixin vendorNoMS($prop, $args) {
+  @each $vendor in webkit, moz, o {
+    -#{$vendor}-#{$prop}: $args;
+    #{$prop}: $args;
+  }
+}
+
+@mixin vendorValueNoMS($prop, $args) {
+  #{$prop}: -webkit- + $args;
+  #{$prop}: -moz- + $args;
+  #{$prop}: -o- + $args;
+  #{$prop}: $args;
+}
+
+@mixin animation {
+  @include vendor("animation", $arguments);
+}
+
+@mixin animation-fill-mode {
+  @include vendor("animation-fill-mode", $arguments);
+}
+
+/*@mixin border-radius()
+  vendor('border-radius', $arguments)
+
+@mixin box-shadow()
+  vendor('box-shadow', $arguments)
+
+@mixin background-size()
+  vendor('background-size', $arguments)
+
+@mixin text-shadow()
+  vendor('text-shadow', $arguments)*/
+
+@mixin backface-visibility {
+  @include vendor("backface-visibility", $arguments);
+}
+
+/* ====================== FLEXBOX ====================== */
+@mixin display-box {
+  @include vendorValueNoMS("display", box) {
+    display: -ms-flexbox;
+  }
+}
+
+@mixin box-pack {
+  @include vendorNoMS("box-pack", $arguments) {
+    -ms-flex-pack: $arguments;
+  }
+}
+
+@mixin box-align {
+  @include vendor("box-align", $arguments) {
+    -ms-flex-align: $arguments;
+  }
+}
+
+@mixin box-sizing {
+  -moz-box-sizing: $arguments;
+  box-sizing: $arguments;
+}
+
+@mixin box-flex {
+  @include vendorNoMS("box-flex", $arguments) {
+    @if $arguments > 0 {
+      -ms-flex: $arguments 0 auto;
+    }
+    @else {
+      -ms-flex: 0 $arguments auto;
+    }
+  }
+}
+
+@mixin box-orient {
+  @include vendorNoMS("box-orient", $arguments) {
+    @if $arguments is horizontal {
+      -ms-flex-direction: row;
+    }
+    @else if $arguments is vertical {
+      -ms-flex-direction: column;
+    }
+  }
+}
+
+@mixin box-direction {
+  @include vendorNoMS("box-direction", $arguments) {
+    -ms-flex-direction: $arguments;
+  }
+}
+
+@mixin ordinal-group {
+  @include vendorNoMS("box-ordinal-group", $arguments) {
+    -ms-flex-order: $arguments;
+  }
+}
+
+@mixin box-lines {
+  @include vendor("box-lines", $arguments);
+}
+
+/* ====================== BOXFLEX ====================== */
+@mixin display-flex {
+  @include vendorValueNoMS("display", flex);
+}
+
+@mixin flex-flow {
+  @include vendor("flex-flow", $arguments);
+}
+
+@mixin justify-content {
+  @include vendor("justify-content", $arguments);
+}
+
+@mixin align-content {
+  @include vendor("align-content", $arguments);
+}
+
+@mixin align-items {
+  @include vendor("align-items", $arguments);
+}
+
+@mixin order {
+  @include vendor("order", $arguments);
+}
+
+@mixin flex {
+  @include vendor("flex", $arguments);
+}
+
+@mixin align-self {
+  @include vendor("align-self", $arguments);
+}
+
+/* ====================== TRANSITIONS ====================== */
+@mixin transition {
+  @include vendor("transition", $arguments);
+}
+
+@mixin transition-delay {
+  @include vendor("transition-delay", $arguments);
+}
+
+@mixin transition-property {
+  @include vendor("transition-property", $arguments);
+}
+
+@mixin transition-duration {
+  @include vendor("transition-duration", $arguments);
+}
+
+@mixin transition-timing-function {
+  @include vendor("transition-timing-function", $arguments);
+}
+
+@mixin transform {
+  @include vendor("transform", $arguments);
+}
+
+@mixin transform-origin {
+  @include vendor("transform-origin", $arguments);
+}

@@ -1,0 +1,62 @@
+[data-component="modal"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1980;
+  @include display-box;
+  @include box-align(center);
+  @include box-pack(center);
+  &:not(.loading) > article {
+    width: $MODAL_WIDTH;
+    text-align: center;
+    @include transform(translate3d(0, 0, 0));
+    & > header {
+      & > * {
+        display: block;
+        padding-top: 1rem;
+        text-align: center;
+      }
+      & .icon {
+        font-size: 3.5rem;
+        line-height: 3.5rem;
+        & + h1 {
+          padding-top: 0;
+        }
+      }
+    }
+    & > footer {
+      & > nav {
+        margin: 0 1em;
+        font-size: $FONT_SIZE_BIG;
+        & > button {
+          line-height: $FONT_SIZE_BIG * 2.75;
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+  }
+  &.loading {
+    & > article {
+      $AIR: 0.75rem;
+      padding: $AIR;
+      &::before, &::after {
+        content: "";
+        display: block;
+        $SIZE: $AIR * 2;
+        width: $SIZE;
+        height: $SIZE;
+      }
+      &::before {
+        float: left;
+        margin-right: $AIR / 2;
+      }
+      &::after {
+        float: right;
+        margin-left: $AIR / 2;
+      }
+    }
+  }
+}

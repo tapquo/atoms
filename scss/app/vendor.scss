@@ -36,7 +36,7 @@
 }
 
 /*@mixin border-radius()
-  vendor('border-radius', $arguments)
+  vendor('border-radius', $arguments)*/
 
 @mixin box-shadow()
   vendor('box-shadow', $arguments)
@@ -44,7 +44,7 @@
 @mixin background-size()
   vendor('background-size', $arguments)
 
-@mixin text-shadow()
+/*@mixin text-shadow()
   vendor('text-shadow', $arguments)*/
 
 @mixin backface-visibility {
@@ -58,24 +58,24 @@
   }
 }
 
-@mixin box-pack {
+@mixin box-pack ($arguments) {
   @include vendorNoMS("box-pack", $arguments) {
     -ms-flex-pack: $arguments;
   }
 }
 
-@mixin box-align {
+@mixin box-align ($arguments){
   @include vendor("box-align", $arguments) {
     -ms-flex-align: $arguments;
   }
 }
 
-@mixin box-sizing {
+@mixin box-sizing ($arguments){
   -moz-box-sizing: $arguments;
   box-sizing: $arguments;
 }
 
-@mixin box-flex {
+@mixin box-flex ($arguments){
   @include vendorNoMS("box-flex", $arguments) {
     @if $arguments > 0 {
       -ms-flex: $arguments 0 auto;
@@ -86,7 +86,7 @@
   }
 }
 
-@mixin box-orient {
+@mixin box-orient ($arguments){
   @include vendorNoMS("box-orient", $arguments) {
     @if $arguments is horizontal {
       -ms-flex-direction: row;
@@ -97,19 +97,19 @@
   }
 }
 
-@mixin box-direction {
+@mixin box-direction ($arguments){
   @include vendorNoMS("box-direction", $arguments) {
     -ms-flex-direction: $arguments;
   }
 }
 
-@mixin ordinal-group {
+@mixin ordinal-group ($arguments){
   @include vendorNoMS("box-ordinal-group", $arguments) {
     -ms-flex-order: $arguments;
   }
 }
 
-@mixin box-lines {
+@mixin box-lines ($arguments){
   @include vendor("box-lines", $arguments);
 }
 
@@ -118,59 +118,59 @@
   @include vendorValueNoMS("display", flex);
 }
 
-@mixin flex-flow {
+@mixin flex-flow ($arguments){
   @include vendor("flex-flow", $arguments);
 }
 
-@mixin justify-content {
+@mixin justify-content ($arguments){
   @include vendor("justify-content", $arguments);
 }
 
-@mixin align-content {
+@mixin align-content ($arguments){
   @include vendor("align-content", $arguments);
 }
 
-@mixin align-items {
+@mixin align-items ($arguments){
   @include vendor("align-items", $arguments);
 }
 
-@mixin order {
+@mixin order ($arguments){
   @include vendor("order", $arguments);
 }
 
-@mixin flex {
+@mixin flex ($arguments){
   @include vendor("flex", $arguments);
 }
 
-@mixin align-self {
+@mixin align-self ($arguments){
   @include vendor("align-self", $arguments);
 }
 
 /* ====================== TRANSITIONS ====================== */
-@mixin transition {
+@mixin transition ($arguments){
   @include vendor("transition", $arguments);
 }
 
-@mixin transition-delay {
+@mixin transition-delay ($arguments){
   @include vendor("transition-delay", $arguments);
 }
 
-@mixin transition-property {
+@mixin transition-property ($arguments){
   @include vendor("transition-property", $arguments);
 }
 
-@mixin transition-duration {
+@mixin transition-duration ($arguments){
   @include vendor("transition-duration", $arguments);
 }
 
-@mixin transition-timing-function {
+@mixin transition-timing-function ($arguments){
   @include vendor("transition-timing-function", $arguments);
 }
 
-@mixin transform {
+@mixin transform ($arguments){
   @include vendor("transform", $arguments);
 }
 
-@mixin transform-origin {
+@mixin transform-origin ($arguments){
   @include vendor("transform-origin", $arguments);
 }

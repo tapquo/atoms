@@ -1,0 +1,33 @@
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  & > aside, & > article {
+    @include display-box;
+    @include box-orient(vertical);
+    height: inherit;
+    -webkit-transform:translate3d(0, 0, 0);
+    & > header, > footer {
+      @include box-flex(0);
+      z-index: 3;
+      position: relative;
+    }
+    & > header {
+      @include ordinal-group(1);
+    }
+    & > section {
+      @include box-flex(1);
+      @include ordinal-group(2);
+    }
+    & > footer {
+      @include ordinal-group(3);
+    }
+  }
+}
+
+body {
+  @include vendor(perspective, 800px);
+  @include vendor(transform-style, preserve-3d);
+}

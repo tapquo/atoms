@@ -1,0 +1,47 @@
+/* INPUT Elements */
+fieldset, form {
+  position: relative;
+  width: 100%;
+  &[molecule-search] {
+    @include display-box();
+    @include box-pack(justify);
+    & > * {
+      display: inline-block;
+      @include box-flex(1);
+    }
+    & > button {
+      position: absolute;
+      right: 1px;
+    }
+  }
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], select, textarea, label.select {
+  display: inline-block;
+  width: 100%;
+  margin: 0.2rem 0;
+  padding: 0.65rem 0.75rem;
+  font-family: inherit;
+  font-size: $FONT_SIZE_NORMAL;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-user-select: text;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  @include box-sizing(border-box);
+  &:focus {
+    outline: none !important;
+  }
+  &.big {
+    padding: 0.85rem 0.75rem;
+    font-size: $FONT_SIZE_BIG;
+  }
+  &.small {
+    padding: 0.45rem 0.75rem;
+    font-size: $FONT_SIZE_SMALL;
+  }
+  &.tiny {
+    padding: 0.35rem 0.75rem;
+    font-size: $FONT_SIZE_TINY;
+  }
+}

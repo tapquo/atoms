@@ -1,0 +1,78 @@
+body > article {
+  position: absolute;
+  @include transform-origin(100% 100%);
+  @include vendor(animation-duration, $ANIMATION_DURATION);
+  @include vendor(animation-timing-function, $ANIMATION_EASE);
+  // vendor(animation-timing-function, steps(1, start))
+  &.active {
+    &[data-state="in"] {
+      @include vendor(animation-name, article-in);
+    }
+    &[data-state="out"] {
+      @include vendor(animation-name, article-in);
+      @include vendor(animation-direction, reverse);
+      @include vendor(animation-fill-mode, forwards);
+    }
+    &[data-state="back-in"] {
+      @include vendor(animation-name, article-out);
+    }
+    &[data-state="back-out"] {
+      @include vendor(animation-delay, 1);
+      @include vendor(animation-name, article-out);
+      @include vendor(animation-direction, reverse);
+      @include vendor(animation-fill-mode, forwards);
+    }
+    &[data-state="aside-in"] {
+      @include vendor(animation-name, article-aside);
+      @include vendor(animation-fill-mode, forwards);
+    }
+    &[data-state="aside-out"] {
+      @include vendor(animation-name, article-aside);
+      @include vendor(animation-direction, reverse);
+      @include vendor(animation-fill-mode, forwards);
+    }
+  }
+  header {
+    background-color: $THEME;
+  }
+  section {
+    background-color: $BACKGROUND;
+  }
+  footer {
+    background: $DARK;
+  }
+}
+
+$TRANSLATE: 110%;
+$OPACITY: 0.25;
+$DEGREES: -15deg;
+
+@keyframes article-in {
+  0% {
+    transform: translateX($TRANSLATE);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes article-out {
+  0% {
+    transform: translateZ(0);
+  }
+  100% {
+    transform: rotateY($DEGREES);
+    opacity: $OPACITY;
+  }
+}
+
+
+@keyframes article-aside {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(80%);
+  }
+}

@@ -1,5 +1,12 @@
-"use strict"
+###
+HTML5 API History Wrapper
 
+@namespace Atoms.Core
+@class Route
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
 
 Atoms.Url = do (a = Atoms) ->
 
@@ -12,9 +19,6 @@ Atoms.Url = do (a = Atoms) ->
   history       = false
   routes        = {}
   current_path  = null
-
-  current       = null
-
   forward       = true
 
   ###
@@ -90,19 +94,15 @@ Atoms.Url = do (a = Atoms) ->
         route.callback?.call(@, obj)
         break
 
+  _pushState = (properties) ->
+    if forward
+      Atoms.System.Layout.show properties.article, properties.section
+    else
+      Atoms.System.Layout.back properties.article, properties.section
 
   _listen = do ->
-    urls =
-      ""                   : (properties) -> console.error "callback /", properties
-      "/:article/:section" : (properties) =>
-        if forward
-          Atoms.System.Layout.show properties.article, properties.section
-        else
-          Atoms.System.Layout.back properties.article, properties.section
-
-    _addRoute(path, callback) for path, callback of urls
+    _addRoute "/:article/:section", _pushState
     Atoms.$(window).on "popstate", _change
-
 
   return {
     path    : _path

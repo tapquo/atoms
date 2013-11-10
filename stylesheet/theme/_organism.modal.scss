@@ -40,10 +40,10 @@
   }
   &.loading {
     & > article {
-      background: darken(DARK, 50%);
+      background: darken($DARK, 50%);
       border-radius: 1rem;
       &::before, &::after {
-        background-color: WHITE;
+        background-color: $WHITE;
         border-radius: 50%;
       }
       &.show {

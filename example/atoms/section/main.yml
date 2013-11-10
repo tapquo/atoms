@@ -1,0 +1,7 @@
+id: "main"
+children:
+  - Atom.Button:
+      style: fluid
+      icon: search
+      text: Find your friends
+      events: ["click"]

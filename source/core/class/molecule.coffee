@@ -15,19 +15,19 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    @default = atoms: [] unless @default
+    @default = children: [] unless @default
     @constructor.type = "Molecule"
     @render()
     @chemistry()
 
 
   chemistry: (elements) ->
-    atoms = @attributes.atoms or @default.atoms
-    for atom, index in atoms
+    children = @attributes.children or @default.children
+    for atom, index in children
       for key of atom when @available.indexOf(key) > -1
         className = Atoms.Core.Helper.className(key)
         if Atoms.Atom[className]?
-          attributes = Atoms.Core.Helper.mix atom[key], @default.atoms?[index]?[key]
+          attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
 
           @[key] = [] unless @[key]?
           @[key].push @_atomInstance key, className, attributes

@@ -9,8 +9,16 @@ body > article
 
   &:not(.active)
     visibility: hidden
+    & > section
+      display: none
+
   &.active
     visibility: visible
+    & > section.active
+      display: block
 
   &.aside
     transform: translateX(ASIDE_WIDTH)
+
+  & > section
+    display: none

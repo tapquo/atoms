@@ -10,21 +10,31 @@ Event emitter which provides the pub/sub pattern to Atoms classes.
 
 Atoms.System.Layout = do (a = Atoms) ->
 
-  current = null
+  current = undefined
 
   _show = (article, section) ->
     article = a.System.Cache[a.Core.Helper.className(article)]
-    article.state("in")
-    @current.state("back-in") if @current
-    @current = article
+    @_activeSection article, section
+    if @current isnt article
+      article.state("in")
+      @current.state("back-in") if @current
+      @current = article
 
   _back = (article, section) ->
-    @current.state("out")
-    @current = a.System.Cache[a.Core.Helper.className(article)]
-    @current.state("back-out")
+    article = a.System.Cache[a.Core.Helper.className(article)]
+    @_activeSection article, section
+    if @current isnt article
+      @current.state("out")
+      @current = article
+      @current.state("back-out")
 
   _aside = ->
     @current.aside()
+
+  _activeSection: (article, section) ->
+    article.el.children("section##{section}")
+      .addClass("active")
+      .siblings().removeClass("active")
 
   show  : _show
   back  : _back

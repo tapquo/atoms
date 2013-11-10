@@ -3,7 +3,7 @@ children:
   - Organism.Header:
       children:
         - Atom.Title:
-            text: "Third"
+            text: "Second"
         - Molecule.Navigation:
             style: left
             children:
@@ -16,13 +16,3 @@ children:
               - button:
                   icon: carrot-right
                   path: third/one
-
-
-  # - Organism.Section:
-  #     id: "main"
-  #     children:
-  #       - Atom.Button:
-  #           style: fluid
-  #           icon: search
-  #           text: Find your friends
-  #           events: ["click"]

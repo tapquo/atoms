@@ -18,7 +18,7 @@ class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
 
   constructor: ->
     @default =
-      atoms: [
+      children: [
         input: type: "search", placeholder: "Type your search..."
       ,
         button: text: "Go!"

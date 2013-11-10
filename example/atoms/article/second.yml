@@ -1,25 +1,28 @@
-header:
-  atom:
-    title:
-      text: "Second"
-  molecule:
-    navigation:
-      - style: left
-        atoms:
-          - button:
-              icon: arrow_carrot-left
-              path: "back"
-      - style: right
-        atoms:
-          - button:
-              icon: arrow_carrot-right
-              path: third/section
-section:
-  atom:
-    button:
-      style  : fluid
-      # disabled: true
-      icon  : search
-      text  : Find your friends
-      events: ["click"]
+id: "second"
+children:
+  - Organism.Header:
+      children:
+        - Atom.Title:
+            text: "Third"
+        - Molecule.Navigation:
+            style: left
+            children:
+              - button:
+                  icon: carrot-left
+                  path: "back"
+        - Molecule.Navigation:
+            style: right
+            children:
+              - button:
+                  icon: carrot-right
+                  path: third/one
 
+
+  # - Organism.Section:
+  #     id: "main"
+  #     children:
+  #       - Atom.Button:
+  #           style: fluid
+  #           icon: search
+  #           text: Find your friends
+  #           events: ["click"]

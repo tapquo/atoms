@@ -15,7 +15,7 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
   areas: []
 
-  yaml = {}
+  yaml = undefined
 
   @scaffold: (url) ->
     loader = if $$? then $$ else $
@@ -30,36 +30,29 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
   constructor: (@attributes) ->
     super
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
-    yaml = {}
+    yaml = undefined
     @constructor.type = @constructor.type or "Organism"
     @render()
-    @el.attr "id", @constructor.name
-    for area in @areas
-      if @attributes[area] then @_create area, @attributes[area]
+
+    if @attributes.children then @_createChildren()
     Atoms.System.Cache[@constructor.name] = @
 
 
-  _create: (area, properties) ->
-    properties = [properties] unless Atoms.Core.Helper.isArray(properties)
+  _createChildren: ->
+    for child in @attributes.children
+      for attribute of child
+        className = attribute.split(".")
+        type = className[0]
+        className = className[1]
 
-    for property in properties
-      el = Atoms.$ "<#{area}/>"
-      @el.append el
+        classInstance = Atoms[type]?[className]
 
-      for type of property
-        for className of property[type]
-          if Atoms[Atoms.Core.Helper.className(type)][Atoms.Core.Helper.className(className)]?
-            @[className] = [] unless @[className]?
-            collection = property[type][className]
-            collection = [collection] unless Atoms.Core.Helper.isArray collection
-            @_instance area, el, type, className, collection
+        if classInstance?
+          @[className] = [] unless @[className]?
 
+          obj = child[attribute]
+          obj.parent = @el
+          instance = new classInstance obj
+          @[className].push instance
 
-
-  _instance: (area, parent, type, className, collection) ->
-    for item in collection
-      item.parent = parent
-      instance = new Atoms[Atoms.Core.Helper.className(type)][Atoms.Core.Helper.className(className)] item
-      @[className].push instance
-      if item.events?
-        @bindList instance, item.events
+          if obj.events? then @bindList instance, obj.events

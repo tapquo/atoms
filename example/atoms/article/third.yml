@@ -1,47 +1,57 @@
-header:
-  atom:
-    title:
-      text: "Third"
-  molecule:
-    navigation:
-      - style: left
-        atoms:
-          - button:
-              icon: arrow_carrot-left
-              path: "back"
+id: "section"
+children:
+  - Organism.Header:
+      children:
+        - Atom.Title:
+            text: "Third"
+        - Molecule.Navigation:
+            style: left
+            children:
+              - button:
+                  icon: carrot-left
+                  path: "back"
 
-section:
-  - atom:
-      button:
-        style  : fluid
-        # disabled: true
-        icon  : search
-        text  : Find your friends
-        events: ["click"]
-  - atom:
-      title:
-        text: two
-  - atom:
-      title:
-        text: three
-  - atom:
-      title:
-        text: four
 
-footer:
-  molecule:
-    navigation:
-      atoms:
-        - button:
-            icon: profile
-            style: active
-            path: third/0
-        - button:
-            icon: chat_alt
-            path: third/1
-        - button:
-            icon: compass_alt
-            path: third/2
-        - button:
-            icon: adjust-horiz
-            path: third/3
+  - Organism.Section:
+      id: "one"
+      class: "active"
+      children:
+        - Atom.Title:
+            text: "section.one"
+
+  - Organism.Section:
+      id: "two"
+      children:
+        - Atom.Title:
+            text: "section.two"
+
+  - Organism.Section:
+      id: "three"
+      title: "three"
+      children:
+        - Atom.Title:
+            text: "section.three"
+
+  - Organism.Section:
+      id: "four"
+      children:
+        - Atom.Title:
+            text: "section.four"
+
+  - Organism.Footer:
+      children:
+        - Molecule.Navigation:
+            children:
+              - button:
+                  icon: profile
+                  style: active
+                  path: third/one
+              - button:
+                  icon: chat_alt
+                  path: third/two
+              - button:
+                  icon: compass_alt
+                  path: third/three
+              - button:
+                  icon: adjust-horiz
+                  path: third/four

@@ -4,19 +4,26 @@ describe "Organism", ->
   Search      = undefined
   spy         = undefined
   Article     = undefined
+
+
   attributes  =
-    header:
-      molecule:
-        navigation:
-          style: "left"
-          atoms: [
-            button: icon: "edit"
-          ,
-            button: icon: "search"
-          ]
-    section:
-      atom:
-        button: icon: "ok"
+    children: [
+      "Organism.Header":
+        children: [
+          "Molecule.Navigation":
+            style: "left"
+            children: [
+              button: icon: "edit"
+            ,
+              button: icon: "search"
+            ]
+        ]
+    ,
+      "Organism.Section":
+        children: [
+          button: icon: "ok"
+        ]
+    ]
 
   beforeEach ->
     noop = spy: ->
@@ -32,10 +39,15 @@ describe "Organism", ->
 
     class Article extends Atoms.Core.Class.Organism
       @template "<article/>"
-      areas: ["header", "section", "footer"]
 
       navigationSelect: spy
       buttonClick: spy
+
+    class Atoms.Organism.Header extends Atoms.Core.Class.Organism
+      @template "<header></header>"
+
+    class Atoms.Organism.Section extends Atoms.Core.Class.Organism
+      @template "<section></section>"
 
     el = Atoms.$("<div/>").first()
     attributes.parent = el
@@ -65,9 +77,9 @@ describe "Organism", ->
   it "Instances of atoms and molecules make up the Organism", ->
     article = new Article attributes
     expect(article.el.children("header").children("nav").length > 0).toBeTruthy()
-    expect(article.navigation.length > 0).toBeTruthy()
+    # expect(article.navigation.length > 0).toBeTruthy()
     expect(article.el.children("section").children("button").length > 0).toBeTruthy()
-    expect(article.button.length > 0).toBeTruthy()
+    # expect(article.button.length > 0).toBeTruthy()
 
   it "Organism can bind to defined Atoms & Molecules events", ->
     attributes.header.molecule.navigation.events = ["select"]

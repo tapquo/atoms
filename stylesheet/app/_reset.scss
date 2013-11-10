@@ -153,8 +153,9 @@ th, td, caption {
   text-align: left;
 }
 
-@media = "all"{
-  ::-webkit-scrollbar;
+@media all{
+  ::-webkit-scrollbar {
     width: 1px;
     height: 1px;
+  }
 }

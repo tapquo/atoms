@@ -4,7 +4,7 @@ fieldset, form {
   width: 100%;
   &[molecule-search] {
     @include display-box();
-    @include box-pack(justify);
+    @include justify-content(space-between);
     & > * {
       display: inline-block;
       @include box-flex(1);

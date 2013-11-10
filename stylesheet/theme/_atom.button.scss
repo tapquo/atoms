@@ -5,7 +5,7 @@ button {
     color: #999;
     & > abbr {
       // text-transform: uppercase
-      font-weight: 300;
+      font-weight: 300; 
     }
     &:not([disabled]) {
       box-shadow: 0em -0.185rem 0em rgba(0, 0, 0, 0.1) inset;
@@ -17,7 +17,7 @@ button {
     }
     &:active {
       background-color: darken($BUTTON, 40%);
-      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset; 
     }
     &.accept {
       background-color: $ACCEPT;

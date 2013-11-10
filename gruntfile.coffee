@@ -29,27 +29,19 @@ module.exports = (grunt) ->
       spec  : [
         'spec/*.coffee'],
 
-      # Stylus
-      stylus:
-        app: [
-          'style/app/reset.styl'
-          'style/app/class.styl'
-          'style/app/atom.*.styl'
-          'style/app/molecule.*.styl'
-          'style/app/organism.*.styl'
-          'style/app/template.*.styl'
-          'style/app/system.styl'
-          'style/app/system.*.styl']
-        theme: [
-          'style/theme/reset.styl'
-          'style/theme/atom.*.styl'
-          'style/theme/molecule.*.styl'
-          'style/theme/organism.*.styl'
-          'style/theme/template.*.styl'
-          'style/theme/system.styl'
-          'style/theme/system.*.styl']
-        icons: [
-          'bower_components/atoms_icons/*.styl']
+      # Stylesheets
+      sass:
+        app:
+          files: [
+            'stylesheet/app.scss'
+            'stylesheet/app/*.scss']
+          compile: 'stylesheet/app.scss'
+
+        theme:
+          files: [
+            'stylesheet/theme.scss'
+            'stylesheet/theme/*.scss']
+          compile: 'stylesheet/theme.scss'
 
 
     concat:
@@ -81,17 +73,12 @@ module.exports = (grunt) ->
           specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
 
 
-    stylus:
+    sass:
       app:
-        options: compress: true, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.css': '<%=source.stylus.app%>'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.css': '<%=source.sass.app.compile%>'
       theme:
-        options: compress: false, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
-      icons:
-        options: compress: false
-        files: '<%=meta.bower%>_icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
-
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.sass.theme.compile%>'
+    
 
     watch:
       core:
@@ -106,23 +93,19 @@ module.exports = (grunt) ->
       example:
         files: ['<%= source.example %>']
         tasks: ['coffee:example']
-      stylus_app:
-        files: ['<%= source.stylus.app %>']
-        tasks: ['stylus:app']
-      stylus_theme:
-        files: ['<%= source.stylus.theme %>']
-        tasks: ['stylus:theme']
-      stylus_icons:
-        files: ['<%= source.stylus.icons %>']
-        tasks: ['stylus:icons']
-
+      sass_app:
+        files: ['<%= source.sass.app.files %>']
+        tasks: ['sass:app']
+      sass_theme:
+        files: ['<%= source.sass.theme.files %>']
+        tasks: ['sass:theme']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
-  grunt.loadNpmTasks 'grunt-contrib-stylus'
+  grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'jasmine', 'stylus']
+  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'jasmine', 'sass']

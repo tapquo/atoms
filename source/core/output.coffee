@@ -42,7 +42,12 @@ Atoms.Core.Output =
     @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
     # Attributes for constructor
     @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
-    Atoms.$(@attributes.parent).first()[@constructor.method] @el
+
+    if typeof(@attributes.parent) is "string" or not @attributes.parent.length?
+      @attributes.parent = Atoms.$(@attributes.parent)
+    @attributes.parent.first()[@constructor.method] @el
+    @attributes.parent = null
+    delete @attributes.parent
 
   # Private Methods
   _createIfBindings: ->

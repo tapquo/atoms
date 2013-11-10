@@ -1,4 +1,5 @@
 build
 node_modules
-scss/app/.BridgeSort
-scss/theme/.BridgeSort
+*/*/.BridgeSort
+.sass-cache/
+.grunt/

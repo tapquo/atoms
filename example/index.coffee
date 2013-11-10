@@ -102,11 +102,18 @@ Atoms.$ ->
       , 850
 
 
-  first = new First parent: document.body
+  # first = new First parent: document.body
 
 
   class Second extends Atoms.Organism.Article
     @scaffold "atoms/article/second.yml"
+
+  second = new Second parent: document.body
+
+
+  class SecondMain extends Atoms.Organism.Section
+
+    @scaffold "atoms/section/main.yml"
 
     buttonClick: ->
       modal = new Atoms.Organism.Modal
@@ -115,7 +122,7 @@ Atoms.$ ->
         text    : "lorem ipsum"
       modal.show()
 
-  second = new Second parent: document.body
+  secondMain = new SecondMain parent: second.el
 
 
   class Third extends Atoms.Organism.Article

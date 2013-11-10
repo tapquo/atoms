@@ -73,12 +73,12 @@ module.exports = (grunt) ->
     jasmine:
       pivotal:
         src: [
-          '<%=meta.build%>/<%=pkg.name%>.debug.js',
-          '<%=meta.build%>/<%=pkg.name%>.organisms.js',
-          '<%=meta.build%>/<%=pkg.name%>.templates.js']
+          '<%=meta.build%>/<%=pkg.name%>.debug.js']
         options:
           vendor: 'spec/components/jquery/jquery.min.js'
           specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
+          # outfile: 'spec.html'
+          # keepRunner: true
 
 
     stylus:

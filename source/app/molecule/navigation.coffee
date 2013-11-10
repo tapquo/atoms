@@ -1,3 +1,13 @@
+###
+Basic fieldset for search
+
+@namespace Atoms.Molecule
+@class Navigation
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
+
 class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
 
   @template """<nav class="{{style}}"></nav>"""

@@ -7,7 +7,7 @@
   z-index: 1980;
   @include display-box;
   @include box-align(center);
-  @include box-pack(center);
+  @include justify-content(center);
   &:not(.loading) > article {
     width: $MODAL_WIDTH;
     text-align: center;

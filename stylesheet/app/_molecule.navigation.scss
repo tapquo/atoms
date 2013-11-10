@@ -3,7 +3,7 @@ nav {
   body > article section &, body > article footer & {
     width: 100%;
     @include display-box;
-    @include box-pack(justify);
+    @include justify-content(space-between);
     & > button {
       @include box-flex(1);
       display: block;

@@ -24,7 +24,9 @@ module.exports = (grunt) ->
         'source/app/template/*.coffee'
         'source/app/system/*.coffee']
       example: [
-        'example/*.coffee']
+        'example/source/organism/*/*.coffee'
+        'example/source/template/*/*.coffee'
+        'example/source/*.coffee']
 
       spec  : [
         'spec/*.coffee'],
@@ -66,19 +68,20 @@ module.exports = (grunt) ->
 
 
     concat:
-      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'   : '<%= source.core %>'
-      app : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'     : '<%= source.app %>'
+      core    : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'   : '<%= source.core %>'
+      app     : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'     : '<%= source.app %>'
+      example : files: '<%=meta.build%>/<%=pkg.name%>.example.coffee' : '<%= source.example %>'
 
 
     coffee:
-      core: files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
-      app : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
-      spec: files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
-      example: files: '<%=meta.build%>/<%=pkg.name%>.example.js'  : '<%= source.example %>'
+      core    : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
+      app     : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      spec    : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
+      example : files: '<%=meta.build%>/<%=pkg.name%>.example.js'     : '<%=meta.build%>/<%=pkg.name%>.example.coffee'
 
 
     uglify:
-      options: report: "gzip", mangle: false, banner: "<%= meta.banner %>"
+      options: mangle: false, banner: "<%= meta.banner %>", # report: "gzip"
       core: files: '<%=meta.bower%>/<%=pkg.name%>.js': '<%=meta.build%>/<%=pkg.name%>.debug.js'
       app : files: '<%=meta.bower%>/<%=pkg.name%>.app.js': '<%=meta.build%>/<%=pkg.name%>.app.js'
 
@@ -125,7 +128,7 @@ module.exports = (grunt) ->
         tasks: ['concat:app', 'coffee:app']
       example:
         files: ['<%= source.example %>']
-        tasks: ['coffee:example']
+        tasks: ['concat:example', 'coffee:example']
       stylus_app:
         files: ['<%= source.stylus.app %>']
         tasks: ['stylus:app']

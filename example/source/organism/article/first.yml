@@ -1,68 +1,19 @@
-header:
-  atom:
-    title:
-      text: "#Atoms"
-  molecule:
-    navigation:
-      - style: left
-        events: ["select"]
-        atoms:
-          - button:
-              icon: menu
-              path: aside
-
-      - style: right
-        events: ["select"]
-        atoms:
-          - button:
-              icon: pencil-edit
-              path: "Second/section2"
-          - button:
-              icon: search
-
-section:
-  molecule:
-    form:
-      events: ["keyup", "keypress", "click"]
-      atoms:
-        - label:
-            text: General Info
-        - input:
-            type        : text
-            name        : name
-            placeholder : Type your name...
-            label       : Your credentials
-            required    : true
-            events      : ["keyup"] # Only subscribe for keyup
-        - input:
-            type        : password
-            name        : password
-            placeholder : Type your password...
-            events      : [] # Disabled all events
-        - label:
-            text        : Other Information
-        - input:
-            type        : email
-            name        : mail
-            placeholder : Type your mail...
-        - input:
-            type        : text
-            name        : username
-            style       : big
-            placeholder : Typer your username...
-        - input:
-            type        : number
-            name        : years
-            placeholder : Years...
-        - button:
-            text        : Save
-            icon        : ok
-            style       : accept fluid
-
-  atom:
-    button:
-      style  : fluid
-      # disabled: true
-      icon  : search
-      text  : Find your friends
-      events: ["click"]
+id: first
+children:
+  - Organism.Header:
+      children:
+        - Atom.Title:
+            text: Atoms
+        - Molecule.Navigation:
+            style: left
+            children:
+              - button:
+                  icon: menu
+                  path: aside
+        - Molecule.Navigation:
+            style: right
+            # events: ["select"]
+            children:
+              - button:
+                  icon: pencil-edit
+                  path: "second/main"

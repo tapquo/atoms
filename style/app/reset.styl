@@ -82,6 +82,12 @@ video
   font-size: 100%
   // font-weight: normal
 
+
+*, *:before, *:after
+  margin: 0
+  padding: 0
+  box-sizing(border-box)
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section
   display: block
 
@@ -107,13 +113,9 @@ body
   -webkit-user-select: none
   -moz-user-select: moz-none
   user-select: none
-
   display-box()
 
   & *
-    box-sizing(border-box)
-    margin: 0
-    padding: 0
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 
 a

@@ -8,7 +8,7 @@ children:
             style: left
             children:
               - button:
-                  icon: carrot-left
+                  icon: back
                   path: "back"
 
 
@@ -43,15 +43,15 @@ children:
         - Molecule.Navigation:
             children:
               - button:
-                  icon: profile
+                  icon: people
                   style: active
                   path: third/one
               - button:
-                  icon: chat_alt
+                  icon: social-android
                   path: third/two
               - button:
-                  icon: compass_alt
+                  icon: coffee
                   path: third/three
               - button:
-                  icon: adjust-horiz
+                  icon: social-twitter
                   path: third/four

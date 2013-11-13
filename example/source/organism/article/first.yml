@@ -8,12 +8,12 @@ children:
             style: left
             children:
               - button:
-                  icon: menu
+                  icon: navicon
                   path: aside
         - Molecule.Navigation:
             style: right
             # events: ["select"]
             children:
               - button:
-                  icon: pencil-edit
+                  icon: forward
                   path: "second/main"

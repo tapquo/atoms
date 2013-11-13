@@ -28,14 +28,11 @@ Atoms.Url = do (a = Atoms) ->
   ###
   _path = (args...) ->
     forward = true
-    last_argument = args[args.length - 1]
-    if typeof last_argument is 'object'
-      options = args.pop()
-
     path = "/" + args.join("/")
     unless path is current_path
       path = "#" + path unless history
-      window.history.pushState {}, document.title, path.toLowerCase()
+      state = window.history.state or null
+      window.history.pushState state, document.title, path.toLowerCase()
       _change()
 
   ###
@@ -44,7 +41,8 @@ Atoms.Url = do (a = Atoms) ->
   ###
   _back = ->
     forward = false
-    window.history.back()
+    steps = if window.history.state.steps? then window.history.state.steps else 1
+    window.history.go -steps
 
   # Private
   _addRoute = (path, callback) ->

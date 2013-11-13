@@ -34,7 +34,7 @@ children:
             placeholder : Years...
         - button:
             text        : Save
-            icon        : ok
+            icon        : checkmark
             style       : accept fluid
 
   - Atom.Button:

@@ -8,11 +8,11 @@ children:
             style: left
             children:
               - button:
-                  icon: carrot-left
+                  icon: back
                   path: "back"
         - Molecule.Navigation:
             style: right
             children:
               - button:
-                  icon: carrot-right
+                  icon: forward
                   path: third/one

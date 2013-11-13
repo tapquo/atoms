@@ -2,7 +2,6 @@ class Form extends Atoms.Organism.Section
 
   @scaffold "source/organism/section/form.yml"
 
-
   formKeyup: (event) -> console.log "ku", event
 
   formKeypress: (event) -> console.log "kp", event

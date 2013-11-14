@@ -14,25 +14,25 @@ Atoms.Core.Output =
   Insert content to the end of each element in the set of matched elements.
   @method append
   ###
-  append: -> @render "append"
+  append: -> @output "append"
 
   ###
   Insert content to the beginning of each element in the set of matched elements.
   @method prepend
   ###
-  prepend: -> @render "prepend"
+  prepend: -> @output "prepend"
 
   ###
   Set the HTML contents of each element in the set of matched elements.
   @method html
   ###
-  html: -> @render "html"
+  html: -> @output "html"
 
   ###
   Render element with the instance @template and @attributes.
-  @method render
+  @method output
   ###
-  render: () ->
+  output: ->
     throw "No template defined." unless @constructor.template?
     throw "No parent assigned." unless @attributes?.parent?
 

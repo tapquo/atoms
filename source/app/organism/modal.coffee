@@ -36,8 +36,9 @@ class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
     @article = @el.children("article")
     # @TODO: Test in QuoJS
     @article.bind "webkitAnimationEnd mozAnimationEnd", @onAnimationEnd
-
     @article.find("button").bind "click", => @hide()
+    Atoms.App.Modal[@constructor.name] = @
+
 
   # Publics
   show: ->

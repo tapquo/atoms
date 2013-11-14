@@ -29,7 +29,7 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
     for key in @constructor.elements
       @attributes[key] = @[key] unless @attributes[key]?
     @render()
-    Atoms.System.Cache[@constructor.name] = @
+    Atoms.App.Template[@constructor.name] = @
 
 
   _mixAttributes: (key)->

@@ -9,6 +9,7 @@ Atoms = @Atoms =
   App       :
     Article : {}
     Modal   : {}
+    Section : {}
     Template: {}
   # DOM Handler Facade
   $: (args...) -> if $$? then $$ args... else $ args...

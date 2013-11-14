@@ -6,8 +6,11 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
   constructor: ->
     super
-    @el.bind "webkitAnimationEnd", @_onAnimationEnd
     Atoms.App.Article[@constructor.name] = @
+
+  render: ->
+    super
+    @el.bind "webkitAnimationEnd", @_onAnimationEnd
 
   in: ->
     # @TODO: Has a aside?
@@ -37,6 +40,8 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
   _onAnimationEnd: (event) =>
     state = @el.attr "data-state"
+    @trigger state
+    @trigger (if state in ["in", "back-out"] then "active" else "inactive")
     @el.removeAttr "data-state" unless state in ["aside-in"]
 
     unless state in ["in", "back-out", "aside-in", "aside-out"] then @el.removeClass "active"

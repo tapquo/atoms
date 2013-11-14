@@ -7,6 +7,7 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
   constructor: ->
     super
     @el.bind "webkitAnimationEnd", @_onAnimationEnd
+    Atoms.App.Article[@constructor.name] = @
 
   in: ->
     # @TODO: Has a aside?

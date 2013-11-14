@@ -10,9 +10,9 @@ class Form extends Atoms.Organism.Section
 
   buttonClick: (event) ->
     console.log "Atom.Button clicked"
-    Atoms.System.Cache.Loading.show()
+    Atoms.App.Modal.Loading.show()
     setTimeout ->
-      Atoms.System.Cache.Loading.hide()
+      Atoms.App.Modal.Loading.hide()
     , 850
 
 form = new Form parent: "article#first"

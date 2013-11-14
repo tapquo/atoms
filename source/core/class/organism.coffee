@@ -33,9 +33,7 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
     yaml = undefined
     @constructor.type = @constructor.type or "Organism"
     @render()
-
     if @attributes.children then @_createChildren()
-    Atoms.System.Cache[@constructor.name] = @
 
 
   _createChildren: ->

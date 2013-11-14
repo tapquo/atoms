@@ -33,6 +33,8 @@ class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
     @constructor.type = "Modal"
     @attributes.parent = document.body
     super @attributes
+    @render()
+
     @article = @el.children("article")
     # @TODO: Test in QuoJS
     @article.bind "webkitAnimationEnd mozAnimationEnd", @onAnimationEnd

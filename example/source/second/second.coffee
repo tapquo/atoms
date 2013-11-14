@@ -1,9 +1,9 @@
 class Second extends Atoms.Organism.Article
   @scaffold "source/second/second.yml"
 
-  instance: ->
+  render: ->
     super
-    new Atoms.App.Section.Main {parent: @el}, instance = true, "source/second/main.yml"
+    new Atoms.App.Section.Main {parent: @el}, "source/second/main.yml"
 
 
 second = new Second parent: document.body

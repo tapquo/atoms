@@ -1,6 +1,6 @@
-class Form extends Atoms.Organism.Section
+class Atoms.App.Section.Form extends Atoms.Organism.Section
 
-  @scaffold "source/organism/section/form.yml"
+  @scaffold "source/first/form.yml"
 
   formKeyup: (event) -> console.log "ku", event
 
@@ -14,5 +14,3 @@ class Form extends Atoms.Organism.Section
     setTimeout ->
       Atoms.App.Modal.Loading.hide()
     , 850
-
-form = new Form parent: "article#first"

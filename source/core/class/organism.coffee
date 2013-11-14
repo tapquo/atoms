@@ -13,8 +13,6 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output
 
-  areas: []
-
   yaml = undefined
 
   @scaffold: (url) ->
@@ -24,17 +22,22 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-      success : (response) -> yaml = YAML.parse(response)
+      success : (response) =>
+        yaml = YAML.parse(response)
 
 
-  constructor: (@attributes) ->
+  constructor: (@attributes, scaffold) ->
     super
+    if scaffold
+      yaml = @_getScaffold scaffold
+
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
     yaml = undefined
     @constructor.type = @constructor.type or "Organism"
-    @render()
-    if @attributes.children then @_createChildren()
 
+  render: ->
+    @output()
+    if @attributes.children then @_createChildren()
 
   _createChildren: ->
     for child in @attributes.children
@@ -44,7 +47,6 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
         className = className[1]
 
         classInstance = Atoms[type]?[className]
-
         if classInstance?
           @[className] = [] unless @[className]?
 
@@ -54,3 +56,12 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
           @[className].push instance
 
           if obj.events? then @bindList instance, obj.events
+
+  _getScaffold: (url) ->
+    loader = if $$? then $$ else $
+    scaffold = loader.ajax
+      url     : url
+      async   : false
+      dataType: "text"
+      error   : -> throw "Error loading scaffold in #{url}"
+    YAML.parse scaffold.responseText

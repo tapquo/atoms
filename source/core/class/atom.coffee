@@ -16,7 +16,7 @@ class Atoms.Core.Class.Atom extends Atoms.Core.Module
   constructor: (@attributes) ->
     super
     @constructor.type = "Atom"
-    @render()
+    @output()
 
     if @attributes.events
       for evt in @attributes.events

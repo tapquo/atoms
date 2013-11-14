@@ -23,9 +23,7 @@ module.exports = (grunt) ->
         'source/app/organism/*.coffee'
         'source/app/template/*.coffee']
       example: [
-        'example/source/organism/**/*.coffee'
-        'example/source/template/**/*.coffee'
-        'example/source/template/**/*.coffee'
+        'example/source/*/*.coffee'
         'example/source/*.coffee']
 
       spec  : [

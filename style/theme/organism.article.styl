@@ -7,14 +7,18 @@ body > article
   // vendor(animation-timing-function, steps(1, start))
   &.active
     &[data-state="in"]
+      z-index: 1
       vendor(animation-name, article-in)
     &[data-state="out"]
+      z-index: 1
       vendor(animation-name, article-in)
       vendor(animation-direction, reverse)
       vendor(animation-fill-mode, forwards)
     &[data-state="back-in"]
+      z-index: 0
       vendor(animation-name, article-out)
     &[data-state="back-out"]
+      z-index: 0
       vendor(animation-delay, 1)
       vendor(animation-name, article-out)
       vendor(animation-direction, reverse)

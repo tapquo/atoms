@@ -28,7 +28,7 @@ class Atoms.Core.Class.Template extends Atoms.Core.Module
 
     for key in @constructor.elements
       @attributes[key] = @[key] unless @attributes[key]?
-    @render()
+    @output()
     Atoms.App.Template[@constructor.name] = @
 
 

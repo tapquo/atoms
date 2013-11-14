@@ -17,7 +17,7 @@ class Atoms.Core.Class.Molecule extends Atoms.Core.Module
     super
     @default = children: [] unless @default
     @constructor.type = "Molecule"
-    @render()
+    @output()
     @chemistry()
 
 

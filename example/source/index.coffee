@@ -10,6 +10,6 @@ Atoms.$ ->
   # ------------------------------------------------------------
   # URL
   # ------------------------------------------------------------
-  # Atoms.Url.path "first", "form"
+  Atoms.Url.path "first", "form"
   # Atoms.Url.path "second", "main"
   # Atoms.Url.path "third", "second"

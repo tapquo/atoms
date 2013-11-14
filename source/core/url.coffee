@@ -99,6 +99,23 @@ Atoms.Url = do (a = Atoms) ->
 
   _onChangeArticleSection = (properties) ->
     article = a.App.Article[a.Core.Helper.className(properties.article)]
+
+    unless article.el then article.render()
+    setTimeout ->
+      unless _options.forward then _stepHistory 0
+      _activeSection article, properties.section
+      if _article isnt article
+        if _options.forward
+          _stepHistory 1
+          article.state("in")
+          _article.state("back-in") if _article
+        else
+          _article.state("out")
+          article.state("back-out")
+        _article = article
+    , 1
+
+  _X = (article, properties) ->
     unless _options.forward then _stepHistory 0
     _activeSection article, properties.section
     if _article isnt article
@@ -116,9 +133,7 @@ Atoms.Url = do (a = Atoms) ->
 
   _activeSection = (article, section) ->
     _addStepHistory()
-    article.el.children("section##{section}")
-      .addClass("active")
-      .siblings().removeClass("active")
+    article.section section
 
   _addStepHistory = ->
     state = window.history.state or steps: 0

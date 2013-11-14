@@ -8,8 +8,8 @@ class First extends Atoms.Organism.Article
       @bind "active", (event) -> console.log "active", event
       @bind "inactive", (event) -> console.log "inactive", event
 
-    instance: ->
+    render: ->
       super
-      new Atoms.App.Section.Form {parent: @el}, instance = true, "source/first/form.yml"
+      new Atoms.App.Section.Form {parent: @el}, "source/first/form.yml"
 
 first = new First parent: document.body

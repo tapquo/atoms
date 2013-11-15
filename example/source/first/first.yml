@@ -17,3 +17,18 @@ children:
               - button:
                   icon: forward
                   path: "second/main"
+
+  - Organism.Section:
+      id: list
+
+  - Organism.Footer:
+      children:
+        - Molecule.Navigation:
+            children:
+              - button:
+                  style: active
+                  icon: archive
+                  path: first/form
+              - button:
+                  icon: clipboard
+                  path: first/list

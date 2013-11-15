@@ -12,22 +12,8 @@ class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
 
   @template """
     <div data-component="modal">
-      <article>
-        <header>
-          {{#if.icon}}<span class="icon {{icon}}"></span>{{/if.icon}}
-          {{#if.title}}<h1>{{title}}</h1>{{/if.title}}
-        </header>
-        <section>{{text}}</section>
-        <footer>
-          <nav>
-            <button>Yes</button>
-            <button>No</button>
-          </nav>
-        <footer>
-      </article>
+      <article></article>
     </div>"""
-
-  areas: ["header", "section", "footer"]
 
   constructor: (@attributes={}) ->
     @constructor.type = "Modal"
@@ -38,7 +24,6 @@ class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
     @article = @el.children("article")
     # @TODO: Test in QuoJS
     @article.bind "webkitAnimationEnd mozAnimationEnd", @onAnimationEnd
-    @article.find("button").bind "click", => @hide()
     Atoms.App.Modal[@constructor.name] = @
 
 

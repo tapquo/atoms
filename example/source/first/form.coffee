@@ -9,8 +9,9 @@ class Atoms.App.Section.Form extends Atoms.Organism.Section
   formClick: (event, atom, molecule) -> console.log "value: ", molecule.value()
 
   buttonClick: (event) ->
-    console.log "Atom.Button clicked"
     Atoms.App.Modal.Loading.show()
     setTimeout ->
       Atoms.App.Modal.Loading.hide()
     , 850
+
+

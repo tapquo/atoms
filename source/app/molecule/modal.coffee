@@ -1,14 +1,14 @@
 ###
-Base class for Organism
+Base for Modals
 
-@namespace Atoms.Organism
+@namespace Atoms.Molecule
 @class Modal
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
+class Atoms.Molecule.Modal extends Atoms.Core.Class.Molecule
 
   @template """
     <div data-component="modal">
@@ -16,16 +16,12 @@ class Atoms.Organism.Modal extends Atoms.Core.Class.Organism
     </div>"""
 
   constructor: (@attributes={}) ->
-    @constructor.type = "Modal"
     @attributes.parent = document.body
     super @attributes
-    @render()
-
     @article = @el.children("article")
     # @TODO: Test in QuoJS
-    @article.bind "webkitAnimationEnd mozAnimationEnd", @onAnimationEnd
+    @article.bind "webkitAnimationEnd mozAnimationEnd AnimationEnd", @onAnimationEnd
     Atoms.App.Modal[@constructor.name] = @
-
 
   # Publics
   show: ->

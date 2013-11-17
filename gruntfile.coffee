@@ -113,17 +113,22 @@ module.exports = (grunt) ->
       theme:
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.sass.theme.compile%>'
 
+    notify:
+      core:
+        options: title: 'CoffeeScript', message: 'Core builded.'
+      app:
+        options: title: 'CoffeeScript', message: 'App builded.'
 
     watch:
       core:
         files: ['<%= source.core %>']
-        tasks: ['concat:core', 'coffee:core', 'jasmine']
+        tasks: ['concat:core', 'coffee:core', 'jasmine', 'notify:core']
       spec:
         files: ['<%= source.spec %>']
         tasks: ['coffee:spec', 'jasmine']
       app:
         files: ['<%= source.app %>']
-        tasks: ['concat:app', 'coffee:app']
+        tasks: ['concat:app', 'coffee:app', 'notify:app']
       example:
         files: ['<%= source.example %>']
         tasks: ['concat:example', 'coffee:example']
@@ -150,6 +155,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'jasmine', 'stylus', 'sass']

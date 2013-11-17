@@ -8,11 +8,11 @@ Base class for Organism
 ###
 "use strict"
 
-class Atoms.Organism.Loading extends Atoms.Organism.Modal
+class Atoms.Molecule.Loading extends Atoms.Molecule.Modal
 
   @template = """
     <div data-component="modal" class="loading">
       <article></article>
     </div>"""
 
-new Atoms.Organism.Loading()
+new Atoms.Molecule.Loading()

@@ -8,7 +8,7 @@ Base class for Organism
 ###
 "use strict"
 
-class Atoms.Organism.Confirm extends Atoms.Organism.Modal
+class Atoms.Molecule.Confirm extends Atoms.Molecule.Modal
 
   @template = """
     <div data-component="modal" class="confirm">
@@ -18,19 +18,22 @@ class Atoms.Organism.Confirm extends Atoms.Organism.Modal
           {{#if.title}}<h1>{{title}}</h1>{{/if.title}}
         </header>
         <section>{{text}}</section>
-        <footer>
-          <nav>
-            <button class="accept">{{accept}}</button>
-            <button class="cancel">{{cancel}}</button>
-          </nav>
-        <footer>
+        <footer></footer>
       </article>
     </div>"""
 
   constructor: ->
     super
-    @article.find("button").bind "click", @buttonClick
+    navigation = new Atoms.Molecule.Navigation
+      parent: @article.children("footer")
+      events: ["select"]
+      children: [
+        button: text: @attributes.accept, action: "accept"
+      ,
+        button: text: @attributes.cancel, action: "cancel"
+      ]
+    navigation.bind "select", @navigationSelect
 
-  buttonClick: (event) =>
-    @trigger Atoms.$(event.target).attr "class"
+  navigationSelect: (event, atom) =>
+    @trigger atom.action
     @hide()

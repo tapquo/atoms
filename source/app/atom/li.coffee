@@ -10,5 +10,5 @@
 
 class Atoms.Atom.Li extends Atoms.Core.Class.Atom
 
-  @template """
+  @template = """
     <li class="{{style}}">{{text}}</li>"""

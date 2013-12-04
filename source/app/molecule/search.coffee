@@ -10,7 +10,7 @@ Basic fieldset for search
 
 class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
 
-  @template """
+  @template = """
     <fieldset></fieldset>
   """
 

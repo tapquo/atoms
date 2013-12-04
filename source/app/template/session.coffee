@@ -5,7 +5,7 @@ class Atoms.Template.Session extends Atoms.Core.Class.Template
   # ---------------------------------------------------------------------------
   @attributes "title", "logo", "inputs", "buttons", "copyright"
 
-  @template """
+  @template = """
     <article id="session" atom-template="LoginSignup">
       <section>
         {{#if.logo}}<img src="{{logo}}" />{{/if.logo}}

@@ -9,7 +9,7 @@ Basic fieldset for search
 "use strict"
 
 class Atoms.Organism.Header extends Atoms.Core.Class.Organism
-  @template """
+  @template = """
     <header></header>
   """
   constructor: ->
@@ -18,7 +18,7 @@ class Atoms.Organism.Header extends Atoms.Core.Class.Organism
 
 
 class Atoms.Organism.Section extends Atoms.Core.Class.Organism
-  @template """
+  @template = """
     <section {{#if.id}}id="{{id}}"{{/if.id}}></section>
   """
   constructor: ->
@@ -27,7 +27,7 @@ class Atoms.Organism.Section extends Atoms.Core.Class.Organism
 
 
 class Atoms.Organism.Footer extends Atoms.Core.Class.Organism
-  @template """
+  @template = """
     <footer></footer>
   """
   constructor: ->

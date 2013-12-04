@@ -1,7 +1,7 @@
 
 class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
-  @template """
+  @template = """
     <article {{#if.id}}id="{{id}}"{{/if.id}} {{#if.style}}class="{{style}}"{{/if.style}}></article>"""
 
   constructor: ->

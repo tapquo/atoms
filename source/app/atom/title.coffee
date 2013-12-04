@@ -10,7 +10,7 @@
 
 class Atoms.Atom.Title extends Atoms.Core.Class.Atom
 
-  @template """
+  @template = """
     <h1>
       {{#if.image}}<img src="image" />{{/if.image}}
       {{#if.text}}{{text}}{{/if.text}}

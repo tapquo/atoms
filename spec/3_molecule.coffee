@@ -11,14 +11,13 @@ describe "Molecule", ->
     spy = noop.spy
 
     class Atoms.Atom.Button extends Atoms.Core.Class.Atom
-      @template "<button>{{text}}</button>"
+      @template = "<button>{{text}}</button>"
 
     class Atoms.Atom.Input extends Atoms.Core.Class.Atom
-      @template "<input type='{{type}}' />"
+      @template = "<input type='{{type}}' />"
 
     class Search extends Atoms.Core.Class.Molecule
-
-      @template "<fieldset/>"
+      @template = "<fieldset/>"
 
       available: ["input", "button"]
 

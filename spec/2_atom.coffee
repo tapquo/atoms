@@ -6,7 +6,7 @@ describe "Atom", ->
 
   beforeEach ->
     class Input extends Atoms.Core.Class.Atom
-      @template template
+      @template = template
       events: ["click"]
 
     el = Atoms.$("<div/>").first()
@@ -42,9 +42,8 @@ describe "Atom", ->
 
   it "can extend a atom", ->
     class InputBig extends Input
-      constructor: ->
-        @constructor.template = "<input type='{{type}}' class='big'/>"
-        super
+      @template = "<input type='{{type}}' class='big'/>"
+
     input = new Input parent: el
     inputBig = new InputBig parent: el
     expect(inputBig.constructor.__super__.constructor.name).toEqual input.constructor.name

@@ -10,7 +10,7 @@
 
 class Atoms.Atom.Input extends Atoms.Core.Class.Atom
 
-  @template """
+  @template = """
     <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" {{#if.value}}value="{{value}}"{{/if.value}} {{#required}}required{{/required}} />"""
 
   value: (value) ->

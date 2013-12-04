@@ -50,15 +50,6 @@ class Atoms.Core.Module
     cls.extend(statics) if statics
     cls
 
-  ###
-  ...
-  @method template
-  @param  {value}    String or Function
-  ###
-  @template = (value) ->
-    if value? and typeof value is "string"
-      @template = value
-
 guid = ->
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace /[xy]/g, (c) ->
     r = Math.random() * 16 | 0

@@ -31,23 +31,23 @@ describe "Organism", ->
     spy = noop.spy
 
     class Atoms.Atom.Button extends Atoms.Core.Class.Atom
-      @template "<button>{{text}}</button>"
+      @template = "<button>{{text}}</button>"
 
     class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
-      @template "<nav></nav>"
+      @template = "<nav></nav>"
       available: ["button", "link"]
 
     class Article extends Atoms.Core.Class.Organism
-      @template "<article/>"
+      @template = "<article/>"
 
       navigationSelect: spy
       buttonClick: spy
 
     class Atoms.Organism.Header extends Atoms.Core.Class.Organism
-      @template "<header></header>"
+      @template = "<header></header>"
 
     class Atoms.Organism.Section extends Atoms.Core.Class.Organism
-      @template "<section></section>"
+      @template = "<section></section>"
 
     el = Atoms.$("<div/>").first()
     attributes.parent = el

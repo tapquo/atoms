@@ -10,7 +10,7 @@ Base for Modals
 
 class Atoms.Molecule.Modal extends Atoms.Core.Class.Molecule
 
-  @template """
+  @template = """
     <div data-component="modal">
       <article></article>
     </div>"""

@@ -42,9 +42,8 @@ body > article
     background: DARK
 
 
-TRANSLATE = 110%
-OPACITY   = 0.25
-DEGREES   = -15deg
+TRANSLATE = 105%
+OPACITY   = 0.5
 
 @keyframes article-in
   0%
@@ -54,10 +53,24 @@ DEGREES   = -15deg
 
 @keyframes article-out
   0%
-    transform: translateZ(0)
+    transform: translateX(0)
   100%
-    transform: rotateY(DEGREES)
+    transform: translateX(-(TRANSLATE/5))
     opacity: OPACITY
+
+// DEGREES   = -15deg
+// @keyframes article-page-in
+//   0%
+//     transform: translateX(TRANSLATE)
+//   100%
+//     transform: translateX(0)
+
+// @keyframes article-page-out
+//   0%
+//     transform: translateZ(0)
+//   100%
+//     transform: rotateY(DEGREES)
+//     opacity: OPACITY
 
 @keyframes article-aside
   0%

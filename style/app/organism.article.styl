@@ -1,7 +1,7 @@
 body > article
   position: relative
   width: 100%
-  z-index: 1
+  z-index: 0
 
   display-box()
   backface-visibility hidden
@@ -14,11 +14,8 @@ body > article
 
   &.active
     visibility: visible
-    & > section.active
-      display: block
-
-  &.aside
-    transform: translateX(ASIDE_WIDTH)
-
-  & > section
-    display: none
+    & > section
+      &:not(.active)
+        display: none
+      &.active
+        display: block

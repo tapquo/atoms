@@ -22,8 +22,7 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
     @el.bind Atoms.Core.Constants.ANIMATION.END, @_onAnimationEnd
 
   in: ->
-    # @TODO: Has a aside?
-    @state "in"
+   @state "in"
 
   out: ->
     @state "out"
@@ -39,13 +38,13 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
   section: (id) ->
     @el.children("##{id}").addClass("active").siblings().removeClass("active")
+    @aside() if @el.attr("data-state") is "aside-in"
 
-  aside: (id) ->
+  aside: ->
     state = @el.attr("data-state")
-    if state?
-      Atoms.App.Aside[@attributes.aside].out()
-    else
-      Atoms.App.Aside[@attributes.aside].in()
+    if @attributes.aside?
+      method = (if state? then "out" else "in")
+      do Atoms.App.Aside[@attributes.aside][method]
     @el.removeAttr("data-state")
     setTimeout =>
       @state if state is "aside-in" then "aside-out" else "aside-in"
@@ -54,7 +53,10 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
   _onAnimationEnd: (event) =>
     state = @el.attr "data-state"
     @trigger state
-    @trigger (if state in ["in", "back-out"] then "active" else "inactive")
+    if state in ["in", "back-out"]
+      @trigger "active"
+    else if state in ["out", "back-in"]
+      @trigger "inactive"
     @el.removeAttr "data-state" unless state in ["aside-in"]
 
     unless state in ["in", "back-out", "aside-in", "aside-out"] then @el.removeClass "active"

@@ -1,31 +1,32 @@
-header:
-  atom:
-    title:
-      text: "#Atoms"
-  molecule:
-    navigation:
-      - style: right
-        events: ["select"]
-        atoms:
-          - button:
-              icon: cog
+id: options
+children:
+  - Organism.Header:
+      children:
+        - Atom.Title:
+            text: Options
+        - Molecule.Navigation:
+            style: right
+            children:
+              - button:
+                  icon: navicon
+                  path: "second/main"
 
-
-section:
-  molecule:
-    navigation:
-      events: ["select"]
-      atoms:
-        - link:
-            text        : text sample 1
-            icon        : profile
-        - link:
-            text        : text sample 2
-            icon        : cog
-        - button:
-            text: Button sample
-
-  atom:
-    button:
-      text: "Add Contact"
-      style: "fluid accept"
+  - Organism.Section:
+      id: list
+      children:
+        - Molecule.Navigation:
+            children:
+              - link:
+                  style: active
+                  icon: archive
+                  text: Sample
+                  path: first/form
+              - link:
+                  icon: clipboard
+                  text: sample 2
+                  path: first/list
+              - button:
+                  text: Button sample
+        - Atom.Button:
+            text: "Add Contact"
+            style: "fluid accept"

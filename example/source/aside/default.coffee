@@ -1,4 +1,4 @@
-class Aside extends Atoms.Organism.Aside
+class Options extends Atoms.Organism.Aside
   @scaffold "source/aside/default.yml"
 
-  # aside = new Aside parent: document.body
+aside = new Options parent: document.body

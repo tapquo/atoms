@@ -1,3 +1,12 @@
+###
+...
+
+@namespace Atoms.Organism
+@class Article
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
 
 class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
@@ -10,7 +19,7 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
   render: ->
     super
-    @el.bind "webkitAnimationEnd", @_onAnimationEnd
+    @el.bind Atoms.Core.Constants.ANIMATION.END, @_onAnimationEnd
 
   in: ->
     # @TODO: Has a aside?
@@ -33,6 +42,10 @@ class Atoms.Organism.Article extends Atoms.Core.Class.Organism
 
   aside: (id) ->
     state = @el.attr("data-state")
+    if state?
+      Atoms.App.Aside[@attributes.aside].out()
+    else
+      Atoms.App.Aside[@attributes.aside].in()
     @el.removeAttr("data-state")
     setTimeout =>
       @state if state is "aside-in" then "aside-out" else "aside-in"

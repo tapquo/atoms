@@ -8,6 +8,7 @@ Atoms = @Atoms =
   Template  : {}
   App       :
     Article : {}
+    Aside   : {}
     Modal   : {}
     Section : {}
     Template: {}

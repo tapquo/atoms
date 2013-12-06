@@ -4,9 +4,9 @@ class First extends Atoms.Organism.Article
 
     constructor: ->
       super
-      @bind "in", (event) -> console.log "in", event
-      @bind "active", (event) -> console.log "active", event
-      @bind "inactive", (event) -> console.log "inactive", event
+      # @bind "in", (event) -> console.log "in", event
+      # @bind "active", (event) -> console.log "active", event
+      # @bind "inactive", (event) -> console.log "inactive", event
 
     render: ->
       super

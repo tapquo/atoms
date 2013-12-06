@@ -115,19 +115,6 @@ Atoms.Url = do (a = Atoms) ->
         _article = article
     , 1
 
-  _X = (article, properties) ->
-    unless _options.forward then _stepHistory 0
-    _activeSection article, properties.section
-    if _article isnt article
-      if _options.forward
-        _stepHistory 1
-        article.state("in")
-        _article.state("back-in") if _article
-      else
-        _article.state("out")
-        article.state("back-out")
-      _article = article
-
   _aside = ->
     _article.aside()
 

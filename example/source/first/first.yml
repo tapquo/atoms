@@ -1,4 +1,5 @@
 id: first
+aside: Options
 children:
   - Organism.Header:
       children:

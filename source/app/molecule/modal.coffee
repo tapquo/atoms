@@ -20,7 +20,7 @@ class Atoms.Molecule.Modal extends Atoms.Core.Class.Molecule
     super @attributes
     @article = @el.children("article")
     # @TODO: Test in QuoJS
-    @article.bind "webkitAnimationEnd mozAnimationEnd AnimationEnd", @onAnimationEnd
+    @article.bind Atoms.Core.Constants.ANIMATION.END, @onAnimationEnd
     Atoms.App.Modal[@constructor.name] = @
 
   # Publics

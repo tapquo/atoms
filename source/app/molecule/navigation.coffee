@@ -33,9 +33,7 @@ class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
     @trigger "select", event, atom
 
     path = atom.attributes.path
-
     if path is "aside"
-      console.log path
       Atoms.Url.aside()
     else if path is "back"
       Atoms.Url.back()

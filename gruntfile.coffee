@@ -33,21 +33,18 @@ module.exports = (grunt) ->
       stylus:
         app: [
           'style/app/reset.styl'
-          'style/app/class.styl'
           'style/app/atom.*.styl'
           'style/app/molecule.*.styl'
           'style/app/organism.*.styl'
           'style/app/template.*.styl'
-          'style/app/system.styl'
-          'style/app/system.*.styl']
+          'style/app/app.styl']
         theme: [
           'style/theme/reset.styl'
           'style/theme/atom.*.styl'
           'style/theme/molecule.*.styl'
           'style/theme/organism.*.styl'
           'style/theme/template.*.styl'
-          'style/theme/system.styl'
-          'style/theme/system.*.styl']
+          'style/theme/app.styl']
         icons: [
           'bower_components/atoms_icons/*.styl']
 

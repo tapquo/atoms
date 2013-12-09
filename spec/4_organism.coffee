@@ -5,7 +5,6 @@ describe "Organism", ->
   spy         = undefined
   Article     = undefined
 
-
   attributes  =
     children: [
       "Organism.Header":
@@ -21,7 +20,7 @@ describe "Organism", ->
     ,
       "Organism.Section":
         children: [
-          button: icon: "ok"
+          "Atom.Button": icon: "ok"
         ]
     ]
 
@@ -60,34 +59,49 @@ describe "Organism", ->
   it "a instance of Organism needs a template and a parent", ->
     no_template = -> new do class NoTemplate extends Atoms.Core.Class.Organism
     expect(no_template).toThrow()
-    no_parent = -> new Article()
+    no_parent = -> new do Article()
     expect(no_parent).toThrow()
 
   it "can create a instance of Organism", ->
     article = new Article parent: el
     expect(article instanceof Article).toBeTruthy()
+
+  it "can render a instance of Organism", ->
+    article = new Article parent: el
+    expect(article.el).toBeFalsy()
+    article.render()
+    expect(article.el).toBeTruthy()
     expect(article.el.parent().html()).toEqual el.html()
 
   it "Instance of Organism has areas for Atoms & Molecules", ->
     article = new Article attributes
-    expect(article.el.children("header").length > 0).toBeTruthy()
-    expect(article.el.children("div").length > 0).not.toBeTruthy()
-    expect(article.el.children("footer").length > 0).not.toBeTruthy()
+    article.render()
+    expect(article.el.children("header")).toBeTruthy()
+    expect(article.Header[0]).toBeTruthy()
+    expect(article.el.children("section")).toBeTruthy()
+    expect(article.Section[0]).toBeTruthy()
+    expect(article.el.children("footer").length > 0).toBeFalsy()
+    expect(article.Footer?[0]).toBeFalsy()
 
   it "Instances of atoms and molecules make up the Organism", ->
     article = new Article attributes
-    expect(article.el.children("header").children("nav").length > 0).toBeTruthy()
+    article.render()
+    expect(article.Header[0].Navigation[0]).toBeTruthy()
+    # expect(article.el.children("header").children("nav").length > 0).toBeTruthy()
     # expect(article.navigation.length > 0).toBeTruthy()
-    expect(article.el.children("section").children("button").length > 0).toBeTruthy()
+    # expect(article.el.children("section").children("button").length > 0).toBeTruthy()
     # expect(article.button.length > 0).toBeTruthy()
 
   it "Organism can bind to defined Atoms & Molecules events", ->
-    attributes.header.molecule.navigation.events = ["select"]
+    attributes.children[0]["Organism.Header"].children[0]["Molecule.Navigation"].events = ["select"]
     article = new Article attributes
-    article.navigation[0].trigger "select"
+    article.render()
+    article.Header[0].Navigation[0].trigger "select"
     expect(spy).toHaveBeenCalled()
 
   it "Organism can't bind to defined Atoms & Molecules events", ->
     article = new Article attributes
-    article.button[0].trigger "click"
+    article.render()
+    expect(article.Section[0]).toBeTruthy()
+    article.Section[0].Button[0].trigger "click"
     expect(spy).not.toHaveBeenCalled()

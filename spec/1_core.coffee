@@ -18,16 +18,16 @@ describe "Core", ->
     expect(Atoms).toBeTruthy()
 
   it "Atom class exists", ->
-    expect(Atoms.Core.Class.Atom).toBeTruthy()
+    expect(Atoms.Class.Atom).toBeTruthy()
 
   it "Molecule class exists", ->
-    expect(Atoms.Core.Class.Molecule).toBeTruthy()
+    expect(Atoms.Class.Molecule).toBeTruthy()
 
   it "Organism class exists", ->
-    expect(Atoms.Core.Class.Organism).toBeTruthy()
+    expect(Atoms.Class.Organism).toBeTruthy()
 
   it "Template class exists", ->
-    expect(Atoms.Core.Class.Organism).toBeTruthy()
+    expect(Atoms.Class.Organism).toBeTruthy()
 
   it "can create subclasses", ->
     Atom.extend classProperty: true

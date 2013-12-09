@@ -1,14 +1,14 @@
 ###
 Base class for Organism
 
-@namespace Atoms.Core.Class
+@namespace Atoms.Class
 @class Template
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-class Atoms.Core.Class.Template extends Atoms.Core.Module
+class Atoms.Class.Template extends Atoms.Core.Module
 
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output

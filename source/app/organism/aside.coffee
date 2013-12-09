@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Organism.Aside extends Atoms.Core.Class.Organism
+class Atoms.Organism.Aside extends Atoms.Class.Organism
 
   @template = """<aside></aside>"""
 

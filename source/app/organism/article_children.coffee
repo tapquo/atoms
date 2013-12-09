@@ -8,7 +8,7 @@ Basic fieldset for search
 ###
 "use strict"
 
-class Atoms.Organism.Header extends Atoms.Core.Class.Organism
+class Atoms.Organism.Header extends Atoms.Class.Organism
   @template = """
     <header></header>
   """
@@ -17,7 +17,7 @@ class Atoms.Organism.Header extends Atoms.Core.Class.Organism
     @render()
 
 
-class Atoms.Organism.Section extends Atoms.Core.Class.Organism
+class Atoms.Organism.Section extends Atoms.Class.Organism
   @template = """
     <section {{#if.id}}id="{{id}}"{{/if.id}}></section>
   """
@@ -26,7 +26,7 @@ class Atoms.Organism.Section extends Atoms.Core.Class.Organism
     @render()
 
 
-class Atoms.Organism.Footer extends Atoms.Core.Class.Organism
+class Atoms.Organism.Footer extends Atoms.Class.Organism
   @template = """
     <footer></footer>
   """

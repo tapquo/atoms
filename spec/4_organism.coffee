@@ -29,23 +29,23 @@ describe "Organism", ->
     spyOn noop, "spy"
     spy = noop.spy
 
-    class Atoms.Atom.Button extends Atoms.Core.Class.Atom
+    class Atoms.Atom.Button extends Atoms.Class.Atom
       @template = "<button>{{text}}</button>"
 
-    class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
+    class Atoms.Molecule.Navigation extends Atoms.Class.Molecule
       @template = "<nav></nav>"
       available: ["button", "link"]
 
-    class Article extends Atoms.Core.Class.Organism
+    class Article extends Atoms.Class.Organism
       @template = "<article/>"
 
       navigationSelect: spy
       buttonClick: spy
 
-    class Atoms.Organism.Header extends Atoms.Core.Class.Organism
+    class Atoms.Organism.Header extends Atoms.Class.Organism
       @template = "<header></header>"
 
-    class Atoms.Organism.Section extends Atoms.Core.Class.Organism
+    class Atoms.Organism.Section extends Atoms.Class.Organism
       @template = "<section></section>"
 
     el = Atoms.$("<div/>").first()
@@ -53,11 +53,11 @@ describe "Organism", ->
 
 
   it "can create a new Organism extends Base", ->
-    class Organism extends Atoms.Core.Class.Organism
+    class Organism extends Atoms.Class.Organism
     expect(Organism).toBeTruthy()
 
   it "a instance of Organism needs a template and a parent", ->
-    no_template = -> new do class NoTemplate extends Atoms.Core.Class.Organism
+    no_template = -> new do class NoTemplate extends Atoms.Class.Organism
     expect(no_template).toThrow()
     no_parent = -> new do Article()
     expect(no_parent).toThrow()

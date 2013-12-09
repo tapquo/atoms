@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Organism.Article extends Atoms.Core.Class.Organism
+class Atoms.Organism.Article extends Atoms.Class.Organism
 
   @template = """
     <article {{#if.id}}id="{{id}}"{{/if.id}} {{#if.style}}class="{{style}}"{{/if.style}}></article>"""

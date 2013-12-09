@@ -8,7 +8,7 @@ Basic fieldset for search
 ###
 "use strict"
 
-class Atoms.Molecule.Search extends Atoms.Core.Class.Molecule
+class Atoms.Molecule.Search extends Atoms.Class.Molecule
 
   @template = """
     <fieldset></fieldset>

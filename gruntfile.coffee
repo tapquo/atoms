@@ -18,6 +18,7 @@ module.exports = (grunt) ->
         'source/core/*.coffee'
         'source/core/class/*.coffee']
       app: [
+        'source/app/*.coffee'
         'source/app/atom/*.coffee'
         'source/app/molecule/*.coffee'
         'source/app/organism/*.coffee'

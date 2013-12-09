@@ -8,7 +8,7 @@ Basic fieldset for search
 ###
 "use strict"
 
-class Atoms.Molecule.Form extends Atoms.Core.Class.Molecule
+class Atoms.Molecule.Form extends Atoms.Class.Molecule
 
   @template = """<form {{#if.style}}style="{{style}}"{{/if.style}}></form>"""
 

@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Atom.Label extends Atoms.Core.Class.Atom
+class Atoms.Atom.Label extends Atoms.Class.Atom
 
   @template = """
     <label {{#if.style}}class="{{style}}"{{/if.style}}>

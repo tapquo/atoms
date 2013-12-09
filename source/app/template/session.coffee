@@ -1,5 +1,5 @@
 
-class Atoms.Template.Session extends Atoms.Core.Class.Template
+class Atoms.Template.Session extends Atoms.Class.Template
 
   # Template
   # ---------------------------------------------------------------------------

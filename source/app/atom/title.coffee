@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Atom.Title extends Atoms.Core.Class.Atom
+class Atoms.Atom.Title extends Atoms.Class.Atom
 
   @template = """
     <h1>

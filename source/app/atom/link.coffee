@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Atom.Link extends Atoms.Core.Class.Atom
+class Atoms.Atom.Link extends Atoms.Class.Atom
 
   @template = """
     <a href="{{href}}" class="{{style}}">

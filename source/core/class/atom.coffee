@@ -1,14 +1,14 @@
 ###
 Base class for Atom
 
-@namespace Atoms.Core.Class
+@namespace Atoms.Class
 @class Atom
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-class Atoms.Core.Class.Atom extends Atoms.Core.Module
+class Atoms.Class.Atom extends Atoms.Core.Module
 
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output

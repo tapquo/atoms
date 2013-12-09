@@ -10,13 +10,13 @@ describe "Molecule", ->
     spyOn noop, "spy"
     spy = noop.spy
 
-    class Atoms.Atom.Button extends Atoms.Core.Class.Atom
+    class Atoms.Atom.Button extends Atoms.Class.Atom
       @template = "<button>{{text}}</button>"
 
-    class Atoms.Atom.Input extends Atoms.Core.Class.Atom
+    class Atoms.Atom.Input extends Atoms.Class.Atom
       @template = "<input type='{{type}}' />"
 
-    class Search extends Atoms.Core.Class.Molecule
+    class Search extends Atoms.Class.Molecule
       @template = "<fieldset/>"
 
       available: ["input", "button"]
@@ -41,11 +41,11 @@ describe "Molecule", ->
 
 
   it "can create a new Molecule extends Base", ->
-    class Search extends Atoms.Core.Class.Molecule
+    class Search extends Atoms.Class.Molecule
     expect(Search).toBeTruthy()
 
   it "a instance of Molecule needs a template and a parent", ->
-    no_template = -> new do class NoTemplate extends Atoms.Core.Class.Molecule
+    no_template = -> new do class NoTemplate extends Atoms.Class.Molecule
     expect(no_template).toThrow()
     no_parent = -> new Article()
     expect(no_parent).toThrow()

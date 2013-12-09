@@ -8,7 +8,7 @@ Basic fieldset for search
 ###
 "use strict"
 
-class Atoms.Molecule.Navigation extends Atoms.Core.Class.Molecule
+class Atoms.Molecule.Navigation extends Atoms.Class.Molecule
 
   @template = """<nav class="{{style}}"></nav>"""
 

@@ -5,7 +5,7 @@ describe "Atom", ->
   Input    = undefined
 
   beforeEach ->
-    class Input extends Atoms.Core.Class.Atom
+    class Input extends Atoms.Class.Atom
       @template = template
       events: ["click"]
 
@@ -13,11 +13,11 @@ describe "Atom", ->
 
 
   it "can create a new Atom extends Base", ->
-    class Button extends Atoms.Core.Class.Atom
+    class Button extends Atoms.Class.Atom
     expect(Button).toBeTruthy()
 
   it "a instance of Atom needs a template and a parent", ->
-    no_template = -> new do class NoTemplate extends Atoms.Core.Class.Atom
+    no_template = -> new do class NoTemplate extends Atoms.Class.Atom
     expect(no_template).toThrow()
 
     no_parent = -> new Input()

@@ -8,7 +8,7 @@
 ###
 "use strict"
 
-class Atoms.Atom.Input extends Atoms.Core.Class.Atom
+class Atoms.Atom.Input extends Atoms.Class.Atom
 
   @template = """
     <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="{{style}}" {{#if.value}}value="{{value}}"{{/if.value}} {{#required}}required{{/required}} />"""

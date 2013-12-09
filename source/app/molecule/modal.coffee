@@ -8,7 +8,7 @@ Base for Modals
 ###
 "use strict"
 
-class Atoms.Molecule.Modal extends Atoms.Core.Class.Molecule
+class Atoms.Molecule.Modal extends Atoms.Class.Molecule
 
   @template = """
     <div data-component="modal">

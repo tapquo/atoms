@@ -13,6 +13,7 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
   @include Atoms.Core.EventEmitter
   @include Atoms.Core.Output
 
+  #@TODO: Better if I use a instance variable. Change It!
   yaml = undefined
 
   @scaffold: (url) ->
@@ -28,8 +29,7 @@ class Atoms.Core.Class.Organism extends Atoms.Core.Module
 
   constructor: (@attributes, scaffold) ->
     super
-    if scaffold
-      yaml = @_getScaffold scaffold
+    if scaffold then yaml = @_getScaffold(scaffold)
 
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
     yaml = undefined

@@ -20,6 +20,7 @@ module.exports = (grunt) ->
         'source/quojs/source/quo.element.coffee'
         'source/quojs/source/quo.environment.coffee'
         'source/quojs/source/quo.events.coffee'
+        'source/quojs/source/quo.gestures.coffee'
         'source/quojs/source/quo.output.coffee'
         'source/quojs/source/quo.query.coffee'
         'source/core/atoms.coffee'

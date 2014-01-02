@@ -25,15 +25,15 @@ class Atoms.Molecule.Search extends Atoms.Class.Molecule
       ]
       events:
         input: ["keyup"]
-        button: ["click"]
+        button: ["touch"]
     super
-
-  buttonClick: (event, atom) =>
-    @_search event, atom
 
   inputKeyup: (event, atom) =>
     @trigger "keyup", event.keyCode
     if event.keyCode is 13 then @_search event, atom
+
+  buttonTouch: (event, atom) =>
+    @_search event, atom
 
   _search: (event, atom) ->
     value = @input[0].el.val()

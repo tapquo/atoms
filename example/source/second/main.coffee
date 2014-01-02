@@ -2,7 +2,7 @@ class Atoms.App.Section.Main extends Atoms.Organism.Section
 
   @scaffold "source/second/main.yml"
 
-  buttonClick: ->
+  buttonTouch: ->
     modal = new Atoms.Molecule.Confirm
       icon    : "search"
       title   : "Find your friends"

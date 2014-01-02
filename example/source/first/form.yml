@@ -1,7 +1,7 @@
 id: "form"
 children:
   - Molecule.Form:
-      events: ["keyup", "keypress", "click"]
+      events: ["keyup", "keypress", "submit"]
       children:
         - label:
             text: General Info
@@ -42,4 +42,4 @@ children:
       # disabled: true
       icon  : search
       text  : Find your friends
-      events: ["click"]
+      events: ["touch"]

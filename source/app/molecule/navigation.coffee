@@ -17,14 +17,14 @@ class Atoms.Molecule.Navigation extends Atoms.Class.Molecule
   constructor: ->
     @default =
       events:
-        link:   ["click"]
-        button: ["click"]
+        link:   ["touch"]
+        button: ["touch"]
     super
 
-  linkClick: (event, atom) =>
+  linkTouch: (event, atom) =>
     @_trigger event, atom
 
-  buttonClick: (event, atom) =>
+  buttonTouch: (event, atom) =>
     @_trigger event, atom
 
   _trigger: (event, atom) ->

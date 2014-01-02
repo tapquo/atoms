@@ -15,10 +15,10 @@ form = new Atoms.Molecule.Form
   ]
   # events:
   #   input: ["keyup"]
-  triggers: ["keypress", "keyup", "click"]
+  triggers: ["keypress", "keyup", "touch"]
 
 form.bind "keyup", (event) ->
   console.log "keyupped", event
 
-form.bind "click", (event) ->
-  console.log "clicked", event
+form.bind "touch", (event) ->
+  console.log "touched", event

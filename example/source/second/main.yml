@@ -4,4 +4,4 @@ children:
       style: fluid
       icon: search
       text: Find your friends
-      events: ["click"]
+      events: ["touch"]

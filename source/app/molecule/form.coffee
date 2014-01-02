@@ -18,7 +18,7 @@ class Atoms.Molecule.Form extends Atoms.Class.Molecule
     @default =
       events:
         input   : ["keyup", "keypress"]
-        button  : ["click"]
+        button  : ["touch"]
     super
 
   value: ->
@@ -32,6 +32,6 @@ class Atoms.Molecule.Form extends Atoms.Class.Molecule
   inputKeyup: (event, atom) =>
     @trigger "keyup", event.keyCode, atom
 
-  buttonClick: (event, atom) =>
+  buttonTouch: (event, atom) =>
     event.preventDefault()
-    @trigger "click", event, atom
+    @trigger "submit", event, atom

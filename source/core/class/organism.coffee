@@ -38,7 +38,6 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   _createChildren: ->
     for child in @attributes.children
-      console.log child
       for attribute of child
         className = attribute.split(".")
         type = className[0]

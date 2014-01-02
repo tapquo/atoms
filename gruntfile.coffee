@@ -14,6 +14,14 @@ module.exports = (grunt) ->
     source:
       # CoffeeScript
       core: [
+        'source/quojs/source/quo.coffee'
+        'source/quojs/source/quo.ajax.coffee'
+        'source/quojs/source/quo.css.coffee'
+        'source/quojs/source/quo.element.coffee'
+        'source/quojs/source/quo.environment.coffee'
+        'source/quojs/source/quo.events.coffee'
+        'source/quojs/source/quo.output.coffee'
+        'source/quojs/source/quo.query.coffee'
         'source/core/atoms.coffee'
         'source/core/*.coffee'
         'source/core/class/*.coffee']
@@ -26,10 +34,8 @@ module.exports = (grunt) ->
       example: [
         'example/source/*/*.coffee'
         'example/source/*.coffee']
-
       spec  : [
         'spec/*.coffee'],
-
       # Stylesheets
       stylus:
         app: [
@@ -77,9 +83,13 @@ module.exports = (grunt) ->
 
 
     uglify:
-      options: mangle: false, banner: "<%= meta.banner %>", # report: "gzip"
-      core: files: '<%=meta.bower%>/<%=pkg.name%>.js': '<%=meta.build%>/<%=pkg.name%>.debug.js'
-      app : files: '<%=meta.bower%>/<%=pkg.name%>.app.js': '<%=meta.build%>/<%=pkg.name%>.app.js'
+      options:  banner: "<%= meta.banner %>", report: "gzip"
+      core:
+        options: mangle: true
+        files: '<%=meta.bower%>/<%=pkg.name%>.js'     : '<%=meta.build%>/<%=pkg.name%>.debug.js'
+      app:
+        options: mangle: false
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.js' : '<%=meta.build%>/<%=pkg.name%>.app.js'
 
 
     jasmine:
@@ -111,22 +121,24 @@ module.exports = (grunt) ->
       theme:
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.sass.theme.compile%>'
 
+
     notify:
       core:
         options: title: 'CoffeeScript', message: 'Core builded.'
       app:
         options: title: 'CoffeeScript', message: 'App builded.'
 
+
     watch:
       core:
         files: ['<%= source.core %>']
-        tasks: ['concat:core', 'coffee:core', 'jasmine', 'notify:core']
+        tasks: ['concat:core', 'coffee:core', 'uglify:core', 'jasmine', 'notify:core']
       spec:
         files: ['<%= source.spec %>']
         tasks: ['coffee:spec', 'jasmine']
       app:
         files: ['<%= source.app %>']
-        tasks: ['concat:app', 'coffee:app', 'notify:app']
+        tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
       example:
         files: ['<%= source.example %>']
         tasks: ['concat:example', 'coffee:example']
@@ -156,4 +168,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'jasmine', 'stylus', 'sass']
+  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']

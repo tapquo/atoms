@@ -8,5 +8,5 @@
     path = bower_components/atoms_icons
     url = https://github.com/tapquo/bower-atoms-icons
 [submodule "source/quojs"]
-	path = source/quojs
-	url = https://github.com/soyjavi/QuoJS
+    path = source/quojs
+    url = https://github.com/soyjavi/QuoJS

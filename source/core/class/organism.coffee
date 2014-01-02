@@ -18,19 +18,16 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   @scaffold: (url) ->
     loader = if $$? then $$ else $
-    response = loader.ajax
+    scaffold = loader.ajax
       url     : url
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-      success : (response) =>
-        yaml = YAML.parse(response)
-
+    yaml = YAML.parse scaffold.responseText
 
   constructor: (@attributes, scaffold) ->
     super
     if scaffold then yaml = @_getScaffold(scaffold)
-
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
     yaml = undefined
     @constructor.type = @constructor.type or "Organism"
@@ -41,6 +38,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   _createChildren: ->
     for child in @attributes.children
+      console.log child
       for attribute of child
         className = attribute.split(".")
         type = className[0]
@@ -64,4 +62,4 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-    YAML.parse scaffold.responseText
+    yaml = YAML.parse scaffold.responseText

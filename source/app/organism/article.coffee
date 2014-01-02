@@ -37,7 +37,7 @@ class Atoms.Organism.Article extends Atoms.Class.Organism
     @el.addClass("active").attr("data-state", name)
 
   section: (id) ->
-    @el.children("##{id}").addClass("active").siblings().removeClass("active")
+    @el.children("##{id}").addClass("active").siblings("section").removeClass("active")
     @aside() if @el.attr("data-state") is "aside-in"
 
   aside: ->

@@ -7,6 +7,6 @@
 [submodule "bower_components/atoms_icons"]
     path = bower_components/atoms_icons
     url = https://github.com/tapquo/bower-atoms-icons
-[submodule "bower_components/quojs"]
-    path = bower_components/quojs
-    url = https://github.com/soyjavi/package-quojs
+[submodule "source/quojs"]
+	path = source/quojs
+	url = https://github.com/soyjavi/QuoJS

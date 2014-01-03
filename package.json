@@ -15,7 +15,6 @@
     "grunt-contrib-stylus": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-sass": "~0.5.0",
     "grunt-notify": "~0.2.16"
   }
 }

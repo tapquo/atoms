@@ -8,11 +8,11 @@
     path = source/quojs
     url = https://github.com/soyjavi/QuoJS
 [submodule "extensions/ide"]
-    path = extensions/ide
-    url = https://github.com/tapquo/atoms-ide
+	path = extensions/ide
+	url = https://github.com/tapquo/atoms-ide
 [submodule "extensions/app"]
-    path = extensions/app
-    url = https://github.com/tapquo/atoms-app
+	path = extensions/app
+	url = https://github.com/tapquo/atoms-app
 [submodule "extensions/icons"]
-    path = extensions/icons
-    url = https://github.com/tapquo/bower-atoms-icons
+	path = extensions/icons
+	url = https://github.com/tapquo/bower-atoms-icons

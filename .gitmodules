@@ -1,9 +1,6 @@
 [submodule "bower_components/CSSmethods"]
     path = bower_components/CSSmethods
     url = https://github.com/soyjavi/CSSmethods
-[submodule "bower_components/atoms"]
-    path = bower_components/atoms
-    url = https://github.com/tapquo/bower-atoms
 [submodule "source/quojs"]
     path = source/quojs
     url = https://github.com/soyjavi/QuoJS
@@ -16,3 +13,6 @@
 [submodule "extensions/icons"]
 	path = extensions/icons
 	url = https://github.com/tapquo/bower-atoms-icons
+[submodule "bower"]
+	path = bower
+	url = https://github.com/tapquo/bower-atoms

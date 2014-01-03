@@ -54,7 +54,7 @@ module.exports = (grunt) ->
           'style/theme/template.*.styl'
           'style/theme/app.styl']
         icons: [
-          'bower_components/atoms_icons/*.styl']
+          'extensions/icons/*.styl']
 
       sass:
         app:

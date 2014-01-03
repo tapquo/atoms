@@ -4,9 +4,6 @@
 [submodule "bower_components/atoms"]
     path = bower_components/atoms
     url = https://github.com/tapquo/bower-atoms
-[submodule "bower_components/atoms_icons"]
-    path = bower_components/atoms_icons
-    url = https://github.com/tapquo/bower-atoms-icons
 [submodule "source/quojs"]
     path = source/quojs
     url = https://github.com/soyjavi/QuoJS
@@ -14,5 +11,8 @@
     path = extensions/ide
     url = https://github.com/tapquo/atoms-ide
 [submodule "extensions/app"]
-	path = extensions/app
-	url = https://github.com/tapquo/atoms-app
+    path = extensions/app
+    url = https://github.com/tapquo/atoms-app
+[submodule "extensions/icons"]
+    path = extensions/icons
+    url = https://github.com/tapquo/bower-atoms-icons

@@ -2,13 +2,13 @@
 Event emitter which provides the pub/sub pattern to Atoms classes.
 
 @namespace Atoms.Core
-@class EventEmitter
+@class Event
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
 "use strict"
 
-Atoms.Core.EventEmitter =
+Atoms.Core.Event =
 
   bindings: null
 

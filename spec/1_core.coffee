@@ -8,7 +8,7 @@ describe "Core", ->
     Atom = Atoms.Core.Module
 
     atomEmitter = Atom.create()
-    atomEmitter.extend Atoms.Core.EventEmitter
+    atomEmitter.extend Atoms.Core.Event
     noop = spy: ->
     spyOn noop, "spy"
     spy = noop.spy

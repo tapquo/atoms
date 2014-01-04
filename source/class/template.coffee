@@ -10,7 +10,7 @@ Base class for Organism
 
 class Atoms.Class.Template extends Atoms.Core.Module
 
-  @include Atoms.Core.EventEmitter
+  @include Atoms.Core.Event
   @include Atoms.Core.Output
 
   @attributes: (@elements...) -> @

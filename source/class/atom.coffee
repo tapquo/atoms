@@ -10,7 +10,7 @@ Base class for Atom
 
 class Atoms.Class.Atom extends Atoms.Core.Module
 
-  @include Atoms.Core.EventEmitter
+  @include Atoms.Core.Event
   @include Atoms.Core.Output
 
   constructor: (@attributes) ->

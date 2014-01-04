@@ -10,7 +10,7 @@ Base class for Organism
 
 class Atoms.Class.Organism extends Atoms.Core.Module
 
-  @include Atoms.Core.EventEmitter
+  @include Atoms.Core.Event
   @include Atoms.Core.Output
 
   #@TODO: Better if I use a instance variable. Change It!

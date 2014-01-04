@@ -23,15 +23,12 @@ module.exports = (grunt) ->
         'components/quojs/source/quo.gestures.coffee'
         'components/quojs/source/quo.output.coffee'
         'components/quojs/source/quo.query.coffee'
-        'source/atoms.coffee'
         'source/*.coffee'
+        'source/core/*.coffee'
         'source/class/*.coffee']
       app: [
         'extensions/app/source/*.coffee'
-        'extensions/app/source/atom/*.coffee'
-        'extensions/app/source/molecule/*.coffee'
-        'extensions/app/source/organism/*.coffee'
-        'extensions/app/source/template/*.coffee']
+        'extensions/app/source/*/*.coffee']
       example: [
         'extensions/app/demo/source/*/*.coffee'
         'extensions/app/demo/source/*.coffee']
@@ -56,6 +53,7 @@ module.exports = (grunt) ->
         icons: [
           'extensions/icons/*.styl']
 
+
     concat:
       core    : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'   : '<%= source.core %>'
       app     : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'     : '<%= source.app %>'
@@ -64,8 +62,8 @@ module.exports = (grunt) ->
 
     coffee:
       core    : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
-      app     : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
       spec    : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
+      app     : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
       example : files: '<%=meta.build%>/<%=pkg.name%>.example.js'     : '<%=meta.build%>/<%=pkg.name%>.example.coffee'
 
 

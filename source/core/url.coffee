@@ -22,7 +22,6 @@ Atoms.Url = do (a = Atoms) ->
     history: false
     routes : {}
 
-  _article = undefined
 
   ###
   @TODO
@@ -97,44 +96,10 @@ Atoms.Url = do (a = Atoms) ->
         route.callback?.call(@, obj)
         break
 
-  _onChangeArticleSection = (properties) ->
-    article = a.App.Article[a.Core.Helper.className(properties.article)]
-
-    unless article.el then article.render()
-    setTimeout ->
-      unless _options.forward then _stepHistory 0
-      _activeSection article, properties.section
-      if _article isnt article
-        if _options.forward
-          _stepHistory 1
-          article.state("in")
-          _article.state("back-in") if _article
-        else
-          _article.state("out")
-          article.state("back-out")
-        _article = article
-    , 1
-
-  _aside = ->
-    _article.aside()
-
-  _activeSection = (article, section) ->
-    _addStepHistory()
-    article.section section
-
-  _addStepHistory = ->
-    state = window.history.state or steps: 0
-    state.steps++
-    window.history.replaceState state
-
-  _stepHistory = (value) ->
-    window.history.replaceState steps: value
-
   do ->
-    _listen "/:article/:section", _onChangeArticleSection
     Atoms.$(window).on "popstate", _onPopState
 
   path    : _path
   back    : _back
   listen  : _listen
-  aside   : _aside
+  options : _options

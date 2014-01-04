@@ -15,3 +15,6 @@ Atoms.Core.Constants =
     END   : "webkitAnimationEnd"
 
   APPEND:  "append"
+
+  EXCLUDED_IF_KEYS: ["events", "if", "parent"]
+

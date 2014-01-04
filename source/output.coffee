@@ -52,7 +52,7 @@ Atoms.Core.Output =
   # Private Methods
   _createIfBindings: ->
     @attributes.if = {}
-    for key of @attributes
+    for key of @attributes when key not in Atoms.Core.Constants.EXCLUDED_IF_KEYS
       @attributes.if[key] = true if @attributes[key]?
 
   ###

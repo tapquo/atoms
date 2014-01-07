@@ -1,8 +1,8 @@
 ###
-Constants
+Entity Namespace
 
-@namespace Atoms.Core
-@class Constants
+@namespace Atoms.Core.Class
+@class Entity
 
 @author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
 ###
@@ -14,28 +14,29 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   @records    : {}
   @attributes : []
 
-
+  # ---------------------------------------------------------------------------
+  # Static Methods
+  # ---------------------------------------------------------------------------
   @fields: (attributes...) ->
     @records    = {}
-    @attributes = attributes if attributes.length
-    @attributes or =  []
+    @attributes = attributes or []
     @unbind()
     @
 
-  # Class Methods
   @create: (attributes) ->
-    record = new @(attributes)
+    record = new @ attributes
     record.save()
 
   @exists: (uid) ->
     try
-      return @find(uid)
+      @find uid
+      true
     catch e
-      return false
+      false
 
   @find: (uid) ->
     record = @records[uid]
-    # throw new Error('Unknown record') unless record
+    throw new Error('Unknown UID record') unless record
     record.clone()
 
   @findBy: (name, value) ->
@@ -44,17 +45,19 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     # throw new Error('Unknown record')
 
   @select: (callback) ->
-    result = (record for uid, record of @records when callback(record))
-    @cloneArray(result)
+    @cloneArray (record for uid, record of @records when callback(record))
 
   @each: (callback) ->
     callback(value.clone()) for key, value of @records
 
-  @all: -> @cloneArray(@recordsValues())
+  @all: ->
+    @cloneArray(@recordsValues())
 
-  @count: -> @recordsValues().length
+  @count: ->
+    @recordsValues().length
 
-  @cloneArray: (array) -> (value.clone() for value in array)
+  @cloneArray: (array) ->
+    (value.clone() for value in array)
 
   @recordsValues: ->
     result = []
@@ -65,18 +68,22 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     #@TODO mejor lanzar eventos de que se ha eliminado el modelo no??
     @records = {}
 
+  # ---------------------------------------------------------------------------
   # Instance Methods
+  # ---------------------------------------------------------------------------
   constructor: (attributes) ->
     super
     @className = @constructor.name
     @load attributes if attributes
 
-  isNew: -> not @exists()
+  isNew: ->
+    not @exists()
 
   exists: ->
     @uid && @uid of @constructor.records
 
-  clone: -> createObject(@)
+  clone: ->
+    createObject(@)
 
   load: (attributes) ->
     for key, value of attributes
@@ -153,15 +160,9 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   clone: ->
     Object.create(@)
 
-  unbind: -> @trigger('unbind')
+  unbind: ->
+    @trigger 'unbind'
 
   trigger: (args...) ->
     args.splice(1, 0, @)
-    @constructor.trigger(args...)
-
-# Utilities & Shims
-unless typeof Object.create is 'function'
-  Object.create = (o) ->
-    Func = ->
-    Func.prototype = o
-    new Func()
+    @constructor.trigger args...

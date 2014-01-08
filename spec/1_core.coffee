@@ -29,6 +29,10 @@ describe "Core", ->
   it "Template class exists", ->
     expect(Atoms.Class.Organism).toBeTruthy()
 
+  it "can generate UID", ->
+    module = new Atoms.Core.Module()
+    expect(module.uid).toBeTruthy()
+
   it "can create subclasses", ->
     Atom.extend classProperty: true
     chemistry = Atom.create()

@@ -20,7 +20,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   @fields: (attributes...) ->
     @records    = {}
     @attributes = attributes or []
-    @unbind()
+    do @unbind
     @
 
   @create: (attributes) ->
@@ -40,9 +40,9 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     record.clone()
 
   @findBy: (name, value) ->
-    for uid, record of @records
-      return record.clone() if record[name] is value
-    # throw new Error('Unknown record')
+    for uid, record of @records when record[name] is value
+      return record.clone()
+    throw new Error 'Unknown record'
 
   @select: (callback) ->
     @cloneArray (record for uid, record of @records when callback(record))
@@ -65,7 +65,8 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     result
 
   @destroyAll: ->
-    #@TODO mejor lanzar eventos de que se ha eliminado el modelo no??
+    # @TODO: Test if remove correctly
+    # record.destroy() for uid, record of @records
     @records = {}
 
   # ---------------------------------------------------------------------------
@@ -81,9 +82,6 @@ class Atoms.Class.Entity extends Atoms.Core.Module
 
   exists: ->
     @uid && @uid of @constructor.records
-
-  clone: ->
-    createObject(@)
 
   load: (attributes) ->
     for key, value of attributes
@@ -102,63 +100,53 @@ class Atoms.Class.Entity extends Atoms.Core.Module
         result[key] = @[key]
     result
 
-  equal: (rec) ->
-    !!(rec and rec.constructor is @constructor and
-      (rec.uid and rec.uid is @uid))
+  equal: (record) ->
+    !!(record?.constructor is @constructor and record.uid is @uid)
 
-  save: () ->
+  save: ->
     error = @validate() if @validate?
     if error
-      @trigger('error', error)
-      return false
-
-    @trigger('beforeSave')
-    record = if @isNew() then @create() else @update()
-    @trigger('save')
-    record
+      @trigger 'error', error
+    else
+      @trigger 'beforeSave'
+      record = if @isNew() then @create() else @update()
+      @trigger 'save'
+      record
 
   updateAttributes: (attributes) ->
-    @load(attributes)
-    @save()
-
-  changeUID: (uid) ->
-    records = @constructor.records
-    records[uid] = records[@uid]
-    delete records[@uid]
-    @uid = uid
+    @load attributes
     @save()
 
   create: ->
-    @trigger('beforeCreate')
+    @trigger 'beforeCreate'
 
-    record = new @constructor(@attributes())
+    record = new @constructor @attributes()
     record.uid = @uid
     @constructor.records[@uid] = record
 
-    @trigger('create')
-    @trigger('change', 'create')
+    @trigger 'create'
+    @trigger 'change', 'create'
     record.clone()
 
   update: ->
-    @trigger('beforeUpdate')
+    @trigger 'beforeUpdate'
 
     records = @constructor.records
     records[@uid].load @attributes()
 
-    @trigger('update')
-    @trigger('change', 'update')
+    @trigger 'update'
+    @trigger 'change', 'update'
     records[@uid].clone()
 
   destroy: ->
-    @trigger('beforeDestroy')
+    @trigger 'beforeDestroy'
     delete @constructor.records[@uid]
-    @trigger('destroy')
-    @trigger('change', 'destroy')
+    @trigger 'destroy'
+    @trigger 'change', 'destroy'
     @unbind()
-    @
 
   clone: ->
-    Object.create(@)
+    Object.create @
 
   unbind: ->
     @trigger 'unbind'
@@ -166,3 +154,10 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   trigger: (args...) ->
     args.splice(1, 0, @)
     @constructor.trigger args...
+
+# Utilities & Shims
+unless typeof Object.create is 'function'
+  Object.create = (o) ->
+    Func = ->
+    Func.prototype = o
+    new Func()

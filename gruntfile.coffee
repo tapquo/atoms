@@ -21,6 +21,7 @@ module.exports = (grunt) ->
         'components/quojs/source/quo.environment.coffee'
         'components/quojs/source/quo.events.coffee'
         'components/quojs/source/quo.gestures.coffee'
+        'components/quojs/source/quo.gestures.*.coffee'
         'components/quojs/source/quo.output.coffee'
         'components/quojs/source/quo.query.coffee'
         'source/*.coffee'

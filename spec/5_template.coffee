@@ -1,14 +1,9 @@
-describe "Organism", ->
+describe "Template", ->
 
   el          = undefined
-  Search      = undefined
-  spy         = undefined
   Template    = undefined
 
   beforeEach ->
-    noop = spy: ->
-    spyOn noop, "spy"
-    spy = noop.spy
 
     class Template extends Atoms.Class.Template
       @attributes "title", "button"
@@ -33,9 +28,7 @@ describe "Organism", ->
   it "can create a instance of Template", ->
     template = new Template parent: el
     expect(template instanceof Template).toBeTruthy()
-    template.render()
-    expect(template.el.parent().html()).toEqual el.html()
 
-  it "Templates are shielded only be assigned attributes that exist in the base", ->
-    template = new Template parent: el
-    expect(template.constructor.elements).toEqual ["title", "button"]
+  # it "Templates are shielded only be assigned attributes that exist in the base", ->
+  #   template = new Template parent: el
+  #   expect(template.constructor.elements).toEqual ["title", "button"]

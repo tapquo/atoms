@@ -1,5 +1,5 @@
 ###
-Base class for Organism
+Base class for Template
 
 @namespace Atoms.Class
 @class Template
@@ -15,7 +15,6 @@ class Atoms.Class.Template extends Atoms.Core.Module
 
   @attributes: (@elements...) -> @
 
-
   constructor: (@attributes) ->
     super
     @constructor.type = "Template"
@@ -29,7 +28,6 @@ class Atoms.Class.Template extends Atoms.Core.Module
     for key in @constructor.elements
       @attributes[key] = @[key] unless @attributes[key]?
     @output()
-    Atoms.App.Template[@constructor.name] = @
 
 
   _mixAttributes: (key)->

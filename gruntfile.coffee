@@ -106,6 +106,9 @@ module.exports = (grunt) ->
       app:
         options: compress: true, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.app.css': '<%=source.stylus.app%>'
+      ide:
+        options: compress: true, import: [ '__init']
+        files: '<%=meta.bower%>/<%=pkg.name%>.ide.css': '<%=source.stylus.ide%>'
       theme:
         options: compress: false, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
@@ -131,6 +134,9 @@ module.exports = (grunt) ->
       app:
         files: ['<%= source.app %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
+      ide:
+        files: ['<%= source.ide %>']
+        tasks: ['concat:ide', 'coffee:ide', 'uglify:ide', 'notify:ide']
       stylus_app:
         files: ['<%= source.stylus.app %>']
         tasks: ['stylus:app']

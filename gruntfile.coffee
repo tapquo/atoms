@@ -31,8 +31,9 @@ module.exports = (grunt) ->
         'extensions/app/source/*.coffee'
         'extensions/app/source/*/*.coffee']
       ide: [
-        'extensions/ide/source/*.coffee'
-        'extensions/ide/source/*/*.coffee']
+        'extensions/ide/source/namespace.coffee'
+        'extensions/ide/source/*/*.coffee'
+        'extensions/ide/source/ide.coffee']
       spec  : [
         'spec/*.coffee']
       example:
@@ -128,6 +129,8 @@ module.exports = (grunt) ->
         options: title: 'CoffeeScript', message: 'Core builded.'
       app:
         options: title: 'CoffeeScript', message: 'App builded.'
+      ide:
+        options: title: 'CoffeeScript', message: 'IDE builded.'
 
 
     watch:

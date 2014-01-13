@@ -1,0 +1,35 @@
+id: first
+aside: Options
+children:
+  - Organism.Header:
+      children:
+        - Atom.Title:
+            text: Atoms
+        - Molecule.Navigation:
+            style: left
+            children:
+              - button:
+                  icon: navicon
+                  path: aside
+        - Molecule.Navigation:
+            style: right
+            # events: ["select"]
+            children:
+              - button:
+                  icon: forward
+                  path: "second/main"
+
+  - Organism.Section:
+      id: list
+
+  - Organism.Footer:
+      children:
+        - Molecule.Navigation:
+            children:
+              - button:
+                  style: active
+                  icon: archive
+                  path: first/form
+              - button:
+                  icon: clipboard
+                  path: first/list

@@ -30,11 +30,19 @@ module.exports = (grunt) ->
       app: [
         'extensions/app/source/*.coffee'
         'extensions/app/source/*/*.coffee']
-      example: [
-        'extensions/app/demo/source/*/*.coffee'
-        'extensions/app/demo/source/*.coffee']
+      ide: [
+        'extensions/ide/source/*.coffee'
+        'extensions/ide/source/*/*.coffee']
       spec  : [
-        'spec/*.coffee'],
+        'spec/*.coffee']
+      example:
+          app: [
+            'examples/app/source/*/*.coffee'
+            'examples/app/source/*.coffee']
+          ide: [
+            'examples/ide/source/*/*.coffee'
+            'examples/ide/source/*.coffee']
+
       # Stylesheets
       stylus:
         app: [
@@ -56,16 +64,20 @@ module.exports = (grunt) ->
 
 
     concat:
-      core    : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'   : '<%= source.core %>'
-      app     : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'     : '<%= source.app %>'
-      example : files: '<%=meta.build%>/<%=pkg.name%>.example.coffee' : '<%= source.example %>'
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'       : '<%= source.core %>'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'         : '<%= source.app %>'
+      ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.coffee'         : '<%= source.ide %>'
+      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee' : '<%= source.example.app %>'
+      example_ide : files: '<%=meta.build%>/<%=pkg.name%>.example.ide.coffee' : '<%= source.example.ide %>'
 
 
     coffee:
-      core    : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
-      spec    : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
-      app     : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
-      example : files: '<%=meta.build%>/<%=pkg.name%>.example.js'     : '<%=meta.build%>/<%=pkg.name%>.example.coffee'
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
+      spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.js'         : '<%=meta.build%>/<%=pkg.name%>.ide.coffee'
+      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js' : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
+      example_ide : files: '<%=meta.build%>/<%=pkg.name%>.example.ide.js' : '<%=meta.build%>/<%=pkg.name%>.example.ide.coffee'
 
 
     uglify:
@@ -76,6 +88,9 @@ module.exports = (grunt) ->
       app:
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.app.js' : '<%=meta.build%>/<%=pkg.name%>.app.js'
+      ide:
+        options: mangle: false
+        files: '<%=meta.bower%>/<%=pkg.name%>.ide.js' : '<%=meta.build%>/<%=pkg.name%>.ide.js'
 
 
     jasmine:
@@ -116,9 +131,6 @@ module.exports = (grunt) ->
       app:
         files: ['<%= source.app %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
-      example:
-        files: ['<%= source.example %>']
-        tasks: ['concat:example', 'coffee:example']
       stylus_app:
         files: ['<%= source.stylus.app %>']
         tasks: ['stylus:app']
@@ -128,6 +140,13 @@ module.exports = (grunt) ->
       stylus_icons:
         files: ['<%= source.stylus.icons %>']
         tasks: ['stylus:icons']
+      example_app:
+        files: ['<%= source.example.app %>']
+        tasks: ['concat:example_app', 'coffee:example_app']
+      example_ide:
+        files: ['<%= source.example.ide %>']
+        tasks: ['concat:example_ide', 'coffee:example_ide']
+
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'
@@ -137,5 +156,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+
 
   grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']

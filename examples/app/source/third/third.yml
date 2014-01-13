@@ -1,0 +1,57 @@
+id: "section"
+children:
+  - Organism.Header:
+      children:
+        - Atom.Title:
+            text: "Third"
+        - Molecule.Navigation:
+            style: left
+            children:
+              - button:
+                  icon: back
+                  path: "back"
+
+
+  - Organism.Section:
+      id: "one"
+      class: "active"
+      children:
+        - Atom.Title:
+            text: "section.one"
+
+  - Organism.Section:
+      id: "two"
+      children:
+        - Atom.Title:
+            text: "section.two"
+
+  - Organism.Section:
+      id: "three"
+      title: "three"
+      children:
+        - Atom.Title:
+            text: "section.three"
+
+  - Organism.Section:
+      id: "four"
+      children:
+        - Atom.Title:
+            text: "section.four"
+
+  - Organism.Footer:
+      children:
+        - Molecule.Navigation:
+            children:
+              - button:
+                  icon: people
+                  style: active
+                  path: third/one
+              - button:
+                  icon: social-android
+                  path: third/two
+              - button:
+                  icon: coffee
+                  path: third/three
+              - button:
+                  icon: social-twitter
+                  path: third/four

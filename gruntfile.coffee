@@ -52,6 +52,12 @@ module.exports = (grunt) ->
           'extensions/app/style/organism.*.styl'
           'extensions/app/style/template.*.styl'
           'extensions/app/style/app.styl']
+        ide: [
+          'extensions/ide/style/reset.styl'
+          'extensions/ide/style/atom.*.styl'
+          'extensions/ide/style/molecule.*.styl'
+          'extensions/ide/style/organism.*.styl'
+          'extensions/ide/style/ide.styl']
         theme: [
           'extensions/app/style/theme/reset.styl'
           'extensions/app/style/theme/atom.*.styl'
@@ -140,6 +146,9 @@ module.exports = (grunt) ->
       stylus_app:
         files: ['<%= source.stylus.app %>']
         tasks: ['stylus:app']
+      stylus_ide:
+        files: ['<%= source.stylus.ide %>']
+        tasks: ['stylus:ide']
       stylus_theme:
         files: ['<%= source.stylus.theme %>']
         tasks: ['stylus:theme']

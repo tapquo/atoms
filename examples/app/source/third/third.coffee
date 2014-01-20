@@ -4,4 +4,4 @@ class Third extends Atoms.Organism.Article
   constructor: ->
     super
 
-third = new Third parent: document.body
+third = new Third()

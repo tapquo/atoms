@@ -11,9 +11,11 @@ class First extends Atoms.Organism.Article
 
   render: ->
     super
-    new Atoms.App.Section.Form {parent: @el}, "source/first/form.yml"
+    new Atoms.App.Section.Form {klass: @}, "source/first/form.yml"
 
   _log: (method, event) -> console.log "article > #{method}", event
 
+  event_form_submit: (event, form, hierarchy...) ->
+    console.info "event_form_submit", form.value()
 
-first = new First parent: document.body
+first = new First()

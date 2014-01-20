@@ -38,5 +38,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     attributes.events = attributes.events or @attributes.events?[key] or @default.events?[key] or []
 
     instance = new Atoms.Atom[className] attributes
+    instance.parentClass = @
     if attributes.events.length > 0 then @bindList instance, attributes.events
     instance

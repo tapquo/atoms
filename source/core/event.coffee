@@ -54,6 +54,26 @@ Atoms.Core.Event =
       break if event.apply(@, args) is false
 
   ###
+  @TODO: Comment method
+  @method bubble
+  @param  {string}    A string containing one or more event/custom types.
+  @param  {array}     [OPTIONAL] Additional parameters to pass along to the event
+                      handler.
+  ###
+  bubble: (event, args...) ->
+    if @parentClass
+      if args.length is 1
+        callbackName = "event_#{@constructor.name}_#{event}"
+      else
+        callbackName = "event_#{args[1].constructor.name}_#{event}"
+
+      args.push @
+      # Dispatch event to parentClass
+      @parentClass[callbackName.toLowerCase()]?.apply(@parentClass, args)
+      # Bubble event
+      @parentClass.bubble.apply @parentClass, [event].concat(args)
+
+  ###
   Attach a handler to a list of a events for the class.
   @method bindList
   @param  {DOM}       Element in DOM.

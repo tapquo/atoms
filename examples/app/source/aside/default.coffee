@@ -8,4 +8,4 @@ class Options extends Atoms.Organism.Aside
 
   _log: (method, event) -> console.log "aside > #{method}", event
 
-aside = new Options parent: document.body
+aside = new Options()

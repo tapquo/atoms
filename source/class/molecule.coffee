@@ -15,11 +15,11 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
+    @childrenClass = []
     @default = children: [] unless @default
     @constructor.type = "Molecule"
     @output()
     @chemistry()
-
 
   chemistry: (elements) ->
     children = @attributes.children or @default.children

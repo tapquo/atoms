@@ -29,7 +29,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
         if Atoms.Atom[className]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
           instance = @_atomInstance key, className, attributes
-          @childrenClass.push = instance
+          @childrenClass.push instance
           # @[key] = [] unless @[key]?
           # @[key].push instance
 

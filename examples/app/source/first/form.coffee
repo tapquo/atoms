@@ -5,19 +5,22 @@ class Atoms.App.Section.Form extends Atoms.Organism.Section
   formKeyup: (event) ->
     console.log "ku", event
 
-  event_input_keyup: (event) ->
-    @tunnel "va", data: "mi data"
-
   formKeypress: (event) ->
     console.log "kp", event
 
-  formSubmit: (event, atom, molecule) ->
-    console.log "value: ", molecule.value()
+  formSubmit: (event, args...) ->
+    form = args[1]
+    console.log "value: ", form.value()
 
-  buttonTouch: (event) ->
+  buttonTouch: (event) => @_modalShow()
+  button2Touch: (event) => @_modalShow()
+
+  event_input_keyup: (event) ->
+    @tunnel "va", data: "mi data"
+
+  _modalShow: () ->
     Atoms.App.Modal.Loading.show()
     setTimeout ->
       Atoms.App.Modal.Loading.hide()
     , 850
-
 

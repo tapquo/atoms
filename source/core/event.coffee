@@ -81,17 +81,18 @@ Atoms.Core.Event =
                       handler.
   ###
   tunnel: (event, args...) ->
-    for child in @childrenClass
+    if @childrenClass?.length > 0
       if args.length is 1
         callbackName = "event_#{@constructor.name}_#{event}"
       else
         callbackName = "event_#{args[1].constructor.name}_#{event}"
 
       args.push @
-      # Dispatch event to parentClass
-      child[callbackName.toLowerCase()]?.apply(child, args)
-      # Tunnel event
-      child.tunnel.apply child, [event].concat(args)
+      for child in @childrenClass
+        # Dispatch event to child
+        child[callbackName.toLowerCase()]?.apply(child, args)
+        # Tunnel event
+        child.tunnel.apply child, [event].concat(args)
 
   ###
   Attach a handler to a list of a events for the class.

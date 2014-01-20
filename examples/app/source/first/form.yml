@@ -47,7 +47,7 @@ children:
             icon        : checkmark
             style       : accept fluid
 
-  - Atom.Button:
+  - Atom.Button2:
       style  : fluid
       # disabled: true
       icon  : search

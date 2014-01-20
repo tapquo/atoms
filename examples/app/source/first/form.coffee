@@ -5,6 +5,9 @@ class Atoms.App.Section.Form extends Atoms.Organism.Section
   formKeyup: (event) ->
     console.log "ku", event
 
+  event_input_keyup: (event) ->
+    @tunnel "va", data: "mi data"
+
   formKeypress: (event) ->
     console.log "kp", event
 

@@ -28,9 +28,10 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
         className = Atoms.Core.Helper.className(key)
         if Atoms.Atom[className]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
-
-          @[key] = [] unless @[key]?
-          @[key].push @_atomInstance key, className, attributes
+          instance = @_atomInstance key, className, attributes
+          @childrenClass.push = instance
+          # @[key] = [] unless @[key]?
+          # @[key].push instance
 
 
   _atomInstance: (key, className, attributes) ->

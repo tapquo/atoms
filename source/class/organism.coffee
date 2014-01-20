@@ -52,7 +52,8 @@ class Atoms.Class.Organism extends Atoms.Core.Module
           obj.parent = @el
           instance = new classInstance obj
           instance.parentClass = @
-          @[className].push instance
+          @childrenClass.push instance
+          # @[className].push instance
 
           if obj.events? then @bindList instance, obj.events
 

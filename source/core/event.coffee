@@ -68,4 +68,4 @@ Atoms.Core.Event =
 
   # Private Methods
   _parseName: (event) ->
-    ("#{@constructor.type}_#{@constructor.name}_#{event}").toLowerCase()
+    ("#{@constructor.type}:#{@constructor.name}:#{event}").toLowerCase()

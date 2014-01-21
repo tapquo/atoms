@@ -15,12 +15,12 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
+    @childrenClass = []
     @default = children: [] unless @default
     @constructor.type = "Molecule"
     do @instance
     do @output
     do @chemistry
-
 
   chemistry: (elements) ->
     children = @attributes.children or @default.children
@@ -29,9 +29,10 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
         className = key.toClassName()
         if Atoms.Atom[className]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
-
+          instance = @_atomInstance key, className, attributes
+          @childrenClass.push instance
           @[key] = [] unless @[key]?
-          @[key].push @_atomInstance key, className, attributes
+          @[key].push instance
 
 
   _atomInstance: (key, className, attributes) ->

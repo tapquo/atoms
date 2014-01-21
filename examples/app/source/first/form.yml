@@ -49,6 +49,13 @@ children:
 
   - Atom.Button:
       style  : fluid
+      disabled: true
+      icon  : search
+      text  : Find your friends
+      events: ["touch"]
+
+  - Atom.Button2:
+      style  : fluid
       # disabled: true
       icon  : search
       text  : Find your friends

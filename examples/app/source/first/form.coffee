@@ -8,16 +8,17 @@ class Atoms.App.Section.Form extends Atoms.Organism.Section
   formKeypress: (event) ->
     console.log "kp", event
 
-  formSubmit: (event, atom, molecule) ->
-    console.log "value: ", molecule.value()
+  formSubmit: (event, args...) ->
+    form = args[1]
+    console.log "value: ", form.value()
 
   bubbleFormSubmit: (event, form, hierarchy...) ->
     console.info "<section> bubbleFormSubmit", form.value()
+    # @tunnel "va", data: "mi data"
 
-  buttonTouch: (event) ->
+  _modalShow: () ->
     Atoms.App.Modal.Loading.show()
     setTimeout ->
       Atoms.App.Modal.Loading.hide()
     , 850
-
 

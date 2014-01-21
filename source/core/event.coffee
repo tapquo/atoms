@@ -72,6 +72,27 @@ Atoms.Core.Event =
       @parent.bubble.apply @parent, [event].concat(args)
 
   ###
+  @TODO: Comment method
+  @method tunnel
+  @param  {string}    A string containing one or more event/custom types.
+  @param  {array}     [OPTIONAL] Additional parameters to pass along to the event
+                      handler.
+  ###
+  tunnel: (event, args...) ->
+    if @childrenClass?.length > 0
+      if args.length is 1
+        callbackName = "event_#{@constructor.name}_#{event}"
+      else
+        callbackName = "event_#{args[1].constructor.name}_#{event}"
+
+      args.push @
+      for child in @childrenClass
+        # Dispatch event to child
+        child[callbackName.toLowerCase()]?.apply(child, args)
+        # Tunnel event
+        child.tunnel.apply child, [event].concat(args)
+
+  ###
   Attach a handler to a list of a events for the class.
   @method bindList
   @param  {DOM}       Element in DOM.

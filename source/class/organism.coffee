@@ -27,6 +27,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   constructor: (@attributes, scaffold) ->
     super
+    @childrenClass = []
     if scaffold then yaml = @_getScaffold(scaffold)
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
     yaml = undefined
@@ -51,6 +52,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
           attributes = child[attribute]
           attributes.parent = @
           instance = new classInstance attributes
+          @childrenClass.push instance
           @[className].push instance
 
           if attributes.events? then @bindList instance, attributes.events

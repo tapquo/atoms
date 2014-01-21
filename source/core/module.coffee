@@ -12,7 +12,8 @@ MODULE_KEYWORDS = ['included', 'extended']
 
 class Atoms.Core.Module
 
-  constructor: -> @uid = guid()
+  constructor: ->
+    @uid = _guid()
 
   ###
   Extends the contents of an object onto the class to provide new static methods.
@@ -50,7 +51,7 @@ class Atoms.Core.Module
     cls.extend(statics) if statics
     cls
 
-guid = ->
+_guid = ->
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace /[xy]/g, (c) ->
     r = Math.random() * 16 | 0
     v = if c is 'x' then r else r & 3 | 8

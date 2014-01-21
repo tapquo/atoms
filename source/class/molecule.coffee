@@ -17,8 +17,9 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     super
     @default = children: [] unless @default
     @constructor.type = "Molecule"
-    @output()
-    @chemistry()
+    do @instance
+    do @output
+    do @chemistry
 
 
   chemistry: (elements) ->

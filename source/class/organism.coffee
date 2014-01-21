@@ -33,6 +33,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
     @constructor.type = @constructor.type or "Organism"
 
   render: ->
+    do @instance
     do @output
     if @attributes.children then @_createChildren()
 

@@ -28,6 +28,13 @@ Atoms.Core.Output =
   ###
   html: -> @output "html"
 
+  instance: ->
+    @parent = {}
+    if @attributes?.parent?
+      @parent = @attributes.parent
+      delete @attributes.parent
+    @parent.el = @parent.el or document.body
+
   ###
   Render element with the instance @template and @attributes.
   @method output
@@ -49,8 +56,8 @@ Atoms.Core.Output =
 
   # Private Methods
   _createIfBindings: ->
-    @attributes.if = {}
     for key of @attributes when key not in Atoms.Core.Constants.EXCLUDED_IF_KEYS
+      @attributes.if = {} unless @attributes.if
       @attributes.if[key] = true if @attributes[key]?
 
 ###

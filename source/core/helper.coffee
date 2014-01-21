@@ -31,14 +31,6 @@ Atoms.Core.Helper = do ->
     clone
 
   ###
-  Capitalize first letter of a String
-  @method className
-  @param  {string}    String to capitalize.
-  @return {string}    String capitalizated.
-  ###
-  className = (string) -> string.charAt(0).toUpperCase() + string.slice(1)
-
-  ###
   Test if a given value it's a array type.
   @method isArray
   @param  {value}     Value to test.
@@ -65,5 +57,12 @@ Atoms.Core.Helper = do ->
     newInstance
 
   mix       : mix
-  className : className
   isArray   : isArray
+
+###
+String prototype: capitalize first letter of a String
+@method className
+@return {string}    String capitalizated.
+###
+String.prototype.toClassName = ->
+  @charAt(0).toUpperCase() + @slice(1)

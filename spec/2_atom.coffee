@@ -24,31 +24,36 @@ describe "Atom", ->
     expect(no_parent).toThrow()
 
   it "can create a instance of Atom", ->
-    input = new Input parent: el
+    input = new Input parent: el: el
     expect(input instanceof Input).toBeTruthy()
     expect(input.el.parent().html()).toEqual el.html()
 
   it "can set a QuerySelectorAll parent", ->
-    input = new Input parent: query = "<header></header>"
+    input = new Input parent: el: query = "<header></header>"
     expect(input.el.parent()[0].nodeType).toEqual Atoms.$(query)[0].nodeType
 
   it "can set attributes in a new Instance of Atom", ->
-    input = new Input parent: el, type: "text"
+    input = new Input
+      parent: el: el
+      type  : "text"
     expect(input.el[0].outerHTML).toEqual '<input type="text" data-atom="input">'
 
   it "can set a different method to render a instance of Atom in parent", ->
-    input = new Input parent: el, type: "text", method: "prepend"
+    input = new Input
+      parent: el: el
+      type  : "text"
+      method: "prepend"
     expect(input.el[0].outerHTML).toEqual '<input type="text" data-atom="input">'
 
   it "can extend a atom", ->
     class InputBig extends Input
       @template = "<input type='{{type}}' class='big'/>"
 
-    input = new Input parent: el
-    inputBig = new InputBig parent: el
+    input = new Input parent: el: el
+    inputBig = new InputBig parent: el: el
     expect(inputBig.constructor.__super__.constructor.name).toEqual input.constructor.name
 
   it "should bind to a assigned events", ->
-    input = new Input parent: el
+    input = new Input parent: el: el
     expect("click" in input.events).toBeTruthy()
     expect("tap" in input.events).not.toBeTruthy()

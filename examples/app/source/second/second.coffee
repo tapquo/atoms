@@ -3,6 +3,6 @@ class Second extends Atoms.Organism.Article
 
   render: ->
     super
-    new Atoms.App.Section.Main {klass: @}, "source/second/main.yml"
+    new Atoms.App.Section.Main {parent: @}, "source/second/main.yml"
 
 second = new Second()

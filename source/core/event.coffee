@@ -61,17 +61,15 @@ Atoms.Core.Event =
                       handler.
   ###
   bubble: (event, args...) ->
-    if @parentClass
-      if args.length is 1
-        callbackName = "event_#{@constructor.name}_#{event}"
-      else
-        callbackName = "event_#{args[1].constructor.name}_#{event}"
+    if @parent?.uid?
+      constructor = if args.length is 1 then @constructor else args[1].constructor
+      callbackName = "bubble#{constructor.name.toClassName()}#{event.toClassName()}"
 
       args.push @
-      # Dispatch event to parentClass
-      @parentClass[callbackName.toLowerCase()]?.apply(@parentClass, args)
+      # Dispatch event to parent
+      @parent[callbackName]?.apply(@parent, args)
       # Bubble event
-      @parentClass.bubble.apply @parentClass, [event].concat(args)
+      @parent.bubble.apply @parent, [event].concat(args)
 
   ###
   Attach a handler to a list of a events for the class.
@@ -83,7 +81,7 @@ Atoms.Core.Event =
   bindList: (instance, events) ->
     class_lower = instance.constructor.name.toLowerCase()
     for event in events
-      callback_name = "#{class_lower}#{Atoms.Core.Helper.className(event)}"
+      callback_name = "#{class_lower}#{event.toClassName()}"
       instance.bind event, @[callback_name]
 
   # Private Methods

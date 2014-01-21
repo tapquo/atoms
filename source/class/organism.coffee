@@ -47,13 +47,12 @@ class Atoms.Class.Organism extends Atoms.Core.Module
         if classInstance?
           @[className] = [] unless @[className]?
 
-          obj = child[attribute]
-          obj.parent = @el
-          instance = new classInstance obj
-          instance.parentClass = @
+          attributes = child[attribute]
+          attributes.parent = @
+          instance = new classInstance attributes
           @[className].push instance
 
-          if obj.events? then @bindList instance, obj.events
+          if attributes.events? then @bindList instance, attributes.events
 
   _getScaffold: (url) ->
     loader = if $$? then $$ else $

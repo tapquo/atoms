@@ -1,5 +1,5 @@
 form = new Atoms.Molecule.Form
-  parent: "article section"
+  parent: el: "article section"
   atoms : [
     label: text: "prueba"
   ,

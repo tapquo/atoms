@@ -11,6 +11,9 @@ class Atoms.App.Section.Form extends Atoms.Organism.Section
   formSubmit: (event, atom, molecule) ->
     console.log "value: ", molecule.value()
 
+  bubbleFormSubmit: (event, form, hierarchy...) ->
+    console.info "<section> bubbleFormSubmit", form.value()
+
   buttonTouch: (event) ->
     Atoms.App.Modal.Loading.show()
     setTimeout ->

@@ -51,23 +51,23 @@ describe "Molecule", ->
     expect(no_parent).toThrow()
 
   it "can create a instance of Molecule", ->
-    search = new Search parent: el
+    search = new Search parent: el: el
     expect(search instanceof Search).toBeTruthy()
     expect(search.el.parent().html()).toEqual el.html()
 
   it "Instances of Atoms make up the Molecule", ->
-    search = new Search parent: el
+    search = new Search parent: el: el
     expect(search.el.children("input")).toBeTruthy()
     expect(search.input.length > 0).toBeTruthy()
     expect(search.el.children("button")).toBeTruthy()
     expect(search.button.length > 0).toBeTruthy()
 
   it "Molecule can bind to defined Atoms events", ->
-    search = new Search parent: el
+    search = new Search parent: el: el
     search.button[0].trigger "click"
     expect(spy).toHaveBeenCalled()
 
   it "Molecule can't bind to undefined Atoms events", ->
-    search = new Search parent: el
+    search = new Search parent: el: el
     search.button[0].trigger "dblClick"
     expect(spy).not.toHaveBeenCalled()

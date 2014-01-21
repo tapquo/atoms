@@ -49,7 +49,7 @@ describe "Organism", ->
       @template = "<section></section>"
 
     el = Atoms.$("<div/>").first()
-    attributes.parent = el
+    attributes.el = el
 
 
   it "can create a new Organism extends Base", ->
@@ -63,11 +63,11 @@ describe "Organism", ->
     expect(no_parent).toThrow()
 
   it "can create a instance of Organism", ->
-    article = new Article parent: el
+    article = new Article parent: el: el
     expect(article instanceof Article).toBeTruthy()
 
   it "can render a instance of Organism", ->
-    article = new Article parent: el
+    article = new Article parent: el: el
     expect(article.el).toBeFalsy()
     article.render()
     expect(article.el).toBeTruthy()

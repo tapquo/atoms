@@ -25,7 +25,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     children = @attributes.children or @default.children
     for atom, index in children
       for key of atom when @available.indexOf(key) > -1
-        className = Atoms.Core.Helper.className(key)
+        className = key.toClassName()
         if Atoms.Atom[className]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
 
@@ -34,10 +34,9 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
 
   _atomInstance: (key, className, attributes) ->
-    attributes.parent = @el
+    attributes.parent = @
     attributes.events = attributes.events or @attributes.events?[key] or @default.events?[key] or []
 
     instance = new Atoms.Atom[className] attributes
-    instance.parentClass = @
     if attributes.events.length > 0 then @bindList instance, attributes.events
     instance

@@ -13,4 +13,5 @@ class Atoms.App.Section.Main extends Atoms.Organism.Section
     modal.bind "accept", (event) ->
       console.log "accept"
       Atoms.App.Modal.Loading.show()
-    modal.bind "cancel", (event) -> console.log "cancel"
+    modal.bind "cancel", (event) ->
+      console.log "cancel"

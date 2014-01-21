@@ -1,5 +1,4 @@
-search = new Atoms.Molecule.Search
-  parent: document.body
+search = new Atoms.Molecule.Search()
   # atoms : [
   #   input: placeholder: "Your password..."
   # ,

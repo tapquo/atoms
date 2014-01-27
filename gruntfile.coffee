@@ -29,7 +29,9 @@ module.exports = (grunt) ->
         'source/class/*.coffee']
       app: [
         'extensions/app/source/*.coffee'
-        'extensions/app/source/*/*.coffee']
+        'extensions/app/source/atom/*.coffee'
+        'extensions/app/source/molecule/*.coffee'
+        'extensions/app/source/organism/*.coffee']
       ide: [
         'extensions/ide/source/namespace.coffee'
         'extensions/ide/source/*/*.coffee'
@@ -51,7 +53,6 @@ module.exports = (grunt) ->
           'extensions/app/style/atom.*.styl'
           'extensions/app/style/molecule.*.styl'
           'extensions/app/style/organism.*.styl'
-          'extensions/app/style/template.*.styl'
           'extensions/app/style/app.styl']
         ide: [
           'extensions/ide/style/reset.styl'
@@ -64,7 +65,6 @@ module.exports = (grunt) ->
           'extensions/app/style/theme/atom.*.styl'
           'extensions/app/style/theme/molecule.*.styl'
           'extensions/app/style/theme/organism.*.styl'
-          'extensions/app/style/theme/template.*.styl'
           'extensions/app/style/theme/app.styl']
         icons: [
           'extensions/icons/*.styl']
@@ -88,7 +88,7 @@ module.exports = (grunt) ->
 
 
     uglify:
-      options:  banner: "<%= meta.banner %>", report: "gzip"
+      options:  banner: "<%= meta.banner %>"#, report: "gzip"
       core:
         options: mangle: true
         files: '<%=meta.bower%>/<%=pkg.name%>.js'     : '<%=meta.build%>/<%=pkg.name%>.debug.js'

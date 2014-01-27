@@ -64,5 +64,5 @@ String prototype: capitalize first letter of a String
 @method className
 @return {string}    String capitalizated.
 ###
-String.prototype.toClassName = ->
+String::toClassName = ->
   @charAt(0).toUpperCase() + @slice(1)

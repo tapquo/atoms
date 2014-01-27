@@ -34,6 +34,7 @@ module.exports = (grunt) ->
         'extensions/app/source/organism/*.coffee']
       ide: [
         'extensions/ide/source/namespace.coffee'
+        'extensions/ide/source/ide.constants.coffee'
         'extensions/ide/source/*/*.coffee'
         'extensions/ide/source/ide.coffee']
       spec  : [
@@ -65,7 +66,8 @@ module.exports = (grunt) ->
           'extensions/app/style/theme/atom.*.styl'
           'extensions/app/style/theme/molecule.*.styl'
           'extensions/app/style/theme/organism.*.styl'
-          'extensions/app/style/theme/app.styl']
+          'extensions/app/style/theme/app.styl'
+        ]
         icons: [
           'extensions/icons/*.styl']
 

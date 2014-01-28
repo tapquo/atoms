@@ -34,7 +34,7 @@ module.exports = (grunt) ->
         'extensions/app/source/organism/*.coffee']
       ide: [
         'extensions/ide/source/namespace.coffee'
-        'extensions/ide/source/ide.constants.coffee'
+        'extensions/ide/source/ide.*.coffee'
         'extensions/ide/source/*/*.coffee'
         'extensions/ide/source/ide.coffee']
       spec  : [

@@ -41,7 +41,7 @@ module.exports = (grunt) ->
         'spec/*.coffee']
       example:
           app: [
-            'examples/app/source/*/*.coffee'
+            'examples/app/source/**/*.coffee'
             'examples/app/source/*.coffee']
           ide: [
             'examples/ide/source/*/*.coffee'

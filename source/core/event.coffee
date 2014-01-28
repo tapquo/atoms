@@ -22,7 +22,7 @@ Atoms.Core.Event =
     events = events.split(' ')
     calls = @hasOwnProperty('events') and @events or = {}
     for event in events
-      event = @_parseName event
+      event = @_customEventName event
       calls[event] or = []
       calls[event].push callback
 
@@ -33,7 +33,7 @@ Atoms.Core.Event =
   @param  {function}  The function that is to be no longer executed.
   ###
   unbind: (event, callback) ->
-    event = @_parseName event
+    event = @_customEventName event
     if @hasOwnProperty('events') and @events?[event]
       @events[event].splice @events[event].indexOf(callback), 1
 
@@ -46,7 +46,7 @@ Atoms.Core.Event =
                       handler.
   ###
   trigger: (event, args...) ->
-    event = @_parseName event
+    event = @_customEventName event
     events = @hasOwnProperty('events') and @events?[event]
     return unless events
     args.push @
@@ -62,12 +62,10 @@ Atoms.Core.Event =
   ###
   bubble: (event, args...) ->
     if @parent?.uid?
-      constructor = if args.length is 1 then @constructor else args[1].constructor
-      callbackName = "bubble#{constructor.name.toClassName()}#{event.toClassName()}"
-
+      callbackName = @_eventCallbackName event, "bubble", args
       args.push @
       # Dispatch event to parent
-      @parent[callbackName]?.apply(@parent, args)
+      @parent[callbackName]?.apply @parent, args
       # Bubble event
       @parent.bubble.apply @parent, [event].concat(args)
 
@@ -80,15 +78,11 @@ Atoms.Core.Event =
   ###
   tunnel: (event, args...) ->
     if @childrenClass?.length > 0
-      if args.length is 1
-        callbackName = "event_#{@constructor.name}_#{event}"
-      else
-        callbackName = "event_#{args[1].constructor.name}_#{event}"
-
+      callbackName =  @_eventCallbackName event, "tunnel", args
       args.push @
       for child in @childrenClass
         # Dispatch event to child
-        child[callbackName.toLowerCase()]?.apply(child, args)
+        child[callbackName]?.apply child, args
         # Tunnel event
         child.tunnel.apply child, [event].concat(args)
 
@@ -100,11 +94,20 @@ Atoms.Core.Event =
   @param  {array}     List of events to subscribe.
   ###
   bindList: (instance, events) ->
-    class_lower = instance.constructor.name.toLowerCase()
+    class_base = @_classBase instance.constructor
     for event in events
-      callback_name = "#{class_lower}#{event.toClassName()}"
-      instance.bind event, @[callback_name]
+      callback_name = "#{class_base.toLowerCase()}#{event.toClassName()}"
+      if @[callback_name] then instance.bind event, @[callback_name]
 
   # Private Methods
-  _parseName: (event) ->
-    ("#{@constructor.type}:#{@constructor.name}:#{event}").toLowerCase()
+  _customEventName: (event) ->
+    class_base = @_classBase @constructor
+    ("#{@constructor.type}:#{class_base}:#{event}").toLowerCase()
+
+  _eventCallbackName: (event, type, args) ->
+    constructor = if args.length is 1 then @constructor else args[1].constructor
+    class_base = @_classBase constructor
+    callbackName = "#{type}#{class_base.toClassName()}#{event.toClassName()}"
+
+  _classBase: (constructor) ->
+    constructor.base or constructor.name

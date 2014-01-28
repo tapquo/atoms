@@ -35,6 +35,12 @@ Atoms.Core.Output =
       delete @attributes.parent
     @parent.el = @parent.el or document.body
 
+  createElement: ->
+    @_createIfBindings()
+    # Public attributes
+    @el = Atoms.$(_mustache(@constructor.template)(@attributes))
+    @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
+
   ###
   Render element with the instance @template and @attributes.
   @method output
@@ -43,10 +49,7 @@ Atoms.Core.Output =
     throw "No template defined." unless @constructor.template?
     throw "No parent assigned." unless @parent?
 
-    @_createIfBindings()
-    # Public attributes
-    @el = Atoms.$(_mustache(@constructor.template)(@attributes))
-    @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
+    do @createElement
     # Attributes for constructor
     @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
 

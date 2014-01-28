@@ -13,6 +13,8 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
+  _entities: []
+
   constructor: (@attributes) ->
     super
     @childrenClass = []
@@ -35,6 +37,22 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
           @[key].push instance
 
 
+  entity: (entities) ->
+    # Clean
+    entity.el.remove() for entity in @_entities
+    @_entities = []
+
+    # Renerate
+    for entity in entities
+      instance = new Atoms.Atom[@attributes.class]
+        parent  : @
+        entity  : entity
+        events  : ["touch", "swipe"]
+
+      @bindList instance, instance.attributes.events
+      @_entities.push instance
+
+  # Private Methods
   _atomInstance: (key, className, attributes) ->
     attributes.parent = @
     attributes.events = attributes.events or @attributes.events?[key] or @default.events?[key] or []

@@ -35,12 +35,6 @@ Atoms.Core.Output =
       delete @attributes.parent
     @parent.el = @parent.el or document.body
 
-  createElement: ->
-    @_createIfBindings()
-    # Public attributes
-    @el = Atoms.$(_mustache(@constructor.template)(@attributes))
-    @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
-
   ###
   Render element with the instance @template and @attributes.
   @method output
@@ -49,7 +43,7 @@ Atoms.Core.Output =
     throw "No template defined." unless @constructor.template?
     throw "No parent assigned." unless @parent?
 
-    do @createElement
+    do @_createElement
     # Attributes for constructor
     @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
 
@@ -57,7 +51,26 @@ Atoms.Core.Output =
       @parent.el = Atoms.$(@parent.el)
     @parent.el.first()[@constructor.method] @el
 
+  ###
+  Refresh element with the new @attributes.
+  @method refresh
+  ###
+  refresh: ->
+    throw "No template defined." unless @constructor.template?
+    throw "No parent assigned." unless @parent?
+
+    old_node = @el[0]
+    old_node.parentNode.replaceChild @_createElement()[0], old_node
+
+
   # Private Methods
+  _createElement: ->
+    @_createIfBindings()
+    # Public attributes
+    @el = Atoms.$(_mustache(@constructor.template)(@attributes))
+    @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
+    return @el
+
   _createIfBindings: ->
     @attributes.if = {}
     for key of @attributes when key not in Atoms.Core.Constants.EXCLUDED_IF_KEYS

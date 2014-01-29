@@ -16,5 +16,9 @@ Atoms.Core.Constants =
 
   APPEND:  "append"
 
-  EXCLUDED_IF_KEYS: ["events", "if", "parent", "entity"]
+  EXCLUDED_IF_KEYS: ["class", "entity", "events", "if", "parent"]
 
+  ENTITY:
+    EVENT:
+      UPDATE  : "update"
+      DESTROY : "destroy"

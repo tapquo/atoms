@@ -28,7 +28,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   chemistry: (elements) ->
     children = @attributes.children or @default.children
     for atom, index in children
-      for key of atom when @available.indexOf(key) > -1
+      for key of atom when key in @available
         className = key.toClassName()
         if Atoms.Atom[className]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
@@ -37,21 +37,15 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
           @[key] = [] unless @[key]?
           @[key].push instance
 
+  entityAtom: (@atomEntity) -> @
 
   entity: (entities) ->
-    # Clean
-    entity.el.remove() for entity in @_entities
-    @_entities = []
+    do @_removeAtomsEntities
 
-    # Renerate
-    for entity in entities
-      instance = new Atoms.Atom[@attributes.class]
-        parent  : @
-        entity  : entity
-        events  : ["touch", "swipe"]
-
-      @bindList instance, instance.attributes.events
-      @_entities.push instance
+    for entity in entities when Atoms.Atom[@atomEntity]?
+      attributes = entity: entity
+      attributes = Atoms.Core.Helper.mix attributes, @default.children?[@atomEntity]
+      @_entities.push @_atomInstance null, @atomEntity, attributes
 
   # Private Methods
   _atomInstance: (key, className, attributes) ->
@@ -61,3 +55,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     instance = new Atoms.Atom[className] attributes
     if attributes.events.length > 0 then @bindList instance, attributes.events
     instance
+
+  _removeAtomsEntities: ->
+    entity.el.remove() for entity in @_entities
+    @_entities = []

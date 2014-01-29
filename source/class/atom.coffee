@@ -10,6 +10,7 @@ Base class for Atom
 
 class Atoms.Class.Atom extends Atoms.Core.Module
 
+  @include Atoms.Core.Attributes
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
@@ -17,14 +18,24 @@ class Atoms.Class.Atom extends Atoms.Core.Module
     super
     @constructor.type = "Atom"
 
-    if @attributes.entity
-      @attributes = Atoms.Core.Helper.mix @attributes, @attributes.entity.attributes()
-
-    do @setParent
+    do @scaffold
+    if @entity
+      @attributes = Atoms.Core.Helper.mix @attributes, @entity.attributes()
+      EVENT = Atoms.Core.Constants.ENTITY.EVENT
+      Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindUpdate
+      Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindDestroy
     do @output
-
     if @attributes.events
       for evt in @attributes.events
         @el.on evt, do (evt) => (event) =>
           @trigger evt, event
           @bubble evt, event
+
+  bindUpdate: (model) =>
+    if model.uid is @entity.uid
+      @attributes[property] = @entity[property] for property of @entity.attributes()
+      do @refresh
+
+  bindDestroy: (model) =>
+    if model.uid is @entity.uid
+      do @destroy

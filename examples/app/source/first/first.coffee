@@ -16,15 +16,13 @@ class First extends Atoms.Organism.Article
     list = new Atoms.Molecule.ListContacts
       parent  : el: @el.find("section#list")
 
-    list.entity [
-      name: "@soyjavi", description: "Test"
-    ,
-      name: "@piniphone", description: "Test 2"
-    ,
-      name: "@tapquo", description: "Test 3"
-    ]
+    # Example of Async Process Render
+    Atoms.Entity.Contact.create name: "@soyjavi", description: "Test", url: "sjsjjs"
+    Atoms.Entity.Contact.create name: "@piniphone", description: "Test 2", when: new Date()
+    Atoms.Entity.Contact.create name: "@tapquo"
 
-    # list.entity [name: "Javi"]
+    list.entityAtom "Li"
+    list.entity Atoms.Entity.Contact.all()
 
 
   _log: (method, event) -> console.log "article > #{method}", event
@@ -33,3 +31,11 @@ class First extends Atoms.Organism.Article
     console.info "<article> bubbleFormSubmit", form.value()
 
 first = new First()
+
+
+class Atoms.Entity.Contact extends Atoms.Class.Entity
+
+  @fields "id", "name", "description", "url", "when"
+
+  text: ->
+    @name

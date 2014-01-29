@@ -1,12 +1,12 @@
 # Globals
 Atoms = @Atoms =
-  version   : "0.2.13"
+  version   : "0.2.29"
   Core      : {}
   Class     : {}
 
   Atom      : {}
   Molecule  : {}
   Organism  : {}
-  Template  : {}
+  Entity    : {}
   # DOM Handler Facade
   $: (args...) -> if $$? then $$ args... else $ args...

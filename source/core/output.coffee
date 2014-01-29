@@ -28,19 +28,6 @@ Atoms.Core.Output =
   ###
   html: -> @output "html"
 
-
-
-  ###
-  Set the parent instance to current instance.
-  @method setParent
-  ###
-  setParent: ->
-    @parent = {}
-    if @attributes?.parent?
-      @parent = @attributes.parent
-      delete @attributes.parent
-    @parent.el = @parent.el or document.body
-
   ###
   Render element with the instance @template and @attributes.
   @method output
@@ -49,7 +36,7 @@ Atoms.Core.Output =
     throw "No template defined." unless @constructor.template?
     throw "No parent assigned." unless @parent?
 
-    do @_createElement
+    do @_render
     # Attributes for constructor
     @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
 
@@ -62,20 +49,23 @@ Atoms.Core.Output =
   @method refresh
   ###
   refresh: ->
-    throw "No template defined." unless @constructor.template?
-    throw "No parent assigned." unless @parent?
+    dom_node = @el[0]
+    dom_node.parentNode.replaceChild @_render()[0], dom_node
 
-    old_node = @el[0]
-    old_node.parentNode.replaceChild @_createElement()[0], old_node
+  ###
+  Remove element from DOM
+  @method destroy
+  ###
+  destroy: ->
+    do @el.remove
 
 
   # Private Methods
-  _createElement: ->
-    @_createIfBindings()
-    # Public attributes
+  _render: ->
+    do @_createIfBindings
     @el = Atoms.$(_mustache(@constructor.template)(@attributes))
     @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
-    return @el
+    @el
 
   _createIfBindings: ->
     @attributes.if = {}

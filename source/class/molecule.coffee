@@ -10,6 +10,7 @@ Base class for Molecule
 
 class Atoms.Class.Molecule extends Atoms.Core.Module
 
+  @include Atoms.Core.Attributes
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
@@ -20,7 +21,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @childrenClass = []
     @default = children: [] unless @default
     @constructor.type = "Molecule"
-    do @setParent
+    do @scaffold
     do @output
     do @chemistry
 

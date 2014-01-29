@@ -10,6 +10,7 @@ Base class for Organism
 
 class Atoms.Class.Organism extends Atoms.Core.Module
 
+  @include Atoms.Core.Attributes
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
@@ -34,7 +35,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
     @constructor.type = @constructor.type or "Organism"
 
   render: ->
-    do @setParent
+    do @scaffold
     do @output
     if @attributes.children then @_createChildren()
 

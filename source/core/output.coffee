@@ -28,7 +28,13 @@ Atoms.Core.Output =
   ###
   html: -> @output "html"
 
-  instance: ->
+
+
+  ###
+  Set the parent instance to current instance.
+  @method setParent
+  ###
+  setParent: ->
     @parent = {}
     if @attributes?.parent?
       @parent = @attributes.parent

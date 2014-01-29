@@ -16,7 +16,11 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   constructor: (@attributes) ->
     super
     @constructor.type = "Atom"
-    do @instance
+
+    if @attributes.entity
+      @attributes = Atoms.Core.Helper.mix @attributes, @attributes.entity.attributes()
+
+    do @setParent
     do @output
 
     if @attributes.events

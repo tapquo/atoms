@@ -20,7 +20,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @childrenClass = []
     @default = children: [] unless @default
     @constructor.type = "Molecule"
-    do @instance
+    do @setParent
     do @output
     do @chemistry
 

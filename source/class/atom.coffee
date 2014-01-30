@@ -26,11 +26,7 @@ class Atoms.Class.Atom extends Atoms.Core.Module
       Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindUpdate
       Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindDestroy
     do @output
-    if @attributes.events
-      for evt in @attributes.events
-        @el.on evt, do (evt) => (event) =>
-          @trigger evt, event
-          @bubble evt, event
+    @bindEvents()
 
   bindUpdate: (model) =>
     if model.uid is @entity.uid
@@ -43,3 +39,10 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   bindDestroy: (model) =>
     if model.uid is @entity.uid
       do @destroy
+
+  bindEvents: ->
+    if @attributes.events
+      for evt in @attributes.events
+        @el.on evt, do (evt) => (event) =>
+          @trigger evt, event
+          @bubble evt, event

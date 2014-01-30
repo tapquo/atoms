@@ -50,7 +50,9 @@ Atoms.Core.Output =
   ###
   refresh: ->
     dom_node = @el[0]
-    dom_node.parentNode.replaceChild @_render()[0], dom_node
+    @_render()
+    @bindEvents()
+    dom_node.parentNode.replaceChild @el[0], dom_node
 
   ###
   Remove element from DOM

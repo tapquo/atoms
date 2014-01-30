@@ -51,7 +51,7 @@ Atoms.Core.Output =
   refresh: ->
     dom_node = @el[0]
     @_render()
-    @bindEvents()
+    @bindEvents?()
     dom_node.parentNode.replaceChild @el[0], dom_node
 
   ###

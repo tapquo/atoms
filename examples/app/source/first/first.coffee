@@ -14,7 +14,7 @@ class First extends Atoms.Organism.Article
     new Atoms.App.Section.Form  parent: @, "source/first/form.yml"
 
     list = new Atoms.Molecule.ListContacts
-      parent  : el: @el.find("section#list")
+      parent    : el: @el.find("section#list")
 
     # Example of Async Process Render
     Atoms.Entity.Contact.create name: "@soyjavi", description: "Test", url: "sjsjjs"
@@ -27,6 +27,11 @@ class First extends Atoms.Organism.Article
 
   _log: (method, event) -> console.log "article > #{method}", event
 
+
+  bubbleLiTouch: (event, atom) ->
+    console.log ">>> bubble", atom, atom.attributes.entity
+    # atom.entity.updateAttributes text: "Hello", description: "UPDATED!",
+
   bubbleFormSubmit: (event, form, hierarchy...) ->
     console.info "<article> bubbleFormSubmit", form.value()
 
@@ -37,5 +42,10 @@ class Atoms.Entity.Contact extends Atoms.Class.Entity
 
   @fields "id", "name", "description", "url", "when"
 
-  text: ->
-    @name
+  parse: ->
+    image       : @url
+    date        : @when
+    text        : @name
+    description : @description
+
+

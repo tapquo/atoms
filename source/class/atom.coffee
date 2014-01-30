@@ -20,7 +20,8 @@ class Atoms.Class.Atom extends Atoms.Core.Module
 
     do @scaffold
     if @entity
-      @attributes = Atoms.Core.Helper.mix @attributes, @entity.attributes()
+      attributes = @entity.parse?() or @entity.attributes()
+      @attributes = Atoms.Core.Helper.mix @attributes, attributes
       EVENT = Atoms.Core.Constants.ENTITY.EVENT
       Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindUpdate
       Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindDestroy
@@ -33,7 +34,10 @@ class Atoms.Class.Atom extends Atoms.Core.Module
 
   bindUpdate: (model) =>
     if model.uid is @entity.uid
-      @attributes[property] = @entity[property] for property of @entity.attributes()
+
+      attributes = @entity.parse?() or @entity.attributes()
+      # attributes = @entity.attributes()
+      @attributes[attribute] = @entity[attribute] for attribute of attributes
       do @refresh
 
   bindDestroy: (model) =>

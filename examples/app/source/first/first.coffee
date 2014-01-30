@@ -14,7 +14,8 @@ class First extends Atoms.Organism.Article
     new Atoms.App.Section.Form  parent: @, "source/first/form.yml"
 
     list = new Atoms.Molecule.ListContacts
-      parent    : el: @el.find("section#list")
+      parent    : @
+      container : @el.find("section#list") # "section#list"
 
     # Example of Async Process Render
     Atoms.Entity.Contact.create name: "@soyjavi", description: "Test", url: "sjsjjs"

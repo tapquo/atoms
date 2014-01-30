@@ -15,12 +15,17 @@ Atoms.Core.Attributes =
   @method setParent
   ###
   scaffold: ->
+    # Assign Parrent
     @parent = {}
     if @attributes?.parent?
       @parent = @attributes.parent
       delete @attributes.parent
-    @parent.el = @parent.el or document.body
 
+    # Assign Container
+    @container = @attributes.container or @parent.el or document.body
+    delete @attributes.container
+
+    # Assign Entity
     if @attributes?.entity?
       @entity = @attributes.entity
       delete @attributes.entity

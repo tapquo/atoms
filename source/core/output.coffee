@@ -34,15 +34,16 @@ Atoms.Core.Output =
   ###
   output: ->
     throw "No template defined." unless @constructor.template?
-    throw "No parent assigned." unless @parent?
+    throw "No container assigned." unless @container?
 
     do @_render
     # Attributes for constructor
     @constructor.method =  @attributes.method or Atoms.Core.Constants.APPEND
 
-    if typeof(@parent.el) is "string" or not @parent.el.length?
-      @parent.el = Atoms.$(@parent.el)
-    @parent.el.first()[@constructor.method] @el
+    if typeof(@container) is "string" or not @container.length?
+      @container = Atoms.$(@container)
+    @container.first()[@constructor.method] @el
+
 
   ###
   Refresh element with the new @attributes.

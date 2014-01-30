@@ -18,7 +18,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    @childrenClass = []
+    @children = []
     @default = children: [] unless @default
     @constructor.type = "Molecule"
     do @scaffold
@@ -33,7 +33,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
         if Atoms.Atom[className]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
           instance = @_atomInstance key, className, attributes
-          @childrenClass.push instance
+          @children.push instance
           @[key] = [] unless @[key]?
           @[key].push instance
 

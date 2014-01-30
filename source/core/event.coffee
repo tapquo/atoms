@@ -64,10 +64,7 @@ Atoms.Core.Event =
     if @parent?.uid?
       callbackName = @_eventCallbackName event, "bubble", args
       args.push @
-      # Dispatch event to parent
-      @parent[callbackName]?.apply @parent, args
-      # Bubble event
-      @parent.bubble.apply @parent, [event].concat(args)
+      @_state @parent, event, callbackName, args, "bubble"
 
   ###
   @TODO: Comment method
@@ -77,14 +74,11 @@ Atoms.Core.Event =
                       handler.
   ###
   tunnel: (event, args...) ->
-    if @childrenClass?.length > 0
+    if @children?.length > 0
       callbackName =  @_eventCallbackName event, "tunnel", args
       args.push @
-      for child in @childrenClass
-        # Dispatch event to child
-        child[callbackName]?.apply child, args
-        # Tunnel event
-        child.tunnel.apply child, [event].concat(args)
+      for child in @children
+        @_state child, event, callbackName, args, "tunnel"
 
   ###
   Attach a handler to a list of a events for the class.
@@ -111,3 +105,9 @@ Atoms.Core.Event =
 
   _classBase: (constructor) ->
     constructor.base or constructor.name
+
+  _state: (instance, event, callback, args, type="bubble") ->
+    # Dispatch event to instance
+    instance[callback]?.apply instance, args
+    # Recursive event
+    instance[type].apply instance, [event].concat(args)

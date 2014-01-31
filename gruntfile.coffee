@@ -72,7 +72,7 @@ module.exports = (grunt) ->
         icons: [
           'extensions/icons/*.styl']
 
-      # IDE node-webkit dependencies
+      # IDE node-webkit sources
       ide_nodewebkit:
         css: [
           "<%= meta.bower %>/atoms.ide.css"
@@ -122,27 +122,6 @@ module.exports = (grunt) ->
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.ide.js' : '<%=meta.build%>/<%=pkg.name%>.ide.js'
 
-    compress:
-      ide_nodewebkit:
-        options: archive: "<%= meta.ide_nw %>/build/atoms-ide.zip"
-        files: [
-          {
-            expand: true
-            flatten: true
-            filter: "isFile"
-            src: [
-              "<%= source.ide_nodewebkit.css %>"
-              "<%= source.ide_nodewebkit.js %>"
-              "<%= source.ide_nodewebkit.resources %>"
-              "<%= source.ide_nodewebkit.files %>"
-            ]
-          }
-        ]
-
-    rename:
-      ide_nodewebkit_zip:
-        src: "<%= meta.ide_nw %>/build/atoms-ide.zip"
-        dest: "<%= meta.ide_nw %>/build/atoms-ide.nw"
 
     jasmine:
       pivotal:
@@ -175,6 +154,26 @@ module.exports = (grunt) ->
         options: title: 'CoffeeScript', message: 'App builded.'
       ide:
         options: title: 'CoffeeScript', message: 'IDE builded.'
+
+
+    copy:
+      ide_nodewebkit:
+        files: [{
+          expand: true
+          flatten: true
+          src: ["<%= source.ide_nodewebkit.css %>", "<%= source.ide_nodewebkit.js %>"]
+          dest: "<%= meta.ide_nw %>"
+          filter: "isFile"
+        }]
+
+    nodewebkit:
+      options:
+        build_dir: "<%= meta.ide_nw %>/build/"
+        mac: true
+        win: true
+        linux32: true
+        linux64: true
+      src: ["<%= meta.ide_nw %>/*.*"]
 
 
     watch:
@@ -218,9 +217,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-contrib-compress'
-  grunt.loadNpmTasks 'grunt-rename'
-
+  grunt.loadNpmTasks 'grunt-node-webkit-builder'
 
   grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']
-  grunt.registerTask 'idecompile', ['concat', 'coffee', 'uglify', 'stylus', 'compress', 'rename']
+  grunt.registerTask 'idecompile', ['concat', 'coffee', 'uglify', 'stylus', 'copy:ide_nodewebkit', 'nodewebkit']

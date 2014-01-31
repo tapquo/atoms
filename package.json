@@ -16,7 +16,6 @@
     "grunt-contrib-copy": "*",
     "grunt-contrib-watch": "*",
     "grunt-notify": "~0.2.16",
-    "grunt-contrib-compress": "*",
-    "grunt-rename": "*"
+    "grunt-node-webkit-builder": "*"
   }
 }

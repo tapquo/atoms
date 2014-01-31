@@ -5,6 +5,7 @@ module.exports = (grunt) ->
     meta:
       build   : 'build',
       bower   : 'bower',
+      ide_nw  : 'examples/ide/node-webkit',
       version : '',
       banner  : '/* <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy/m/d") %>\n' +
               '   <%= pkg.homepage %>\n' +
@@ -71,6 +72,26 @@ module.exports = (grunt) ->
         icons: [
           'extensions/icons/*.styl']
 
+      # IDE node-webkit dependencies
+      ide_nodewebkit:
+        css: [
+          "<%= meta.bower %>/atoms.ide.css"
+          "extensions/icons/atoms.icons.css"
+          "<%= meta.bower %>/atoms.app.css"
+          "<%= meta.bower %>/atoms.app.theme.css"
+        ]
+        js: [
+          "<%= meta.bower %>/atoms.js"
+          "<%= meta.bower %>/atoms.app.js"
+          "<%= meta.bower %>/atoms.ide.js"
+        ]
+        resources: [
+          "<%= meta.ide_nw %>/atom.png"
+        ]
+        files: [
+          "<%= meta.ide_nw %>/index.html"
+          "<%= meta.ide_nw %>/package.json"
+        ]
 
     concat:
       core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'       : '<%= source.core %>'
@@ -101,6 +122,27 @@ module.exports = (grunt) ->
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.ide.js' : '<%=meta.build%>/<%=pkg.name%>.ide.js'
 
+    compress:
+      ide_nodewebkit:
+        options: archive: "<%= meta.ide_nw %>/build/atoms-ide.zip"
+        files: [
+          {
+            expand: true
+            flatten: true
+            filter: "isFile"
+            src: [
+              "<%= source.ide_nodewebkit.css %>"
+              "<%= source.ide_nodewebkit.js %>"
+              "<%= source.ide_nodewebkit.resources %>"
+              "<%= source.ide_nodewebkit.files %>"
+            ]
+          }
+        ]
+
+    rename:
+      ide_nodewebkit_zip:
+        src: "<%= meta.ide_nw %>/build/atoms-ide.zip"
+        dest: "<%= meta.ide_nw %>/build/atoms-ide.nw"
 
     jasmine:
       pivotal:
@@ -176,6 +218,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-compress'
+  grunt.loadNpmTasks 'grunt-rename'
 
 
   grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']
+  grunt.registerTask 'idecompile', ['concat', 'coffee', 'uglify', 'stylus', 'compress', 'rename']

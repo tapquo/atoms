@@ -1,0 +1,21 @@
+{
+  "name": "Atoms IDE",
+  "description": "Atomic Development Components for Modern WebApps",
+  "version": "0.1.0",
+  "main": "index.html",
+  "window": {
+    "title": "Atoms IDE",
+    "icon": "atom.png",
+    "toolbar": false,
+    "frame": true,
+    "width": 1024,
+    "height": 800,
+    "position": "center",
+    "min_width": 900,
+    "min_height": 800,
+    "resizable": true
+  },
+  "webkit": {
+    "plugin": true
+  }
+}

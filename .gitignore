@@ -3,3 +3,5 @@ node_modules
 */*/.BridgeSort
 .sass-cache/
 .grunt/
+examples/ide/node-webkit/node-webkit.app
+examples/ide/node-webkit/atoms-ide.nw

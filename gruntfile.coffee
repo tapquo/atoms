@@ -42,11 +42,8 @@ module.exports = (grunt) ->
         'spec/*.coffee']
       example:
           app: [
-            'examples/app/source/**/*.coffee'
-            'examples/app/source/*.coffee']
-          ide: [
-            'examples/ide/source/*/*.coffee'
-            'examples/ide/source/*.coffee']
+            'extensions/app/example/**/*.coffee'
+            'extensions/app/example/*.coffee']
 
       # Stylesheets
       stylus:
@@ -72,33 +69,12 @@ module.exports = (grunt) ->
         icons: [
           'extensions/icons/*.styl']
 
-      # IDE node-webkit sources
-      ide_nodewebkit:
-        css: [
-          "<%= meta.bower %>/atoms.ide.css"
-          "extensions/icons/atoms.icons.css"
-          "<%= meta.bower %>/atoms.app.css"
-          "<%= meta.bower %>/atoms.app.theme.css"
-        ]
-        js: [
-          "<%= meta.bower %>/atoms.js"
-          "<%= meta.bower %>/atoms.app.js"
-          "<%= meta.bower %>/atoms.ide.js"
-        ]
-        resources: [
-          "<%= meta.ide_nw %>/atom.png"
-        ]
-        files: [
-          "<%= meta.ide_nw %>/index.html"
-          "<%= meta.ide_nw %>/package.json"
-        ]
 
     concat:
       core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'       : '<%= source.core %>'
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'         : '<%= source.app %>'
       ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.coffee'         : '<%= source.ide %>'
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee' : '<%= source.example.app %>'
-      example_ide : files: '<%=meta.build%>/<%=pkg.name%>.example.ide.coffee' : '<%= source.example.ide %>'
 
 
     coffee:
@@ -107,7 +83,6 @@ module.exports = (grunt) ->
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
       ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.js'         : '<%=meta.build%>/<%=pkg.name%>.ide.coffee'
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js' : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
-      example_ide : files: '<%=meta.build%>/<%=pkg.name%>.example.ide.js' : '<%=meta.build%>/<%=pkg.name%>.example.ide.coffee'
 
 
     uglify:

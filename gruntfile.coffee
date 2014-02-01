@@ -155,27 +155,6 @@ module.exports = (grunt) ->
       ide:
         options: title: 'CoffeeScript', message: 'IDE builded.'
 
-
-    copy:
-      ide_nodewebkit:
-        files: [{
-          expand: true
-          flatten: true
-          src: ["<%= source.ide_nodewebkit.css %>", "<%= source.ide_nodewebkit.js %>"]
-          dest: "<%= meta.ide_nw %>"
-          filter: "isFile"
-        }]
-
-    nodewebkit:
-      options:
-        build_dir: "<%= meta.ide_nw %>/build/"
-        mac: true
-        win: true
-        linux32: true
-        linux64: true
-      src: ["<%= meta.ide_nw %>/*.*"]
-
-
     watch:
       core:
         files: ['<%= source.core %>']
@@ -214,10 +193,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-node-webkit-builder'
 
   grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']
-  grunt.registerTask 'idecompile', ['concat', 'coffee', 'uglify', 'stylus', 'copy:ide_nodewebkit', 'nodewebkit']

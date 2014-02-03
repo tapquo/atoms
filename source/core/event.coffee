@@ -80,19 +80,6 @@ Atoms.Core.Event =
       for child in @children
         @_state child, event, callbackName, args, "tunnel"
 
-  ###
-  Attach a handler to a list of a events for the class.
-  @method bindList
-  @param  {DOM}       Element in DOM.
-  @param  {string}    Name of class.
-  @param  {array}     List of events to subscribe.
-  ###
-  bindList: (instance, events) ->
-    class_base = @_classBase instance.constructor
-    for event in events
-      callback_name = "#{class_base.toLowerCase()}#{event.toClassName()}"
-      if @[callback_name] then instance.bind event, @[callback_name]
-
   # Private Methods
   _customEventName: (event) ->
     class_base = @_classBase @constructor

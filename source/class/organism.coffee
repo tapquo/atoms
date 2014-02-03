@@ -17,6 +17,14 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   #@TODO: Better if I use a instance variable. Change It!
   yaml = undefined
 
+  constructor: (@attributes, scaffold) ->
+    super
+    @children = []
+    if scaffold then yaml = @_getScaffold(scaffold)
+    @attributes = Atoms.Core.Helper.mix @attributes, yaml
+    yaml = undefined
+    @constructor.type = @constructor.type or "Organism"
+
   @scaffold: (url) ->
     loader = if $$? then $$ else $
     scaffold = loader.ajax
@@ -25,14 +33,6 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
     yaml = YAML.parse scaffold.responseText
-
-  constructor: (@attributes, scaffold) ->
-    super
-    @children = []
-    if scaffold then yaml = @_getScaffold(scaffold)
-    @attributes = Atoms.Core.Helper.mix @attributes, yaml
-    yaml = undefined
-    @constructor.type = @constructor.type or "Organism"
 
   render: ->
     do @scaffold
@@ -55,8 +55,6 @@ class Atoms.Class.Organism extends Atoms.Core.Module
           instance = new classInstance attributes
           @children.push instance
           @[className].push instance
-
-          if attributes.events? then @bindList instance, attributes.events
 
   _getScaffold: (url) ->
     loader = if $$? then $$ else $

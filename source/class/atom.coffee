@@ -43,6 +43,4 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   bindEvents: ->
     if @attributes.events
       for evt in @attributes.events
-        @el.on evt, do (evt) => (event) =>
-          @trigger evt, event
-          @bubble evt, event
+        @el.on evt, do (evt) => (event) => @bubble evt, event

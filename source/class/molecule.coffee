@@ -50,11 +50,8 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   # Private Methods
   _atomInstance: (key, className, attributes) ->
     attributes.parent = @
-    attributes.events = attributes.events or @attributes.events?[key] or @default.events?[key] or []
-
-    instance = new Atoms.Atom[className] attributes
-    if attributes.events.length > 0 then @bindList instance, attributes.events
-    instance
+    attributes.events = attributes.events or []
+    new Atoms.Atom[className] attributes
 
   _removeAtomsEntities: ->
     entity.el.remove() for entity in @_entities

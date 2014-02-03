@@ -158,9 +158,6 @@ module.exports = (grunt) ->
       example_app:
         files: ['<%= source.example.app %>']
         tasks: ['concat:example_app', 'coffee:example_app']
-      example_ide:
-        files: ['<%= source.example.ide %>']
-        tasks: ['concat:example_ide', 'coffee:example_ide']
 
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'

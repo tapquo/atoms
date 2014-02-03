@@ -95,6 +95,6 @@ Atoms.Core.Event =
 
   _state: (instance, event, callback, args, type="bubble") ->
     # Dispatch event to instance
-    instance[callback]?.apply instance, args
-    # Recursive event
-    instance[type].apply instance, [event].concat(args)
+    unless instance[callback]?.apply(instance, args) is false
+      # Recursive event
+      instance[type].apply instance, [event].concat(args)

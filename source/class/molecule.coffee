@@ -18,8 +18,8 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    @children = []
     @default = children: [] unless @default
+    @children = []
     @constructor.type = "Molecule"
     do @scaffold
     do @output
@@ -29,10 +29,12 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     children = @attributes.children or @default.children
     for atom, index in children
       for key of atom when key in @available
-        className = key.toClassName()
-        if Atoms.Atom[className]?
+        item = key.split(".")
+        type = item[0]
+        class_name = item[1]
+        if Atoms[type][class_name]?
           attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
-          instance = @_atomInstance key, className, attributes
+          instance = @_atomInstance class_name, attributes
           @children.push instance
           @[key] = [] unless @[key]?
           @[key].push instance
@@ -41,17 +43,15 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   entity: (entities) ->
     do @_removeAtomsEntities
-
     for entity in entities when Atoms.Atom[@atomEntity]?
       attributes = entity: entity
       attributes = Atoms.Core.Helper.mix attributes, @default.children?[@atomEntity]
-      @_entities.push @_atomInstance null, @atomEntity, attributes
+      @_entities.push @_atomInstance @atomEntity, attributes
 
   # Private Methods
-  _atomInstance: (key, className, attributes) ->
+  _atomInstance: (class_name, attributes) ->
     attributes.parent = @
-    attributes.events = attributes.events or []
-    new Atoms.Atom[className] attributes
+    new Atoms.Atom[class_name] attributes
 
   _removeAtomsEntities: ->
     entity.el.remove() for entity in @_entities

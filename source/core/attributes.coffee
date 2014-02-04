@@ -41,11 +41,7 @@ Atoms.Core.Attributes =
           attributes = item[key]
           if @default?.children?[index]?[key]?
             attributes = Atoms.Core.Helper.mix item[key], @default.children?[index]?[key]
-
-          instance = @instance type, class_name, attributes
-          @children.push instance
-          @[key] = [] unless @[key]?
-          @[key].push instance
+          @children.push @instance type, class_name, attributes
 
   instance: (type, class_name, attributes) ->
     attributes.parent = @

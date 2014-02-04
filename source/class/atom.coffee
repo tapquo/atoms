@@ -15,8 +15,8 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @include Atoms.Core.Output
 
   constructor: (@attributes) ->
-    @default = {} unless @default
     super
+    @default = events: [] unless @default
     @attributes = Atoms.Core.Helper.mix @attributes, @default
     @constructor.type = "Atom"
 

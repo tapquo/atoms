@@ -19,11 +19,13 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   constructor: (@attributes, scaffold) ->
     super
+    @default = children: [] unless @default
     @children = []
+    @constructor.type = @constructor.type or "Organism"
+
     if scaffold then yaml = @_getScaffold(scaffold)
     @attributes = Atoms.Core.Helper.mix @attributes, yaml
     yaml = undefined
-    @constructor.type = @constructor.type or "Organism"
 
   @scaffold: (url) ->
     loader = if $$? then $$ else $
@@ -37,24 +39,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   render: ->
     do @scaffold
     do @output
-    if @attributes.children then @_chemistry()
-
-  _chemistry: ->
-    for child in @attributes.children
-      for attribute of child
-        className = attribute.split(".")
-        type = className[0]
-        className = className[1]
-
-        classInstance = Atoms[type]?[className]
-        if classInstance?
-          @[className] = [] unless @[className]?
-
-          attributes = child[attribute]
-          attributes.parent = @
-          instance = new classInstance attributes
-          @children.push instance
-          @[className].push instance
+    do @chemistry
 
   _getScaffold: (url) ->
     loader = if $$? then $$ else $

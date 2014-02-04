@@ -23,8 +23,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @constructor.type = "Molecule"
     do @scaffold
     do @output
-    do @_chemistry
-
+    do @chemistry
 
   entityAtom: (@atomEntity) -> @
 
@@ -33,26 +32,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     for entity in entities when Atoms.Atom[@atomEntity]?
       attributes = entity: entity
       attributes = Atoms.Core.Helper.mix attributes, @default.children?[@atomEntity]
-      @_entities.push @_atomInstance @atomEntity, attributes
-
-  # Private Methods
-  _chemistry: (elements) ->
-    children = @attributes.children or @default.children
-    for atom, index in children
-      for key of atom when key in @available
-        item = key.split(".")
-        type = item[0]
-        class_name = item[1]
-        if Atoms[type][class_name]?
-          attributes = Atoms.Core.Helper.mix atom[key], @default.children?[index]?[key]
-          instance = @_atomInstance class_name, attributes
-          @children.push instance
-          @[key] = [] unless @[key]?
-          @[key].push instance
-
-  _atomInstance: (class_name, attributes) ->
-    attributes.parent = @
-    new Atoms.Atom[class_name] attributes
+      @_entities.push @instance "Atom", @atomEntity, attributes
 
   _removeAtomsEntities: ->
     entity.el.remove() for entity in @_entities

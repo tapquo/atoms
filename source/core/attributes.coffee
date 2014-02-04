@@ -29,3 +29,24 @@ Atoms.Core.Attributes =
     if @attributes?.entity?
       @entity = @attributes.entity
       delete @attributes.entity
+
+  chemistry: (children) ->
+    children = @attributes.children or @default.children
+    for item, index in children
+      for key of item when not @available or key in @available
+        base = key.split(".")
+        type = base[0]
+        class_name = base[1]
+        if Atoms[type][class_name]?
+          attributes = item[key]
+          if @default?.children?[index]?[key]?
+            attributes = Atoms.Core.Helper.mix item[key], @default.children?[index]?[key]
+
+          instance = @instance type, class_name, attributes
+          @children.push instance
+          @[key] = [] unless @[key]?
+          @[key].push instance
+
+  instance: (type, class_name, attributes) ->
+    attributes.parent = @
+    new Atoms[type][class_name] attributes

@@ -37,9 +37,9 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   render: ->
     do @scaffold
     do @output
-    if @attributes.children then @_createChildren()
+    if @attributes.children then @_chemistry()
 
-  _createChildren: ->
+  _chemistry: ->
     for child in @attributes.children
       for attribute of child
         className = attribute.split(".")

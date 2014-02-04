@@ -62,9 +62,8 @@ Atoms.Core.Event =
   ###
   bubble: (event, args...) ->
     if @parent?.uid?
-      callbackName = @_eventCallbackName event, "bubble", args
       args.push @
-      @_state @parent, event, callbackName, args, "bubble"
+      @_state @parent, event, args, "bubble"
 
   ###
   @TODO: Comment method
@@ -75,25 +74,27 @@ Atoms.Core.Event =
   ###
   tunnel: (event, args...) ->
     if @children?.length > 0
-      callbackName =  @_eventCallbackName event, "tunnel", args
       args.push @
       for child in @children
-        @_state child, event, callbackName, args, "tunnel"
+        @_state child, event, args, "tunnel"
 
   # Private Methods
   _customEventName: (event) ->
     class_base = @_classBase @constructor
     ("#{@constructor.type}:#{class_base}:#{event}").toLowerCase()
 
-  _eventCallbackName: (event, type, args) ->
-    constructor = if args.length is 1 then @constructor else args[1].constructor
-    class_base = @_classBase constructor
-    callbackName = "#{type}#{class_base.toClassName()}#{event.toClassName()}"
-
   _classBase: (constructor) ->
     constructor.base or constructor.name
 
-  _state: (instance, event, callback, args, type="bubble") ->
+  _state: (instance, event, args, type="bubble") ->
+    #Callback Name
+    constructor = if args.length is 1 then @constructor else args[1].constructor
+    class_base = @_classBase constructor
+    callback = "on#{class_base.toClassName()}#{event.toClassName()}"
+
+    #Add type
+    args[0].eventType = type
+
     # Dispatch event to instance
     unless instance[callback]?.apply(instance, args) is false
       # Recursive event

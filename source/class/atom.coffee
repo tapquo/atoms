@@ -15,7 +15,9 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @include Atoms.Core.Output
 
   constructor: (@attributes) ->
+    @default = {} unless @default
     super
+    @attributes = Atoms.Core.Helper.mix @attributes, @default
     @constructor.type = "Atom"
 
     do @scaffold
@@ -30,9 +32,7 @@ class Atoms.Class.Atom extends Atoms.Core.Module
 
   bindUpdate: (model) =>
     if model.uid is @entity.uid
-
       attributes = @entity.parse?() or @entity.attributes()
-      # attributes = @entity.attributes()
       @attributes[attribute] = @entity[attribute] for attribute of attributes
       do @refresh
 

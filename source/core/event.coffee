@@ -87,12 +87,22 @@ Atoms.Core.Event =
     constructor.base or constructor.name
 
   _state: (instance, event, args, type="bubble") ->
-    #Callback Name
-    constructor = if args.length is 1 then @constructor else args[1].constructor
-    class_base = @_classBase constructor
-    callback = "on#{class_base.toClassName()}#{event.toClassName()}"
+    # Custom Callback
+    indexEvent = @attributes.events?.indexOf event
+    if indexEvent > -1
+      callback = @attributes.callbacks?[indexEvent]
+      args[0].eventCustomCallback = callback if callback
 
-    #Add type
+    # Recursive Callback
+    callback = args[0].eventCustomCallback unless callback
+
+    # Default Callback
+    unless callback
+      constructor = if args.length is 1 then @constructor else args[1].constructor
+      class_base = @_classBase constructor
+      callback = "on#{class_base.toClassName()}#{event.toClassName()}"
+
+    # Add type
     args[0].eventType = type
 
     # Dispatch event to instance

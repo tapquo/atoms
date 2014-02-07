@@ -55,10 +55,11 @@ module.exports = (grunt) ->
           'extensions/app/style/app.styl']
         ide: [
           'extensions/ide/style/reset.styl'
+          'extensions/ide/style/ide.styl'
+          'extensions/ide/style/ide.*.styl'
           'extensions/ide/style/atom.*.styl'
           'extensions/ide/style/molecule.*.styl'
-          'extensions/ide/style/organism.*.styl'
-          'extensions/ide/style/ide.styl']
+          'extensions/ide/style/organism.*.styl']
         theme: [
           'extensions/app/style/theme/reset.styl'
           'extensions/app/style/theme/atom.*.styl'

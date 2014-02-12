@@ -46,7 +46,10 @@ Atoms.Core.Attributes =
   instance: (type, class_name, attributes={}) ->
     if @__available type, class_name
       attributes.parent = attributes.parent or @
-      new Atoms[type][class_name] attributes
+      instance = new Atoms[type][class_name] attributes
+      @[attributes.id] = instance if attributes.id
+      instance
+
     else
       throw "Instance no available in current container."
 

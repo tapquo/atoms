@@ -32,7 +32,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     for entity in entities when Atoms.Atom[@atomEntity]?
       attributes = entity: entity
       attributes = Atoms.Core.Helper.mix attributes, @default.children?[@atomEntity]
-      @_entities.push @instance "Atom", @atomEntity, attributes
+      @_entities.push @appendChild "Atom", @atomEntity, attributes
 
   _removeAtomsEntities: ->
     entity.el.remove() for entity in @_entities

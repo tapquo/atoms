@@ -73,7 +73,7 @@ Atoms.Core.Output =
   _createIfBindings: ->
     @attributes.if = {}
     for key of @attributes when key not in Atoms.Core.Constants.EXCLUDED_IF_KEYS
-      @attributes.if[key] = true if @attributes[key]?
+      @attributes.if[key] = true if @attributes[key]
 
 ###
 The fastest and smallest Mustache compliant Javascript templating library

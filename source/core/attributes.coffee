@@ -31,7 +31,7 @@ Atoms.Core.Attributes =
       delete @attributes.entity
 
   chemistry: (children) ->
-    children = @attributes.children or @default.children
+    children = @attributes.children or @default.children or []
     for item, index in children
       for key of item when not @constructor.available or key in @constructor.available
         base = key.split(".")
@@ -41,15 +41,15 @@ Atoms.Core.Attributes =
           attributes = item[key]
           if @default?.children?[index]?[key]?
             attributes = Atoms.Core.Helper.mix item[key], @default.children?[index]?[key]
-          @children.push @instance type, class_name, attributes
+          @appendChild type, class_name, attributes
 
-  instance: (type, class_name, attributes={}) ->
+  appendChild: (type, class_name, attributes={}) ->
     if @__available type, class_name
       attributes.parent = attributes.parent or @
-      instance = new Atoms[type][class_name] attributes
-      @[attributes.id] = instance if attributes.id
-      instance
-
+      child = new Atoms[type][class_name] attributes
+      @children.push child
+      @[attributes.id] = child if attributes.id
+      child
     else
       throw "Instance no available in current container."
 

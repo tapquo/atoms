@@ -76,6 +76,7 @@ module.exports = (grunt) ->
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'         : '<%= source.app %>'
       ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.coffee'         : '<%= source.ide %>'
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee' : '<%= source.example.app %>'
+      atoms_app   : files: '<%=meta.build%>/<%=pkg.name%>.app.standalone.coffee' : ['<%=meta.build%>/<%=pkg.name%>.debug.coffee', '<%=meta.build%>/<%=pkg.name%>.app.coffee']
 
 
     coffee:
@@ -84,6 +85,7 @@ module.exports = (grunt) ->
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
       ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.js'         : '<%=meta.build%>/<%=pkg.name%>.ide.coffee'
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js' : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
+      app_alone   : files: '<%=meta.build%>/<%=pkg.name%>.app.standalone.debug.js'         : '<%=meta.build%>/<%=pkg.name%>.app.standalone.coffee'
 
 
     uglify:
@@ -94,6 +96,9 @@ module.exports = (grunt) ->
       app:
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.app.js' : '<%=meta.build%>/<%=pkg.name%>.app.js'
+      app_standalone:
+        options: mangle: false
+        files: '<%=meta.build%>/<%=pkg.name%>.app.standalone.js' : '<%=meta.build%>/<%=pkg.name%>.app.standalone.debug.js'
       ide:
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.ide.js' : '<%=meta.build%>/<%=pkg.name%>.ide.js'

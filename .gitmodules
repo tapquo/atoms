@@ -1,6 +1,3 @@
-[submodule "extensions/ide"]
-	path = extensions/ide
-	url = https://github.com/tapquo/atoms-ide
 [submodule "extensions/app"]
 	path = extensions/app
 	url = https://github.com/tapquo/atoms-app

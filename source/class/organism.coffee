@@ -15,7 +15,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   @include Atoms.Core.Output
 
   #@TODO: Better if I use a instance variable. Change It!
-  yaml = undefined
+  _file = undefined
 
   constructor: (@attributes, scaffold) ->
     super
@@ -23,9 +23,9 @@ class Atoms.Class.Organism extends Atoms.Core.Module
     @children = []
     @constructor.type = @constructor.type or "Organism"
 
-    if scaffold then yaml = @_getScaffold(scaffold)
-    @attributes = Atoms.Core.Helper.mix @attributes, yaml
-    yaml = undefined
+    if scaffold then _file = @_getScaffold(scaffold)
+    @attributes = Atoms.Core.Helper.mix @attributes, _file
+    _file = undefined
 
   @scaffold: (url) ->
     loader = if $$? then $$ else $
@@ -34,7 +34,10 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-    yaml = YAML.parse scaffold.responseText
+    if YAML?
+      _file = YAML.parse scaffold.responseText
+    else
+      _file = JSON.parse scaffold.responseText
 
   render: ->
     do @scaffold
@@ -48,4 +51,4 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-    yaml = YAML.parse scaffold.responseText
+    _file = YAML.parse scaffold.responseText

@@ -33,11 +33,6 @@ module.exports = (grunt) ->
         'extensions/app/source/atom/*.coffee'
         'extensions/app/source/molecule/*.coffee'
         'extensions/app/source/organism/*.coffee']
-      ide: [
-        'extensions/ide/source/namespace.coffee'
-        'extensions/ide/source/ide.*.coffee'
-        'extensions/ide/source/*/*.coffee'
-        'extensions/ide/source/ide.coffee']
       spec  : [
         'spec/*.coffee']
       example:
@@ -53,13 +48,6 @@ module.exports = (grunt) ->
           'extensions/app/style/molecule.*.styl'
           'extensions/app/style/organism.*.styl'
           'extensions/app/style/app.styl']
-        ide: [
-          'extensions/ide/style/reset.styl'
-          'extensions/ide/style/ide.styl'
-          'extensions/ide/style/ide.*.styl'
-          'extensions/ide/style/atom.*.styl'
-          'extensions/ide/style/molecule.*.styl'
-          'extensions/ide/style/organism.*.styl']
         theme: [
           'extensions/app/style/theme/reset.styl'
           'extensions/app/style/theme/atom.*.styl'
@@ -72,36 +60,26 @@ module.exports = (grunt) ->
 
 
     concat:
-      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'       : '<%= source.core %>'
-      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'         : '<%= source.app %>'
-      ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.coffee'         : '<%= source.ide %>'
-      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee' : '<%= source.example.app %>'
-      atoms_app   : files: '<%=meta.build%>/<%=pkg.name%>.app.standalone.coffee' : ['<%=meta.build%>/<%=pkg.name%>.debug.coffee', '<%=meta.build%>/<%=pkg.name%>.app.coffee']
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'           : '<%= source.core %>'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'             : '<%= source.app %>'
+      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'     : '<%= source.example.app %>'
 
 
     coffee:
-      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'       : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
-      spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'        : '<%= source.spec %>'
-      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
-      ide         : files: '<%=meta.build%>/<%=pkg.name%>.ide.js'         : '<%=meta.build%>/<%=pkg.name%>.ide.coffee'
-      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js' : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
-      app_alone   : files: '<%=meta.build%>/<%=pkg.name%>.app.standalone.debug.js'         : '<%=meta.build%>/<%=pkg.name%>.app.standalone.coffee'
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'               : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
+      spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'                : '<%= source.spec %>'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'                 : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js'         : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
 
 
     uglify:
       options:  banner: "<%= meta.banner %>"#, report: "gzip"
       core:
         options: mangle: true
-        files: '<%=meta.bower%>/<%=pkg.name%>.js'     : '<%=meta.build%>/<%=pkg.name%>.debug.js'
+        files: '<%=meta.bower%>/<%=pkg.name%>.js'                 : '<%=meta.build%>/<%=pkg.name%>.debug.js'
       app:
         options: mangle: false
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.js' : '<%=meta.build%>/<%=pkg.name%>.app.js'
-      app_standalone:
-        options: mangle: false
-        files: '<%=meta.build%>/<%=pkg.name%>.app.standalone.js' : '<%=meta.build%>/<%=pkg.name%>.app.standalone.debug.js'
-      ide:
-        options: mangle: false
-        files: '<%=meta.bower%>/<%=pkg.name%>.ide.js' : '<%=meta.build%>/<%=pkg.name%>.ide.js'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.js'             : '<%=meta.build%>/<%=pkg.name%>.app.js'
 
 
     jasmine:
@@ -117,9 +95,6 @@ module.exports = (grunt) ->
       app:
         options: compress: true, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.app.css': '<%=source.stylus.app%>'
-      ide:
-        options: compress: true, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.ide.css': '<%=source.stylus.ide%>'
       theme:
         options: compress: false, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
@@ -133,8 +108,6 @@ module.exports = (grunt) ->
         options: title: 'CoffeeScript', message: 'Core builded.'
       app:
         options: title: 'CoffeeScript', message: 'App builded.'
-      ide:
-        options: title: 'CoffeeScript', message: 'IDE builded.'
 
     watch:
       core:
@@ -146,15 +119,9 @@ module.exports = (grunt) ->
       app:
         files: ['<%= source.app %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
-      ide:
-        files: ['<%= source.ide %>']
-        tasks: ['concat:ide', 'coffee:ide', 'uglify:ide', 'notify:ide']
       stylus_app:
         files: ['<%= source.stylus.app %>']
         tasks: ['stylus:app']
-      stylus_ide:
-        files: ['<%= source.stylus.ide %>']
-        tasks: ['stylus:ide']
       stylus_theme:
         files: ['<%= source.stylus.theme %>']
         tasks: ['stylus:theme']

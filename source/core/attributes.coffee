@@ -33,7 +33,7 @@ Atoms.Core.Attributes =
   chemistry: (children) ->
     children = @attributes.children or @default.children or []
     for item, index in children
-      for key of item when not @constructor.available or key in @constructor.available
+      for key of item # when not @constructor.available or key in @constructor.available
         base = key.split(".")
         type = base[0]
         class_name = base[1]

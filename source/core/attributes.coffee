@@ -33,7 +33,7 @@ Atoms.Core.Attributes =
   chemistry: (children) ->
     children = @attributes.children or @default.children or []
     for item, index in children
-      for key of item # when not @constructor.available or key in @constructor.available
+      for key of item
         base = key.split(".")
         type = base[0]
         class_name = base[1]
@@ -51,7 +51,7 @@ Atoms.Core.Attributes =
       @[attributes.id] = child if attributes.id
       child
     else
-      throw "Instance no available in current container."
+      console.error "Instance #{type}.#{class_name} no available in #{constructor.name} (#{constructor.base})"
 
   __available: (type, class_name) ->
     instance = Atoms[type][class_name]

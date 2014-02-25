@@ -101,7 +101,7 @@ module.exports = (grunt) ->
         options: compress: false, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
       icons:
-        options: compress: false
+        options: compress: true
         files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
 
 

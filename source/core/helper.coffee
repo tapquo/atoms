@@ -41,22 +41,20 @@ Atoms.Core.Helper = do ->
 
   # Private Methods
   _clone: (obj) ->
-    return JSON.parse(JSON.stringify(obj))
+    return obj if not obj? or typeof obj isnt 'object'
+    return new Date(obj.getTime()) if obj instanceof Date
 
-    # return obj if not obj? or typeof obj isnt 'object'
-    # return new Date(obj.getTime()) if obj instanceof Date
+    if obj instanceof RegExp
+      flags = ''
+      flags += 'g' if obj.global?
+      flags += 'i' if obj.ignoreCase?
+      flags += 'm' if obj.multiline?
+      flags += 'y' if obj.sticky?
+      return new RegExp(obj.source, flags)
 
-    # if obj instanceof RegExp
-    #   flags = ''
-    #   flags += 'g' if obj.global?
-    #   flags += 'i' if obj.ignoreCase?
-    #   flags += 'm' if obj.multiline?
-    #   flags += 'y' if obj.sticky?
-    #   return new RegExp(obj.source, flags)
-
-    # newInstance = new obj.constructor()
-    # newInstance[key] = @_clone obj[key] for key of obj
-    # newInstance
+    newInstance = new obj.constructor()
+    newInstance[key] = @_clone obj[key] for key of obj
+    newInstance
 
   mix       : mix
   isArray   : isArray

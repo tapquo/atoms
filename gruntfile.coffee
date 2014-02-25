@@ -3,14 +3,16 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON 'package.json'
 
     meta:
-      build   : 'build',
-      bower   : 'bower',
-      ide_nw  : 'examples/ide/node-webkit',
-      version : '',
-      banner  : '/* <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy/m/d") %>\n' +
-              '   <%= pkg.homepage %>\n' +
-              '   Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
-              ' - Licensed <%= _.pluck(pkg.license, "type").join(", ") %> */\n'
+      build     : 'build',
+      bower     : 'bower',
+      extensions: 'extensions',
+
+      ide_nw    : 'examples/ide/node-webkit',
+      version   : '',
+      banner    : '/* <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy/m/d") %>\n' +
+                '   <%= pkg.homepage %>\n' +
+                '   Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
+                ' - Licensed <%= _.pluck(pkg.license, "type").join(", ") %> */\n'
 
     source:
       # CoffeeScript
@@ -100,7 +102,7 @@ module.exports = (grunt) ->
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
       icons:
         options: compress: false
-        files: '<%=meta.bower%>/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
+        files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
 
 
     notify:

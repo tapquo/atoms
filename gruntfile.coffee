@@ -107,26 +107,33 @@ module.exports = (grunt) ->
 
     notify:
       core:
-        options: title: 'CoffeeScript', message: 'Core builded.'
+        options: title: 'atoms.js', message: 'grunt:uglify:core'
       app:
-        options: title: 'CoffeeScript', message: 'App builded.'
+        options: title: 'atoms.app.js', message: 'grunt:uglify:app'
+      stylus_app:
+        options: title: 'atoms.app.css', message: 'grunt:stylus:app'
+      stylus_theme:
+        options: title: 'atoms.app.theme.css', message: 'grunt:stylus:theme'
+      spec:
+        options: title: 'Atoms Spec', message: 'grunt:jasmine'
+
 
     watch:
       core:
         files: ['<%= source.core %>']
-        tasks: ['concat:core', 'coffee:core', 'uglify:core', 'jasmine', 'notify:core']
+        tasks: ['concat:core', 'coffee:core', 'uglify:core']#, 'jasmine', 'notify:core']
       spec:
         files: ['<%= source.spec %>']
-        tasks: ['coffee:spec', 'jasmine']
+        tasks: ['coffee:spec', 'jasmine', 'notify:spec']
       app:
         files: ['<%= source.app %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
       stylus_app:
         files: ['<%= source.stylus.app %>']
-        tasks: ['stylus:app']
+        tasks: ['stylus:app', 'notify:stylus_app']
       stylus_theme:
         files: ['<%= source.stylus.theme %>']
-        tasks: ['stylus:theme']
+        tasks: ['stylus:theme', 'notify:stylus_theme']
       stylus_icons:
         files: ['<%= source.stylus.icons %>']
         tasks: ['stylus:icons']

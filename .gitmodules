@@ -1,15 +1,21 @@
 [submodule "extensions/app"]
-	path = extensions/app
-	url = https://github.com/tapquo/atoms-app
+    path = extensions/app
+    url = https://github.com/tapquo/atoms-app
 [submodule "extensions/icons"]
-	path = extensions/icons
-	url = https://github.com/tapquo/bower-atoms-icons
+    path = extensions/icons
+    url = https://github.com/tapquo/bower-atoms-icons
+[submodule "extensions/appnima"]
+    path = extensions/appnima
+    url = https://github.com/tapquo/bower-atoms-appnima
+[submodule "extensions/gmaps"]
+    path = extensions/gmaps
+    url = https://github.com/tapquo/bower-atoms-gmaps
 [submodule "bower"]
-	path = bower
-	url = https://github.com/tapquo/bower-atoms
+    path = bower
+    url = https://github.com/tapquo/bower-atoms
 [submodule "components/CSSmethods"]
-	path = components/CSSmethods
-	url = https://github.com/soyjavi/CSSmethods
+    path = components/CSSmethods
+    url = https://github.com/soyjavi/CSSmethods
 [submodule "components/QuoJS"]
-	path = components/QuoJS
-	url = https://github.com/soyjavi/QuoJS
+    path = components/QuoJS
+    url = https://github.com/soyjavi/QuoJS

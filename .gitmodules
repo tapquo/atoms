@@ -5,11 +5,11 @@
 	path = extensions/icons
 	url = https://github.com/tapquo/bower-atoms-icons
 [submodule "extensions/appnima"]
-    path = extensions/appnima
-    url = https://github.com/tapquo/bower-atoms-appnima
+	path = extensions/appnima
+	url = https://github.com/tapquo/bower-atoms-appnima
 [submodule "extensions/gmaps"]
-    path = extensions/gmaps
-    url = https://github.com/tapquo/bower-atoms-gmaps
+	path = extensions/gmaps
+	url = https://github.com/tapquo/bower-atoms-gmaps
 [submodule "bower"]
 	path = bower
 	url = https://github.com/tapquo/bower-atoms

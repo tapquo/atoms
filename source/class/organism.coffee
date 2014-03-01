@@ -34,10 +34,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-    if YAML?
-      _file = YAML.parse scaffold.responseText
-    else
-      _file = JSON.parse scaffold.responseText
+    _file = JSON.parse scaffold.responseText
 
   render: ->
     do @scaffold
@@ -51,4 +48,4 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-    _file = YAML.parse scaffold.responseText
+    _file = JSON.parse scaffold.responseText

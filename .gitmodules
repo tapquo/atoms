@@ -19,3 +19,6 @@
 [submodule "components/QuoJS"]
 	path = components/QuoJS
 	url = https://github.com/soyjavi/QuoJS
+[submodule "extensions/carousel"]
+	path = extensions/carousel
+	url = https://github.com/tapquo/bower-atoms-carousel

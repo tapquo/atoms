@@ -63,8 +63,11 @@ module.exports = (grunt) ->
           'extensions/app/style/theme/organism.*.styl'
           'extensions/app/style/theme/app.styl'
         ]
+        # Extensions
         icons: [
           'extensions/icons/*.styl']
+        appnima: [
+          'extensions/appnima/stylesheets/*.styl']
         gmaps: [
           'extensions/gmaps/stylesheets/*.styl']
 
@@ -75,6 +78,7 @@ module.exports = (grunt) ->
       spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'                : '<%= source.spec %>'
       # Extension
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'                 : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      appnima     : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'         : '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'
       gmaps       : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'           : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'
       # Example
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js'         : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
@@ -89,6 +93,9 @@ module.exports = (grunt) ->
       app:
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.app.js'             : '<%=meta.build%>/<%=pkg.name%>.app.js'
+      appnima:
+        options: mangle: false
+        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.js'       : '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'
       gmaps:
         options: mangle: false
         files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.js'       : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'
@@ -110,13 +117,16 @@ module.exports = (grunt) ->
       theme:
         options: compress: false, import: [ '__init']
         files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
+      # Extensions
       icons:
         options: compress: true
         files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
+      appnima:
+        options: compress: true
+        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.css': '<%=source.stylus.appnima%>'
       gmaps:
         options: compress: true
         files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.css': '<%=source.stylus.gmaps%>'
-
 
     notify:
       core:
@@ -141,6 +151,9 @@ module.exports = (grunt) ->
       app:
         files: ['<%= source.app %>']
         tasks: ['coffee:app', 'uglify:app', 'notify:app']
+      app_appnima:
+        files: ['<%= source.extensions.appnima %>']
+        tasks: ['coffee:appnima', 'uglify:appnima']
       app_gmaps:
         files: ['<%= source.extensions.gmaps %>']
         tasks: ['coffee:gmaps', 'uglify:gmaps']
@@ -153,7 +166,10 @@ module.exports = (grunt) ->
       stylus_icons:
         files: ['<%= source.stylus.icons %>']
         tasks: ['stylus:icons']
-      stylus_app_gmaps:
+      stylus_appnima:
+        files: ['<%= source.stylus.appnima %>']
+        tasks: ['stylus:appnima']
+      stylus_gmaps:
         files: ['<%= source.stylus.gmaps %>']
         tasks: ['stylus:gmaps']
       example_app:

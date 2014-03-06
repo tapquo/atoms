@@ -42,6 +42,11 @@ module.exports = (grunt) ->
             'extensions/app/example/**/*.coffee'
             'extensions/app/example/*.coffee']
 
+      extensions:
+        app     : []
+        appnima : []
+        gmaps   : ['extensions/gmaps/**/*.coffee']
+
       # Stylesheets
       stylus:
         app: [
@@ -59,18 +64,26 @@ module.exports = (grunt) ->
         ]
         icons: [
           'extensions/icons/*.styl']
+        app_gmaps: [
+          'extensions/gmaps/stylesheets/*.styl']
 
 
     concat:
       core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'           : '<%= source.core %>'
+      # Extension
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'             : '<%= source.app %>'
+      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'       : '<%= source.extensions.gmaps %>'
+      # Example
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'     : '<%= source.example.app %>'
 
 
     coffee:
       core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'               : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
       spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'                : '<%= source.spec %>'
+      # Extension
       app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'                 : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'           : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'
+      # Example
       example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js'         : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
 
 
@@ -79,9 +92,13 @@ module.exports = (grunt) ->
       core:
         options: mangle: true
         files: '<%=meta.bower%>/<%=pkg.name%>.js'                 : '<%=meta.build%>/<%=pkg.name%>.debug.js'
+      # Extensions
       app:
         options: mangle: false
         files: '<%=meta.bower%>/<%=pkg.name%>.app.js'             : '<%=meta.build%>/<%=pkg.name%>.app.js'
+      app_gmaps:
+        options: mangle: false
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.gmaps.js'       : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'
 
 
     jasmine:
@@ -103,6 +120,9 @@ module.exports = (grunt) ->
       icons:
         options: compress: true
         files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
+      app_gmaps:
+        options: compress: true
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.gmaps.css': '<%=source.stylus.app_gmaps%>'
 
 
     notify:
@@ -128,6 +148,9 @@ module.exports = (grunt) ->
       app:
         files: ['<%= source.app %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
+      app_gmaps:
+        files: ['<%= source.extensions.gmaps %>']
+        tasks: ['concat:app_gmaps', 'coffee:app_gmaps', 'uglify:app_gmaps']
       stylus_app:
         files: ['<%= source.stylus.app %>']
         tasks: ['stylus:app', 'notify:stylus_app']
@@ -137,6 +160,9 @@ module.exports = (grunt) ->
       stylus_icons:
         files: ['<%= source.stylus.icons %>']
         tasks: ['stylus:icons']
+      stylus_app_gmaps:
+        files: ['<%= source.stylus.app_gmaps %>']
+        tasks: ['stylus:app_gmaps']
       example_app:
         files: ['<%= source.example.app %>']
         tasks: ['concat:example_app', 'coffee:example_app']

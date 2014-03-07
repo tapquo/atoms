@@ -167,6 +167,12 @@ module.exports = (grunt) ->
       app:
         files: ['<%= source.app %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
+      app_appnima:
+        files: ['<%= source.extensions.appnima %>']
+        tasks: ['concat:app_appnima', 'coffee:app_appnima', 'uglify:app_appnima']
+      app_carousel:
+        files: ['<%= source.extensions.carousel %>']
+        tasks: ['concat:app_carousel', 'coffee:app_carousel', 'uglify:app_carousel']
       app_gmaps:
         files: ['<%= source.extensions.gmaps %>']
         tasks: ['concat:app_gmaps', 'coffee:app_gmaps', 'uglify:app_gmaps']

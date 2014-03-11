@@ -29,13 +29,16 @@ Atoms.Url = do (a = Atoms) ->
   @param  {value}    Array of urls with callbacks
   ###
   _path = (args...) ->
-    _options.forward = true
-    path = "/" + args.join("/")
-    unless path is _options.path
-      path = "#" + path unless _options.history
-      state = window.history.state or null
-      window.history.pushState state, document.title, path.toLowerCase()
-      _onPopState()
+    if args.length > 0
+      _options.forward = true
+      path = "/" + args.join("/")
+      unless path is _options.path
+        path = "#" + path unless _options.history
+        state = window.history.state or null
+        window.history.pushState state, document.title, path.toLowerCase()
+        _onPopState()
+    else
+      if _options.history then _getPath() else _getFragment()
 
   ###
   @TODO

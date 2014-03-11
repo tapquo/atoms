@@ -11,7 +11,7 @@ Constants
 Atoms.Core.Constants =
 
   ANIMATION:
-    END   : "webkitAnimationEnd mozAnimationEnd AnimationEnd"
+    END   : "webkitAnimationEnd mozAnimationEnd animationend"
 
   APPEND:  "append"
 

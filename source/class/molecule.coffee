@@ -24,16 +24,26 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     do @scaffold
     do @output
     do @chemistry
-
-  entityAtom: (@atomEntity) -> @
+    if @attributes.entityBind? and @attributes.entityAtom?
+      Atoms.$ => do @_bindEntityEvents
 
   entity: (entities) ->
     do @_removeAtomsEntities
-    for entity in entities when Atoms.Atom[@atomEntity]?
-      attributes = entity: entity
-      attributes = Atoms.Core.Helper.mix attributes, @default.children?[@atomEntity]
-      @_entities.push @appendChild "Atom", @atomEntity, attributes
+    if @attributes.entityAtom? and Atoms.Atom[@attributes.entityAtom]?
+      @_addAtomEntity entity for entity in entities
+
+  # Entities
+  _addAtomEntity: (entity) ->
+    attributes = Atoms.Core.Helper.mix entity: entity, @default.children?[@attributes.entityAtom]
+    @_entities.push @appendChild "Atom", @attributes.entityAtom, attributes
 
   _removeAtomsEntities: ->
     entity.el.remove() for entity in @_entities
     @_entities = []
+
+  _bindEntityEvents : =>
+    EVENT = Atoms.Core.Constants.ENTITY.EVENT
+    Atoms.Entity[@attributes.entityBind].bind EVENT.CREATE, @_bindEntityCreate
+
+  _bindEntityCreate: (entity) =>
+    @_addAtomEntity entity

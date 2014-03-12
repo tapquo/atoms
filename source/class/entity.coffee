@@ -74,6 +74,8 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   # ---------------------------------------------------------------------------
   constructor: (attributes) ->
     super
+    @constructor.constructor.type = "Entity"
+    @constructor.constructor.base = @constructor.name
     @className = @constructor.name
     @load attributes if attributes
 
@@ -125,7 +127,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     @constructor.records[@uid] = record
 
     @trigger 'create'
-    @trigger 'change', 'create'
+    @trigger 'change'
     record.clone()
 
   update: ->
@@ -133,16 +135,15 @@ class Atoms.Class.Entity extends Atoms.Core.Module
 
     records = @constructor.records
     records[@uid].load @attributes()
-
     @trigger 'update'
-    @trigger 'change', 'update'
+    @trigger 'change'
     records[@uid].clone()
 
   destroy: ->
     @trigger 'beforeDestroy'
     delete @constructor.records[@uid]
     @trigger 'destroy'
-    @trigger 'change', 'destroy'
+    @trigger 'change'
     @unbind()
 
   clone: ->

@@ -19,5 +19,6 @@ Atoms.Core.Constants =
 
   ENTITY:
     EVENT:
+      CREATE  : "create"
       UPDATE  : "update"
       DESTROY : "destroy"

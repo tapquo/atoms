@@ -25,20 +25,19 @@ class Atoms.Class.Atom extends Atoms.Core.Module
       attributes = @entity.parse?() or @entity.attributes()
       @attributes = Atoms.Core.Helper.mix @attributes, attributes
       EVENT = Atoms.Core.Constants.ENTITY.EVENT
-      Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindUpdate
-      Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindDestroy
+      Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindEntityUpdate
+      Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindEntityDestroy
     do @output
     @bindEvents()
 
-  bindUpdate: (model) =>
+  bindEntityUpdate: (model) =>
     if model.uid is @entity.uid
       attributes = @entity.parse?() or @entity.attributes()
-      @attributes[attribute] = @entity[attribute] for attribute of attributes
+      @attributes[attribute] = attributes[attribute] for attribute of attributes
       do @refresh
 
-  bindDestroy: (model) =>
-    if model.uid is @entity.uid
-      do @destroy
+  bindEntityDestroy: (model) =>
+    do @destroy if model.uid is @entity.uid
 
   bindEvents: ->
     if @attributes.events

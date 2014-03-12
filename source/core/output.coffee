@@ -50,10 +50,10 @@ Atoms.Core.Output =
   @method refresh
   ###
   refresh: ->
-    dom_node = @el[0]
+    current_el = @el
     @_render()
     @bindEvents?()
-    dom_node.parentNode.replaceChild @el[0], dom_node
+    current_el.replaceWith @el
 
   ###
   Remove element from DOM
@@ -61,7 +61,6 @@ Atoms.Core.Output =
   ###
   destroy: ->
     do @el.remove
-
 
   # Private Methods
   _render: ->

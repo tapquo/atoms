@@ -110,7 +110,6 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     if error
       @trigger 'error', error
     else
-      @trigger 'beforeSave'
       record = if @isNew() then @create() else @update()
       @trigger 'save'
       record
@@ -120,19 +119,14 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     @save()
 
   create: ->
-    @trigger 'beforeCreate'
-
     record = new @constructor @attributes()
     record.uid = @uid
     @constructor.records[@uid] = record
-
     @trigger 'create'
     @trigger 'change'
     record.clone()
 
   update: ->
-    @trigger 'beforeUpdate'
-
     records = @constructor.records
     records[@uid].load @attributes()
     @trigger 'update'
@@ -140,7 +134,6 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     records[@uid].clone()
 
   destroy: ->
-    @trigger 'beforeDestroy'
     delete @constructor.records[@uid]
     @trigger 'destroy'
     @trigger 'change'

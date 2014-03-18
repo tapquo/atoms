@@ -76,46 +76,46 @@ module.exports = (grunt) ->
           'extensions/gmaps/stylesheets/*.styl']
 
     concat:
-      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'           : '<%= source.core %>'
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'         : '<%= source.core %>'
       # Extension
-      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'             : '<%= source.app %>'
-      app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'     : '<%= source.extensions.appnima %>'
-      app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'    : '<%= source.extensions.carousel %>'
-      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'       : '<%= source.extensions.gmaps %>'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'           : '<%= source.app %>'
+      app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'   : '<%= source.extensions.appnima %>'
+      app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'  : '<%= source.extensions.carousel %>'
+      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'     : '<%= source.extensions.gmaps %>'
       # Example
-      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'     : '<%= source.example.app %>'
+      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'   : '<%= source.example.app %>'
 
 
     coffee:
-      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'               : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
-      spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'                : '<%= source.spec %>'
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'             : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
+      spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'              : '<%= source.spec %>'
       # Extension
-      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.js'                 : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
-      app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'           : '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'
-      app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'           : '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'
-      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'           : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.debug.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'       : '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'
+      app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'      : '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'
+      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'         : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'
       # Example
-      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js'         : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
+      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js'       : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
 
 
     uglify:
       options:  banner: "<%= meta.banner %>"#, report: "gzip"
       core:
         options: mangle: true
-        files: '<%=meta.bower%>/<%=pkg.name%>.js'                 : '<%=meta.build%>/<%=pkg.name%>.debug.js'
+        files: '<%=meta.bower%>/<%=pkg.name%>.js'                               : '<%=meta.build%>/<%=pkg.name%>.debug.js'
       # Extensions
       app:
         options: mangle: false
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.js'             : '<%=meta.build%>/<%=pkg.name%>.app.js'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.js'                           : '<%=meta.build%>/<%=pkg.name%>.app.debug.js'
       app_appnima:
         options: mangle: false
-        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.js'       : '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'
+        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.js'      : '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'
       app_carousel:
         options: mangle: false
-        files: '<%=meta.extensions%>/carousel/<%=pkg.name%>.app.carousel.js'       : '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'
+        files: '<%=meta.extensions%>/carousel/<%=pkg.name%>.app.carousel.js'    : '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'
       app_gmaps:
         options: mangle: false
-        files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.js'       : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'
+        files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.js'          : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'
 
     jasmine:
       pivotal:
@@ -129,22 +129,22 @@ module.exports = (grunt) ->
     stylus:
       app:
         options: compress: true, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.css': '<%=source.stylus.app%>'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.css'                          : '<%=source.stylus.app%>'
       theme:
         options: compress: false, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css': '<%=source.stylus.theme%>'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css'                    : '<%=source.stylus.theme%>'
       icons:
         options: compress: true
-        files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css': '<%=source.stylus.icons%>'
+        files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css'             : '<%=source.stylus.icons%>'
       app_appnima:
         options: compress: true
-        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.css': '<%=source.stylus.app_appnima%>'
+        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.css'     : '<%=source.stylus.app_appnima%>'
       app_carousel:
         options: compress: true
-        files: '<%=meta.extensions%>/carousel/<%=pkg.name%>.app.carousel.css': '<%=source.stylus.app_carousel%>'
+        files: '<%=meta.extensions%>/carousel/<%=pkg.name%>.app.carousel.css'   : '<%=source.stylus.app_carousel%>'
       app_gmaps:
         options: compress: true
-        files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.css': '<%=source.stylus.app_gmaps%>'
+        files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.css'         : '<%=source.stylus.app_gmaps%>'
 
 
     notify:

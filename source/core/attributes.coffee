@@ -34,26 +34,31 @@ Atoms.Core.Attributes =
     children = @attributes.children or @default.children or []
     for item, index in children
       for key of item
-        base = key.split(".")
-        type = base[0]
-        class_name = base[1]
-        if Atoms[type][class_name]?
-          attributes = item[key]
-          if @default?.children?[index]?[key]?
-            attributes = Atoms.Core.Helper.mix item[key], @default.children?[index]?[key]
-          @appendChild type, class_name, attributes
+        attributes = item[key]
+        if @default?.children?[index]?[key]?
+          attributes = Atoms.Core.Helper.mix item[key], @default.children[index][key]
+        @appendChild key, attributes
 
-  appendChild: (type, class_name, attributes={}) ->
-    if @__available type, class_name
-      attributes.parent = attributes.parent or @
-      child = new Atoms[type][class_name] attributes
-      @children.push child
-      @[attributes.id] = child if attributes.id
-      child
+  appendChild: (class_name, attributes={}) ->
+    child_constructor = __getConstructor class_name
+    if child_constructor
+      if @__available child_constructor
+        attributes.parent = attributes.parent or @
+        child = new child_constructor attributes
+        @children.push child
+        @[attributes.id] = child if attributes.id
+        child
+      else
+        console.error "Instance #{class_name} not available in #{@constructor.type}.#{@constructor.base} ##{@constructor.name}."
     else
-      console.error "Instance #{type}.#{class_name} no available in #{constructor.name} (#{constructor.base})"
+      console.error "Instance #{class_name} doesn't exists."
 
-  __available: (type, class_name) ->
-    instance = Atoms[type][class_name]
-    instance = instance.base or instance.name
-    (not @constructor.available or "#{type}.#{instance}" in @constructor.available)
+  __available: (instance) ->
+    base = "#{instance.type}." + (instance.base or instance.name)
+    (not @constructor.available or base in @constructor.available)
+
+
+__getConstructor = (class_name) ->
+  instance = Atoms
+  instance = instance[item] for item in class_name.split(".") when instance?
+  instance

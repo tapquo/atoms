@@ -14,6 +14,8 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
+  @type = "Organism"
+
   #@TODO: Better if I use a instance variable. Change It!
   _file = undefined
 
@@ -21,7 +23,6 @@ class Atoms.Class.Organism extends Atoms.Core.Module
     super
     @default = children: [] unless @default
     @children = []
-    @constructor.type = @constructor.type or "Organism"
 
     if scaffold then _file = @_getScaffold(scaffold)
     @attributes = Atoms.Core.Helper.mix @attributes, _file

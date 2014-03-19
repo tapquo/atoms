@@ -14,13 +14,14 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
+  @type = "Molecule"
+
   _entities: []
 
   constructor: (@attributes) ->
     super
     @default = children: [] unless @default
     @children = []
-    @constructor.type = "Molecule"
     do @scaffold
     do @output
     do @chemistry
@@ -40,7 +41,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
       attributes[property] = @attributes.bind[property] if @attributes.bind[property]?
 
     attributes = Atoms.Core.Helper.mix attributes, @default.children?[@attributes.entityAtom]
-    @_entities.push @appendChild "Atom", @attributes.bind.atom, attributes
+    @_entities.push @appendChild "Atom.#{@attributes.bind.atom}", attributes
 
   _removeAtomsEntities: ->
     entity.el.remove() for entity in @_entities

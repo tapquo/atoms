@@ -16,7 +16,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   @type = "Molecule"
 
-  _entities: []
+  _records: []
 
   constructor: (@attributes) ->
     super
@@ -35,17 +35,19 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
       @_addAtomEntity entity for entity in entities
 
   # Entities
-  _addAtomEntity: (entity) =>
+  _addAtomEntity: (entity, record = true) =>
     attributes = entity: entity
-    for property in ["events", "callbacks"]
-      attributes[property] = @attributes.bind[property] if @attributes.bind[property]?
+    for property in ["events", "callbacks"] when @attributes.bind[property]?
+      attributes[property] = @attributes.bind[property]
 
     attributes = Atoms.Core.Helper.mix attributes, @default.children?[@attributes.entityAtom]
-    @_entities.push @appendChild "Atom.#{@attributes.bind.atom}", attributes
+    atom = @appendChild "Atom.#{@attributes.bind.atom}", attributes
+    @_records.push atom if record
+    atom
 
   _removeAtomsEntities: ->
-    entity.el.remove() for entity in @_entities
-    @_entities = []
+    entity.el.remove() for entity in @_records
+    @_records = []
 
   _bindEntityEvents : ->
     entity = Atoms.Entity[@attributes.bind.entity]

@@ -31,7 +31,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   entity: (entities) ->
     do @_removeAtomsEntities
-    if @attributes.bind?.entity? and @attributes.bind.atom? and Atoms.Atom[@attributes.bind.atom]?
+    if @attributes.bind?.entity? and @attributes.bind.atom?
       @_addAtomEntity entity for entity in entities
 
   # Entities
@@ -41,7 +41,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
       attributes[property] = @attributes.bind[property]
 
     attributes = Atoms.Core.Helper.mix attributes, @default.children?[@attributes.entityAtom]
-    atom = @appendChild "Atom.#{@attributes.bind.atom}", attributes
+    atom = @appendChild "#{@attributes.bind.atom}", attributes
     @_records.push atom if record
     atom
 

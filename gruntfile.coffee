@@ -85,10 +85,10 @@ module.exports = (grunt) ->
 
 
     coffee:
-      core        : files: '<%=meta.bower%>/<%=pkg.name%>.debug.js'             : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
+      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'             : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
       spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'              : '<%= source.spec %>'
       # Extension
-      app         : files: '<%=meta.bower%>/<%=pkg.name%>.app.debug.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
+      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.debug.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
       app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'       : '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'
       app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'      : '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'
       app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'         : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'
@@ -100,11 +100,11 @@ module.exports = (grunt) ->
       options:  banner: "<%= meta.banner %>"#, report: "gzip"
       core:
         options: mangle: true
-        files: '<%=meta.bower%>/<%=pkg.name%>.js'                               : '<%=meta.bower%>/<%=pkg.name%>.debug.js'
+        files: '<%=meta.bower%>/<%=pkg.name%>.js'                               : '<%=meta.build%>/<%=pkg.name%>.debug.js'
       # Extensions
       app:
         options: mangle: false
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.js'                           : '<%=meta.bower%>/<%=pkg.name%>.app.debug.js'
+        files: '<%=meta.bower%>/<%=pkg.name%>.app.js'                           : '<%=meta.build%>/<%=pkg.name%>.app.debug.js'
       app_appnima:
         options: mangle: false
         files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.js'      : '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'

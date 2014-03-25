@@ -28,7 +28,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.auto
       do @_bindEntityEvents
 
-
   entity: (entities) ->
     do @_removeAtomsEntities
     if @attributes.bind?.entity? and @attributes.bind.atom?
@@ -51,5 +50,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   _bindEntityEvents : ->
     entity = Atoms.Entity[@attributes.bind.entity]
-    new entity()
-    entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, @_addAtomEntity
+    if entity?
+      new entity()
+      entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, @_addAtomEntity

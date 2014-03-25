@@ -67,11 +67,11 @@ module.exports = (grunt) ->
         icons: [
           'extensions/icons/*.styl']
         app_appnima: [
-          'extensions/appnima/stylesheets/*.styl']
+          'extensions/appnima/style/*.styl']
         app_carousel: [
-          'extensions/carousel/stylesheets/*.styl']
+          'extensions/carousel/style/*.styl']
         app_gmaps: [
-          'extensions/gmaps/stylesheets/*.styl']
+          'extensions/gmaps/style/*.styl']
 
     concat:
       core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'         : '<%= source.core %>'

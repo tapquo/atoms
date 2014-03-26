@@ -99,8 +99,8 @@ Atoms.Core.Event =
     # Default Callback
     unless callback
       constructor = if args.length is 1 then @constructor else args[1].constructor
-      class_base = @_classBase constructor
-      callback = "on#{class_base.toClassName()}#{event.toClassName()}"
+      base = if constructor.extends then constructor.name else constructor.base
+      callback = "on#{base.toClassName()}#{event.toClassName()}"
 
     # Add type
     args[0].eventType = type

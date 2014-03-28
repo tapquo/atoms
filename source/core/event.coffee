@@ -60,10 +60,13 @@ Atoms.Core.Event =
   @param  {array}     [OPTIONAL] Additional parameters to pass along to the event
                       handler.
   ###
-  bubble: (event, args...) ->
-    if @parent?.uid?
-      args.push @
-      @_state @parent, event, args, "bubble"
+  bubble: (event, hierarchy...) ->
+    bubbled = true
+    if hierarchy.length is 1
+      bubbled = false unless event in (@attributes.events or [])
+    if bubbled and @parent?.uid?
+      hierarchy.push @
+      @_state @parent, event, hierarchy, "bubble"
 
   ###
   @TODO: Comment method

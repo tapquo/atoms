@@ -80,10 +80,10 @@ Atoms.Core.Event =
 
   # Private Methods
   _customEventName: (event) ->
-    class_base = @_classBase @constructor
-    ("#{@constructor.type}:#{class_base}:#{event}").toLowerCase()
+    base = @_base @constructor
+    ("#{@constructor.type}:#{base}:#{event}").toLowerCase()
 
-  _classBase: (constructor) ->
+  _base: (constructor) ->
     constructor.base or constructor.name
 
   _state: (instance, event, args, type="bubble") ->
@@ -99,7 +99,8 @@ Atoms.Core.Event =
     # Default Callback
     unless callback
       constructor = if args.length is 1 then @constructor else args[1].constructor
-      base = if constructor.extends then constructor.name else constructor.base
+      base = @_base constructor
+      base = constructor.name if constructor.extends
       callback = "on#{base.toClassName()}#{event.toClassName()}"
 
     # Add type

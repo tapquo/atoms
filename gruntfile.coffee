@@ -199,13 +199,12 @@ module.exports = (grunt) ->
         files: ['<%= source.example.app %>']
         tasks: ['concat:example_app', 'coffee:example_app']
 
-
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-concat'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
-  grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
-  grunt.loadNpmTasks 'grunt-notify'
+  grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-notify'
 
   grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']

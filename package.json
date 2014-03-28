@@ -1,6 +1,6 @@
 {
   "name": "atoms",
-  "version": "0.03.26",
+  "version": "0.03.28",
   "description": "Atomic Development Components for Modern WebApps.",
   "homepage": "http://atomic.tapquo.com",
   "author": {
@@ -8,13 +8,12 @@
     "site": "http://tapquo.com"
   },
   "devDependencies": {
-    "grunt-contrib-coffee": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-jasmine": "*",
-    "grunt-contrib-stylus": "*",
-    "grunt-contrib-copy": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-notify": "~0.2.16",
-    "grunt-node-webkit-builder": "*"
+    "grunt-contrib-concat"  : "*",
+    "grunt-contrib-coffee"  : "*",
+    "grunt-contrib-uglify"  : "*",
+    "grunt-contrib-stylus"  : "*",
+    "grunt-contrib-jasmine" : "*",
+    "grunt-contrib-watch"   : "*",
+    "grunt-notify"          : "~0.2.16"
   }
 }

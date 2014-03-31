@@ -30,19 +30,18 @@ Atoms.Core.Attributes =
       @entity = @attributes.entity
       delete @attributes.entity
 
-  chemistry: (children) ->
-    children = @attributes.children or @default.children or []
-    for item, index in children
-      for key of item
-        attributes = item[key]
-        if @default?.children?[index]?[key]?
-          attributes = Atoms.Core.Helper.mix item[key], @default.children[index][key]
-        @appendChild key, attributes
+  chemistry: ->
+    for item in @attributes.children or @constructor.default?.children or []
+      @appendChild class_name, item[class_name] for class_name of item
 
   appendChild: (class_name, attributes={}) ->
     child_constructor = __getConstructor class_name
     if child_constructor
       if @__available child_constructor
+
+        if child_constructor.default?
+          attributes = Atoms.Core.Helper.mix attributes, child_constructor.default
+
         attributes.parent = attributes.parent or @
         child = new child_constructor attributes
         @children.push child

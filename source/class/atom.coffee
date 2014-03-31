@@ -14,11 +14,11 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
-  @type = "Atom"
+  @type    = "Atom"
+  @default = {}
 
   constructor: (@attributes) ->
     super
-    @default = events: [] unless @default
     @attributes = Atoms.Core.Helper.mix @attributes, @default
 
     do @scaffold

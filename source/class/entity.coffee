@@ -11,8 +11,9 @@ Entity Namespace
 class Atoms.Class.Entity extends Atoms.Core.Module
 
   @extend Atoms.Core.Event
-  @records    : {}
-  @attributes : []
+
+  @records    = {}
+  @attributes = []
 
   # ---------------------------------------------------------------------------
   # Static Methods

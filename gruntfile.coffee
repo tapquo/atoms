@@ -29,10 +29,10 @@ module.exports = (grunt) ->
         'source/core/*.coffee'
         'source/class/*.coffee']
       app: [
-        'extensions/app/source/*.coffee'
-        'extensions/app/source/atom/*.coffee'
-        'extensions/app/source/molecule/*.coffee'
-        'extensions/app/source/organism/*.coffee']
+        'extensions/app/*.coffee'
+        'extensions/app/atom/*.coffee'
+        'extensions/app/molecule/*.coffee'
+        'extensions/app/organism/*.coffee']
       spec  : [
         'spec/*.coffee']
       example:

@@ -1,6 +1,6 @@
 {
   "name": "atoms",
-  "version": "0.03.31",
+  "version": "0.04.02",
   "description": "Atomic Development Components for Modern WebApps.",
   "homepage": "http://atomic.tapquo.com",
   "author": {
@@ -14,6 +14,7 @@
     "grunt-contrib-stylus"  : "*",
     "grunt-contrib-jasmine" : "*",
     "grunt-contrib-watch"   : "*",
+    "grunt-contrib-copy"    : "*",
     "grunt-notify"          : "~0.2.16"
   }
 }

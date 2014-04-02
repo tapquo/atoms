@@ -1,6 +1,6 @@
 # Atoms
 ## Atomic Development for Modern WebApps
-Copyright 2013, Javier Jimenez Villar
+Copyright 2013-2014, Javier Jimenez Villar
 
 
 ### What is project *Atoms*?
@@ -41,6 +41,7 @@ Now you can download the project code and get all the necessary NPM modules:
 
 ```
 git clone https://github.com/tapquo/atoms.git my-atoms
+git submodule foreach git pull origin master
 npm install
 ```
 

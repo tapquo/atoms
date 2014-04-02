@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
   grunt.initConfig
-    pkg: grunt.file.readJSON 'package.json'
+    pkg         : grunt.file.readJSON 'package.json'
+    component   : grunt.file.readJSON 'bower/component.json'
 
     meta:
       build     : 'build',
@@ -11,7 +12,6 @@ module.exports = (grunt) ->
                 '   <%= pkg.homepage %>\n' +
                 '   Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
                 ' - Licensed <%= _.pluck(pkg.license, "type").join(", ") %> */\n'
-
     source:
       # CoffeeScript
       core: [
@@ -33,15 +33,16 @@ module.exports = (grunt) ->
         'extensions/app/atom/*.coffee'
         'extensions/app/molecule/*.coffee'
         'extensions/app/organism/*.coffee']
+
       spec  : [
         'spec/*.coffee']
       example:
           app: [
-            'extensions/app/example/source/entities/*.coffee'
-            'extensions/app/example/source/atoms/*.coffee'
-            'extensions/app/example/source/molecules/*.coffee'
-            'extensions/app/example/source/organisms/*.coffee'
-            'extensions/app/example/source/*.coffee']
+            'extensions/test/source/entities/*.coffee'
+            'extensions/test/source/atoms/*.coffee'
+            'extensions/test/source/molecules/*.coffee'
+            'extensions/test/source/organisms/*.coffee'
+            'extensions/test/source/*.coffee']
 
       extensions:
         app     : []
@@ -72,6 +73,9 @@ module.exports = (grunt) ->
           'extensions/carousel/style/*.styl']
         app_gmaps: [
           'extensions/gmaps/style/*.styl']
+
+    doc:
+      es: ['extensions/app/docs/ES/*.md']
 
     concat:
       core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'         : '<%= source.core %>'
@@ -114,6 +118,15 @@ module.exports = (grunt) ->
       app_gmaps:
         options: mangle: false
         files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.js'          : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'
+
+
+    copy:
+      doc_es:
+        expand  : true
+        flatten : true
+        src     : '<%= doc.es %>'
+        dest    : '<%= meta.bower %>/docs/ES/'
+
 
     jasmine:
       pivotal:
@@ -195,6 +208,9 @@ module.exports = (grunt) ->
       stylus_app_gmaps:
         files: ['<%= source.stylus.app_gmaps %>']
         tasks: ['stylus:app_gmaps']
+      doc_es:
+        files: ['<%= doc.es %>']
+        tasks: ['copy:doc_es']
       example_app:
         files: ['<%= source.example.app %>']
         tasks: ['concat:example_app', 'coffee:example_app']
@@ -203,8 +219,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-notify'
 
-  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'jasmine']
+  grunt.registerTask 'default', ['concat', 'coffee', 'uglify', 'stylus', 'copy', 'jasmine']

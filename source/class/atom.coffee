@@ -19,7 +19,7 @@ class Atoms.Class.Atom extends Atoms.Core.Module
 
   constructor: (@attributes) ->
     super
-    @attributes = Atoms.Core.Helper.mix @attributes, @default
+    @attributes = Atoms.Core.Helper.mix @attributes, @constructor.default
 
     do @scaffold
     if @entity

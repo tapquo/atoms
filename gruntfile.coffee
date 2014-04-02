@@ -8,7 +8,7 @@ module.exports = (grunt) ->
       bower     : 'bower',
       extensions: 'extensions',
       version   : '',
-      banner    : '/* <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy/m/d") %>\n' +
+      banner    : '/* <%= pkg.name %> v<%= grunt.template.today("0.mm.dd") %>\n' +
                 '   <%= pkg.homepage %>\n' +
                 '   Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
                 ' - Licensed <%= _.pluck(pkg.license, "type").join(", ") %> */\n'

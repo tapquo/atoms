@@ -4,216 +4,219 @@ module.exports = (grunt) ->
     component   : grunt.file.readJSON 'bower/component.json'
 
     meta:
-      build     : 'build',
-      bower     : 'bower',
-      extensions: 'extensions',
       version   : '',
       banner    : '/* <%= pkg.name %> v<%= grunt.template.today("0.mm.dd") %>\n' +
                 '   <%= pkg.homepage %>\n' +
                 '   Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
                 ' - Licensed <%= _.pluck(pkg.license, "type").join(", ") %> */\n'
-    source:
-      # CoffeeScript
-      core: [
-        'components/quojs/source/quo.coffee'
-        'components/quojs/source/quo.ajax.coffee'
-        'components/quojs/source/quo.css.coffee'
-        'components/quojs/source/quo.element.coffee'
-        'components/quojs/source/quo.environment.coffee'
-        'components/quojs/source/quo.events.coffee'
-        'components/quojs/source/quo.gestures.coffee'
-        'components/quojs/source/quo.gestures.*.coffee'
-        'components/quojs/source/quo.output.coffee'
-        'components/quojs/source/quo.query.coffee'
+
+    folder:
+      build : 'build/'
+      bower : 'bower/'
+      app   : 'extensions/app/'
+      icons : 'extensions/icons/'
+      test  : 'extensions/test/source/'
+      quo   : 'components/quojs/source/'
+
+    core:
+      coffee: [
+        '<%=folder.quo%>quo.coffee'
+        '<%=folder.quo%>quo.ajax.coffee'
+        '<%=folder.quo%>quo.css.coffee'
+        '<%=folder.quo%>quo.element.coffee'
+        '<%=folder.quo%>quo.environment.coffee'
+        '<%=folder.quo%>quo.events.coffee'
+        '<%=folder.quo%>quo.gestures.coffee'
+        '<%=folder.quo%>quo.gestures.*.coffee'
+        '<%=folder.quo%>quo.output.coffee'
+        '<%=folder.quo%>quo.query.coffee'
         'source/*.coffee'
         'source/core/*.coffee'
         'source/class/*.coffee']
-      app: [
-        'extensions/app/*.coffee'
-        'extensions/app/atom/*.coffee'
-        'extensions/app/molecule/*.coffee'
-        'extensions/app/organism/*.coffee']
-
-      spec  : [
+      spec: [
         'spec/*.coffee']
-      example:
-          app: [
-            'extensions/test/source/entities/*.coffee'
-            'extensions/test/source/atoms/*.coffee'
-            'extensions/test/source/molecules/*.coffee'
-            'extensions/test/source/organisms/*.coffee'
-            'extensions/test/source/*.coffee']
+      test: [
+        '<%=folder.test%>entities/*.coffee'
+        '<%=folder.test%>atoms/*.coffee'
+        '<%=folder.test%>molecules/*.coffee'
+        '<%=folder.test%>organisms/*.coffee'
+        '<%=folder.test%>*.coffee']
 
-      extensions:
-        app     : []
-        appnima : ['extensions/appnima/**/*.coffee']
-        carousel: ['extensions/carousel/**/*.coffee']
-        gmaps   : ['extensions/gmaps/**/*.coffee']
+    app:
+      coffee: [
+        '<%=folder.app%>*.coffee'
+        '<%=folder.app%>atom/*.coffee'
+        '<%=folder.app%>molecule/*.coffee'
+        '<%=folder.app%>organism/*.coffee']
+      stylus: [
+        '<%=folder.app%>style/reset.styl'
+        '<%=folder.app%>style/atom.*.styl'
+        '<%=folder.app%>style/molecule.*.styl'
+        '<%=folder.app%>style/organism.*.styl'
+        '<%=folder.app%>style/app.styl']
+      theme: [
+        '<%=folder.app%>style/theme/reset.styl'
+        '<%=folder.app%>style/theme/atom.*.styl'
+        '<%=folder.app%>style/theme/molecule.*.styl'
+        '<%=folder.app%>style/theme/organism.*.styl'
+        '<%=folder.app%>style/theme/app.styl']
 
-      # Stylesheets
-      stylus:
-        app: [
-          'extensions/app/style/reset.styl'
-          'extensions/app/style/atom.*.styl'
-          'extensions/app/style/molecule.*.styl'
-          'extensions/app/style/organism.*.styl'
-          'extensions/app/style/app.styl']
-        theme: [
-          'extensions/app/style/theme/reset.styl'
-          'extensions/app/style/theme/atom.*.styl'
-          'extensions/app/style/theme/molecule.*.styl'
-          'extensions/app/style/theme/organism.*.styl'
-          'extensions/app/style/theme/app.styl'
-        ]
-        icons: [
-          'extensions/icons/*.styl']
-        app_appnima: [
-          'extensions/appnima/style/*.styl']
-        app_carousel: [
-          'extensions/carousel/style/*.styl']
-        app_gmaps: [
-          'extensions/gmaps/style/*.styl']
+      extension:
+        appnima:
+          coffee: '<%=folder.app%>extension/appnima/**/*.coffee'
+          stylus: '<%=folder.app%>extension/appnima/style/*.styl'
+        carousel:
+          coffee: '<%=folder.app%>extension/carousel/**/*.coffee'
+          stylus: '<%=folder.app%>extension/carousel/style/*.styl'
+        gmaps:
+          coffee: '<%=folder.app%>extension/gmaps/**/*.coffee'
+          stylus: '<%=folder.app%>extension/gmaps/style/*.styl'
+
+    icons:
+      stylus: 'extensions/icons/*.styl'
 
     doc:
-      es: ['extensions/app/docs/ES/*.md']
+      es: 'extensions/app/docs/ES/*.md'
 
+    # ==========================================================================
+    # TASKS
+    # ==========================================================================
     concat:
-      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.coffee'         : '<%= source.core %>'
-      # Extension
-      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.coffee'           : '<%= source.app %>'
-      app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'   : '<%= source.extensions.appnima %>'
-      app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'  : '<%= source.extensions.carousel %>'
-      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'     : '<%= source.extensions.gmaps %>'
-      # Example
-      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'   : '<%= source.example.app %>'
-
+      core        : files: '<%=folder.build%>core.coffee'                       : '<%= core.coffee %>'
+      # App
+      app         : files: '<%=folder.build%>app.coffee'                        : '<%= app.coffee %>'
+      app_appnima : files: '<%=folder.build%>app.appnima.coffee'                : '<%= app.extension.appnima.coffee %>'
+      app_carousel: files: '<%=folder.build%>app.carousel.coffee'               : '<%= app.extension.carousel.coffee %>'
+      app_gmaps   : files: '<%=folder.build%>app.gmaps.coffee'                  : '<%= app.extension.gmaps.coffee %>'
+      # Test
+      test        :   files: '<%=folder.build%>test.coffee'                     : '<%= core.test %>'
 
     coffee:
-      core        : files: '<%=meta.build%>/<%=pkg.name%>.debug.js'             : '<%=meta.build%>/<%=pkg.name%>.debug.coffee'
-      spec        : files: '<%=meta.build%>/<%=pkg.name%>.spec.js'              : '<%= source.spec %>'
-      # Extension
-      app         : files: '<%=meta.build%>/<%=pkg.name%>.app.debug.js'         : '<%=meta.build%>/<%=pkg.name%>.app.coffee'
-      app_appnima : files: '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'       : '<%=meta.build%>/<%=pkg.name%>.app.appnima.coffee'
-      app_carousel: files: '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'      : '<%=meta.build%>/<%=pkg.name%>.app.carousel.coffee'
-      app_gmaps   : files: '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'         : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.coffee'
-      # Example
-      example_app : files: '<%=meta.build%>/<%=pkg.name%>.example.app.js'       : '<%=meta.build%>/<%=pkg.name%>.example.app.coffee'
-
+      core        : files: '<%=folder.build%>core.js'                           : '<%=folder.build%>core.coffee'
+      spec        : files: '<%=folder.build%>spec.js'                           : '<%= core.spec %>'
+      # App
+      app         : files: '<%=folder.build%>app.js'                            : '<%=folder.build%>app.coffee'
+      app_appnima : files: '<%=folder.build%>app.appnima.js'                    : '<%=folder.build%>app.appnima.coffee'
+      app_carousel: files: '<%=folder.build%>app.carousel.js'                   : '<%=folder.build%>app.carousel.coffee'
+      app_gmaps   : files: '<%=folder.build%>app.gmaps.js'                      : '<%=folder.build%>app.gmaps.coffee'
+      # Test
+      test        : files: '<%=folder.build%>test.js'                           : '<%=folder.build%>test.coffee'
 
     uglify:
       options:  banner: "<%= meta.banner %>"#, report: "gzip"
       core:
         options: mangle: true
-        files: '<%=meta.bower%>/<%=pkg.name%>.js'                               : '<%=meta.build%>/<%=pkg.name%>.debug.js'
-      # Extensions
+        files: '<%=folder.bower%><%=pkg.name%>.js'                              : '<%=folder.build%>core.js'
+      # App
       app:
         options: mangle: false
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.js'                           : '<%=meta.build%>/<%=pkg.name%>.app.debug.js'
+        files: '<%=folder.bower%><%=pkg.name%>.app.js'                          : '<%=folder.build%>app.js'
       app_appnima:
         options: mangle: false
-        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.js'      : '<%=meta.build%>/<%=pkg.name%>.app.appnima.js'
+        files: '<%=folder.app%>extension/appnima/<%=pkg.name%>.app.appnima.js'  : '<%=folder.build%>app.appnima.js'
       app_carousel:
         options: mangle: false
-        files: '<%=meta.extensions%>/carousel/<%=pkg.name%>.app.carousel.js'    : '<%=meta.build%>/<%=pkg.name%>.app.carousel.js'
+        files: '<%=folder.app%>extension/carousel/<%=pkg.name%>.app.carousel.js': '<%=folder.build%>app.carousel.js'
       app_gmaps:
         options: mangle: false
-        files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.js'          : '<%=meta.build%>/<%=pkg.name%>.app.gmaps.js'
-
+        files: '<%=folder.app%>extension/gmaps/<%=pkg.name%>.app.gmaps.js'      : '<%=folder.build%>app.gmaps.js'
 
     copy:
       doc_es:
         expand  : true
         flatten : true
         src     : '<%= doc.es %>'
-        dest    : '<%= meta.bower %>/docs/ES/'
-
+        dest    : '<%= folder.bower %>/docs/ES/'
 
     jasmine:
       pivotal:
-        src: [
-          '<%=meta.build%>/<%=pkg.name%>.debug.js']
+        src: '<%=folder.build%>core.js'
         options:
           vendor: 'spec/components/jquery/jquery.min.js'
-          specs: '<%=meta.build%>/<%=pkg.name%>.spec.js',
-
+          specs: '<%=folder.build%>spec.js',
 
     stylus:
-      app:
+      # App
+      app_stylus:
         options: compress: true, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.css'                          : '<%=source.stylus.app%>'
-      theme:
+        files: '<%=folder.bower%><%=pkg.name%>.app.css'                         : '<%=app.stylus%>'
+      app_theme:
         options: compress: false, import: [ '__init']
-        files: '<%=meta.bower%>/<%=pkg.name%>.app.theme.css'                    : '<%=source.stylus.theme%>'
-      icons:
-        options: compress: true
-        files: '<%=meta.extensions%>/icons/<%=pkg.name%>.icons.css'             : '<%=source.stylus.icons%>'
+        files: '<%=folder.bower%><%=pkg.name%>.app.theme.css'                   : '<%=app.theme%>'
       app_appnima:
         options: compress: true
-        files: '<%=meta.extensions%>/appnima/<%=pkg.name%>.app.appnima.css'     : '<%=source.stylus.app_appnima%>'
+        files: '<%=folder.app%>extension/appnima/<%=pkg.name%>.app.appnima.css' : '<%=app.extension.appnima.stylus%>'
       app_carousel:
         options: compress: true
-        files: '<%=meta.extensions%>/carousel/<%=pkg.name%>.app.carousel.css'   : '<%=source.stylus.app_carousel%>'
+        files: '<%=folder.app%>extension/carousel/<%=pkg.name%>.app.carousel.css': '<%=app.extension.carousel.stylus%>'
       app_gmaps:
         options: compress: true
-        files: '<%=meta.extensions%>/gmaps/<%=pkg.name%>.app.gmaps.css'         : '<%=source.stylus.app_gmaps%>'
-
+        files: '<%=folder.app%>extension/gmaps/<%=pkg.name%>.app.gmaps.css'     : '<%=app.extension.gmaps.stylus%>'
+      # Icons
+      icons:
+        options: compress: true
+        files: '<%=folder.icons%>icons/<%=pkg.name%>.icons.css'                 : '<%=icons.stylus%>'
 
     notify:
       core:
         options: title: 'atoms.js', message: 'grunt:uglify:core'
-      app:
-        options: title: 'atoms.app.js', message: 'grunt:uglify:app'
-      stylus_app:
-        options: title: 'atoms.app.css', message: 'grunt:stylus:app'
-      stylus_theme:
-        options: title: 'atoms.app.theme.css', message: 'grunt:stylus:theme'
       spec:
         options: title: 'Atoms Spec', message: 'grunt:jasmine'
-
+      app:
+        options: title: 'atoms.app.js', message: 'grunt:uglify:app'
+      app_stylus:
+        options: title: 'atoms.app.css', message: 'grunt:stylus:app'
+      app_theme:
+        options: title: 'atoms.app.theme.css', message: 'grunt:stylus:theme'
 
     watch:
       core:
-        files: ['<%= source.core %>']
-        tasks: ['concat:core', 'coffee:core', 'uglify:core']#, 'jasmine', 'notify:core']
+        files: ['<%= core.coffee %>']
+        tasks: ['concat:core', 'coffee:core', 'uglify:core', 'jasmine', 'notify:core']
       spec:
-        files: ['<%= source.spec %>']
+        files: ['<%= core.spec %>']
         tasks: ['coffee:spec', 'jasmine', 'notify:spec']
-      app:
-        files: ['<%= source.app %>']
+      test:
+        files: ['<%= core.test %>']
+        tasks: ['concat:test', 'coffee:test']
+      # App
+      app_coffee:
+        files: ['<%= app.coffee %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
+      app_stylys:
+        files: ['<%= app.stylus %>']
+        tasks: ['stylus:app_stylus', 'notify:app_stylus']
+      app_theme:
+        files: ['<%= app.theme %>']
+        tasks: ['stylus:app_theme', 'notify:app_theme']
+      # App.Extension
       app_appnima:
-        files: ['<%= source.extensions.appnima %>']
+        files: ['<%= app.extension.appnima.coffee %>']
         tasks: ['concat:app_appnima', 'coffee:app_appnima', 'uglify:app_appnima']
       app_carousel:
-        files: ['<%= source.extensions.carousel %>']
+        files: ['<%= app.extension.carousel.coffee %>']
         tasks: ['concat:app_carousel', 'coffee:app_carousel', 'uglify:app_carousel']
       app_gmaps:
-        files: ['<%= source.extensions.gmaps %>']
+        files: ['<%= app.extension.gmaps.coffee %>']
         tasks: ['concat:app_gmaps', 'coffee:app_gmaps', 'uglify:app_gmaps']
-      stylus_app:
-        files: ['<%= source.stylus.app %>']
-        tasks: ['stylus:app', 'notify:stylus_app']
-      stylus_theme:
-        files: ['<%= source.stylus.theme %>']
-        tasks: ['stylus:theme', 'notify:stylus_theme']
-      stylus_icons:
-        files: ['<%= source.stylus.icons %>']
-        tasks: ['stylus:icons']
-      stylus_app_appnima:
-        files: ['<%= source.stylus.app_appnima %>']
+      app_appnima_stylus:
+        files: ['<%= app.extension.appnima.stylus %>']
         tasks: ['stylus:app_appnima']
-      stylus_app_carousel:
-        files: ['<%= source.stylus.app_carousel %>']
+      app_carousel_stylus:
+        files: ['<%= app.extension.carousel.stylus %>']
         tasks: ['stylus:app_carousel']
-      stylus_app_gmaps:
-        files: ['<%= source.stylus.app_gmaps %>']
+      app_gmaps_stylus:
+        files: ['<%= app.extension.gmaps.stylus %>']
         tasks: ['stylus:app_gmaps']
+      # Icons
+      icons:
+        files: ['<%= icons.stylus %>']
+        tasks: ['stylus:icons']
+      # Docs
       doc_es:
         files: ['<%= doc.es %>']
         tasks: ['copy:doc_es']
-      example_app:
-        files: ['<%= source.example.app %>']
-        tasks: ['concat:example_app', 'coffee:example_app']
+
 
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-coffee'

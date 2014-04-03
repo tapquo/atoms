@@ -155,7 +155,7 @@ module.exports = (grunt) ->
       # Icons
       icons:
         options: compress: true
-        files: '<%=folder.icons%>icons/<%=pkg.name%>.icons.css'                 : '<%=icons.stylus%>'
+        files: '<%=folder.icons%><%=pkg.name%>.icons.css'                       : '<%=icons.stylus%>'
 
     notify:
       core:

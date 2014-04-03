@@ -73,7 +73,7 @@ module.exports = (grunt) ->
           stylus: '<%=folder.app%>extension/gmaps/style/*.styl'
 
     icons:
-      stylus: 'extensions/icons/*.styl'
+      stylus: 'extensions/icons/style/*.styl'
 
     doc:
       es: 'extensions/app/docs/ES/*.md'

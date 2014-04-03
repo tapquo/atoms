@@ -4,12 +4,6 @@
 [submodule "extensions/icons"]
 	path = extensions/icons
 	url = https://github.com/tapquo/bower-atoms-icons
-[submodule "extensions/appnima"]
-	path = extensions/appnima
-	url = https://github.com/tapquo/bower-atoms-appnima
-[submodule "extensions/gmaps"]
-	path = extensions/gmaps
-	url = https://github.com/tapquo/bower-atoms-gmaps
 [submodule "bower"]
 	path = bower
 	url = https://github.com/tapquo/bower-atoms
@@ -19,6 +13,3 @@
 [submodule "components/QuoJS"]
 	path = components/QuoJS
 	url = https://github.com/soyjavi/QuoJS
-[submodule "extensions/carousel"]
-	path = extensions/carousel
-	url = https://github.com/tapquo/bower-atoms-carousel

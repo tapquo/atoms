@@ -1,7 +1,3 @@
 build
+extensions/test
 node_modules
-*/*/.BridgeSort
-.sass-cache/
-.grunt/
-examples/ide/node-webkit/*.js
-examples/ide/node-webkit/*.css

@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.initConfig
     pkg         : grunt.file.readJSON 'package.json'
-    component   : grunt.file.readJSON 'bower/component.json'
+    component   : grunt.file.readJSON 'bower/bower.json'
 
     meta:
       version   : '',
@@ -55,11 +55,11 @@ module.exports = (grunt) ->
         '<%=folder.app%>style/organism.*.styl'
         '<%=folder.app%>style/app.styl']
       theme: [
-        '<%=folder.app%>style/theme/reset.styl'
-        '<%=folder.app%>style/theme/atom.*.styl'
-        '<%=folder.app%>style/theme/molecule.*.styl'
-        '<%=folder.app%>style/theme/organism.*.styl'
-        '<%=folder.app%>style/theme/app.styl']
+        '<%=folder.app%>theme/reset.styl'
+        '<%=folder.app%>theme/atom.*.styl'
+        '<%=folder.app%>theme/molecule.*.styl'
+        '<%=folder.app%>theme/organism.*.styl'
+        '<%=folder.app%>theme/app.styl']
 
       extension:
         appnima:

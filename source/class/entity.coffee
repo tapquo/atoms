@@ -66,8 +66,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     result
 
   @destroyAll: ->
-    # @TODO: Test if remove correctly
-    # record.destroy() for uid, record of @records
+    record.destroy() for uid, record of @records
     @records = {}
 
   # ---------------------------------------------------------------------------

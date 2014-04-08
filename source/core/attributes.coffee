@@ -52,6 +52,10 @@ Atoms.Core.Attributes =
     else
       console.error "Instance #{class_name} doesn't exists."
 
+  destroyChildren: ->
+    child.destroy?() for child in @children or []
+    @children = []
+
   __available: (instance) ->
     base = "#{instance.type}." + (instance.base or instance.name)
     (not @constructor.available or base in @constructor.available)

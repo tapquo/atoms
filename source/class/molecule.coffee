@@ -25,17 +25,22 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     do @scaffold
     do @output
     do @chemistry
-    if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.auto
-      do @_bindEntityEvents
+    if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.create
+      do @_bindEntityCreate
 
   entity: (entities) ->
     do @_removeAtomsEntities
     if @attributes.bind?.entity? and @attributes.bind.atom?
-      @_addAtomEntity entity for entity in entities
+      @_addAtomEntity entity, @attributes.bind for entity in entities
 
   # Entities
-  _addAtomEntity: (entity, record = true) =>
-    attributes = entity: entity
+  _addAtomEntity: (entity, bind, record = true) =>
+    attributes =
+      entity: entity
+      bind  :
+        update : bind.update
+        destroy: bind.destroy
+
     for property in ["events", "callbacks"] when @attributes.bind[property]?
       attributes[property] = @attributes.bind[property]
 
@@ -45,11 +50,12 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     atom
 
   _removeAtomsEntities: ->
-    entity.el.remove() for entity in @_records
+    record.el.remove() for record in @_records
     @_records = []
 
-  _bindEntityEvents : ->
+  _bindEntityCreate : ->
     entity = Atoms.Entity[@attributes.bind.entity]
     if entity?
       new entity()
-      entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, @_addAtomEntity
+      entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, (entity) =>
+        @_addAtomEntity entity, @attributes.bind

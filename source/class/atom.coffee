@@ -26,8 +26,10 @@ class Atoms.Class.Atom extends Atoms.Core.Module
       attributes = @entity.parse?() or @entity.attributes()
       @attributes = Atoms.Core.Helper.mix @attributes, attributes
       EVENT = Atoms.Core.Constants.ENTITY.EVENT
-      Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindEntityUpdate
-      Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindEntityDestroy
+      if @attributes.bind.update
+        Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindEntityUpdate
+      if @attributes.bind.destroy
+        Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindEntityDestroy
     do @output
     @bindEvents()
 

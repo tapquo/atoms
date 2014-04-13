@@ -16,12 +16,12 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   @type = "Molecule"
 
-  _records: []
-
   constructor: (@attributes) ->
     super
     @default = children: [] unless @default
     @children = []
+    @_records = []
+
     do @scaffold
     do @output
     do @chemistry
@@ -49,7 +49,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @_records.push atom if record
     atom
 
-  _removeAtomsEntities: ->
+  _removeAtomsEntities: =>
     record.el.remove() for record in @_records
     @_records = []
 

@@ -26,9 +26,7 @@ describe "Entity", ->
   it "can find records", ->
     expect(Asset.find(pdf.uid)).toBeTruthy()
     pdf.destroy()
-    expect(->
-      Asset.find pdf.uid
-    ).toThrow()
+    expect( Asset.find pdf.uid ).toEqual(null)
 
 
   it "can find records by attribute", ->
@@ -36,9 +34,7 @@ describe "Entity", ->
     expect(asset).toEqual pdf
     asset.destroy()
     expect(Asset.count()).toEqual 0
-    expect(->
-      Asset.findBy "name", "test.pdf"
-    ).toThrow()
+    expect( Asset.findBy "name", "test.pdf" ).toEqual(null)
 
 
   it "can check existence", ->

@@ -29,21 +29,16 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     record.save()
 
   @exists: (uid) ->
-    try
-      @find uid
-      true
-    catch e
-      false
+    @find uid
 
   @find: (uid) ->
     record = @records[uid]
-    throw new Error('Unknown UID record') unless record
-    record.clone()
+    record?.clone() or null
 
   @findBy: (name, value) ->
     for uid, record of @records when record[name] is value
       return record.clone()
-    throw new Error 'Unknown record'
+    return null
 
   @select: (callback) ->
     @cloneArray (record for uid, record of @records when callback(record))

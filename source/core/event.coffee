@@ -20,11 +20,11 @@ Atoms.Core.Event =
   ###
   bind: (events, callback) ->
     events = events.split(' ')
-    calls = @hasOwnProperty('events') and @events or = {}
+    @events = @events or {}
     for event in events
       event = @_customEventName event
-      calls[event] or = []
-      calls[event].push callback
+      @events[event] or = []
+      @events[event].push callback
 
   ###
   Remove a previously-attached event handler from the class.
@@ -47,7 +47,7 @@ Atoms.Core.Event =
   ###
   trigger: (event, args...) ->
     event = @_customEventName event
-    events = @hasOwnProperty('events') and @events?[event]
+    events = if @hasOwnProperty('events') then @events?[event]
     return unless events
     args.push @
     for event in events

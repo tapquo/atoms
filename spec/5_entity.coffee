@@ -111,7 +111,7 @@ describe "Entity", ->
     expect(asset.last_name).toEqual "Jimenez"
 
 
- it "attributes() respecting getters/setters", ->
+  it "attributes() respecting getters/setters", ->
     Asset.include
       name: -> "Bob"
     asset = new Asset()
@@ -135,6 +135,6 @@ describe "Entity", ->
 
 
   it "new records should not be equal", ->
-    asset1 = new Asset
-    asset2 = new Asset
-    expect(asset1.equal(asset2)).not().toBeTruthy()
+    asset1 = new Asset()
+    asset2 = new Asset()
+    expect(asset1.equal(asset2)).toBeFalsy()

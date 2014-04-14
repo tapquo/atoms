@@ -71,6 +71,9 @@ module.exports = (grunt) ->
         gmaps:
           coffee: '<%=folder.app%>extension/gmaps/**/*.coffee'
           stylus: '<%=folder.app%>extension/gmaps/style/*.styl'
+        stripe:
+          coffee: '<%=folder.app%>extension/stripe/**/*.coffee'
+          stylus: '<%=folder.app%>extension/stripe/style/*.styl'
 
     icons:
       stylus: 'extensions/icons/style/*.styl'
@@ -88,6 +91,7 @@ module.exports = (grunt) ->
       app_appnima : files: '<%=folder.build%>app.appnima.coffee'                : '<%= app.extension.appnima.coffee %>'
       app_carousel: files: '<%=folder.build%>app.carousel.coffee'               : '<%= app.extension.carousel.coffee %>'
       app_gmaps   : files: '<%=folder.build%>app.gmaps.coffee'                  : '<%= app.extension.gmaps.coffee %>'
+      app_stripe  : files: '<%=folder.build%>app.stripe.coffee'                 : '<%= app.extension.stripe.coffee %>'
       # Test
       test        :   files: '<%=folder.build%>test.coffee'                     : '<%= core.test %>'
 
@@ -99,6 +103,7 @@ module.exports = (grunt) ->
       app_appnima : files: '<%=folder.build%>app.appnima.js'                    : '<%=folder.build%>app.appnima.coffee'
       app_carousel: files: '<%=folder.build%>app.carousel.js'                   : '<%=folder.build%>app.carousel.coffee'
       app_gmaps   : files: '<%=folder.build%>app.gmaps.js'                      : '<%=folder.build%>app.gmaps.coffee'
+      app_stripe  : files: '<%=folder.build%>app.stripe.js'                     : '<%=folder.build%>app.stripe.coffee'
       # Test
       test        : files: '<%=folder.build%>test.js'                           : '<%=folder.build%>test.coffee'
 
@@ -120,6 +125,9 @@ module.exports = (grunt) ->
       app_gmaps:
         options: mangle: false
         files: '<%=folder.app%>extension/gmaps/<%=pkg.name%>.app.gmaps.js'      : '<%=folder.build%>app.gmaps.js'
+      app_stripe:
+        options: mangle: false
+        files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.js'      : '<%=folder.build%>app.stripe.js'
 
     copy:
       doc_es:
@@ -152,6 +160,9 @@ module.exports = (grunt) ->
       app_gmaps:
         options: compress: true
         files: '<%=folder.app%>extension/gmaps/<%=pkg.name%>.app.gmaps.css'     : '<%=app.extension.gmaps.stylus%>'
+      app_stripe:
+        options: compress: true
+        files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.css'     : '<%=app.extension.stripe.stylus%>'
       # Icons
       icons:
         options: compress: true
@@ -199,6 +210,9 @@ module.exports = (grunt) ->
       app_gmaps:
         files: ['<%= app.extension.gmaps.coffee %>']
         tasks: ['concat:app_gmaps', 'coffee:app_gmaps', 'uglify:app_gmaps']
+      app_stripe:
+        files: ['<%= app.extension.stripe.coffee %>']
+        tasks: ['concat:app_stripe', 'coffee:app_stripe', 'uglify:app_stripe']
       app_appnima_stylus:
         files: ['<%= app.extension.appnima.stylus %>']
         tasks: ['stylus:app_appnima']
@@ -208,6 +222,9 @@ module.exports = (grunt) ->
       app_gmaps_stylus:
         files: ['<%= app.extension.gmaps.stylus %>']
         tasks: ['stylus:app_gmaps']
+      app_stripe_stylus:
+        files: ['<%= app.extension.stripe.stylus %>']
+        tasks: ['stylus:app_stripe']
       # Icons
       icons:
         files: ['<%= icons.stylus %>']

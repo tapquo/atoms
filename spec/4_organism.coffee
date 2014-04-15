@@ -8,19 +8,24 @@ describe "Organism", ->
   attributes  =
     children: [
       "Organism.Header":
+        id: "header"
+        events: ["load"]
         children: [
           "Molecule.Navigation":
+            id: "menu"
             style: "left"
+            events: ["select"]
             children: [
-              button: icon: "edit"
+              "Atom.Button": icon: "edit"
             ,
-              button: icon: "search"
+              "Atom.Button": icon: "search"
             ]
         ]
     ,
       "Organism.Section":
+        id: "section"
         children: [
-          "Atom.Button": icon: "ok"
+          "Atom.Button": id: "button", icon: "ok"
         ]
     ]
 
@@ -30,23 +35,25 @@ describe "Organism", ->
     spy = noop.spy
 
     class Atoms.Atom.Button extends Atoms.Class.Atom
-      @template = "<button>{{text}}</button>"
+      @template : "<button>{{text}}</button>"
 
     class Atoms.Molecule.Navigation extends Atoms.Class.Molecule
-      @template = "<nav></nav>"
+      @template : "<nav></nav>"
       available: ["button", "link"]
 
     class Article extends Atoms.Class.Organism
-      @template = "<article/>"
+      @template : "<article/>"
 
-      navigationSelect: spy
-      buttonClick: spy
+      onNavigationSelect: -> do spy
 
     class Atoms.Organism.Header extends Atoms.Class.Organism
-      @template = "<header></header>"
+      @template : "<header></header>"
 
     class Atoms.Organism.Section extends Atoms.Class.Organism
-      @template = "<section></section>"
+      @template : "<section></section>"
+
+    class Atoms.Organism.Footer extends Atoms.Class.Organism
+      @template : "<footer></footer>"
 
     el = Atoms.$("<div/>").first()
     attributes.el = el
@@ -77,32 +84,41 @@ describe "Organism", ->
     article = new Article attributes
     article.render()
     expect(article.el.children("header")).toBeTruthy()
-    expect(article.Header[0]).toBeTruthy()
+    expect(article.header).toBeTruthy()
     expect(article.el.children("section")).toBeTruthy()
-    expect(article.Section[0]).toBeTruthy()
+    expect(article.section).toBeTruthy()
     expect(article.el.children("footer").length > 0).toBeFalsy()
-    expect(article.Footer?[0]).toBeFalsy()
+    expect(article.footer).toBeFalsy()
 
   it "Instances of atoms and molecules make up the Organism", ->
     article = new Article attributes
-    spyOn article, "_createChildren"
     article.render()
-    expect(article.el.children("header")).toBeTruthy()
     expect(article.el.children("header").children("nav")).toBeTruthy()
-    # expect(article.navigation.length > 0).toBeTruthy()
     expect(article.el.children("section").children("button")).toBeTruthy()
-    # expect(article.button.length > 0).toBeTruthy()
 
-  # it "Organism can bind to defined Atoms & Molecules events", ->
-  #   attributes.children[0]["Organism.Header"].children[0]["Molecule.Navigation"].events = ["select"]
-  #   article = new Article attributes
-  #   article.render()
-  #   article.Header[0].Navigation[0].trigger "select"
-  #   expect(spy).toHaveBeenCalled()
+  it "can subscribe to children bubble events", ->
+    article = new Article attributes
+    article.render()
+    expect(article.header).toBeTruthy()
+    article.header.render()
+    article.header.menu.bubble "select", true
+    expect(spy).toHaveBeenCalled()
 
-  # it "Organism can't bind to defined Atoms & Molecules events", ->
-  #   article = new Article attributes
-  #   article.render()
-  #   expect(article.Section[0]).toBeTruthy()
-  #   article.Section[0].Button[0].trigger "click"
-  #   expect(spy).not.toHaveBeenCalled()
+  it "Organism can't to subscribe children bubble events", ->
+    article = new Article attributes
+    article.render()
+    expect(article.section).toBeTruthy()
+    article.section.render()
+    article.section.button.trigger "click"
+    expect(spy).not.toHaveBeenCalled()
+
+  it "can add a new children with AppendChild method", ->
+    article = new Article attributes
+    article.render()
+    expect(article.children.length).toEqual(2)
+    article.appendChild "Organism.Footer", id: "footer", info: "footer"
+    expect(article.children.length).toEqual(3)
+    expect(article.footer).toBeTruthy()
+    article.footer.render()
+    expect(article.footer.el).toBeTruthy()
+    expect(article.footer.attributes.info).toEqual("footer")

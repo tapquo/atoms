@@ -140,8 +140,10 @@ module.exports = (grunt) ->
       pivotal:
         src: '<%=folder.build%>core.js'
         options:
-          vendor: 'spec/components/jquery/jquery.min.js'
-          specs: '<%=folder.build%>spec.js',
+          display : 'short'
+          summary : true
+          vendor  : 'spec/components/jquery/jquery.min.js'
+          specs   : '<%=folder.build%>spec.js',
 
     stylus:
       # App

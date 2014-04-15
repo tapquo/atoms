@@ -16,12 +16,9 @@ describe "Atom", ->
     class Button extends Atoms.Class.Atom
     expect(Button).toBeTruthy()
 
-  it "a instance of Atom needs a template and a parent", ->
+  it "a instance of Atom needs a template", ->
     no_template = -> new do class NoTemplate extends Atoms.Class.Atom
     expect(no_template).toThrow()
-
-    no_parent = -> new Input()
-    expect(no_parent).toThrow()
 
   it "can create a instance of Atom", ->
     input = new Input parent: el: el

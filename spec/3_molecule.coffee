@@ -17,25 +17,20 @@ describe "Molecule", ->
       @template = "<input type='{{type}}' />"
 
     class Search extends Atoms.Class.Molecule
-      @template = "<fieldset/>"
+      @template : "<fieldset/>"
 
-      available: ["input", "button"]
+      @available: ["Atom.Input", "Atom.Button"]
 
-      constructor: ->
-        @default =
-          children: [
-            input: type: "search", placeholder: "Type your search..."
-          ,
-            button: text: "Go!"
-          ]
-          events:
-            input: ["keyup"]
-            button: ["click"]
-        super
+      @default  :
+        children: [
+          "Atom.Input": id: "input", type: "search", placeholder: "Type your search...", events: ["keyup"]
+        ,
+          "Atom.Button": id: "button", text: "Go!", events: ["click"]
+        ]
 
-      buttonClick: spy
+      onButtonClick: spy
 
-      buttonDblClick: spy
+      onButtonDblclick: spy
 
     el = Atoms.$("<div/>").first()
 
@@ -58,16 +53,23 @@ describe "Molecule", ->
   it "Instances of Atoms make up the Molecule", ->
     search = new Search parent: el: el
     expect(search.el.children("input")).toBeTruthy()
-    expect(search.input.length > 0).toBeTruthy()
-    expect(search.el.children("button")).toBeTruthy()
-    expect(search.button.length > 0).toBeTruthy()
+    expect(search.input).toBeTruthy()
 
-  it "Molecule can bind to defined Atoms events", ->
+  it "can subscribe to children bubble events", ->
     search = new Search parent: el: el
-    search.button[0].trigger "click"
+    search.button.el.trigger "click"
     expect(spy).toHaveBeenCalled()
 
-  it "Molecule can't bind to undefined Atoms events", ->
+  it "can't subscribe to children bubble events", ->
     search = new Search parent: el: el
-    search.button[0].trigger "dblClick"
+    search.button.el.trigger "dblClick"
     expect(spy).not.toHaveBeenCalled()
+
+  it "can add a new children with AppenChild method", ->
+    search = new Search parent: el: el
+    expect(search.children.length).toEqual(2)
+    search.appendChild "Atom.Button", id: "btnCancel", text: "Cancel"
+    expect(search.children.length).toEqual(3)
+    expect(search.btnCancel).toBeTruthy()
+    expect(search.btnCancel.el).toBeTruthy()
+    expect(search.btnCancel.attributes.text).toEqual("Cancel")

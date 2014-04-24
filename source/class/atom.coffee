@@ -44,5 +44,6 @@ class Atoms.Class.Atom extends Atoms.Core.Module
 
   bindEvents: ->
     if @attributes.events
-      for evt in @attributes.events
-        @el.on evt, do (evt) => (event) => @bubble evt, event
+      for event in @attributes.events
+        @el.on event, do (event) => (handler) =>
+          unless @el[0].disabled is true then @bubble event, handler

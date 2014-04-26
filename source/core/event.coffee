@@ -100,12 +100,15 @@ Atoms.Core.Event =
       # Recursive Callback
       callback = args[0].eventCustomCallback unless callback
 
-    # Default Callback
-    unless callback
-      constructor = if args.length is 1 then @constructor else args[1].constructor
-      base = @_base constructor
-      base = constructor.name if constructor.extends
-      callback = "on#{base.toClassName()}#{event.toClassName()}"
+      # Default Callback
+      unless callback
+        constructor = if args.length is 1 then @constructor else args[1].constructor
+        base = @_base constructor
+        base = constructor.name if constructor.extends
+        callback = "on#{base.toClassName()}#{event.toClassName()}"
+
+    else if type is "tunnel"
+      callback = event
 
     # Add type
     args[0].eventType = type

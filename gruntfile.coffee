@@ -64,8 +64,8 @@ module.exports = (grunt) ->
       extension:
         appnima:
           user:
-            coffee: '<%=folder.app%>extension/appnima-user/**/*.coffee'
-            stylus: '<%=folder.app%>extension/appnima-user/style/*.styl'
+            coffee: '<%=folder.app%>extension/appnima/user/**/*.coffee'
+            stylus: '<%=folder.app%>extension/appnima/user/style/*.styl'
         carousel:
           coffee: '<%=folder.app%>extension/carousel/**/*.coffee'
           stylus: '<%=folder.app%>extension/carousel/style/*.styl'
@@ -119,7 +119,7 @@ module.exports = (grunt) ->
         files: '<%=folder.bower%><%=pkg.name%>.app.js'                          : '<%=folder.build%>app.js'
       app_appnima_user:
         options: mangle: false
-        files: '<%=folder.app%>extension/appnima-user/<%=pkg.name%>.app.appnima.user.js': '<%=folder.build%>app.appnima.user.js'
+        files: '<%=folder.app%>extension/appnima/user/<%=pkg.name%>.app.appnima.user.js': '<%=folder.build%>app.appnima.user.js'
       app_carousel:
         options: mangle: false
         files: '<%=folder.app%>extension/carousel/<%=pkg.name%>.app.carousel.js': '<%=folder.build%>app.carousel.js'
@@ -156,7 +156,7 @@ module.exports = (grunt) ->
         files: '<%=folder.bower%><%=pkg.name%>.app.theme.css'                   : '<%=app.theme%>'
       app_appnima_user:
         options: compress: true
-        files: '<%=folder.app%>extension/appnima-user/<%=pkg.name%>.app.appnima.user.css' : '<%=app.extension.appnima.user.stylus%>'
+        files: '<%=folder.app%>extension/appnima/user/<%=pkg.name%>.app.appnima.user.css' : '<%=app.extension.appnima.user.stylus%>'
       app_carousel:
         options: compress: true
         files: '<%=folder.app%>extension/carousel/<%=pkg.name%>.app.carousel.css': '<%=app.extension.carousel.stylus%>'
@@ -216,9 +216,9 @@ module.exports = (grunt) ->
       app_stripe:
         files: ['<%= app.extension.stripe.coffee %>']
         tasks: ['concat:app_stripe', 'coffee:app_stripe', 'uglify:app_stripe']
-      app_appnima_stylus:
-        files: ['<%= app.extension.appnima.stylus %>']
-        tasks: ['stylus:app_appnima']
+      app_appnima_user_stylus:
+        files: ['<%= app.extension.appnima.user.stylus %>']
+        tasks: ['stylus:app_appnima_user']
       app_carousel_stylus:
         files: ['<%= app.extension.carousel.stylus %>']
         tasks: ['stylus:app_carousel']

@@ -63,8 +63,9 @@ module.exports = (grunt) ->
 
       extension:
         appnima:
-          coffee: '<%=folder.app%>extension/appnima/**/*.coffee'
-          stylus: '<%=folder.app%>extension/appnima/style/*.styl'
+          user:
+            coffee: '<%=folder.app%>extension/appnima-user/**/*.coffee'
+            stylus: '<%=folder.app%>extension/appnima-user/style/*.styl'
         carousel:
           coffee: '<%=folder.app%>extension/carousel/**/*.coffee'
           stylus: '<%=folder.app%>extension/carousel/style/*.styl'
@@ -85,27 +86,27 @@ module.exports = (grunt) ->
     # TASKS
     # ==========================================================================
     concat:
-      core        : files: '<%=folder.build%>core.coffee'                       : '<%= core.coffee %>'
+      core              : files: '<%=folder.build%>core.coffee'                 : '<%= core.coffee %>'
       # App
-      app         : files: '<%=folder.build%>app.coffee'                        : '<%= app.coffee %>'
-      app_appnima : files: '<%=folder.build%>app.appnima.coffee'                : '<%= app.extension.appnima.coffee %>'
-      app_carousel: files: '<%=folder.build%>app.carousel.coffee'               : '<%= app.extension.carousel.coffee %>'
-      app_gmaps   : files: '<%=folder.build%>app.gmaps.coffee'                  : '<%= app.extension.gmaps.coffee %>'
-      app_stripe  : files: '<%=folder.build%>app.stripe.coffee'                 : '<%= app.extension.stripe.coffee %>'
+      app               : files: '<%=folder.build%>app.coffee'                  : '<%= app.coffee %>'
+      app_appnima_user  : files: '<%=folder.build%>app.appnima.user.coffee'     : '<%= app.extension.appnima.user.coffee %>'
+      app_carousel      : files: '<%=folder.build%>app.carousel.coffee'         : '<%= app.extension.carousel.coffee %>'
+      app_gmaps         : files: '<%=folder.build%>app.gmaps.coffee'            : '<%= app.extension.gmaps.coffee %>'
+      app_stripe        : files: '<%=folder.build%>app.stripe.coffee'           : '<%= app.extension.stripe.coffee %>'
       # Test
-      test        :   files: '<%=folder.build%>test.coffee'                     : '<%= core.test %>'
+      test              :   files: '<%=folder.build%>test.coffee'               : '<%= core.test %>'
 
     coffee:
-      core        : files: '<%=folder.build%>core.js'                           : '<%=folder.build%>core.coffee'
-      spec        : files: '<%=folder.build%>spec.js'                           : '<%= core.spec %>'
+      core              : files: '<%=folder.build%>core.js'                     : '<%=folder.build%>core.coffee'
+      spec              : files: '<%=folder.build%>spec.js'                     : '<%= core.spec %>'
       # App
-      app         : files: '<%=folder.build%>app.js'                            : '<%=folder.build%>app.coffee'
-      app_appnima : files: '<%=folder.build%>app.appnima.js'                    : '<%=folder.build%>app.appnima.coffee'
-      app_carousel: files: '<%=folder.build%>app.carousel.js'                   : '<%=folder.build%>app.carousel.coffee'
-      app_gmaps   : files: '<%=folder.build%>app.gmaps.js'                      : '<%=folder.build%>app.gmaps.coffee'
-      app_stripe  : files: '<%=folder.build%>app.stripe.js'                     : '<%=folder.build%>app.stripe.coffee'
+      app               : files: '<%=folder.build%>app.js'                      : '<%=folder.build%>app.coffee'
+      app_appnima_user  : files: '<%=folder.build%>app.appnima.user.js'         : '<%=folder.build%>app.appnima.user.coffee'
+      app_carousel      : files: '<%=folder.build%>app.carousel.js'             : '<%=folder.build%>app.carousel.coffee'
+      app_gmaps         : files: '<%=folder.build%>app.gmaps.js'                : '<%=folder.build%>app.gmaps.coffee'
+      app_stripe        : files: '<%=folder.build%>app.stripe.js'               : '<%=folder.build%>app.stripe.coffee'
       # Test
-      test        : files: '<%=folder.build%>test.js'                           : '<%=folder.build%>test.coffee'
+      test              : files: '<%=folder.build%>test.js'                     : '<%=folder.build%>test.coffee'
 
     uglify:
       options:  banner: "<%= meta.banner %>"#, report: "gzip"
@@ -116,9 +117,9 @@ module.exports = (grunt) ->
       app:
         options: mangle: false
         files: '<%=folder.bower%><%=pkg.name%>.app.js'                          : '<%=folder.build%>app.js'
-      app_appnima:
+      app_appnima_user:
         options: mangle: false
-        files: '<%=folder.app%>extension/appnima/<%=pkg.name%>.app.appnima.js'  : '<%=folder.build%>app.appnima.js'
+        files: '<%=folder.app%>extension/appnima-user/<%=pkg.name%>.app.appnima.user.js': '<%=folder.build%>app.appnima.user.js'
       app_carousel:
         options: mangle: false
         files: '<%=folder.app%>extension/carousel/<%=pkg.name%>.app.carousel.js': '<%=folder.build%>app.carousel.js'
@@ -127,7 +128,7 @@ module.exports = (grunt) ->
         files: '<%=folder.app%>extension/gmaps/<%=pkg.name%>.app.gmaps.js'      : '<%=folder.build%>app.gmaps.js'
       app_stripe:
         options: mangle: false
-        files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.js'      : '<%=folder.build%>app.stripe.js'
+        files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.js'    : '<%=folder.build%>app.stripe.js'
 
     copy:
       doc_es:
@@ -153,9 +154,9 @@ module.exports = (grunt) ->
       app_theme:
         options: compress: false, import: [ '__init']
         files: '<%=folder.bower%><%=pkg.name%>.app.theme.css'                   : '<%=app.theme%>'
-      app_appnima:
+      app_appnima_user:
         options: compress: true
-        files: '<%=folder.app%>extension/appnima/<%=pkg.name%>.app.appnima.css' : '<%=app.extension.appnima.stylus%>'
+        files: '<%=folder.app%>extension/appnima-user/<%=pkg.name%>.app.appnima.user.css' : '<%=app.extension.appnima.user.stylus%>'
       app_carousel:
         options: compress: true
         files: '<%=folder.app%>extension/carousel/<%=pkg.name%>.app.carousel.css': '<%=app.extension.carousel.stylus%>'
@@ -203,9 +204,9 @@ module.exports = (grunt) ->
         files: ['<%= app.theme %>']
         tasks: ['stylus:app_theme', 'notify:app_theme']
       # App.Extension
-      app_appnima:
-        files: ['<%= app.extension.appnima.coffee %>']
-        tasks: ['concat:app_appnima', 'coffee:app_appnima', 'uglify:app_appnima']
+      app_appnima_user:
+        files: ['<%= app.extension.appnima.user.coffee %>']
+        tasks: ['concat:app_appnima_user', 'coffee:app_appnima_user', 'uglify:app_appnima_user']
       app_carousel:
         files: ['<%= app.extension.carousel.coffee %>']
         tasks: ['concat:app_carousel', 'coffee:app_carousel', 'uglify:app_carousel']

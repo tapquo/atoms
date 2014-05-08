@@ -36,24 +36,30 @@ describe "Organism", ->
 
     class Atoms.Atom.Button extends Atoms.Class.Atom
       @template : "<button>{{text}}</button>"
+      @base     : "Button"
 
     class Atoms.Molecule.Navigation extends Atoms.Class.Molecule
       @template : "<nav></nav>"
+      @base     : "Navigation"
       available: ["button", "link"]
 
     class Article extends Atoms.Class.Organism
       @template : "<article/>"
+      @base     : "Article"
 
       onNavigationSelect: -> do spy
 
     class Atoms.Organism.Header extends Atoms.Class.Organism
       @template : "<header></header>"
+      @base     : "Header"
 
     class Atoms.Organism.Section extends Atoms.Class.Organism
       @template : "<section></section>"
+      @base     : "Section"
 
     class Atoms.Organism.Footer extends Atoms.Class.Organism
       @template : "<footer></footer>"
+      @base     : "Footer"
 
     el = Atoms.$("<div/>").first()
     attributes.el = el

@@ -66,10 +66,10 @@ Atoms.Core.Output =
   _render: ->
     do @_createIfBindings
     @el = Atoms.$(_mustache(@constructor.template)(@attributes))
-    @el.attr "data-#{@constructor.type}", @constructor.name.toLowerCase()
-    base = @constructor.base
-    if base? and @constructor.name.toLowerCase() isnt base.toLowerCase()
-      @el.attr "data-extend", base.toLowerCase()
+    base = @constructor.base or new String()
+    @el.attr "data-#{@constructor.type}", base.toLowerCase()
+    if @constructor.name.toLowerCase() isnt base.toLowerCase()
+      @el.attr "data-extend", @constructor.name.toLowerCase()
     @el
 
   _createIfBindings: ->

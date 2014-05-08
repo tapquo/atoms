@@ -6,8 +6,8 @@ describe "Atom", ->
 
   beforeEach ->
     class Input extends Atoms.Class.Atom
-      @template = template
-      events: ["click"]
+      @template : template
+      @base     : "Input"
 
     el = Atoms.$("<div/>").first()
 
@@ -51,6 +51,6 @@ describe "Atom", ->
     expect(inputBig.constructor.__super__.constructor.name).toEqual input.constructor.name
 
   it "should bind to a assigned events", ->
-    input = new Input parent: el: el
-    expect("click" in input.events).toBeTruthy()
-    expect("tap" in input.events).not.toBeTruthy()
+    input = new Input events: ["click"], parent: el: el
+    expect("click" in input.attributes.events).toBeTruthy()
+    expect("tap" in input.attributes.events).not.toBeTruthy()

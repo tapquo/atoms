@@ -28,8 +28,8 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.create
       do @_bindEntityCreate
 
-  entity: (entities) ->
-    do @_removeAtomsEntities
+  entity: (entities, append = false) ->
+    do @_removeAtomsEntities unless append
     if @attributes.bind?.entity? and @attributes.bind.atom?
       @_addAtomEntity entity, @attributes.bind for entity in entities
 

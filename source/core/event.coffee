@@ -78,7 +78,7 @@ Atoms.Core.Event =
   tunnel: (event, args...) ->
     if @children?.length > 0
       args.push @
-      for child in @children
+      for child in @children when child.uid?
         @_state child, event, args, "tunnel"
 
   # Private Methods

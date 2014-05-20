@@ -75,9 +75,12 @@ module.exports = (grunt) ->
         stripe:
           coffee: '<%=folder.app%>extension/stripe/**/*.coffee'
           stylus: '<%=folder.app%>extension/stripe/style/*.styl'
+        chart:
+          coffee: '<%=folder.app%>extension/chart/**/*.coffee'
+          stylus: '<%=folder.app%>extension/chart/style/*.styl'
 
     icons:
-      stylus: 'extensions/icons/style/*.styl'
+      stylus: '<%=folder.icons%>/style/*.styl'
 
     doc:
       es: 'extensions/app/docs/ES/*.md'
@@ -93,6 +96,7 @@ module.exports = (grunt) ->
       app_carousel      : files: '<%=folder.build%>app.carousel.coffee'         : '<%= app.extension.carousel.coffee %>'
       app_gmaps         : files: '<%=folder.build%>app.gmaps.coffee'            : '<%= app.extension.gmaps.coffee %>'
       app_stripe        : files: '<%=folder.build%>app.stripe.coffee'           : '<%= app.extension.stripe.coffee %>'
+      app_chart        : files: '<%=folder.build%>app.chart.coffee'             : '<%= app.extension.chart.coffee %>'
       # Test
       test              :   files: '<%=folder.build%>test.coffee'               : '<%= core.test %>'
 
@@ -105,6 +109,7 @@ module.exports = (grunt) ->
       app_carousel      : files: '<%=folder.build%>app.carousel.js'             : '<%=folder.build%>app.carousel.coffee'
       app_gmaps         : files: '<%=folder.build%>app.gmaps.js'                : '<%=folder.build%>app.gmaps.coffee'
       app_stripe        : files: '<%=folder.build%>app.stripe.js'               : '<%=folder.build%>app.stripe.coffee'
+      app_chart        : files: '<%=folder.build%>app.chart.js'                 : '<%=folder.build%>app.chart.coffee'
       # Test
       test              : files: '<%=folder.build%>test.js'                     : '<%=folder.build%>test.coffee'
 
@@ -129,6 +134,9 @@ module.exports = (grunt) ->
       app_stripe:
         options: mangle: false
         files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.js'    : '<%=folder.build%>app.stripe.js'
+      app_chart:
+        options: mangle: false
+        files: '<%=folder.app%>extension/chart/<%=pkg.name%>.app.chart.js'      : '<%=folder.build%>app.chart.js'
 
     copy:
       doc_es:
@@ -149,10 +157,10 @@ module.exports = (grunt) ->
     stylus:
       # App
       app_stylus:
-        options: compress: true, import: [ '__init']
+        options: compress: true, import: ['__init']
         files: '<%=folder.bower%><%=pkg.name%>.app.css'                         : '<%=app.stylus%>'
       app_theme:
-        options: compress: false, import: [ '__init']
+        options: compress: true, import: ['__init']
         files: '<%=folder.bower%><%=pkg.name%>.app.theme.css'                   : '<%=app.theme%>'
       app_appnima_user:
         options: compress: true
@@ -165,7 +173,10 @@ module.exports = (grunt) ->
         files: '<%=folder.app%>extension/gmaps/<%=pkg.name%>.app.gmaps.css'     : '<%=app.extension.gmaps.stylus%>'
       app_stripe:
         options: compress: true
-        files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.css'     : '<%=app.extension.stripe.stylus%>'
+        files: '<%=folder.app%>extension/stripe/<%=pkg.name%>.app.stripe.css'   : '<%=app.extension.stripe.stylus%>'
+      app_chart:
+        options: compress: true
+        files: '<%=folder.app%>extension/chart/<%=pkg.name%>.app.chart.css'     : '<%=app.extension.chart.stylus%>'
       # Icons
       icons:
         options: compress: true
@@ -197,7 +208,7 @@ module.exports = (grunt) ->
       app_coffee:
         files: ['<%= app.coffee %>']
         tasks: ['concat:app', 'coffee:app', 'uglify:app', 'notify:app']
-      app_stylys:
+      app_stylus:
         files: ['<%= app.stylus %>']
         tasks: ['stylus:app_stylus', 'notify:app_stylus']
       app_theme:
@@ -216,6 +227,9 @@ module.exports = (grunt) ->
       app_stripe:
         files: ['<%= app.extension.stripe.coffee %>']
         tasks: ['concat:app_stripe', 'coffee:app_stripe', 'uglify:app_stripe']
+      app_chart:
+        files: ['<%= app.extension.chart.coffee %>']
+        tasks: ['concat:app_chart', 'coffee:app_chart', 'uglify:app_chart']
       app_appnima_user_stylus:
         files: ['<%= app.extension.appnima.user.stylus %>']
         tasks: ['stylus:app_appnima_user']
@@ -228,6 +242,9 @@ module.exports = (grunt) ->
       app_stripe_stylus:
         files: ['<%= app.extension.stripe.stylus %>']
         tasks: ['stylus:app_stripe']
+      app_chart_stylus:
+        files: ['<%= app.extension.chart.stylus %>']
+        tasks: ['stylus:app_chart']
       # Icons
       icons:
         files: ['<%= icons.stylus %>']

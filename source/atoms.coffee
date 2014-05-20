@@ -1,6 +1,6 @@
 # Globals
 Atoms = @Atoms =
-  version   : "0.05.08"
+  version   : "0.05.20"
   Core      : {}
   Class     : {}
 

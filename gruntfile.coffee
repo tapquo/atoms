@@ -33,6 +33,10 @@ module.exports = (grunt) ->
         'source/*.coffee'
         'source/core/*.coffee'
         'source/class/*.coffee']
+      standalone: [
+        'source/*.coffee'
+        'source/core/*.coffee'
+        'source/class/*.coffee']
       spec: [
         'spec/*.coffee']
       test: [
@@ -92,37 +96,42 @@ module.exports = (grunt) ->
     # TASKS
     # ==========================================================================
     concat:
-      core                : files: '<%=folder.build%>core.coffee'                 : '<%= core.coffee %>'
+      core                : files: '<%=folder.build%>core.coffee'               : '<%= core.coffee %>'
+      standalone          : files: '<%=folder.build%>standalone.coffee'         : '<%= core.standalone %>'
       # App
-      app                 : files: '<%=folder.build%>app.coffee'                  : '<%= app.coffee %>'
-      app_appnima_user    : files: '<%=folder.build%>app.appnima.user.coffee'     : '<%= app.extension.appnima.user.coffee %>'
-      app_appnima_payment : files: '<%=folder.build%>app.appnima.payment.coffee'  : '<%= app.extension.appnima.payment.coffee %>'
-      app_carousel        : files: '<%=folder.build%>app.carousel.coffee'         : '<%= app.extension.carousel.coffee %>'
-      app_gmaps           : files: '<%=folder.build%>app.gmaps.coffee'            : '<%= app.extension.gmaps.coffee %>'
-      app_stripe          : files: '<%=folder.build%>app.stripe.coffee'           : '<%= app.extension.stripe.coffee %>'
-      app_chart           : files: '<%=folder.build%>app.chart.coffee'            : '<%= app.extension.chart.coffee %>'
+      app                 : files: '<%=folder.build%>app.coffee'                : '<%= app.coffee %>'
+      app_appnima_user    : files: '<%=folder.build%>app.appnima.user.coffee'   : '<%= app.extension.appnima.user.coffee %>'
+      app_appnima_payment : files: '<%=folder.build%>app.appnima.payment.coffee': '<%= app.extension.appnima.payment.coffee %>'
+      app_carousel        : files: '<%=folder.build%>app.carousel.coffee'       : '<%= app.extension.carousel.coffee %>'
+      app_gmaps           : files: '<%=folder.build%>app.gmaps.coffee'          : '<%= app.extension.gmaps.coffee %>'
+      app_stripe          : files: '<%=folder.build%>app.stripe.coffee'         : '<%= app.extension.stripe.coffee %>'
+      app_chart           : files: '<%=folder.build%>app.chart.coffee'          : '<%= app.extension.chart.coffee %>'
       # Test
-      test                :   files: '<%=folder.build%>test.coffee'               : '<%= core.test %>'
+      test                :   files: '<%=folder.build%>test.coffee'             : '<%= core.test %>'
 
     coffee:
-      core                : files: '<%=folder.build%>core.js'                     : '<%=folder.build%>core.coffee'
-      spec                : files: '<%=folder.build%>spec.js'                     : '<%= core.spec %>'
+      core                : files: '<%=folder.build%>core.js'                   : '<%=folder.build%>core.coffee'
+      standalone          : files: '<%=folder.build%>standalone.js'             : '<%=folder.build%>standalone.coffee'
+      spec                : files: '<%=folder.build%>spec.js'                   : '<%= core.spec %>'
       # App
-      app                 : files: '<%=folder.build%>app.js'                      : '<%=folder.build%>app.coffee'
-      app_appnima_user    : files: '<%=folder.build%>app.appnima.user.js'         : '<%=folder.build%>app.appnima.user.coffee'
-      app_appnima_payment : files: '<%=folder.build%>app.appnima.payment.js'      : '<%=folder.build%>app.appnima.payment.coffee'
-      app_carousel        : files: '<%=folder.build%>app.carousel.js'             : '<%=folder.build%>app.carousel.coffee'
-      app_gmaps           : files: '<%=folder.build%>app.gmaps.js'                : '<%=folder.build%>app.gmaps.coffee'
-      app_stripe          : files: '<%=folder.build%>app.stripe.js'               : '<%=folder.build%>app.stripe.coffee'
-      app_chart           : files: '<%=folder.build%>app.chart.js'                : '<%=folder.build%>app.chart.coffee'
+      app                 : files: '<%=folder.build%>app.js'                    : '<%=folder.build%>app.coffee'
+      app_appnima_user    : files: '<%=folder.build%>app.appnima.user.js'       : '<%=folder.build%>app.appnima.user.coffee'
+      app_appnima_payment : files: '<%=folder.build%>app.appnima.payment.js'    : '<%=folder.build%>app.appnima.payment.coffee'
+      app_carousel        : files: '<%=folder.build%>app.carousel.js'           : '<%=folder.build%>app.carousel.coffee'
+      app_gmaps           : files: '<%=folder.build%>app.gmaps.js'              : '<%=folder.build%>app.gmaps.coffee'
+      app_stripe          : files: '<%=folder.build%>app.stripe.js'             : '<%=folder.build%>app.stripe.coffee'
+      app_chart           : files: '<%=folder.build%>app.chart.js'              : '<%=folder.build%>app.chart.coffee'
       # Test
-      test                : files: '<%=folder.build%>test.js'                     : '<%=folder.build%>test.coffee'
+      test                : files: '<%=folder.build%>test.js'                   : '<%=folder.build%>test.coffee'
 
     uglify:
       options:  banner: "<%= meta.banner %>"#, report: "gzip"
       core:
         options: mangle: true
         files: '<%=folder.bower%><%=pkg.name%>.js'                              : '<%=folder.build%>core.js'
+      standalone:
+        options: mangle: true
+        files: '<%=folder.bower%><%=pkg.name%>.standalone.js'                   : '<%=folder.build%>standalone.js'
       # App
       app:
         options: mangle: false
@@ -208,7 +217,7 @@ module.exports = (grunt) ->
     watch:
       core:
         files: ['<%= core.coffee %>']
-        tasks: ['concat:core', 'coffee:core', 'uglify:core', 'jasmine', 'notify:core']
+        tasks: ['concat:core', 'coffee:core', 'uglify:core', 'concat:standalone', 'coffee:standalone', 'uglify:standalone', 'jasmine', 'notify:core']
       spec:
         files: ['<%= core.spec %>']
         tasks: ['coffee:spec', 'jasmine', 'notify:spec']

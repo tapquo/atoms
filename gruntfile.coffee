@@ -87,7 +87,7 @@ module.exports = (grunt) ->
           stylus: '<%=folder.app%>extension/chart/style/*.styl'
 
     icons:
-      stylus: '<%=folder.icons%>/style/*.styl'
+      stylus: '<%=folder.icons%>/style/atoms.*.styl'
 
     doc:
       es: 'extensions/app/docs/ES/*.md'
@@ -199,7 +199,7 @@ module.exports = (grunt) ->
         files: '<%=folder.app%>extension/chart/<%=pkg.name%>.app.chart.css'     : '<%=app.extension.chart.stylus%>'
       # Icons
       icons:
-        options: compress: true
+        options: compress: true, import: ['__vendor']
         files: '<%=folder.icons%><%=pkg.name%>.icons.css'                       : '<%=icons.stylus%>'
 
     notify:

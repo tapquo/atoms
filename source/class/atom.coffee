@@ -8,6 +8,12 @@ Base class for Atom
 ###
 "use strict"
 
+EVENTS_DESKTOP =
+  touch             : "click"
+  singleTap         : "click"
+  tap               : "click"
+  doubleTap         : "dblClick"
+
 class Atoms.Class.Atom extends Atoms.Core.Module
 
   @include Atoms.Core.Attributes
@@ -45,5 +51,6 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   bindEvents: ->
     if @attributes.events
       for event in @attributes.events
-        @el.on event, do (event) => (handler) =>
+        event_desktop = EVENTS_DESKTOP[event] unless $$?
+        @el.on event_desktop or event, do (event) => (handler) =>
           unless @el[0].disabled is true then @bubble event, handler

@@ -35,7 +35,7 @@ Atoms.Core.Attributes =
       @appendChild class_name, item[class_name] for class_name of item
 
   appendChild: (class_name, attributes={}) ->
-    child_constructor = __getConstructor class_name
+    child_constructor = class_name.toClassObject(Atoms)
     if child_constructor
       if @__available child_constructor
 
@@ -59,9 +59,3 @@ Atoms.Core.Attributes =
   __available: (instance) ->
     base = "#{instance.type}." + (instance.base or instance.name)
     (not @constructor.available or base in @constructor.available)
-
-
-__getConstructor = (class_name) ->
-  instance = Atoms
-  instance = instance[item] for item in class_name.split(".") when instance?
-  instance

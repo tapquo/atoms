@@ -56,8 +56,8 @@ Atoms.Core.Helper = do ->
     newInstance[key] = @_clone obj[key] for key of obj
     newInstance
 
-  mix       : mix
-  isArray   : isArray
+  mix         : mix
+  isArray     : isArray
 
 ###
 String prototype: capitalize first letter of a String
@@ -66,3 +66,16 @@ String prototype: capitalize first letter of a String
 ###
 String::toClassName = ->
   @charAt(0).toUpperCase() + @slice(1)
+
+###
+  String prototype: Retrieve a Object constructor given a className String
+  @method toClassObject
+  @return {string} Set a root domain for Object [OPTIONAL]
+###
+String::toClassObject = (domain) ->
+  namespaces = @split "."
+  unless domain
+    domain = window[namespaces[0]]
+    namespaces.shift()
+  domain = domain[item] for item in namespaces when domain?
+  domain

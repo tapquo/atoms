@@ -31,11 +31,12 @@ class Atoms.Class.Atom extends Atoms.Core.Module
     if @entity
       attributes = @entity.parse?() or @entity.attributes()
       @attributes = Atoms.Core.Helper.mix @attributes, attributes
-      EVENT = Atoms.Core.Constants.ENTITY.EVENT
-      if @attributes.bind.update
-        Atoms.Entity[@entity.className].bind EVENT.UPDATE, @bindEntityUpdate
-      if @attributes.bind.destroy
-        Atoms.Entity[@entity.className].bind EVENT.DESTROY, @bindEntityDestroy
+
+      entity = @entity.className.toClassObject(__.Entity)
+      if entity
+        EVENT = Atoms.Core.Constants.ENTITY.EVENT
+        entity.bind EVENT.UPDATE, @bindEntityUpdate if @attributes.bind.update
+        entity.bind EVENT.DESTROY, @bindEntityDestroy if @attributes.bind.destroy
     do @output
     @bindEvents()
 

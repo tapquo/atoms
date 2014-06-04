@@ -54,7 +54,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @_records = []
 
   _bindEntityCreate : ->
-    entity = Atoms.Entity[@attributes.bind.entity]
+    entity = @attributes.bind.entity.toClassObject()
     if entity?
       new entity()
       entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, (entity) =>

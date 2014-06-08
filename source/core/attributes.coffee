@@ -1,5 +1,5 @@
 ###
-HTML Renderer
+Attributes mixer
 
 @namespace Atoms.Core
 @class Attributes
@@ -23,7 +23,7 @@ Atoms.Core.Attributes =
 
     # Assign Container
     @container = @attributes.container or @parent.el or document.body
-    delete @attributes.container
+    delete @attributes.container if @attributes?.container?
 
     # Assign Entity
     if @attributes?.entity?

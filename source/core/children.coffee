@@ -1,5 +1,5 @@
 ###
-Attributes mixer
+Children Chemistry
 
 @namespace Atoms.Core
 @class Attributes
@@ -8,32 +8,22 @@ Attributes mixer
 ###
 "use strict"
 
-Atoms.Core.Attributes =
+Atoms.Core.Children =
+
+  default: children: []
 
   ###
   Set the parent instance to current instance.
-  @method setParent
+  @method chemistry
   ###
-  scaffold: ->
-    # Assign Parrent
-    @parent = {}
-    if @attributes?.parent?
-      @parent = @attributes.parent
-      delete @attributes.parent
-
-    # Assign Container
-    @container = @attributes.container or @parent.el or document.body
-    delete @attributes.container if @attributes?.container?
-
-    # Assign Entity
-    if @attributes?.entity?
-      @entity = @attributes.entity
-      delete @attributes.entity
-
   chemistry: ->
     for item in @attributes.children or @constructor.default?.children or []
       @appendChild class_name, item[class_name] for class_name of item
 
+  ###
+  Set the parent instance to current instance.
+  @method appendChild
+  ###
   appendChild: (class_name, attributes={}) ->
     child_constructor = class_name.toClassObject(Atoms)
     if child_constructor
@@ -52,6 +42,10 @@ Atoms.Core.Attributes =
     else
       console.error "Instance #{class_name} doesn't exists."
 
+  ###
+  Set the parent instance to current instance.
+  @method destroyChildren
+  ###
   destroyChildren: ->
     child.destroy?() for child in @children or []
     @children = []

@@ -16,7 +16,7 @@ EVENTS_DESKTOP =
 
 class Atoms.Class.Atom extends Atoms.Core.Module
 
-  @include Atoms.Core.Attributes
+  @include Atoms.Core.Scaffold
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 

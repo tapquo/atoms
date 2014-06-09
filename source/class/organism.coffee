@@ -10,7 +10,8 @@ Base class for Organism
 
 class Atoms.Class.Organism extends Atoms.Core.Module
 
-  @include Atoms.Core.Attributes
+  @include Atoms.Core.Scaffold
+  @include Atoms.Core.Children
   @include Atoms.Core.Event
   @include Atoms.Core.Output
 
@@ -21,9 +22,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   constructor: (@attributes, scaffold) ->
     super
-    @default = children: [] unless @default
     @children = []
-
     if scaffold then _file = @_getScaffold(scaffold)
     @attributes = Atoms.Core.Helper.mix @attributes, _file
     _file = undefined

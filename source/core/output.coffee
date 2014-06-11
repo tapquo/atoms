@@ -48,8 +48,11 @@ Atoms.Core.Output =
   ###
   Refresh element with the new @attributes.
   @method refresh
+  @param  {object} [OPTIONAL]  New values for current attributes
   ###
-  refresh: ->
+  refresh: (attributes = {}) ->
+    @attributes[key] = value for key, value of attributes when @attributes[key]?
+
     current_el = @el
     @_render()
     @bindEvents?()

@@ -10,8 +10,6 @@ Base class for Atom
 
 EVENTS_DESKTOP =
   touch             : "click"
-  singleTap         : "click"
-  tap               : "click"
   doubleTap         : "dblClick"
 
 class Atoms.Class.Atom extends Atoms.Core.Module

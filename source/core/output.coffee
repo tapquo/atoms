@@ -51,7 +51,7 @@ Atoms.Core.Output =
   @param  {object} [OPTIONAL]  New values for current attributes
   ###
   refresh: (attributes = {}) ->
-    @attributes[key] = value for key, value of attributes when @attributes[key]?
+    @attributes[key] = value for key, value of attributes
 
     current_el = @el
     @_render()

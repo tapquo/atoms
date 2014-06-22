@@ -29,9 +29,13 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
       do @_bindEntityCreate
 
   entity: (entities, append = false) ->
-    do @_removeAtomsEntities unless append
+    do @destroyChildren unless append
     if @attributes.bind?.entity? and @attributes.bind.atom?
       @_addAtomEntity entity, @attributes.bind for entity in entities
+
+  destroyChildren: ->
+    super
+    @_recors = []
 
   # Entities
   _addAtomEntity: (entity, bind, record = true) =>
@@ -48,10 +52,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     atom = @appendChild "#{@attributes.bind.atom}", attributes
     @_records.push atom if record
     atom
-
-  _removeAtomsEntities: =>
-    record.el.remove() for record in @_records
-    @_records = []
 
   _bindEntityCreate : ->
     entity = @attributes.bind.entity.toClassObject()

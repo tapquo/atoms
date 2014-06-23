@@ -17,11 +17,10 @@ Atoms.Url = do (a = Atoms) ->
     hash        : /^#*/
 
   _options =
-    path   : null
-    forward: true
-    history: false
-    routes : {}
-
+    path     : null
+    forward  : true
+    absolute : false
+    routes   : {}
 
   ###
   @TODO
@@ -33,12 +32,12 @@ Atoms.Url = do (a = Atoms) ->
       _options.forward = true
       path = "/" + args.join("/")
       unless path is _options.path
-        path = "#" + path unless _options.history
+        path = "#" + path unless _options.absolute
         state = window.history.state or null
         window.history.pushState state, document.title, path.toLowerCase()
         _onPopState()
     else
-      if _options.history then _getPath() else _getFragment()
+      if _options.absolute then _getPath() else _getHash()
 
   ###
   @TODO
@@ -75,18 +74,17 @@ Atoms.Url = do (a = Atoms) ->
   # Private
   _onPopState = (event) ->
     if event then event.preventDefault()
-    path = if _options.history then _getPath() else _getFragment()
+    path = if _options.absolute then _getPath() else _getHash()
     unless path is _options.path
       _options.path = path
       _matchRoute path
 
   _getPath = ->
     path = window.location.pathname
-    if path.substr(0,1) isnt '/'
-      path = '/' + path
+    path = '/#{path}' if path.substr(0,1) isnt '/'
     path
 
-  _getFragment = ->
+  _getHash = ->
     window.location.hash.replace(_regexp.hash, '')
 
   _matchRoute = (path, options) ->

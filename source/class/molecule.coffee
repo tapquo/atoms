@@ -34,8 +34,9 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
       @_addAtomEntity entity, @attributes.bind for entity in entities
 
   destroyChildren: ->
-    super
-    @_recors = []
+    child.destroy?() for child in @children or []
+    @children = []
+    @_records = []
 
   # Entities
   _addAtomEntity: (entity, bind, record = true) =>

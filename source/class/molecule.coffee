@@ -26,7 +26,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     do @output
     do @chemistry
     if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.create
-      do @_bindEntityCreate
+      do @_bindEntity
 
   entity: (entities, append = false) ->
     do @destroyChildren unless append
@@ -54,9 +54,14 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @_records.push atom if record
     atom
 
-  _bindEntityCreate : ->
+  _bindEntity : ->
     entity = @attributes.bind.entity.toClassObject()
     if entity?
       new entity()
       entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, (entity) =>
         @_addAtomEntity entity, @attributes.bind
+
+      entity.bind Atoms.Core.Constants.ENTITY.EVENT.DESTROY, (entity) =>
+        for record, index in @_records when record.entity.uid is entity.uid
+          @_records.splice index, 1
+          break

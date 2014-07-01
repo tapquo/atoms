@@ -85,6 +85,9 @@ module.exports = (grunt) ->
         chart:
           coffee: '<%=folder.app%>extension/chart/**/*.coffee'
           stylus: '<%=folder.app%>extension/chart/style/*.styl'
+        leaflet:
+          coffee: '<%=folder.app%>extension/leaflet/**/*.coffee'
+          stylus: '<%=folder.app%>extension/leaflet/style/*.styl'
 
     icons:
       stylus: '<%=folder.icons%>/style/atoms.*.styl'
@@ -106,6 +109,7 @@ module.exports = (grunt) ->
       app_gmaps           : files: '<%=folder.build%>app.gmaps.coffee'          : '<%= app.extension.gmaps.coffee %>'
       app_stripe          : files: '<%=folder.build%>app.stripe.coffee'         : '<%= app.extension.stripe.coffee %>'
       app_chart           : files: '<%=folder.build%>app.chart.coffee'          : '<%= app.extension.chart.coffee %>'
+      app_leaflet         : files: '<%=folder.build%>app.leaflet.coffee'        : '<%= app.extension.leaflet.coffee %>'
       # Test
       test                :   files: '<%=folder.build%>test.coffee'             : '<%= core.test %>'
 
@@ -121,6 +125,7 @@ module.exports = (grunt) ->
       app_gmaps           : files: '<%=folder.build%>app.gmaps.js'              : '<%=folder.build%>app.gmaps.coffee'
       app_stripe          : files: '<%=folder.build%>app.stripe.js'             : '<%=folder.build%>app.stripe.coffee'
       app_chart           : files: '<%=folder.build%>app.chart.js'              : '<%=folder.build%>app.chart.coffee'
+      app_leaflet         : files: '<%=folder.build%>app.leaflet.js'            : '<%=folder.build%>app.leaflet.coffee'
       # Test
       test                : files: '<%=folder.build%>test.js'                   : '<%=folder.build%>test.coffee'
 
@@ -154,6 +159,9 @@ module.exports = (grunt) ->
       app_chart:
         options: mangle: false
         files: '<%=folder.app%>extension/chart/<%=pkg.name%>.app.chart.js'      : '<%=folder.build%>app.chart.js'
+      app_leaflet:
+        options: mangle: false
+        files: '<%=folder.app%>extension/leaflet/<%=pkg.name%>.app.leaflet.js'  : '<%=folder.build%>app.leaflet.js'
 
     copy:
       doc_es:
@@ -197,6 +205,9 @@ module.exports = (grunt) ->
       app_chart:
         options: compress: true
         files: '<%=folder.app%>extension/chart/<%=pkg.name%>.app.chart.css'     : '<%=app.extension.chart.stylus%>'
+      app_leaflet:
+        options: compress: true
+        files: '<%=folder.app%>extension/leaflet/<%=pkg.name%>.app.leaflet.css' : '<%=app.extension.leaflet.stylus%>'
       # Icons
       icons:
         options: compress: true, import: ['__vendor']
@@ -253,6 +264,9 @@ module.exports = (grunt) ->
       app_chart:
         files: ['<%= app.extension.chart.coffee %>']
         tasks: ['concat:app_chart', 'coffee:app_chart', 'uglify:app_chart']
+      app_leaflet:
+        files: ['<%= app.extension.leaflet.coffee %>']
+        tasks: ['concat:app_leaflet', 'coffee:app_leaflet', 'uglify:app_leaflet']
       app_appnima_user_stylus:
         files: ['<%= app.extension.appnima.user.stylus %>']
         tasks: ['stylus:app_appnima_user']
@@ -271,6 +285,9 @@ module.exports = (grunt) ->
       app_chart_stylus:
         files: ['<%= app.extension.chart.stylus %>']
         tasks: ['stylus:app_chart']
+      app_leaflet_stylus:
+        files: ['<%= app.extension.leaflet.stylus %>']
+        tasks: ['stylus:app_leaflet']
       # Icons
       icons:
         files: ['<%= icons.stylus %>']

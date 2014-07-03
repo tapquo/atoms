@@ -53,17 +53,15 @@ module.exports = (grunt) ->
         '<%=folder.app%>molecule/*.coffee'
         '<%=folder.app%>organism/*.coffee']
       stylus: [
-        '<%=folder.app%>style/reset.styl'
+        '<%=folder.app%>style/app.styl'
         '<%=folder.app%>style/atom.*.styl'
         '<%=folder.app%>style/molecule.*.styl'
-        '<%=folder.app%>style/organism.*.styl'
-        '<%=folder.app%>style/app.styl']
+        '<%=folder.app%>style/organism.*.styl']
       theme: [
-        '<%=folder.app%>theme/reset.styl'
+        '<%=folder.app%>theme/app.styl'
         '<%=folder.app%>theme/atom.*.styl'
         '<%=folder.app%>theme/molecule.*.styl'
-        '<%=folder.app%>theme/organism.*.styl'
-        '<%=folder.app%>theme/app.styl']
+        '<%=folder.app%>theme/organism.*.styl']
 
       extension:
         appnima:
@@ -111,7 +109,7 @@ module.exports = (grunt) ->
       app_chart           : files: '<%=folder.build%>app.chart.coffee'          : '<%= app.extension.chart.coffee %>'
       app_leaflet         : files: '<%=folder.build%>app.leaflet.coffee'        : '<%= app.extension.leaflet.coffee %>'
       # Test
-      test                :   files: '<%=folder.build%>test.coffee'             : '<%= core.test %>'
+      test                : files: '<%=folder.build%>test.coffee'             : '<%= core.test %>'
 
     coffee:
       core                : files: '<%=folder.build%>core.js'                   : '<%=folder.build%>core.coffee'

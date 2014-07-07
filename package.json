@@ -1,13 +1,13 @@
 {
   "name": "atoms",
-  "version": "0.04.24",
-  "description": "Atomic Development Components for Modern WebApps.",
+  "version": "0.07.07",
+  "description": "Atomic & Reactive Development for Modern WebApps.",
   "homepage": "http://atoms.tapquo.com",
   "author": {
     "name": "Tapquo S.L.",
     "site": "http://tapquo.com"
   },
-  "license": [ {"type": "MIT"} ],
+  "license": "MIT",
   "devDependencies": {
     "grunt-contrib-concat"  : "*",
     "grunt-contrib-coffee"  : "*",

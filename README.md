@@ -34,20 +34,21 @@ Atoms fully developed with [CoffeeScript](http://coffeescript.org) language and 
 
 ```
 npm install -g coffee-script
-npm install -g grunt-cli
+npm install -g gulp
 ```
 
 Now you can download the project code and get all the necessary NPM modules:
 
 ```
 git clone https://github.com/tapquo/atoms.git my-atoms
+git submodule init
 git submodule foreach git pull origin master
 npm install
 ```
 
 Once we have our computer ready, just you only need GruntJS which have already scheduled tasks:
 
-* Test Library with Jasmine & 
+* Test Library with Jasmine &
 * Compile Library in debug mode
 * Uglify Library for production mode
 * Process and minify stylus stylesheets
@@ -55,7 +56,7 @@ Once we have our computer ready, just you only need GruntJS which have already s
 You can run the process `grunt` but we recommend you use `grunt watch` to run only the necesary tasks.
 
 
-### Your turn, make *Atoms* the best tool 
+### Your turn, make *Atoms* the best tool
 We do not want you to be a reputed Alchemist, simply internalize these concepts and begin to study the new code that Javi is writing every day and help you on your way to creating a better system for creating custom WebApps, escabalables and community.
 
 This is opensource, so feel free to fork this project to help us create a better tool. All source code is developed with CoffeeScript and Stylus, but don’t worry we worship clean-code so you can quickly get to make your own modifications in it.https://github.com/tapquo/atoms

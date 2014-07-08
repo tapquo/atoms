@@ -1,6 +1,6 @@
 {
   "name": "atoms",
-  "version": "0.07.07",
+  "version": "0.07.08",
   "description": "Atomic & Reactive Development for Modern WebApps.",
   "homepage": "http://atoms.tapquo.com",
   "author": {
@@ -9,13 +9,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "grunt-contrib-concat"  : "*",
-    "grunt-contrib-coffee"  : "*",
-    "grunt-contrib-uglify"  : "*",
-    "grunt-contrib-stylus"  : "*",
-    "grunt-contrib-jasmine" : "*",
-    "grunt-contrib-watch"   : "*",
-    "grunt-contrib-copy"    : "*",
-    "grunt-notify"          : "~0.2.16"
+    "gulp"        : "*",
+    "gulp-coffee" : "*",
+    "gulp-concat" : "*",
+    "gulp-connect": "*",
+    "gulp-jasmine": "*",
+    "gulp-uglify" : "*",
+    "gulp-stylus" : "*",
+    "gulp-header" : "*"
   }
 }

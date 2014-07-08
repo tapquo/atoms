@@ -1,42 +1,56 @@
-var gulp    = require('gulp');
-var connect    = require('gulp-connect');
+"use strict"
 
+// -- DEPENDENCIES -------------------------------------------------------------
+var gulp    = require('gulp');
 var coffee  = require('gulp-coffee');
 var concat  = require('gulp-concat');
-var uglify  = require('gulp-uglify');
-var jasmine = require('gulp-jasmine');
-var stylus  = require('gulp-stylus');
+var connect = require('gulp-connect');
 var header  = require('gulp-header');
-var pkg     = require('./package.json')
-
+var jasmine = require('gulp-jasmine');
+// var jasmine = require('gulp-jasmine2-phantomjs');
+var uglify  = require('gulp-uglify');
+var stylus  = require('gulp-stylus');
+var pkg     = require('./package.json');
 
 
 // -- FILES --------------------------------------------------------------------
 var path = {
   // Exports
   bower: './bower',
-  temp: './build',
+  temp : './build',
   // Sources
-  quojs: ['components/quojs/source/quo.coffee', 'components/quojs/source/quo.*.coffee'],
+  quojs: ['components/QuoJS/source/quo.coffee',
+          'components/QuoJS/source/quo.ajax.coffee',
+          'components/QuoJS/source/quo.css.coffee',
+          'components/QuoJS/source/quo.element.coffee',
+          'components/QuoJS/source/quo.environment.coffee',
+          'components/QuoJS/source/quo.events.coffee',
+          'components/QuoJS/source/quo.gestures.coffee',
+          'components/QuoJS/source/quo.gestures.*.coffee',
+          'components/QuoJS/source/quo.output.coffee',
+          'components/QuoJS/source/quo.query.coffee'],
   core : ['source/*.coffee', 'source/core/*.coffee', 'source/class/*.coffee'],
-  spec : ['spec/*.coffee']
-};
+  spec : ['spec/*.coffee']};
 
 var app = {
-  coffee    : ['extensions/app/*.coffee', 'extensions/app/atom/*.coffee', 'extensions/app/molecule/*.coffee', 'extensions/app/organism/*.coffee'],
+  coffee    : [ 'extensions/app/*.coffee',
+                'extensions/app/atom/*.coffee',
+                'extensions/app/molecule/*.coffee',
+                'extensions/app/organism/*.coffee'],
   stylus    : ['extensions/app/style/*.styl'],
   theme     : ['extensions/app/theme/*.styl'],
   extensions: ['extensions/app/extension/**/*'],
-  docs      : ['extensions/app/docs/**/*']
-};
+  docs      : ['extensions/app/docs/**/*'],
+  example   : ['extensions/test/source/**/*.coffee']};
 
 var extensions = {
   carousel: 'extensions/app/extension/carousel/',
   chart   : 'extensions/app/extension/chart/',
   gmaps   : 'extensions/app/extension/gmaps/',
   leaflet : 'extensions/app/extension/leaflet/',
-  stripe  : 'extensions/app/extension/stripe/'
-};
+  stripe  : 'extensions/app/extension/stripe/'};
+
+var appnima = {};
 
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
@@ -79,11 +93,15 @@ gulp.task('spec', function() {
   gulp.src(path.spec)
     .pipe(concat('atoms.spec.coffee'))
     .pipe(coffee())
-    .pipe(uglify({mangle: false}))
     .pipe(gulp.dest(path.temp))
 
-  // gulp.src('./gulp/temp/*')
-  //   .pipe(jasmine({verbose: true}))
+  var spec = [
+    'spec/components/quojs/quo.js',
+    'build/atoms.standalone.js',
+    'build/atoms.spec.js'];
+
+  gulp.src(spec)
+    .pipe(jasmine())
 });
 
 gulp.task('app_coffee', function() {
@@ -101,7 +119,9 @@ gulp.task('app_stylus', function() {
     .pipe(stylus({compress: true}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower));
+});
 
+gulp.task('app_theme', function() {
   gulp.src(app.theme)
     .pipe(concat('atoms.app.theme.styl'))
     .pipe(stylus({compress: true}))
@@ -126,18 +146,31 @@ gulp.task('extensions', function() {
       .pipe(stylus({compress: true}))
       .pipe(gulp.dest(folder));
   }
-})
+});
 
-gulp.task('documentation', function() {
-    gulp.src(path.docs)
+gulp.task('docs', function() {
+  gulp.src(app.docs)
     .pipe(gulp.dest(path.bower + "/docs"));
-})
+});
+
+gulp.task('example', function() {
+  gulp.src(app.example)
+    .pipe(concat('atoms.app.example.coffee'))
+    .pipe(coffee())
+    .pipe(gulp.dest(path.temp))
+});
+
+gulp.task('init', function() {
+  gulp.run(['core', 'app_coffee', 'app_stylus', 'app_theme', 'extensions', 'docs', 'example']);
+});
 
 gulp.task('default', function() {
   gulp.run(['webserver'])
   gulp.watch(path.core, ['core', 'spec']);
   gulp.watch(app.coffee, ['app_coffee']);
   gulp.watch(app.stylus, ['app_stylus']);
+  gulp.watch(app.theme, ['app_theme']);
   gulp.watch(app.extensions, ['extensions']);
-  gulp.watch(app.docs, ['documentation']);
+  gulp.watch(app.docs, ['docs']);
+  gulp.watch(app.example, ['example']);
 });

@@ -33,13 +33,14 @@ var path = {
   spec : ['spec/*.coffee']};
 
 var app = {
-  coffee    : [ 'extensions/app/*.coffee',
-                'extensions/app/atom/*.coffee',
-                'extensions/app/molecule/*.coffee',
-                'extensions/app/organism/*.coffee'],
+  coffee    : ['extensions/app/*.coffee',
+               'extensions/app/atom/*.coffee',
+               'extensions/app/molecule/*.coffee',
+               'extensions/app/organism/*.coffee'],
   stylus    : ['extensions/app/style/*.styl'],
   theme     : ['extensions/app/theme/*.styl'],
-  extensions: ['extensions/app/extension/**/*'],
+  extensions: ['extensions/app/extension/**/*.coffee',
+               'extensions/app/extension/**/*.styl'],
   docs      : ['extensions/app/docs/**/*'],
   example   : ['extensions/test/source/**/*.coffee']};
 
@@ -50,7 +51,10 @@ var extensions = {
   leaflet : 'extensions/app/extension/leaflet/',
   stripe  : 'extensions/app/extension/stripe/'};
 
-var appnima = {};
+var appnima = {
+  payment: 'extensions/app/extension/appnima/payment',
+  user   : 'extensions/app/extension/appnima/user'
+};
 
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
@@ -158,6 +162,7 @@ gulp.task('example', function() {
     .pipe(concat('atoms.app.example.coffee'))
     .pipe(coffee())
     .pipe(gulp.dest(path.temp))
+    .pipe(connect.reload())
 });
 
 gulp.task('init', function() {

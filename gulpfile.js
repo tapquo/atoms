@@ -104,8 +104,8 @@ gulp.task('spec', function() {
     'build/atoms.standalone.js',
     'build/atoms.spec.js'];
 
-  gulp.src(spec)
-    .pipe(jasmine())
+  // gulp.src(spec)
+  //   .pipe(jasmine())
 });
 
 gulp.task('app_coffee', function() {

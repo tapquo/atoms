@@ -63,4 +63,4 @@ This is opensource, so feel free to fork this project to help us create a better
 
 
 ### Licensing ###
-Atoms is licensed under MIT licensed. See [LICENSE.md](https://github.com/tapquo/atoms/blob/master/LICENSE.md) file for more information.
+Atoms is licensed under MIT licensed. See [LICENSE](https://github.com/tapquo/atoms/blob/master/LICENSE) file for more information.

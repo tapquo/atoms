@@ -19,16 +19,16 @@ var path = {
   bower: './bower',
   temp : './build',
   // Sources
-  quojs: ['components/QuoJS/source/quo.coffee',
-          'components/QuoJS/source/quo.ajax.coffee',
-          'components/QuoJS/source/quo.css.coffee',
-          'components/QuoJS/source/quo.element.coffee',
-          'components/QuoJS/source/quo.environment.coffee',
-          'components/QuoJS/source/quo.events.coffee',
-          'components/QuoJS/source/quo.gestures.coffee',
-          'components/QuoJS/source/quo.gestures.*.coffee',
-          'components/QuoJS/source/quo.output.coffee',
-          'components/QuoJS/source/quo.query.coffee'],
+  quojs: ['quojs/source/quo.coffee',
+          'quojs/source/quo.ajax.coffee',
+          'quojs/source/quo.css.coffee',
+          'quojs/source/quo.element.coffee',
+          'quojs/source/quo.environment.coffee',
+          'quojs/source/quo.events.coffee',
+          'quojs/source/quo.gestures.coffee',
+          'quojs/source/quo.gestures.*.coffee',
+          'quojs/source/quo.output.coffee',
+          'quojs/source/quo.query.coffee'],
   core : ['source/*.coffee', 'source/core/*.coffee', 'source/class/*.coffee'],
   spec : ['spec/*.coffee']};
 
@@ -172,6 +172,7 @@ gulp.task('init', function() {
 gulp.task('default', function() {
   gulp.run(['webserver'])
   gulp.watch(path.core, ['core', 'spec']);
+  gulp.watch(path.quojs, ['core', 'spec']);
   gulp.watch(app.coffee, ['app_coffee']);
   gulp.watch(app.stylus, ['app_stylus']);
   gulp.watch(app.theme, ['app_theme']);

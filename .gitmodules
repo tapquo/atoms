@@ -7,6 +7,3 @@
 [submodule "bower"]
 	path = bower
 	url = https://github.com/tapquo/bower-atoms
-[submodule "components/QuoJS"]
-	path = components/QuoJS
-	url = https://github.com/soyjavi/QuoJS

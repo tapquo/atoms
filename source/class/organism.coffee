@@ -18,17 +18,18 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   @type = "Organism"
 
   #@TODO: Better if I use a instance variable. Change It!
-  _file = undefined
+  _scaffold = undefined
 
-  @scaffold: (url) ->
+  @scaffold: (url) -> _scaffold = @requestJSON url
+
+  @requestJSON = (url) ->
     loader = if $$? then $$ else $
     scaffold = loader.ajax
       url     : url
       async   : false
       dataType: "text"
       error   : -> throw "Error loading scaffold in #{url}"
-    _file = JSON.parse scaffold.responseText
-
+    JSON.parse scaffold.responseText
 
   ###
   Prepare Organism instance
@@ -39,9 +40,9 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   constructor: (@attributes, scaffold) ->
     super
     @children = []
-    if scaffold then _file = @_getScaffold(scaffold)
-    @attributes = Atoms.Core.Helper.mix @attributes, _file
-    _file = undefined
+    _scaffold = @constructor.requestJSON scaffold if scaffold
+    @attributes = Atoms.Core.Helper.mix @attributes, _scaffold
+    _scaffold = undefined
 
   ###
   Render element with custom template and instance all Atom/Molecule children.
@@ -51,12 +52,3 @@ class Atoms.Class.Organism extends Atoms.Core.Module
     do @scaffold
     do @output
     do @chemistry
-
-  _getScaffold: (url) ->
-    loader = if $$? then $$ else $
-    scaffold = loader.ajax
-      url     : url
-      async   : false
-      dataType: "text"
-      error   : -> throw "Error loading scaffold in #{url}"
-    _file = JSON.parse scaffold.responseText

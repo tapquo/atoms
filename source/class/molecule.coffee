@@ -17,6 +17,11 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
   @type = "Molecule"
 
+  ###
+  Render element with custom template and instance all Atom children.
+  @method constructor
+  @param  attributes OBJECT
+  ###
   constructor: (@attributes) ->
     super
     @children = []
@@ -28,11 +33,21 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.create
       do @_bindEntity
 
+  ###
+  Creates new Atom children with a determinate group of entities.
+  @method entity
+  @param  entities  ARRAY
+  @param  append    BOOLEAN (default = False)
+  ###
   entity: (entities, append = false) ->
     do @destroyChildren unless append
     if @attributes.bind?.entity? and @attributes.bind.atom?
       @_addAtomEntity entity, @attributes.bind for entity in entities
 
+  ###
+  Remove all children for current instance.
+  @method destroyChildren
+  ###
   destroyChildren: ->
     child.destroy?() for child in @children or []
     @children = []

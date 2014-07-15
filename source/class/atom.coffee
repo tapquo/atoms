@@ -21,6 +21,11 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @type    = "Atom"
   @default = {}
 
+  ###
+  Render element with custom template and bind events (entity or user).
+  @method constructor
+  @param  attributes  OBJECT
+  ###
   constructor: (@attributes) ->
     super
     @attributes = Atoms.Core.Helper.mix @attributes, @constructor.default
@@ -38,15 +43,29 @@ class Atoms.Class.Atom extends Atoms.Core.Module
     do @output
     @bindEvents()
 
-  bindEntityUpdate: (model) =>
-    if model.uid is @entity.uid
+  ###
+  Binds to entity update trigger when instance has a entity.
+  @method bindEntityUpdate
+  @param  instance  ENTITY_INSTANCE
+  ###
+  bindEntityUpdate: (instance) =>
+    if instance.uid is @entity.uid
       attributes = @entity.parse?() or @entity.attributes()
       @attributes[attribute] = attributes[attribute] for attribute of attributes
       do @refresh
 
-  bindEntityDestroy: (model) =>
-    do @destroy if model.uid is @entity.uid
+  ###
+  Binds to entity destroy trigger when instance has a entity.
+  @method bindEntityDestroy
+  @param  instance  ENTITY_INSTANCE
+  ###
+  bindEntityDestroy: (instance) =>
+    do @destroy if instance.uid is @entity.uid
 
+  ###
+  Binds to user interface events.
+  @method bindEvents
+  ###
   bindEvents: ->
     if @attributes.events
       for event in @attributes.events

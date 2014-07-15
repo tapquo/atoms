@@ -12,6 +12,10 @@ MODULE_KEYWORDS = ['included', 'extended']
 
 class Atoms.Core.Module
 
+  ###
+  Sets a unique identifier (uid) to created instance.
+  @method constructor
+  ###
   constructor: ->
     @uid = _guid()
 

@@ -20,13 +20,6 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   #@TODO: Better if I use a instance variable. Change It!
   _file = undefined
 
-  constructor: (@attributes, scaffold) ->
-    super
-    @children = []
-    if scaffold then _file = @_getScaffold(scaffold)
-    @attributes = Atoms.Core.Helper.mix @attributes, _file
-    _file = undefined
-
   @scaffold: (url) ->
     loader = if $$? then $$ else $
     scaffold = loader.ajax
@@ -36,6 +29,24 @@ class Atoms.Class.Organism extends Atoms.Core.Module
       error   : -> throw "Error loading scaffold in #{url}"
     _file = JSON.parse scaffold.responseText
 
+
+  ###
+  Prepare Organism instance
+  @method constructor
+  @param  attributes  OBJECT
+  @param  scaffold    STRING
+  ###
+  constructor: (@attributes, scaffold) ->
+    super
+    @children = []
+    if scaffold then _file = @_getScaffold(scaffold)
+    @attributes = Atoms.Core.Helper.mix @attributes, _file
+    _file = undefined
+
+  ###
+  Render element with custom template and instance all Atom/Molecule children.
+  @method render
+  ###
   render: ->
     do @scaffold
     do @output

@@ -1,6 +1,6 @@
 {
   "name": "atoms",
-  "version": "0.07.09",
+  "version": "0.07.21",
   "description": "Atomic & Reactive Development for Modern WebApps.",
   "homepage": "http://atoms.tapquo.com",
   "author": {
@@ -16,6 +16,7 @@
     "gulp-header" : "*",
     "gulp-jasmine": "*",
     "gulp-stylus" : "*",
-    "gulp-uglify" : "*"
+    "gulp-uglify" : "*",
+    "gulp-util" : "*"
   }
 }

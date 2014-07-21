@@ -9,6 +9,7 @@ var header  = require('gulp-header');
 var jasmine = require('gulp-jasmine');
 // var jasmine = require('gulp-jasmine2-phantomjs');
 var uglify  = require('gulp-uglify');
+var gutil   = require('gulp-util');
 var stylus  = require('gulp-stylus');
 var pkg     = require('./package.json');
 
@@ -77,7 +78,7 @@ gulp.task('webserver', function() {
 gulp.task('core', function() {
   gulp.src(path.quojs.concat(path.core))
     .pipe(concat('atoms.coffee'))
-    .pipe(coffee())
+    .pipe(coffee().on('error', gutil.log))
     .pipe(gulp.dest(path.temp))
     .pipe(uglify({mangle: true}))
     .pipe(header(banner, {pkg: pkg}))
@@ -86,7 +87,7 @@ gulp.task('core', function() {
 
   gulp.src(path.core)
     .pipe(concat('atoms.standalone.coffee'))
-    .pipe(coffee())
+    .pipe(coffee().on('error', gutil.log))
     .pipe(gulp.dest(path.temp))
     .pipe(uglify({mangle: true}))
     .pipe(header(banner, {pkg: pkg}))
@@ -96,7 +97,7 @@ gulp.task('core', function() {
 gulp.task('spec', function() {
   gulp.src(path.spec)
     .pipe(concat('atoms.spec.coffee'))
-    .pipe(coffee())
+    .pipe(coffee().on('error', gutil.log))
     .pipe(gulp.dest(path.temp))
 
   var spec = [
@@ -111,7 +112,7 @@ gulp.task('spec', function() {
 gulp.task('app_coffee', function() {
   gulp.src(app.coffee)
     .pipe(concat('atoms.app.coffee'))
-    .pipe(coffee())
+    .pipe(coffee().on('error', gutil.log))
     .pipe(uglify({mangle: false}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower))
@@ -120,7 +121,7 @@ gulp.task('app_coffee', function() {
 gulp.task('app_stylus', function() {
   gulp.src(app.stylus)
     .pipe(concat('atoms.app.styl'))
-    .pipe(stylus({compress: true}))
+    .pipe(stylus({compress: true, errors: true}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower));
 });
@@ -128,7 +129,7 @@ gulp.task('app_stylus', function() {
 gulp.task('app_theme', function() {
   gulp.src(app.theme)
     .pipe(concat('atoms.app.theme.styl'))
-    .pipe(stylus({compress: true}))
+    .pipe(stylus({compress: true, errors: true}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower));
 });
@@ -141,7 +142,7 @@ gulp.task('extensions', function() {
 
     gulp.src(folder + "**/*.coffee")
       .pipe(concat('atoms.app.' + key + '.coffee'))
-      .pipe(coffee())
+      .pipe(coffee().on('error', gutil.log))
       .pipe(uglify({mangle: false}))
       .pipe(gulp.dest(folder));
 
@@ -160,7 +161,7 @@ gulp.task('docs', function() {
 gulp.task('example', function() {
   gulp.src(app.example)
     .pipe(concat('atoms.app.example.coffee'))
-    .pipe(coffee())
+    .pipe(coffee().on('error', gutil.log))
     .pipe(gulp.dest(path.temp))
     .pipe(connect.reload())
 });

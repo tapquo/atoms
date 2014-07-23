@@ -74,11 +74,9 @@ String::toClassName = ->
 ###
 String::toClassObject = (domain) ->
   namespaces = @split "."
-  domain = window.Atoms unless domain? and not window[namespaces[0]]
-
+  domain = window.Atoms if not domain? and not window[namespaces[0]]?
   unless domain?
     domain = window[namespaces[0]] or window.Atoms
     namespaces.shift()
-
   domain = domain[item] for item in namespaces when domain?
   domain

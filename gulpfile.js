@@ -53,8 +53,8 @@ var extensions = {
   stripe  : 'extensions/app/extension/stripe/'};
 
 var appnima = {
-  payment: 'extensions/app/extension/appnima/payment',
-  user   : 'extensions/app/extension/appnima/user'
+  payment: 'extensions/app/extension/appnima/payment/',
+  user   : 'extensions/app/extension/appnima/user/'
 };
 
 var banner = ['/**',
@@ -137,20 +137,27 @@ gulp.task('app_theme', function() {
 gulp.task('extensions', function() {
   var key, folder;
 
-  for (key in extensions) {
-    folder = extensions[key];
-
+  var process = function(key, folder, file) {
     gulp.src(folder + "**/*.coffee")
-      .pipe(concat('atoms.app.' + key + '.coffee'))
+      .pipe(concat(file + key + '.coffee'))
       .pipe(coffee().on('error', gutil.log))
       .pipe(uglify({mangle: false}))
       .pipe(gulp.dest(folder));
 
     gulp.src(folder + "style/*.styl")
-      .pipe(concat('atoms.app.' + key + '.styl'))
+      .pipe(concat(file + key + '.styl'))
       .pipe(stylus({compress: true}))
-      .pipe(gulp.dest(folder));
+      .pipe(gulp.dest(folder))
+      .pipe(connect.reload());
   }
+
+  for (key in extensions) {
+    process(key, extensions[key], 'atoms.app.')
+  };
+
+  for (key in appnima) {
+    process(key, appnima[key], 'atoms.app.appnima.')
+  };
 });
 
 gulp.task('docs', function() {

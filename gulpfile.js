@@ -31,7 +31,8 @@ var path = {
           'quojs/source/quo.output.coffee',
           'quojs/source/quo.query.coffee'],
   core : ['source/*.coffee', 'source/core/*.coffee', 'source/class/*.coffee'],
-  spec : ['spec/*.coffee']};
+  spec : ['spec/*.coffee'],
+  icons: 'extensions/icons/'};
 
 var app = {
   coffee    : ['extensions/app/*.coffee',
@@ -68,11 +69,7 @@ var banner = ['/**',
 
 // -- TASKS --------------------------------------------------------------------
 gulp.task('webserver', function() {
-    connect.server({
-      port      : 8000,
-      // root      : 'extensions/test',
-      livereload: true
-    });
+  connect.server({ port: 8000, /*root: 'www/',*/ livereload: true });
 });
 
 gulp.task('core', function() {
@@ -83,7 +80,6 @@ gulp.task('core', function() {
     .pipe(uglify({mangle: true}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower))
-    .pipe(connect.reload())
 
   gulp.src(path.core)
     .pipe(concat('atoms.standalone.coffee'))
@@ -92,6 +88,7 @@ gulp.task('core', function() {
     .pipe(uglify({mangle: true}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower))
+    .pipe(connect.reload());
 });
 
 gulp.task('spec', function() {
@@ -116,6 +113,7 @@ gulp.task('app_coffee', function() {
     .pipe(uglify({mangle: false}))
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest(path.bower))
+    .pipe(connect.reload());
 });
 
 gulp.task('app_stylus', function() {
@@ -123,7 +121,8 @@ gulp.task('app_stylus', function() {
     .pipe(concat('atoms.app.styl'))
     .pipe(stylus({compress: true, errors: true}))
     .pipe(header(banner, {pkg: pkg}))
-    .pipe(gulp.dest(path.bower));
+    .pipe(gulp.dest(path.bower))
+    .pipe(connect.reload());
 });
 
 gulp.task('app_theme', function() {
@@ -131,7 +130,16 @@ gulp.task('app_theme', function() {
     .pipe(concat('atoms.app.theme.styl'))
     .pipe(stylus({compress: true, errors: true}))
     .pipe(header(banner, {pkg: pkg}))
-    .pipe(gulp.dest(path.bower));
+    .pipe(gulp.dest(path.bower))
+    .pipe(connect.reload());
+});
+
+gulp.task('icons', function() {
+  gulp.src(path.icons + "*.styl")
+    .pipe(concat('atoms.icons.styl'))
+    .pipe(stylus({compress: true, errors: true}))
+    .pipe(header(banner, {pkg: pkg}))
+    .pipe(gulp.dest(path.icons));
 });
 
 gulp.task('extensions', function() {
@@ -181,6 +189,7 @@ gulp.task('default', function() {
   gulp.run(['webserver'])
   gulp.watch(path.core, ['core', 'spec']);
   gulp.watch(path.quojs, ['core', 'spec']);
+  gulp.watch(path.icons + "*.styl", ['icons']);
   gulp.watch(app.coffee, ['app_coffee']);
   gulp.watch(app.stylus, ['app_stylus']);
   gulp.watch(app.theme, ['app_theme']);

@@ -30,7 +30,7 @@ In this way we consider that:
 
 
 ### How to start testing *Atoms*?
-Atoms fully developed with [CoffeeScript](http://coffeescript.org) language and its development tools have been used as [NodeJS](http://nodejs.org) and [Grunt](http://gruntjs.com). So if you don't have these applications installed, please install first NodeJS and then type the following commands:
+Atoms fully developed with [CoffeeScript](http://coffeescript.org) language and its development tools have been used as [NodeJS](http://nodejs.org) and [Gulp](http://gulpjs.com/). So if you don't have these applications installed, please install first NodeJS and then type the following commands:
 
 ```
 npm install -g coffee-script
@@ -46,14 +46,14 @@ git submodule foreach git pull origin master
 npm install
 ```
 
-Once we have our computer ready, just you only need GruntJS which have already scheduled tasks:
+Once we have our computer ready, just you only need Gulp which have already scheduled tasks:
 
 * Test Library with Jasmine &
 * Compile Library in debug mode
 * Uglify Library for production mode
 * Process and minify stylus stylesheets
 
-You can run the process `grunt` but we recommend you use `grunt watch` to run only the necesary tasks.
+Run the `gulp` process to watch file changes and run the necessary tasks.
 
 
 ### Your turn, make *Atoms* the best tool

@@ -35,7 +35,8 @@ class Atoms.Class.Atom extends Atoms.Core.Module
       attributes = @entity.parse?() or @entity.attributes()
       @attributes = Atoms.Core.Helper.mix @attributes, attributes
 
-      entity = @entity.className.toClassObject(__.Entity)
+      domain = if Atoms.Entity[@entity.className]? then Atoms.Entity else __.Entity
+      entity = @entity.className.toClassObject(domain)
       if entity
         EVENT = Atoms.Core.Constants.ENTITY.EVENT
         entity.bind EVENT.UPDATE, @bindEntityUpdate if @attributes.bind.update

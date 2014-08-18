@@ -51,7 +51,8 @@ var extensions = {
   chart   : 'extensions/app/extension/chart/',
   gmaps   : 'extensions/app/extension/gmaps/',
   leaflet : 'extensions/app/extension/leaflet/',
-  stripe  : 'extensions/app/extension/stripe/'};
+  stripe  : 'extensions/app/extension/stripe/',
+  calendar: 'extensions/app/extension/calendar/'};
 
 var appnima = {
   payment: 'extensions/app/extension/appnima/payment/',

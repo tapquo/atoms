@@ -141,7 +141,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     @trigger 'unbind'
 
   trigger: (args...) ->
-    args.splice(1, 0, @)
+    args.splice(1, 0, @.clone())
     @constructor.trigger args...
 
 # Utilities & Shims

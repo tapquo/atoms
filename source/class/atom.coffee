@@ -51,6 +51,7 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   ###
   bindEntityUpdate: (instance) =>
     if instance.uid is @entity.uid
+      @entity[attribute] = value for attribute, value of instance.attributes()
       attributes = @entity.parse?() or @entity.attributes()
       @attributes[attribute] = attributes[attribute] for attribute of attributes
       do @refresh

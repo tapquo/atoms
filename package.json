@@ -1,6 +1,6 @@
 {
   "name": "atoms",
-  "version": "0.08.22",
+  "version": "0.08.23",
   "description": "Atomic & Reactive Development for Modern WebApps.",
   "homepage": "http://atoms.tapquo.com",
   "author": {
@@ -9,14 +9,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "gulp"        : "*",
-    "gulp-coffee" : "*",
-    "gulp-concat" : "*",
-    "gulp-connect": "*",
-    "gulp-header" : "*",
-    "gulp-jasmine": "*",
-    "gulp-stylus" : "*",
-    "gulp-uglify" : "*",
-    "gulp-util" : "*"
+    "gulp"          : "*",
+    "gulp-coffee"   : "*",
+    "gulp-concat"   : "*",
+    "gulp-connect"  : "*",
+    "gulp-header"   : "*",
+    "gulp-jasmine"  : "*",
+    "gulp-karma"    : "*",
+    "gulp-stylus"   : "*",
+    "gulp-uglify"   : "*",
+    "gulp-util"     : "*",
+    "karma-jasmine" : "*"
   }
 }

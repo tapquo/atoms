@@ -7,7 +7,8 @@ var concat  = require('gulp-concat');
 var connect = require('gulp-connect');
 var header  = require('gulp-header');
 var jasmine = require('gulp-jasmine');
-// var jasmine = require('gulp-jasmine2-phantomjs');
+var jasmine = require('gulp-jasmine');
+var karma   = require('gulp-karma');
 var uglify  = require('gulp-uglify');
 var gutil   = require('gulp-util');
 var stylus  = require('gulp-stylus');
@@ -59,6 +60,10 @@ var appnima = {
   user   : 'extensions/app/extension/appnima/user/'
 };
 
+var test = [
+  path.temp + '/spec.js',
+  path.temp + '/atoms.js'];
+
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
@@ -92,19 +97,19 @@ gulp.task('core', function() {
     .pipe(connect.reload());
 });
 
+
 gulp.task('spec', function() {
   gulp.src(path.spec)
-    .pipe(concat('atoms.spec.coffee'))
-    .pipe(coffee().on('error', gutil.log))
-    .pipe(gulp.dest(path.temp))
+    .pipe(concat('spec.coffee'))
+    .pipe(coffee())
+    .pipe(gulp.dest(path.temp));
 
-  var spec = [
-    'spec/components/quojs/quo.js',
-    'build/atoms.standalone.js',
-    'build/atoms.spec.js'];
-
-  // gulp.src(spec)
-  //   .pipe(jasmine())
+  gulp.src(test)
+    .pipe(karma({
+      configFile: 'karma.js',
+      action    : 'run'
+    }))
+    .on('error', function(err) { throw err; });
 });
 
 gulp.task('app_coffee', function() {
@@ -189,6 +194,7 @@ gulp.task('init', function() {
 gulp.task('default', function() {
   gulp.run(['webserver'])
   gulp.watch(path.core, ['core', 'spec']);
+  gulp.watch(path.spec, ['spec']);
   gulp.watch(path.quojs, ['core', 'spec']);
   gulp.watch(path.icons + "*.styl", ['icons']);
   gulp.watch(app.coffee, ['app_coffee']);
@@ -197,4 +203,10 @@ gulp.task('default', function() {
   gulp.watch(app.extensions, ['extensions']);
   gulp.watch(app.docs, ['docs']);
   gulp.watch(app.example, ['example']);
+
+  gulp.src(test)
+    .pipe(karma({
+      configFile: 'karma.js',
+      action: 'watch'
+  }));
 });

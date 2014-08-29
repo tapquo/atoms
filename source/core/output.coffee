@@ -56,6 +56,7 @@ Atoms.Core.Output =
     current_el = @el
     @_render()
     @bindEvents?()
+    @chemistry?()
     current_el.replaceWith @el
 
   ###

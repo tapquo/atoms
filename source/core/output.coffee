@@ -65,6 +65,7 @@ Atoms.Core.Output =
   ###
   destroy: ->
     do @el.remove
+    @entity.destroy trigger = false if @entity? and @attributes.bind?.destroy
 
   # Private Methods
   _render: ->

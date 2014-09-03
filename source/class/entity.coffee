@@ -126,10 +126,11 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     @trigger 'change'
     records[@uid].clone()
 
-  destroy: ->
+  destroy: (trigger = true)->
     delete @constructor.records[@uid]
-    @trigger 'destroy'
-    @trigger 'change'
+    if trigger
+      @trigger 'destroy'
+      @trigger 'change'
 
   clone: ->
     Object.create @

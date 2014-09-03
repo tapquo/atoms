@@ -21,7 +21,6 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   @fields: (attributes...) ->
     @records    = {}
     @attributes = attributes or []
-    do @unbind
     @
 
   @create: (attributes) ->
@@ -106,7 +105,6 @@ class Atoms.Class.Entity extends Atoms.Core.Module
       @trigger 'error', error
     else
       record = if @isNew() then @create() else @update()
-      @trigger 'save'
       record
 
   updateAttributes: (attributes) ->
@@ -132,13 +130,9 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     delete @constructor.records[@uid]
     @trigger 'destroy'
     @trigger 'change'
-    @unbind()
 
   clone: ->
     Object.create @
-
-  unbind: ->
-    @trigger 'unbind'
 
   trigger: (args...) ->
     args.splice(1, 0, @.clone())

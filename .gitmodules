@@ -10,3 +10,6 @@
 [submodule "quojs"]
 	path = quojs
 	url = https://github.com/soyjavi/QuoJS.git
+[submodule "kitchensink"]
+	path = kitchensink
+	url = https://github.com/tapquo/atoms-app-kitchensink.git

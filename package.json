@@ -19,6 +19,7 @@
     "gulp-stylus"   : "*",
     "gulp-uglify"   : "*",
     "gulp-util"     : "*",
+    "gulp-yml"      : "*",
     "karma-jasmine" : "*"
   }
 }

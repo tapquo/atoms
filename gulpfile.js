@@ -12,14 +12,16 @@ var karma   = require('gulp-karma');
 var uglify  = require('gulp-uglify');
 var gutil   = require('gulp-util');
 var stylus  = require('gulp-stylus');
+var yml     = require('gulp-yml');
 var pkg     = require('./package.json');
 
 
 // -- FILES --------------------------------------------------------------------
 var path = {
   // Exports
-  bower: './bower',
-  temp : './build',
+  bower       : './bower',
+  temp        : './build',
+  kitchensink : './kitchensink/www/assets',
   // Sources
   quojs: ['quojs/source/quo.coffee',
           'quojs/source/quo.ajax.coffee',
@@ -44,8 +46,12 @@ var app = {
   theme       : ['extensions/app/theme/*.styl'],
   extensions  : ['extensions/app/extension/**/*.coffee',
                  'extensions/app/extension/**/*.styl'],
-  docs        : ['extensions/app/docs/**/*'],
-  kitchensink : ['kitchensink/source/**/*.coffee']};
+  docs        : ['extensions/app/docs/**/*']};
+
+var kitchensink = {
+    coffee    : ['kitchensink/source/**/*.coffee'],
+    yml       : ['kitchensink/source/organisms/*.yml']
+};
 
 var extensions = {
   carousel: 'extensions/app/extension/carousel/',
@@ -181,11 +187,15 @@ gulp.task('docs', function() {
 });
 
 gulp.task('kitchensink', function() {
-  gulp.src(app.kitchensink)
+  gulp.src(kitchensink.coffee)
     .pipe(concat('atoms.app.kitchensink.coffee'))
     .pipe(coffee().on('error', gutil.log))
     .pipe(gulp.dest(path.temp))
     .pipe(connect.reload())
+
+  gulp.src(kitchensink.yml)
+    .pipe(yml().on('error', gutil.log))
+    .pipe(gulp.dest(path.kitchensink + '/scaffolds'));
 });
 
 gulp.task('init', function() {
@@ -203,7 +213,8 @@ gulp.task('default', function() {
   gulp.watch(app.theme, ['app_theme']);
   gulp.watch(app.extensions, ['extensions']);
   gulp.watch(app.docs, ['docs']);
-  gulp.watch(app.kitchensink, ['kitchensink']);
+  gulp.watch(kitchensink.coffee, ['kitchensink']);
+  gulp.watch(kitchensink.yml, ['kitchensink']);
 
   gulp.src(test)
     .pipe(karma({

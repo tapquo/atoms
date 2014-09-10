@@ -17,19 +17,7 @@ class Atoms.Class.Organism extends Atoms.Core.Module
 
   @type = "Organism"
 
-  #@TODO: Better if I use a instance variable. Change It!
-  _scaffold = undefined
-
-  @scaffold: (url) -> _scaffold = @requestJSON url
-
-  @requestJSON = (url) ->
-    loader = if $$? then $$ else $
-    scaffold = loader.ajax
-      url     : url
-      async   : false
-      dataType: "text"
-      error   : -> throw "Error loading scaffold in #{url}"
-    JSON.parse scaffold.responseText
+  @scaffold: (@url) -> @
 
   ###
   Prepare Organism instance
@@ -37,12 +25,19 @@ class Atoms.Class.Organism extends Atoms.Core.Module
   @param  attributes  OBJECT
   @param  scaffold    STRING
   ###
-  constructor: (@attributes, scaffold) ->
+  constructor: (@attributes, url = @constructor.url) ->
     super
     @children = []
-    _scaffold = @constructor.requestJSON scaffold if scaffold
-    @attributes = Atoms.Core.Helper.mix @attributes, _scaffold
-    _scaffold = undefined
+    if url
+      loader = if $$? then $$ else $
+      scaffold = loader.ajax
+        url     : url
+        async   : false
+        dataType: "text"
+        error   : -> throw "Error loading scaffold in #{url}"
+      if scaffold.status is 200
+        scaffold = JSON.parse scaffold.responseText
+        @attributes = Atoms.Core.Helper.mix @attributes, scaffold
 
   ###
   Render element with custom template and instance all Atom/Molecule children.

@@ -36,16 +36,16 @@ var path = {
   icons: 'extensions/icons/'};
 
 var app = {
-  coffee    : ['extensions/app/*.coffee',
-               'extensions/app/atom/*.coffee',
-               'extensions/app/molecule/*.coffee',
-               'extensions/app/organism/*.coffee'],
-  stylus    : ['extensions/app/style/*.styl'],
-  theme     : ['extensions/app/theme/*.styl'],
-  extensions: ['extensions/app/extension/**/*.coffee',
-               'extensions/app/extension/**/*.styl'],
-  docs      : ['extensions/app/docs/**/*'],
-  example   : ['extensions/test/source/**/*.coffee']};
+  coffee      : ['extensions/app/*.coffee',
+                 'extensions/app/atom/*.coffee',
+                 'extensions/app/molecule/*.coffee',
+                 'extensions/app/organism/*.coffee'],
+  stylus      : ['extensions/app/style/*.styl'],
+  theme       : ['extensions/app/theme/*.styl'],
+  extensions  : ['extensions/app/extension/**/*.coffee',
+                 'extensions/app/extension/**/*.styl'],
+  docs        : ['extensions/app/docs/**/*'],
+  kitchensink : ['kitchensink/source/**/*.coffee']};
 
 var extensions = {
   carousel: 'extensions/app/extension/carousel/',
@@ -99,6 +99,7 @@ gulp.task('core', function() {
 
 
 gulp.task('spec', function() {
+  return true
   gulp.src(path.spec)
     .pipe(concat('spec.coffee'))
     .pipe(coffee())
@@ -179,16 +180,16 @@ gulp.task('docs', function() {
     .pipe(gulp.dest(path.bower + "/docs"));
 });
 
-gulp.task('example', function() {
-  gulp.src(app.example)
-    .pipe(concat('atoms.app.example.coffee'))
+gulp.task('kitchensink', function() {
+  gulp.src(app.kitchensink)
+    .pipe(concat('atoms.app.kitchensink.coffee'))
     .pipe(coffee().on('error', gutil.log))
     .pipe(gulp.dest(path.temp))
     .pipe(connect.reload())
 });
 
 gulp.task('init', function() {
-  gulp.run(['core', 'app_coffee', 'app_stylus', 'app_theme', 'extensions', 'docs', 'example']);
+  gulp.run(['core', 'app_coffee', 'app_stylus', 'app_theme', 'extensions', 'docs', 'kitchensink']);
 });
 
 gulp.task('default', function() {
@@ -202,7 +203,7 @@ gulp.task('default', function() {
   gulp.watch(app.theme, ['app_theme']);
   gulp.watch(app.extensions, ['extensions']);
   gulp.watch(app.docs, ['docs']);
-  gulp.watch(app.example, ['example']);
+  gulp.watch(app.kitchensink, ['kitchensink']);
 
   gulp.src(test)
     .pipe(karma({

@@ -55,7 +55,6 @@ var kitchensink = {
 
 var extensions = {
   carousel: 'extensions/app/extension/carousel/',
-  chart   : 'extensions/app/extension/chart/',
   gmaps   : 'extensions/app/extension/gmaps/',
   leaflet : 'extensions/app/extension/leaflet/',
   stripe  : 'extensions/app/extension/stripe/',

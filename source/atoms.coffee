@@ -1,6 +1,15 @@
-# Globals
+###
+Global namespace for Atoms
+
+@namespace Atoms
+
+@author Javier Jimenez Villar <javi@tapquo.com> || @soyjavi
+###
+"use strict"
+
 Atoms = @Atoms =
-  version   : "0.09.10"
+  version   : "0.09.17"
+  Device    : {}
   Core      : {}
   Class     : {}
 

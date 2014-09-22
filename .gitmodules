@@ -7,3 +7,6 @@
 [submodule "kitchensink"]
 	path = kitchensink
 	url = https://github.com/tapquo/atoms-app-kitchensink.git
+[submodule "atoms-app"]
+	path = atoms-app
+	url = https://github.com/tapquo/atoms-app

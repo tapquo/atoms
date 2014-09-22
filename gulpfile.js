@@ -35,18 +35,18 @@ var path = {
           'quojs/source/quo.query.coffee'],
   core : ['source/*.coffee', 'source/core/*.coffee', 'source/class/*.coffee'],
   spec : ['spec/*.coffee'],
-  icons: 'extensions/icons/'};
+  icons: 'atoms-app/extension/icons/'};
 
 var app = {
-  coffee      : ['extensions/app/*.coffee',
-                 'extensions/app/atom/*.coffee',
-                 'extensions/app/molecule/*.coffee',
-                 'extensions/app/organism/*.coffee'],
-  stylus      : ['extensions/app/style/*.styl'],
-  theme       : ['extensions/app/theme/*.styl'],
-  extensions  : ['extensions/app/extension/**/*.coffee',
-                 'extensions/app/extension/**/*.styl'],
-  docs        : ['extensions/app/docs/**/*']};
+  coffee      : ['atoms-app/*.coffee',
+                 'atoms-app/atom/*.coffee',
+                 'atoms-app/molecule/*.coffee',
+                 'atoms-app/organism/*.coffee'],
+  stylus      : ['atoms-app/style/*.styl'],
+  theme       : ['atoms-app/theme/*.styl'],
+  extensions  : ['atoms-app/extension/**/*.coffee',
+                 'atoms-app/extension/**/*.styl'],
+  docs        : ['atoms-app/docs/**/*']};
 
 var kitchensink = {
     coffee    : ['kitchensink/source/**/*.coffee'],
@@ -54,15 +54,15 @@ var kitchensink = {
 };
 
 var extensions = {
-  carousel: 'extensions/app/extension/carousel/',
-  gmaps   : 'extensions/app/extension/gmaps/',
-  leaflet : 'extensions/app/extension/leaflet/',
-  stripe  : 'extensions/app/extension/stripe/',
-  calendar: 'extensions/app/extension/calendar/'};
+  carousel: 'atoms-app/extension/carousel/',
+  gmaps   : 'atoms-app/extension/gmaps/',
+  leaflet : 'atoms-app/extension/leaflet/',
+  stripe  : 'atoms-app/extension/stripe/',
+  calendar: 'atoms-app/extension/calendar/'};
 
 var appnima = {
-  payment: 'extensions/app/extension/appnima/payment/',
-  user   : 'extensions/app/extension/appnima/user/'
+  payment: 'atoms-app/extension/appnima/payment/',
+  user   : 'atoms-app/extension/appnima/user/'
 };
 
 var test = [

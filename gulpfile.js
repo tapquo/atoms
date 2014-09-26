@@ -57,7 +57,7 @@ var extensions = {
   carousel: 'atoms-app/extension/carousel/',
   gmaps   : 'atoms-app/extension/gmaps/',
   leaflet : 'atoms-app/extension/leaflet/',
-  stripe  : 'atoms-app/extension/stripe/',
+  payments: 'atoms-app/extension/payments/',
   calendar: 'atoms-app/extension/calendar/'};
 
 var appnima = {

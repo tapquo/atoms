@@ -15,7 +15,10 @@ Atoms.Core.Scaffold =
   @method scaffold
   ###
   scaffold: ->
-    # Assign Parrent
+    # Merge properties
+    @attributes = Atoms.Core.Helper.mix @attributes, @constructor.default
+
+    # Assign Parent
     @parent = {}
     if @attributes?.parent?
       @parent = @attributes.parent

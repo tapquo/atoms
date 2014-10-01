@@ -28,8 +28,6 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   ###
   constructor: (@attributes) ->
     super
-    @attributes = Atoms.Core.Helper.mix @attributes, @constructor.default
-
     do @scaffold
     if @entity
       attributes = @entity.parse?() or @entity.attributes()

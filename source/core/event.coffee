@@ -81,6 +81,18 @@ Atoms.Core.Event =
       for child in @children when child.uid?
         @_state child, event, args, "tunnel"
 
+
+  ###
+  Binds to user interface events.
+  @method handleInputEvent
+  ###
+  handleInputEvent: ->
+    for event in @attributes.events
+      console.log event
+      event_desktop = EVENTS_DESKTOP[event] unless $$?
+      @el.on event_desktop or event, do (event) => (handler) =>
+        unless @el[0].disabled is true then @bubble event, handler
+
   # Private Methods
   _customEventName: (event) ->
     base = @_base @constructor

@@ -40,7 +40,7 @@ class Atoms.Class.Atom extends Atoms.Core.Module
         entity.bind EVENT.UPDATE, @bindEntityUpdate if @attributes.bind.update
         entity.bind EVENT.DESTROY, @bindEntityDestroy if @attributes.bind.destroy
     do @output
-    @bindEvents()
+    do @bindEvents
 
   ###
   Binds to entity update trigger when instance has a entity.
@@ -67,8 +67,4 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @method bindEvents
   ###
   bindEvents: ->
-    if @attributes.events
-      for event in @attributes.events
-        event_desktop = EVENTS_DESKTOP[event] unless $$?
-        @el.on event_desktop or event, do (event) => (handler) =>
-          unless @el[0].disabled is true then @bubble event, handler
+    do @handleInputEvent if @attributes.events

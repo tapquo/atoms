@@ -1,6 +1,6 @@
 {
   "name": "atoms",
-  "version": "0.10.02",
+  "version": "0.10.7",
   "description": "Atomic & Reactive Development for Modern WebApps.",
   "homepage": "http://atoms.tapquo.com",
   "author": {
@@ -8,8 +8,11 @@
     "site": "http://tapquo.com"
   },
   "license": "MIT",
+  "dependencies": {
+    "coffee-script": "^1.8.0"
+  },
   "devDependencies": {
-    "gulp"          : "*",
+    "gulp"          : "^3.8.8",
     "gulp-coffee"   : "*",
     "gulp-concat"   : "*",
     "gulp-connect"  : "*",

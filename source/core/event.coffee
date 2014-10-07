@@ -88,7 +88,6 @@ Atoms.Core.Event =
   ###
   handleInputEvent: ->
     for event in @attributes.events
-      console.log event
       event_desktop = EVENTS_DESKTOP[event] unless $$?
       @el.on event_desktop or event, do (event) => (handler) =>
         unless @el[0].disabled is true then @bubble event, handler

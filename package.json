@@ -17,8 +17,6 @@
     "gulp-concat"   : "*",
     "gulp-connect"  : "*",
     "gulp-header"   : "*",
-    "gulp-jasmine"  : "*",
-    "gulp-karma"    : "*",
     "gulp-stylus"   : "*",
     "gulp-uglify"   : "*",
     "gulp-util"     : "*",

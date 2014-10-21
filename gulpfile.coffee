@@ -7,7 +7,7 @@ connect = require 'gulp-connect'
 header  = require 'gulp-header'
 jasmine = require 'gulp-jasmine'
 jasmine = require 'gulp-jasmine'
-karma   = require 'gulp-karma'
+karma   = require('karma').server
 uglify  = require 'gulp-uglify'
 gutil   = require 'gulp-util'
 stylus  = require 'gulp-stylus'
@@ -62,7 +62,7 @@ kitchensink =
   coffee: "kitchensink/source/**/*.coffee"
   yml   : "kitchensink/source/organisms/*.yml"
 
-test = ["#{path.temp}/spec.js", "#{path.temp}/atoms.js"]
+test = ["#{path.temp}/atoms.js", "#{path.temp}/spec.js"]
 
 banner = [
   "/**"
@@ -88,13 +88,14 @@ gulp.task "core", ->
     pkg: pkg
   )).pipe(gulp.dest(path.bower)).pipe connect.reload()
 
-gulp.task "spec", ->
+gulp.task "spec", (done) ->
   return true
   gulp.src(path.spec).pipe(concat("spec.coffee")).pipe(coffee()).pipe gulp.dest(path.temp)
-  gulp.src(test).pipe(karma(
-    configFile: "karma.js"
-    action    : "run"
-  )).on "error", (err) -> throw errreturn
+  karma.start
+    configFile: __dirname + '/karma.js',
+    files: test
+    singleRun: true
+  , done
 
 gulp.task "coffee", ->
   gulp.src(app.coffee).pipe(concat("atoms.app.coffee")).pipe(coffee().on("error", gutil.log)).pipe(uglify(mangle: false)).pipe(header(banner,

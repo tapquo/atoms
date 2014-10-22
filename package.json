@@ -12,17 +12,17 @@
     "coffee-script": "^1.8.0"
   },
   "devDependencies": {
-    "gulp"          : "^3.8.8",
-    "gulp-coffee"   : "*",
-    "gulp-concat"   : "*",
-    "gulp-connect"  : "*",
-    "gulp-header"   : "*",
-    "gulp-jasmine"  : "*",
-    "gulp-karma"    : "*",
-    "gulp-stylus"   : "*",
-    "gulp-uglify"   : "*",
-    "gulp-util"     : "*",
-    "gulp-yml"      : "*",
-    "karma-jasmine" : "*"
+    "gulp"                     : "^3.8.8",
+    "gulp-coffee"              : "*",
+    "gulp-concat"              : "*",
+    "gulp-connect"             : "*",
+    "gulp-header"              : "*",
+    "gulp-stylus"              : "*",
+    "gulp-uglify"              : "*",
+    "gulp-util"                : "*",
+    "gulp-yml"                 : "*",
+    "karma"                    : "*",
+    "karma-jasmine"            : "*",
+    "karma-phantomjs-launcher" : "*"
   }
 }

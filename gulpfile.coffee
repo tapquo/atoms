@@ -86,9 +86,13 @@ gulp.task "core", ->
     pkg: pkg
   )).pipe(gulp.dest(path.bower)).pipe connect.reload()
 
-gulp.task "spec", (done) ->
-  return true
-  gulp.src(path.spec).pipe(concat("spec.coffee")).pipe(coffee()).pipe gulp.dest(path.temp)
+gulp.task "spec", ->
+  gulp.src path.spec
+    .pipe concat "spec.coffee"
+    .pipe coffee()
+    .pipe gulp.dest path.temp
+
+gulp.task "test", ["spec"], (done) ->
   karma.start
     configFile: __dirname + '/karma.js',
     files: test
@@ -145,9 +149,9 @@ gulp.task "init", ->
 
 gulp.task "default", ->
   gulp.run ["webserver"]
-  gulp.watch path.core, ["core", "spec"]
-  gulp.watch path.spec, ["spec"]
-  gulp.watch path.quojs, ["core", "spec"]
+  gulp.watch path.core, ["core", "test"]
+  gulp.watch path.spec, ["test"]
+  gulp.watch path.quojs, ["core", "test"]
   gulp.watch path.icons + "*.styl", ["icons"]
   gulp.watch app.coffee, ["coffee"]
   gulp.watch app.stylus, ["stylus"]
@@ -156,7 +160,3 @@ gulp.task "default", ->
   gulp.watch app.docs, ["docs"]
   gulp.watch kitchensink.coffee, ["kitchensink"]
   gulp.watch kitchensink.yml, ["kitchensink"]
-  gulp.src(test).pipe karma(
-    configFile: "karma.js"
-    action: "watch"
-  )

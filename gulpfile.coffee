@@ -87,6 +87,7 @@ gulp.task "core", ->
     .pipe header banner, pkg: pkg
     .pipe gulp.dest path.bower
 
+gulp.task "standalone", ->
   gulp.src path.core
     .pipe concat "atoms.standalone.coffee"
     .pipe coffee().on "error", gutil.log
@@ -102,7 +103,7 @@ gulp.task "spec", ->
     .pipe coffee()
     .pipe gulp.dest path.temp
 
-gulp.task "test", ["spec"], (done) ->
+gulp.task "test", ["core", "spec"], (done) ->
   karma.start
     configFile: __dirname + '/karma.js',
     files: test
@@ -180,13 +181,13 @@ gulp.task "kitchensink", ->
     .pipe gulp.dest path.kitchensink + "/scaffolds"
 
 gulp.task "init", ->
-  gulp.run ["core", "coffee", "stylus", "theme", "extensions", "docs", "kitchensink"]
+  gulp.run ["core", "standalone", "coffee", "stylus", "theme", "extensions", "docs", "kitchensink"]
 
 gulp.task "default", ->
   gulp.run ["webserver"]
-  gulp.watch path.core, ["core", "spec"]
-  gulp.watch path.spec, ["spec"]
-  gulp.watch path.quojs, ["core", "spec"]
+  gulp.watch path.core, ["core", "standalone", "test"]
+  gulp.watch path.spec, ["test"]
+  gulp.watch path.quojs, ["core", "standalone", "test"]
   gulp.watch path.icons + "*.styl", ["icons"]
   gulp.watch app.coffee, ["coffee"]
   gulp.watch app.stylus, ["stylus"]

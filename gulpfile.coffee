@@ -180,8 +180,7 @@ gulp.task "kitchensink", ->
     .pipe yml().on "error", gutil.log
     .pipe gulp.dest path.kitchensink + "/scaffolds"
 
-gulp.task "init", ->
-  gulp.run ["core", "standalone", "coffee", "stylus", "theme", "extensions", "docs", "kitchensink"]
+gulp.task "init", ["core", "standalone", "coffee", "stylus", "theme", "extensions", "docs", "kitchensink"]
 
 gulp.task "default", ->
   gulp.run ["webserver"]

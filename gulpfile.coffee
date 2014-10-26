@@ -79,16 +79,31 @@ gulp.task "webserver", ->
     livereload: true
 
 gulp.task "core", ->
-  gulp.src(path.quojs.concat(path.core)).pipe(concat("atoms.coffee")).pipe(coffee().on("error", gutil.log)).pipe(gulp.dest(path.temp)).pipe(uglify(mangle: true)).pipe(header(banner,
-    pkg: pkg
-  )).pipe gulp.dest(path.bower)
-  gulp.src(path.core).pipe(concat("atoms.standalone.coffee")).pipe(coffee().on("error", gutil.log)).pipe(gulp.dest(path.temp)).pipe(uglify(mangle: true)).pipe(header(banner,
-    pkg: pkg
-  )).pipe(gulp.dest(path.bower)).pipe connect.reload()
+  gulp.src path.quojs.concat path.core
+    .pipe concat "atoms.coffee"
+    .pipe coffee().on "error", gutil.log
+    .pipe gulp.dest path.temp
+    .pipe uglify mangle: true
+    .pipe header banner, pkg: pkg
+    .pipe gulp.dest path.bower
 
-gulp.task "spec", (done) ->
-  return true
-  gulp.src(path.spec).pipe(concat("spec.coffee")).pipe(coffee()).pipe gulp.dest(path.temp)
+gulp.task "standalone", ->
+  gulp.src path.core
+    .pipe concat "atoms.standalone.coffee"
+    .pipe coffee().on "error", gutil.log
+    .pipe gulp.dest path.temp
+    .pipe uglify mangle: true
+    .pipe header banner, pkg: pkg
+    .pipe gulp.dest path.bower
+    .pipe connect.reload()
+
+gulp.task "spec", ->
+  gulp.src path.spec
+    .pipe concat "spec.coffee"
+    .pipe coffee()
+    .pipe gulp.dest path.temp
+
+gulp.task "test", ["core", "spec"], (done) ->
   karma.start
     configFile: __dirname + '/karma.js',
     files: test
@@ -96,58 +111,82 @@ gulp.task "spec", (done) ->
   , done
 
 gulp.task "coffee", ->
-  gulp.src(app.coffee).pipe(concat("atoms.app.coffee")).pipe(coffee().on("error", gutil.log)).pipe(uglify(mangle: false)).pipe(header(banner,
-    pkg: pkg
-  )).pipe(gulp.dest(path.bower)).pipe connect.reload()
+  gulp.src app.coffee
+    .pipe concat "atoms.app.coffee"
+    .pipe coffee().on "error", gutil.log
+    .pipe uglify mangle: false
+    .pipe header banner, pkg: pkg
+    .pipe gulp.dest path.bower
+    .pipe connect.reload()
 
 gulp.task "stylus", ->
-  gulp.src(app.stylus).pipe(concat("atoms.app.styl")).pipe(stylus(
-    compress: true
-    errors: true
-  )).pipe(header(banner,
-    pkg: pkg
-  )).pipe(gulp.dest(path.bower)).pipe connect.reload()
+  gulp.src app.stylus
+    .pipe concat "atoms.app.styl"
+    .pipe stylus
+      compress: true
+      errors: true
+    .pipe header banner, pkg: pkg
+    .pipe gulp.dest path.bower
+    .pipe connect.reload()
 
 gulp.task "theme", ->
-  gulp.src(app.theme).pipe(concat("atoms.app.theme.styl")).pipe(stylus(
-    compress: true
-    errors: true
-  )).pipe(header(banner,
-    pkg: pkg
-  )).pipe(gulp.dest(path.bower)).pipe connect.reload()
+  gulp.src app.theme
+    .pipe concat "atoms.app.theme.styl"
+    .pipe stylus
+      compress: true
+      errors: true
+    .pipe header banner, pkg: pkg
+    .pipe gulp.dest path.bower
+    .pipe connect.reload()
 
 gulp.task "icons", ->
-  gulp.src(path.icons + "*.styl").pipe(concat("atoms.icons.styl")).pipe(stylus(
-    compress: true
-    errors: true
-  )).pipe(header(banner,
-    pkg: pkg
-  )).pipe gulp.dest(path.icons)
+  gulp.src path.icons + "*.styl"
+    .pipe concat "atoms.icons.styl"
+    .pipe stylus
+      compress: true
+      errors: true
+    .pipe header banner, pkg: pkg
+    .pipe gulp.dest path.icons
 
 gulp.task "extensions", ->
   process = (key, folder = "") ->
     file = unless folder then "atoms.app.#{key}" else "atoms.app.#{folder}.#{key}"
     folder = "atoms-app/extension/#{folder}/#{key}/"
-    gulp.src(folder + "**/*.coffee").pipe(concat("#{file}.coffee")).pipe(coffee().on("error", gutil.log)).pipe(uglify(mangle: false)).pipe gulp.dest(folder)
-    gulp.src(folder + "style/*.styl").pipe(concat("#{file}.styl")).pipe(stylus(compress: true)).pipe(gulp.dest(folder)).pipe connect.reload()
+    gulp.src folder + "**/*.coffee"
+      .pipe concat "#{file}.coffee"
+      .pipe coffee().on "error", gutil.log
+      .pipe uglify mangle: false
+      .pipe gulp.dest folder
+    gulp.src folder + "style/*.styl"
+      .pipe concat "#{file}.styl"
+      .pipe stylus compress: true
+      .pipe gulp.dest folder
+      .pipe connect.reload()
+
   process extension for extension in extensions.common
   process extension, "appnima" for extension in extensions.appnima
 
 gulp.task "docs", ->
-  gulp.src(app.docs).pipe gulp.dest(path.bower + "/docs")
+  gulp.src app.docs
+    .pipe gulp.dest path.bower + "/docs"
 
 gulp.task "kitchensink", ->
-  gulp.src(kitchensink.coffee).pipe(concat("atoms.app.kitchensink.coffee")).pipe(coffee().on("error", gutil.log)).pipe(gulp.dest(path.temp)).pipe connect.reload()
-  gulp.src(kitchensink.yml).pipe(yml().on("error", gutil.log)).pipe gulp.dest(path.kitchensink + "/scaffolds")
+  gulp.src kitchensink.coffee
+    .pipe concat "atoms.app.kitchensink.coffee"
+    .pipe coffee().on "error", gutil.log
+    .pipe gulp.dest path.temp
+    .pipe connect.reload()
+  gulp.src kitchensink.yml
+    .pipe yml().on "error", gutil.log
+    .pipe gulp.dest path.kitchensink + "/scaffolds"
 
-gulp.task "init", ->
-  gulp.run ["core", "coffee", "stylus", "theme", "extensions", "docs", "kitchensink"]
+gulp.task "init", ["core", "standalone", "coffee", "stylus", "theme", "extensions", "docs", "kitchensink"]
 
 gulp.task "default", ->
   gulp.run ["webserver"]
-  gulp.watch path.core, ["core", "spec"]
-  gulp.watch path.spec, ["spec"]
-  gulp.watch path.quojs, ["core", "spec"]
+  gulp.watch path.core, ["core", "standalone", "test"]
+  gulp.watch path.spec, ["test"]
+  gulp.watch path.quojs, ["core", "standalone", "test"]
   gulp.watch path.icons + "*.styl", ["icons"]
   gulp.watch app.coffee, ["coffee"]
   gulp.watch app.stylus, ["stylus"]
@@ -156,7 +195,3 @@ gulp.task "default", ->
   gulp.watch app.docs, ["docs"]
   gulp.watch kitchensink.coffee, ["kitchensink"]
   gulp.watch kitchensink.yml, ["kitchensink"]
-  gulp.src(test).pipe karma(
-    configFile: "karma.js"
-    action: "watch"
-  )

@@ -7,6 +7,9 @@
     "name": "Tapquo S.L.",
     "site": "http://tapquo.com"
   },
+  "scripts": {
+    "test": "gulp test"
+  },
   "license": "MIT",
   "dependencies": {
     "coffee-script": "^1.8.0"

@@ -25,7 +25,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   constructor: (@attributes) ->
     super
     @children = []
-    @_records = []
+    @cache    = []
 
     do @scaffold
     do @output
@@ -49,12 +49,11 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
   @method destroyChildren
   ###
   destroyChildren: ->
-    child.destroy?() for child in @children or []
+    child.destroy?() for child in @children
     @children = []
-    @_records = []
+    @cache = []
 
-  # Entities
-  _addAtomEntity: (entity, bind, record = true) =>
+  _addAtomEntity: (entity, bind, save = true) =>
     attributes =
       entity: entity
       bind  :
@@ -66,7 +65,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
 
     attributes = Atoms.Core.Helper.mix attributes, @default.children?[@attributes.entityAtom]
     atom = @appendChild "#{@attributes.bind.atom}", attributes
-    @_records.push atom if record
+    @cache.push atom if save
     atom
 
   _bindEntity : ->
@@ -77,6 +76,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
         @_addAtomEntity entity, @attributes.bind
 
       entity.bind Atoms.Core.Constants.ENTITY.EVENT.DESTROY, (entity) =>
-        for record, index in @_records when record.entity.uid is entity.uid
-          @_records.splice index, 1
+        for record, index in @cache when record.entity.uid is entity.uid
+          @cache.splice index, 1
           break

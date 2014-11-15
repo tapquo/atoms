@@ -113,7 +113,7 @@ gulp.task "test", ["core", "spec"], (done) ->
 gulp.task "coffee", ->
   gulp.src app.coffee
     .pipe concat "atoms.app.coffee"
-    .pipe coffee().on "error", gutil.log
+    .pipe(coffee().on('error', gutil.log))
     .pipe uglify mangle: false
     .pipe header banner, pkg: pkg
     .pipe gulp.dest path.bower
@@ -142,9 +142,7 @@ gulp.task "theme", ->
 gulp.task "icons", ->
   gulp.src path.icons + "*.styl"
     .pipe concat "atoms.icons.styl"
-    .pipe stylus
-      compress: true
-      errors: true
+    .pipe(stylus(compress: true, errors: true))
     .pipe header banner, pkg: pkg
     .pipe gulp.dest path.icons
 

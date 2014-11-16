@@ -45,10 +45,11 @@ Atoms.Core.Children =
   ###
   Set the parent instance to current instance.
   @method destroyChildren
+  @param  {string} [OPTIONAL] A determinate children with its UID
   ###
-  destroyChildren: ->
-    child.destroy?() for child in @children or []
-    @children = []
+  destroyChildren: (uid) ->
+    children = (child for child in @children) or []
+    child.destroy?() for child in children when not uid or child.uid is uid
 
   __available: (instance) ->
     base = "#{instance.type}." + (instance.base or instance.name)

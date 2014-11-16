@@ -66,6 +66,9 @@ Atoms.Core.Output =
   destroy: ->
     do @el.remove
     @entity.destroy trigger = false if @entity? and @attributes.bind?.destroy
+    for sibling, index in (@parent.children or []) when sibling.uid is @uid
+      @parent.children.splice index, 1
+      break
 
   # Private Methods
   _render: ->

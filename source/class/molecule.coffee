@@ -44,15 +44,6 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     if @attributes.bind?.entity? and @attributes.bind.atom?
       @_addAtomEntity entity, @attributes.bind for entity in entities
 
-  ###
-  Remove all children for current instance.
-  @method destroyChildren
-  ###
-  destroyChildren: ->
-    child.destroy?() for child in @children
-    @children = []
-    @cache = []
-
   _addAtomEntity: (entity, bind, save = true) =>
     attributes =
       entity: entity

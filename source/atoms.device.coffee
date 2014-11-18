@@ -8,7 +8,6 @@ Device detection
 "use strict"
 
 Atoms.$ ->
-  # OS
   OS =
     ios           : /ipad|iphone|ipod/i
     android       : /android/i
@@ -18,13 +17,21 @@ Atoms.$ ->
     firefox_os    : /(Mozilla).*Mobile[^\/]*\/([\d\.]*)/
   useragent = navigator.userAgent.toLowerCase()
 
-  Atoms.Device.os = undefined
-  for type, regexp of OS when regexp.test(useragent) is true
-    Atoms.Device.os = type
-    Atoms.$(document.body).attr "data-os", type
-    break
+  ###
+  Set in Atoms.Device the device OS
+  @method resize
+  ###
+  os = ->
+    Atoms.Device.os = undefined
+    for type, regexp of OS when regexp.test(useragent) is true
+      Atoms.Device.os = type
+      Atoms.$(document.body).attr "data-os", type
+      break
 
-  # Size
+  ###
+  Set in Atoms.Device the device screen resolution
+  @method resize
+  ###
   resize = ->
     w = window.innerWidth
     h = window.innerHeight
@@ -34,6 +41,7 @@ Atoms.$ ->
     Atoms.Device.screen = size
     Atoms.$(document.body).attr "data-screen", size
 
+  do os
   do resize
   Atoms.$(window).on "resize", resize
   Atoms.$(window).on "orientationchange", resize

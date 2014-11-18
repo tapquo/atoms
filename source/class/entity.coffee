@@ -15,9 +15,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
   @records    = {}
   @attributes = []
 
-  # ---------------------------------------------------------------------------
-  # Static Methods
-  # ---------------------------------------------------------------------------
+  # -- Static Methods ----------------------------------------------------------
   @fields: (attributes...) ->
     @records    = {}
     @attributes = attributes or []
@@ -63,9 +61,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     record.destroy() for uid, record of @records
     @records = {}
 
-  # ---------------------------------------------------------------------------
-  # Instance Methods
-  # ---------------------------------------------------------------------------
+  # -- Instance Methods --------------------------------------------------------
   constructor: (attributes) ->
     super
     @constructor.constructor.type = "Entity"
@@ -139,7 +135,7 @@ class Atoms.Class.Entity extends Atoms.Core.Module
     args.splice(1, 0, @.clone())
     @constructor.trigger args...
 
-# Utilities & Shims
+# -- Utilities & Shims ---------------------------------------------------------
 unless typeof Object.create is 'function'
   Object.create = (o) ->
     Func = ->

@@ -8,7 +8,7 @@ Global namespace for Atoms
 "use strict"
 
 Atoms = @Atoms =
-  version   : "0.11.17"
+  version   : "0.11.18"
   Device    : {}
   Core      : {}
   Class     : {}
@@ -17,5 +17,4 @@ Atoms = @Atoms =
   Molecule  : {}
   Organism  : {}
   Entity    : {}
-  # DOM Handler Facade
-  $: (args...) -> if $$? then $$ args... else $ args...
+  $         : (args...) -> if $$? then $$ args... else $ args...

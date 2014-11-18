@@ -15,20 +15,16 @@ Atoms.Core.Scaffold =
   @method scaffold
   ###
   scaffold: ->
-    # Merge properties
     @attributes = Atoms.Core.Helper.mix @attributes, @constructor.default
 
-    # Assign Parent
     @parent = {}
     if @attributes?.parent?
       @parent = @attributes.parent
       delete @attributes.parent
 
-    # Assign Container
     @container = @attributes.container or @parent.el or document.body
     delete @attributes.container if @attributes?.container?
 
-    # Assign Entity
     if @attributes?.entity?
       @entity = @attributes.entity
       delete @attributes.entity

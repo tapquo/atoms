@@ -8,10 +8,6 @@ Base class for Atom
 ###
 "use strict"
 
-EVENTS_DESKTOP =
-  touch             : "click"
-  doubleTap         : "dblClick"
-
 class Atoms.Class.Atom extends Atoms.Core.Module
 
   @include Atoms.Core.Scaffold

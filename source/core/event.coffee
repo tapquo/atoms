@@ -8,9 +8,11 @@ Event emitter which provides the pub/sub pattern to Atoms classes.
 ###
 "use strict"
 
-Atoms.Core.Event =
+EVENTS_DESKTOP =
+  touch             : "click"
+  doubleTap         : "dblClick"
 
-  bindings: null
+Atoms.Core.Event =
 
   ###
   Attach a handler to an event for the class.

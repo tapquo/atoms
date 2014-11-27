@@ -53,7 +53,8 @@ app =
   docs: ["atoms-app/docs/**/*"]
 
 extensions =
-  common: ['carousel', 'gmaps', 'leaflet', 'payments', 'inputrange', 'calendar']
+  common: ['carousel', 'gmaps', 'leaflet', 'payments', 'inputrange', 'calendar',
+           'table', 'crud']
   appnima: ['user', 'payment']
 
 kitchensink =

@@ -53,8 +53,7 @@ app =
   docs: ["atoms-app/docs/**/*"]
 
 extensions =
-  common: ['carousel', 'gmaps', 'leaflet', 'payments', 'inputrange', 'calendar',
-           'table', 'crud']
+  common : ['carousel', 'gmaps', 'leaflet', 'payments', 'inputrange', 'calendar', 'table', 'crud']
   appnima: ['user', 'payment']
 
 kitchensink =
@@ -150,13 +149,16 @@ gulp.task "icons", ->
 gulp.task "extensions", ->
   process = (key, folder = "") ->
     file = unless folder then "atoms.app.#{key}" else "atoms.app.#{folder}.#{key}"
+    folders = []
+    for element in ["atom", "molecule", "organism"]
+      folders.push "atoms-app/extension/#{folder}/#{key}/#{element}/*.coffee"
     folder = "atoms-app/extension/#{folder}/#{key}/"
-    gulp.src folder + "**/*.coffee"
+    gulp.src folders
       .pipe concat "#{file}.coffee"
       .pipe coffee().on "error", gutil.log
       .pipe uglify mangle: false
       .pipe gulp.dest folder
-    gulp.src folder + "style/*.styl"
+    gulp.src "#{folder}style/*.styl"
       .pipe concat "#{file}.styl"
       .pipe stylus compress: true
       .pipe gulp.dest folder

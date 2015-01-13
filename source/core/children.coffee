@@ -25,10 +25,10 @@ Atoms.Core.Children =
   @method appendChild
   ###
   appendChild: (class_name, attributes={}) ->
+    return if attributes.screen? and attributes.screen isnt Atoms.Device.screen
     child_constructor = class_name.toClassObject(Atoms)
     if child_constructor
       if @__available child_constructor
-
         if child_constructor.default?
           attributes = Atoms.Core.Helper.mix attributes, child_constructor.default
 

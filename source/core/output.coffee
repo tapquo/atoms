@@ -76,9 +76,10 @@ Atoms.Core.Output =
     @el = Atoms.$(_mustache(@constructor.template)(@attributes))
     base = @constructor.base.toLowerCase() or new String()
     constructor_name = @constructor.name.toLowerCase()
-    key = "data-#{@constructor.type}-#{base}".toLowerCase()
+    data = @attributes.data or {}
     value = if constructor_name isnt base then constructor_name else ""
-    @el.attr key, value
+    data["#{@constructor.type}-#{base}".toLowerCase()] = value
+    @el.attr "data-#{key}", value for key, value of data
     @el
 
   _createIfBindings: ->

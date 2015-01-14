@@ -48,12 +48,11 @@ Atoms.Core.Event =
                       handler.
   ###
   trigger: (event, args...) ->
-    event = @_customEventName event
+    event = @_customEventName event, args[0]?.className
     events = if @hasOwnProperty('events') then @events?[event]
     return unless events
     args.push @
-    for event in events
-      break if event.apply(@, args) is false
+    break for event in events when event.apply(@, args) is false
 
   ###
   @TODO: Comment method
@@ -83,7 +82,6 @@ Atoms.Core.Event =
       for child in @children when child.uid?
         @_state child, event, args, "tunnel"
 
-
   ###
   Binds to user interface events.
   @method handleInputEvent
@@ -95,8 +93,8 @@ Atoms.Core.Event =
         unless @el[0].disabled is true then @bubble event, handler
 
   # Private Methods
-  _customEventName: (event) ->
-    base = @_base @constructor
+  _customEventName: (event, base) ->
+    base = base or @_base @constructor
     ("#{@constructor.type}:#{base}:#{event}").toLowerCase()
 
   _base: (constructor) ->

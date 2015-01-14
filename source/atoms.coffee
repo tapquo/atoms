@@ -8,7 +8,7 @@ Global namespace for Atoms
 "use strict"
 
 Atoms = @Atoms =
-  version   : "0.11.22"
+  version   : "0.13.14"
   Device    : {}
   Core      : {}
   Class     : {}

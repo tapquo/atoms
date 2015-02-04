@@ -10,9 +10,6 @@ Constants
 
 Atoms.Core.Constants =
 
-  ANIMATION:
-    END   : "webkitAnimationEnd MSAnimationEnd animationend"
-
   APPEND:  "append"
 
   EXCLUDED_IF_KEYS: ["class", "entity", "events", "if", "parent", "children"]

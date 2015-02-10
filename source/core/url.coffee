@@ -34,7 +34,7 @@ Atoms.Url = do (a = Atoms) ->
       unless path is _options.path
         path = "#" + path unless _options.absolute
         state = window.history.state or null
-        window.history.pushState state, document.title, path.toLowerCase()
+        window.history.pushState state, document.title, path
         _onPopState()
     else
       if _options.absolute then _getPath() else _getHash()

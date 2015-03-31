@@ -1,3 +1,4 @@
 build
+bower_components
 extensions/test
 node_modules

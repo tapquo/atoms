@@ -49,7 +49,7 @@ Atoms.Core.Children =
   ###
   destroyChildren: (uid) ->
     children = (child for child in @children) or []
-    child.destroy?() for child in children when not uid or child.uid is uid
+    child.destroy?(entity = false) for child in children when not uid or child.uid is uid
 
   __available: (instance) ->
     base = "#{instance.type}." + (instance.base or instance.name)

@@ -30,8 +30,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     do @scaffold
     do @output
     do @chemistry
-    if @attributes.bind?.entity? and @attributes.bind.atom? and @attributes.bind.create
-      do @_bindEntity
+    do @_bindEntity if @attributes.bind?.entity? and @attributes.bind.atom?
 
   ###
   Creates new Atom children with a determinate group of entities.
@@ -48,6 +47,7 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     attributes =
       entity: entity
       bind  :
+        create : bind.create
         update : bind.update
         destroy: bind.destroy
 
@@ -59,14 +59,13 @@ class Atoms.Class.Molecule extends Atoms.Core.Module
     @cache.push atom if save
     atom
 
-  _bindEntity : ->
+  _bindEntity : =>
     entity = @attributes.bind.entity.toClassObject()
     if entity?
-      new entity()
-      entity.bind Atoms.Core.Constants.ENTITY.EVENT.CREATE, (entity) =>
-        @_addAtomEntity entity, @attributes.bind
-
-      entity.bind Atoms.Core.Constants.ENTITY.EVENT.DESTROY, (entity) =>
-        for record, index in @cache when record.entity.uid is entity.uid
-          @cache.splice index, 1
-          break
+      entity.observe (state) =>
+        if state.type is "add" and @attributes.bind.create
+          @_addAtomEntity state.object, @attributes.bind
+        else if state.type in ["delete", "destroy"]
+          for record, index in @cache when record.entity.uid is state.oldValue.uid
+            @cache.splice index, 1
+            break

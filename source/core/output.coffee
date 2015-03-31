@@ -63,9 +63,9 @@ Atoms.Core.Output =
   Remove element from DOM
   @method destroy
   ###
-  destroy: ->
+  destroy: (entity = true) ->
     do @el.remove
-    @entity.destroy trigger = false if @entity? and @attributes.bind?.destroy
+    @entity.destroy trigger = false if entity and @entity? and @attributes.bind?.destroy
     for sibling, index in (@parent.children or []) when sibling.uid is @uid
       @parent.children.splice index, 1
       break

@@ -26,15 +26,12 @@ class Atoms.Class.Atom extends Atoms.Core.Module
     super
     do @scaffold
     if @entity
-      attributes = @entity.parse?() or @entity.attributes()
+      attributes = @entity.parse?() or @entity.fields()
       @attributes = Atoms.Core.Helper.mix @attributes, attributes
+      @entity.observe (state) =>
+        do @bindEntityDestroy if @attributes.bind.destroy and state.type is "destroy"
+        do @bindEntityUpdate if @attributes.bind.update and state.type is "update"
 
-      domain = if Atoms.Entity[@entity.className]? then Atoms.Entity else __.Entity
-      entity = @entity.className.toClassObject(domain)
-      if entity
-        EVENT = Atoms.Core.Constants.ENTITY.EVENT
-        entity.bind EVENT.UPDATE, @bindEntityUpdate if @attributes.bind.update
-        entity.bind EVENT.DESTROY, @bindEntityDestroy if @attributes.bind.destroy
     do @output
     do @bindEvents
 
@@ -43,12 +40,10 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @method bindEntityUpdate
   @param  instance  ENTITY_INSTANCE
   ###
-  bindEntityUpdate: (instance) =>
-    if instance.uid is @entity.uid
-      @entity[attribute] = value for attribute, value of instance.attributes()
-      attributes = @entity.parse?() or @entity.attributes()
-      @attributes[attribute] = attributes[attribute] for attribute of attributes
-      do @refresh
+  bindEntityUpdate: =>
+    attributes = @entity.parse?() or @entity.fields()
+    @attributes[attribute] = attributes[attribute] for attribute of attributes
+    do @refresh
 
   ###
   Binds to entity destroy trigger when instance has a entity.
@@ -56,7 +51,7 @@ class Atoms.Class.Atom extends Atoms.Core.Module
   @param  instance  ENTITY_INSTANCE
   ###
   bindEntityDestroy: (instance) =>
-    do @destroy if instance.uid is @entity.uid
+    do @destroy
 
   ###
   Binds to user interface events.

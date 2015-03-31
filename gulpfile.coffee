@@ -30,6 +30,7 @@ path =
     "quojs/source/quo.query.coffee"
   ]
   core: [
+    "hamsa/source/*.coffee"
     "source/*.coffee"
     "source/core/*.coffee"
     "source/class/*.coffee"

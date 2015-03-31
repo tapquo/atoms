@@ -10,3 +10,6 @@
 [submodule "atoms-app"]
 	path = atoms-app
 	url = https://github.com/tapquo/atoms-app
+[submodule "hamsa"]
+	path = hamsa
+	url = https://github.com/soyjavi/hamsa.git
